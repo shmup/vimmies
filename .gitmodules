@@ -10,9 +10,6 @@
 [submodule "pack/plugins/start/vim-jsx"]
 	path = pack/plugins/start/vim-jsx
 	url = https://github.com/mxw/vim-jsx.git
-[submodule "pack/plugins/start/tcomment_vim"]
-	path = pack/plugins/start/tcomment_vim
-	url = https://github.com/tomtom/tcomment_vim.git
 [submodule "pack/plugins/start/vim-javascript"]
 	path = pack/plugins/start/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
@@ -28,3 +25,9 @@
 [submodule "pack/plugins/start/vim-filebeagle"]
 	path = pack/plugins/start/vim-filebeagle
 	url = https://github.com/jeetsukumaran/vim-filebeagle.git
+[submodule "pack/plugins/start/vim-commentary"]
+	path = pack/plugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule "pack/plugins/start/dwm.vim"]
+	path = pack/plugins/start/dwm.vim
+	url = git@github.com:shmup/dwm.vim.git

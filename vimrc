@@ -64,6 +64,10 @@ set undolevels=1000
 set laststatus=2
 set undoreload=10000
 
+" better arrows
+nnoremap <left> :bp<cr>
+nnoremap <right> :bn<cr>
+
 " mode exit
 imap jj <Esc>
 
@@ -146,3 +150,18 @@ nmap <leader>gc :Gcommit<cr>
 nmap <leader>ga :Gwrite<cr>
 nmap <leader>gl :Git! log<cr>
 nmap <leader>gd :Gdiff<cr>
+" dwm
+let g:dwm_map_keys = 0
+let g:dwm_make_commands = 0
+nmap <C-_> <Plug>DWMRotateCounterclockwise
+nmap <C-\> <Plug>DWMRotateClockwise
+nmap <C-n> <Plug>DWMNew
+nmap <C-c> <Plug>DWMClose
+nmap <C-f> <Plug>DWMFocus
+nmap <M-l> <Plug>DWMGrowMaster
+nmap <M-h> <Plug>DWMShrinkMaster
+nnoremap <M-j> <C-W>w
+nnoremap <M-k> <C-W>W
+" commentary custom shit
+autocmd FileType vim setlocal commentstring=\"\ %s
+autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
