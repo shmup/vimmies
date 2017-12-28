@@ -1,4 +1,5 @@
 set nocompatible          " don't try to be vi compatible
+filetype plugin on        " allow plugins
 syntax on                 " turn on syntax highlighting
 set modelines=0           " security
 set number                " show line numbers
@@ -7,7 +8,10 @@ set visualbell            " blink dont beep
 set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
+set mouse=a               " sometimesss i click
+
 set autoindent
+set smartindent
 
 let mapleader = "\<Space>"
 
@@ -24,8 +28,9 @@ set noshiftround
 " cursor motion
 set scrolloff=3
 set backspace=indent,eol,start
-set matchpairs+=<:> " use % to jump between pairs
+set matchpairs+=<:>        " use % to jump between pairs
 runtime! macros/matchit.vim
+set whichwrap+=<,>,h,l,[,] " wrap cursor on more shit
 
 " move up/down editor lines
 nnoremap j gj
@@ -46,6 +51,17 @@ set showmatch
 
 " formatting
 map <leader>q gqip
+map <leader>u vipJjjj
+set nojoinspaces
+
+" execute file being edited
+noremap <buffer> <Leader>pl :!/usr/bin/perl % <cr>
+noremap <buffer> <Leader>py :!/usr/bin/env python % <cr>
+noremap <buffer> <Leader>sh :!/bin/bash % <cr>
+
+" menu
+set wildmenu
+set wildmode=list:longest
 
 " visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -99,9 +115,11 @@ nnoremap Y y$
 " wrap toggle
 nnoremap <silent><leader>w :set wrap!<cr>
 
-" more intuitive j/k
-noremap j gj
-noremap k gk
+" num toggle
+nnoremap <silent><leader>n :set number!<cr>
+
+" gutter toggle
+nnoremap <silent><leader>gg :GitGutterToggle<cr>
 
 " clipboard shit
 vmap <leader>y "+y
@@ -111,21 +129,6 @@ nnoremap <leader>a :Ack!<space>
 " cosmetics
 set shortmess=I " hide splash screen
 
-" when editing a file, always jump to the last cursor position
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-\   exe "normal g'\"" |
-\ endif
-
-" cursor line shit
-augroup CursorLine
-  au!
-  au VimEnter * setlocal cursorline
-  au WinEnter * setlocal cursorline
-  au BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
-
 " %< means truncate on the left if too long
 set statusline=%<%F " %F is full path to the file we are editing
 set statusline+=%m " %m shows [+] if the file is modified but not saved
@@ -133,10 +136,10 @@ set statusline+=%r " %r shows [RO] if a file is read-only
 set statusline +=\ %{fugitive#statusline()}
 set statusline+=%= " separation point between the left and right items
 set statusline+=%{&fileformat}
-set statusline+=%Y " %Y shows the filetype, such as VIM or HTML or GO
-set statusline+=%8l " %l shows the line number
+set statusline+=%Y " %Y shows the filetype
+set statusline+=%5l " %l shows the line number
 set statusline+=,
-set statusline+=%-8v " %v shows the virtual column number;
+set statusline+=%-5v " %v shows the virtual column number;
 
 " plugin shit
 map <leader>v :LeaderfMru<cr>
@@ -166,6 +169,50 @@ nmap <M-l> <Plug>DWMGrowMaster
 nmap <M-h> <Plug>DWMShrinkMaster
 nnoremap <M-j> <C-W>w
 nnoremap <M-k> <C-W>W
-" commentary custom shit
-autocmd FileType vim setlocal commentstring=\"\ %s
-autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
+
+" Add the virtualenv's site-packages to vim path
+if has("python")
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+endif
+
+if has("autocmd")
+  au BufEnter /tmp/crontab.* setl backupcopy=yes
+
+  " cursor line shit
+  augroup CursorLine
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+  augroup END
+
+  " commentary custom shit
+  autocmd FileType vim setlocal commentstring=\"\ %s
+  autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
+
+  " when editing a file, always jump to the last cursor position
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal g'\"" |
+  \ endif
+
+  " get completions from current syntax file
+  au BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
+  set iskeyword+=-,:
+
+  " makefiles need literal tabs
+  autocmd FileType make setlocal noexpandtab
+
+  " epub files are zip files
+  au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+endif
