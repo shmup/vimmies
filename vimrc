@@ -7,12 +7,13 @@ set visualbell            " blink dont beep
 set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
+set autoindent
 
 let mapleader = "\<Space>"
 
 " whitespace
-set wrap
-set textwidth=79
+set nowrap
+set textwidth=0
 set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
@@ -94,6 +95,9 @@ map <C-l> <C-w>l
 
 " make Y like C/D
 nnoremap Y y$
+
+" wrap toggle
+nnoremap <silent><leader>w :set wrap!<cr>
 
 " more intuitive j/k
 noremap j gj
