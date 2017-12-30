@@ -1,5 +1,5 @@
 set nocompatible          " don't try to be vi compatible
-filetype plugin on        " allow plugins
+filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 set modelines=0           " security
 set number                " show line numbers
@@ -25,6 +25,9 @@ set softtabstop=2
 set expandtab
 set noshiftround
 
+" ui
+set lazyredraw " make things like macros run fater
+
 " cursor motion
 set scrolloff=3
 set backspace=indent,eol,start
@@ -35,6 +38,11 @@ set whichwrap+=<,>,h,l,[,] " wrap cursor on more shit
 " move up/down editor lines
 nnoremap j gj
 nnoremap k gk
+
+" folds
+set foldmethod=syntax
+set foldnestmax=10
+set foldlevelstart=10
 
 " last line
 set showmode
