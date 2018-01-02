@@ -28,9 +28,6 @@
 [submodule "pack/plugins/start/vim-commentary"]
 	path = pack/plugins/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "pack/plugins/start/dwm.vim"]
-	path = pack/plugins/start/dwm.vim
-	url = git@github.com:shmup/dwm.vim.git
 [submodule "pack/plugins/start/vim-surround"]
 	path = pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
