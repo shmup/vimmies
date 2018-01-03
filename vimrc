@@ -3,7 +3,7 @@ filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
 let mapleader = "\<Space>"
-colorscheme monokai
+colorscheme apprentice
 
 set modelines=0           " security
 set number                " show line numbers
