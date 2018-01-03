@@ -1,6 +1,10 @@
 set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
+
+let mapleader = "\<Space>"
+colorscheme monokai
+
 set modelines=0           " security
 set number                " show line numbers
 set ruler                 " show file stats
@@ -9,17 +13,13 @@ set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
 set mouse=a               " sometimesss i click
-
+set updatetime=250        " speed up gitgutter
 set autoindent
-set smartindent
-
-let mapleader = "\<Space>"
 
 " whitespace
 set nowrap
 set textwidth=0
 set formatoptions=tcqrn1
-set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -50,7 +50,7 @@ set showcmd
 
 " searching
 nnoremap / /\v
-vnoremap / /\v
+xnoremap / /\v
 set hlsearch
 set incsearch
 set ignorecase
@@ -73,11 +73,6 @@ set wildmode=list:longest
 
 " visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
-
-" color scheme (terminal)
-set t_Co=256
-set background=dark
-colorscheme monokai
 
 " undo shit
 set backupdir=~/.vim/junk/backup// " double slash means files are stored with
@@ -165,6 +160,8 @@ nmap <leader>gc :Gcommit<cr>
 nmap <leader>ga :Gwrite<cr>
 nmap <leader>gl :Git! log<cr>
 nmap <leader>gd :Gdiff<cr>
+nmap <leader>gv :GV<cr>
+nmap <leader>gf :GV!<cr>
 " dwm
 let g:dwm_map_keys = 0
 let g:dwm_make_commands = 0
@@ -192,35 +189,35 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 endif
 
-if has("autocmd")
-  au BufEnter /tmp/crontab.* setl backupcopy=yes
-
-  " cursor line shit
-  augroup CursorLine
-    au!
-    au VimEnter * setlocal cursorline
-    au WinEnter * setlocal cursorline
-    au BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-  augroup END
+augroup FileSpecific
+  autocmd BufEnter /tmp/crontab.* setl backupcopy=yes
 
   " commentary custom shit
   autocmd FileType vim setlocal commentstring=\"\ %s
   autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
-  " when editing a file, always jump to the last cursor position
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal g'\"" |
-  \ endif
-
   " get completions from current syntax file
-  au BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
+  autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
   set iskeyword+=-,:
 
   " makefiles need literal tabs
   autocmd FileType make setlocal noexpandtab
 
   " epub files are zip files
-  au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
-endif
+  autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+
+  " when editing a file, always jump to the last cursor position
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal g'\"" |
+  \ endif
+augroup END
+
+" cursor line shit
+augroup CursorLine
+  autocmd!
+  autocmd VimEnter * setlocal cursorline
+  autocmd WinEnter * setlocal cursorline
+  autocmd BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
