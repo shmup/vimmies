@@ -152,9 +152,11 @@ let g:Lf_DefaultMode = 'FullPath'
 let g:jsx_ext_required = 0 " dont require .jsx extension
 let g:ackprg = 'rg --vimgrep'
 let g:indentLine_color_term = 238
+" easy align
 vmap <Enter> <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+" fugitive
 nmap <leader>gs :Gstatus<cr>
 nmap <leader>gc :Gcommit<cr>
 nmap <leader>ga :Gwrite<cr>
@@ -162,6 +164,12 @@ nmap <leader>gl :Git! log<cr>
 nmap <leader>gd :Gdiff<cr>
 nmap <leader>gv :GV<cr>
 nmap <leader>gf :GV!<cr>
+" gutter
+nmap [c <Plug>GitGutterPrevHunk
+nmap ]c <Plug>GitGutterNextHunk
+" ale
+nmap [e <Plug>(ale_previous_wrap)
+nmap ]e <Plug>(ale_next_wrap)
 " dwm
 let g:dwm_map_keys = 0
 let g:dwm_make_commands = 0
@@ -221,3 +229,6 @@ augroup CursorLine
   autocmd BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
+
+packloadall
+silent! helptags ALL
