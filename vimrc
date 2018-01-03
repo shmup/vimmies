@@ -142,7 +142,7 @@ set statusline+=%-5v " %v shows the virtual column number;
 " plugin shit
 let g:jsx_ext_required = 0 " dont require .jsx extension
 let g:indentLine_color_term = 238
-let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "context"
 " ack
 nnoremap <leader>a :Ack!<space>
 let g:ackprg = 'rg --vimgrep'
