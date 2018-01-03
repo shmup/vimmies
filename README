@@ -1,20 +1,20 @@
 gimme vimmies daddy
 ===================
 
-INSTALL
+REQUIRES
+  vim8 +python
 
-git clone --recursive -j8 https://github.com/shmup/vimmies.git ~/.vim
-mkdir -p ~/.vim/junk/backup ~/.vim/junk/swp ~/.vim/junk/undo ~/.vim/junk/view
-cd ~/.vim/pack/plugins/start/LeaderF && ./install.sh
+INSTALL
+  git clone --recursive -j8 https://github.com/shmup/vimmies.git ~/.vim
+  mkdir -p ~/.vim/junk/backup ~/.vim/junk/swp ~/.vim/junk/undo ~/.vim/junk/view
+  cd ~/.vim/pack/plugins/start/LeaderF && ./install.sh
 
 UPDATE SUBMODULES
-
-git submodule update --remote --merge
-git commit
+  git submodule update --remote --merge
+  git commit
 
 REMOVE SUBMODULE
-
-git submodule deinit ~/.vim/pack/plugins/start/Matrix
-git rm ~/.vim/pack/plugins/start/Matrix
-rm -Rf .git/modules/pack/plugins/start/Matrix
-git commit
+  git submodule deinit ~/.vim/pack/plugins/start/Matrix
+  git rm ~/.vim/pack/plugins/start/Matrix
+  rm -Rf .git/modules/pack/plugins/start/Matrix
+  git commit
