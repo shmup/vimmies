@@ -196,25 +196,14 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 endif
 
-augroup FileSpecific
-  autocmd BufEnter /tmp/crontab.* setl backupcopy=yes
-
-  " commentary custom shit
-  autocmd FileType vim setlocal commentstring=\"\ %s
+augroup Convenience
+  " move this to ftdetect when i figure out HOW
   autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 
   " get completions from current syntax file
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
   set iskeyword+=-,:
 
-  " makefiles need literal tabs
-  autocmd FileType make setlocal noexpandtab
-
-  " epub files are zip files
-  autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
-augroup END
-
-augroup Convenience
   " when editing a file, always jump to the last cursor position
   autocmd BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
