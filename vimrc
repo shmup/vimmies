@@ -26,7 +26,7 @@ set expandtab
 set noshiftround
 
 " ui
-set lazyredraw " make things like macros run fater
+set lazyredraw " make things like macros run faster
 
 " cursor motion
 set scrolloff=3
@@ -63,9 +63,9 @@ map <leader>u vipJjjj
 set nojoinspaces
 
 " execute file being edited
-noremap <buffer> <Leader>pl :!/usr/bin/perl % <cr>
-noremap <buffer> <Leader>py :!/usr/bin/env python % <cr>
-noremap <buffer> <Leader>sh :!/bin/bash % <cr>
+noremap <buffer> <leader>pl :!/usr/bin/perl % <cr>
+noremap <buffer> <leader>py :!/usr/bin/env python % <cr>
+noremap <buffer> <leader>sh :!/bin/bash % <cr>
 
 " menu
 set wildmenu
@@ -81,7 +81,6 @@ set undodir=~/.vim/junk/undo//
 set viewdir=~/.vim//junk/view//
 set undofile
 set undolevels=1000
-set laststatus=2
 set undoreload=10000
 
 " better arrows
@@ -101,9 +100,7 @@ nnoremap <silent> <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
 noremap <silent> <leader>ev :e ~/.vim/vimrc<cr>
 noremap <silent> <leader>rv :so ~/.vim/vimrc<cr>
 
-" f1 shit
-nnoremap <f1> <C-^>
-inoremap <f1> <esc><C-^>
+" alt-tab
 nnoremap <leader><leader> :b#<CR>
 
 " better window changing
@@ -115,19 +112,17 @@ map <C-l> <C-w>l
 " make Y like C/D
 nnoremap Y y$
 
-" wrap toggle
+" toggles
 nnoremap <silent><leader>w :set wrap!<cr>
-
-" num toggle
 nnoremap <silent><leader>n :set number!<cr>
-
-" gutter toggle
 nnoremap <silent><leader>gg :GitGutterToggle<cr>
+
+" let me save with sudo when needed
+cmap w!! %!sudo tee > /dev/null %
 
 " clipboard shit
 vmap <leader>y "+y
 vmap <leader>d "+d
-nnoremap <leader>a :Ack!<space>
 
 " cosmetics
 set shortmess=I " hide splash screen
@@ -145,13 +140,17 @@ set statusline+=,
 set statusline+=%-5v " %v shows the virtual column number;
 
 " plugin shit
+let g:jsx_ext_required = 0 " dont require .jsx extension
+let g:indentLine_color_term = 238
+let g:SuperTabDefaultCompletionType = "context"
+" ack
+nnoremap <leader>a :Ack!<space>
+let g:ackprg = 'rg --vimgrep'
+" leaderf
 map <leader>v :LeaderfMru<cr>
 let g:Lf_CommandMap = {'<C-C>': ['<Esc>', '<C-C>']}
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_DefaultMode = 'FullPath'
-let g:jsx_ext_required = 0 " dont require .jsx extension
-let g:ackprg = 'rg --vimgrep'
-let g:indentLine_color_term = 238
 " easy align
 vmap <Enter> <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
@@ -213,7 +212,9 @@ augroup FileSpecific
 
   " epub files are zip files
   autocmd BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+augroup END
 
+augroup Convenience
   " when editing a file, always jump to the last cursor position
   autocmd BufReadPost *
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
