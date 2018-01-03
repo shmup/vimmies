@@ -142,19 +142,22 @@ set statusline+=%-5v " %v shows the virtual column number;
 " plugin shit
 let g:jsx_ext_required = 0 " dont require .jsx extension
 let g:indentLine_color_term = 238
-" let g:SuperTabDefaultCompletionType = "context"
+
 " ack
 nnoremap <leader>a :Ack!<space>
 let g:ackprg = 'rg --vimgrep'
+
 " leaderf
 map <leader>v :LeaderfMru<cr>
 let g:Lf_CommandMap = {'<C-C>': ['<Esc>', '<C-C>']}
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_DefaultMode = 'FullPath'
+
 " easy align
 vmap <Enter> <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
 " fugitive
 nmap <leader>gs :Gstatus<cr>
 nmap <leader>gc :Gcommit<cr>
@@ -163,12 +166,15 @@ nmap <leader>gl :Git! log<cr>
 nmap <leader>gd :Gdiff<cr>
 nmap <leader>gv :GV<cr>
 nmap <leader>gf :GV!<cr>
+
 " gutter
 nmap [c <Plug>GitGutterPrevHunk
 nmap ]c <Plug>GitGutterNextHunk
+
 " ale
 nmap [e <Plug>(ale_previous_wrap)
 nmap ]e <Plug>(ale_next_wrap)
+
 " dwm
 let g:dwm_map_keys = 0
 let g:dwm_make_commands = 0
@@ -211,12 +217,9 @@ augroup Convenience
   \ endif
 augroup END
 
-" cursor line shit
 augroup CursorLine
   autocmd!
-  autocmd VimEnter * setlocal cursorline
-  autocmd WinEnter * setlocal cursorline
-  autocmd BufWinEnter * setlocal cursorline
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
