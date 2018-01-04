@@ -22,9 +22,6 @@
 [submodule "pack/plugins/start/vim-gitgutter"]
 	path = pack/plugins/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "pack/plugins/start/vim-filebeagle"]
-	path = pack/plugins/start/vim-filebeagle
-	url = https://github.com/jeetsukumaran/vim-filebeagle.git
 [submodule "pack/plugins/start/vim-commentary"]
 	path = pack/plugins/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
@@ -55,3 +52,6 @@
 [submodule "pack/plugins/start/ale"]
 	path = pack/plugins/start/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "pack/plugins/start/vim-dirvish"]
+	path = pack/plugins/start/vim-dirvish
+	url = https://github.com/justinmk/vim-dirvish.git
