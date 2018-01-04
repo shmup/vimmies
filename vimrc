@@ -27,6 +27,9 @@ set noshiftround
 
 " ui
 set lazyredraw " make things like macros run faster
+set wildmenu
+set wildmode=list:longest
+set shortmess=I " hide splash screen
 
 " cursor motion
 set scrolloff=3
@@ -66,10 +69,6 @@ set nojoinspaces
 noremap <buffer> <leader>pl :!/usr/bin/perl % <cr>
 noremap <buffer> <leader>py :!/usr/bin/env python % <cr>
 noremap <buffer> <leader>sh :!/bin/bash % <cr>
-
-" menu
-set wildmenu
-set wildmode=list:longest
 
 " visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -123,9 +122,6 @@ cmap w!! %!sudo tee > /dev/null %
 " clipboard shit
 vmap <leader>y "+y
 vmap <leader>d "+d
-
-" cosmetics
-set shortmess=I " hide splash screen
 
 " %< means truncate on the left if too long
 set statusline=%<%F " %F is full path to the file we are editing
