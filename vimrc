@@ -19,7 +19,7 @@ set autoindent
 " whitespace
 set nowrap
 set textwidth=0
-set formatoptions=tcqrn1
+set formatoptions=tcqjrn1
 set shiftwidth=2
 set softtabstop=2
 set expandtab
