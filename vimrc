@@ -2,7 +2,6 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-let mapleader = "\<Space>"
 colorscheme apprentice
 
 set modelines=0           " security
@@ -61,14 +60,14 @@ set smartcase
 set showmatch
 
 " formatting
-map <leader>q gqip
-map <leader>u vipJjjj
+map <space>q gqip
+map <space>u vipJjjj
 set nojoinspaces
 
 " execute file being edited
-noremap <buffer> <leader>pl :!/usr/bin/perl % <cr>
-noremap <buffer> <leader>py :!/usr/bin/env python % <cr>
-noremap <buffer> <leader>sh :!/bin/bash % <cr>
+noremap <buffer> <space>pl :!/usr/bin/perl % <cr>
+noremap <buffer> <space>py :!/usr/bin/env python % <cr>
+noremap <buffer> <space>sh :!/bin/bash % <cr>
 
 " visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -94,17 +93,17 @@ nmap <C-c> :x<cr>
 imap jj <Esc>
 
 " kill highlight
-map <leader>l :let @/=''<cr>
+map <space>l :let @/=''<cr>
 
 " kill whitespace
-nnoremap <silent> <leader>W :%s/\s\+$//<cr>:let @/=''<cr>
+nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
-noremap <silent> <leader>ev :e ~/.vim/vimrc<cr>
-noremap <silent> <leader>rv :so ~/.vim/vimrc<cr>
+noremap <silent> <space>ev :e ~/.vim/vimrc<cr>
+noremap <silent> <space>rv :so ~/.vim/vimrc<cr>
 
 " alt-tab
-nnoremap <leader><leader> :b#<CR>
+nnoremap <space><leader> :b#<CR>
 
 " better window changing
 map <C-h> <C-w>h
@@ -116,16 +115,16 @@ map <C-l> <C-w>l
 nnoremap Y y$
 
 " toggles
-nnoremap <silent><leader>w :set wrap!<cr>
-nnoremap <silent><leader>n :set number!<cr>
-nnoremap <silent><leader>gg :GitGutterToggle<cr>
+nnoremap <silent><space>w :set wrap!<cr>
+nnoremap <silent><space>n :set number!<cr>
+nnoremap <silent><space>gg :GitGutterToggle<cr>
 
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
 
 " clipboard shit
-vmap <leader>y "+y
-vmap <leader>d "+d
+vmap <space>y "+y
+vmap <space>d "+d
 
 " %< means truncate on the left if too long
 set statusline=%<%F " %F is full path to the file we are editing
@@ -144,11 +143,11 @@ let g:jsx_ext_required = 0 " dont require .jsx extension
 let g:indentLine_color_term = 238
 
 " ack
-nnoremap <leader>a :Ack!<space>
+nnoremap <space>a :Ack!<space>
 let g:ackprg = 'rg --vimgrep'
 
 " leaderf
-map <leader>v :LeaderfMru<cr>
+map <space>v :LeaderfMru<cr>
 let g:Lf_CommandMap = {'<C-C>': ['<Esc>', '<C-C>']}
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_DefaultMode = 'FullPath'
@@ -159,14 +158,14 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " fugitive/rhubarb/gv
-nmap <leader>gb :Gbrowse<cr>
-nmap <leader>gs :Gstatus<cr>
-nmap <leader>gc :Gcommit<cr>
-nmap <leader>ga :Gwrite<cr>
-nmap <leader>gl :Git! log<cr>
-nmap <leader>gd :Gdiff<cr>
-nmap <leader>gv :GV<cr>
-nmap <leader>gf :GV!<cr>
+nmap <space>gb :Gbrowse<cr>
+nmap <space>gs :Gstatus<cr>
+nmap <space>gc :Gcommit<cr>
+nmap <space>ga :Gwrite<cr>
+nmap <space>gl :Git! log<cr>
+nmap <space>gd :Gdiff<cr>
+nmap <space>gv :GV<cr>
+nmap <space>gf :GV!<cr>
 
 " gutter
 nmap [c <Plug>GitGutterPrevHunk
