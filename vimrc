@@ -19,7 +19,7 @@ set autoindent
 " whitespace
 set nowrap
 set textwidth=0
-set formatoptions=tcqjrn1
+set formatoptions=tcqrn1
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -196,7 +196,7 @@ augroup Convenience
 
   " get completions from current syntax file
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
-  set iskeyword+=-,:
+  set iskeyword+=-
 
   " when editing a file, always jump to the last cursor position
   autocmd BufReadPost *
