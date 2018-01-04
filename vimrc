@@ -86,6 +86,10 @@ set undoreload=10000
 nnoremap <left> :bp<cr>
 nnoremap <right> :bn<cr>
 
+" window management
+nmap <C-n> :new<cr>
+nmap <C-c> :x<cr>
+
 " mode exit
 imap jj <Esc>
 
@@ -170,19 +174,6 @@ nmap ]c <Plug>GitGutterNextHunk
 " ale
 nmap [e <Plug>(ale_previous_wrap)
 nmap ]e <Plug>(ale_next_wrap)
-
-" dwm
-let g:dwm_map_keys = 0
-let g:dwm_make_commands = 0
-nmap <C-_> <Plug>DWMRotateCounterclockwise
-nmap <C-\> <Plug>DWMRotateClockwise
-nmap <C-n> <Plug>DWMNew
-nmap <C-c> <Plug>DWMClose
-nmap <C-f> <Plug>DWMFocus
-nmap <M-l> <Plug>DWMGrowMaster
-nmap <M-h> <Plug>DWMShrinkMaster
-nnoremap <M-j> <C-W>w
-nnoremap <M-k> <C-W>W
 
 " Add the virtualenv's site-packages to vim path
 if has("python")

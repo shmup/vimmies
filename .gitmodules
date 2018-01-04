@@ -52,9 +52,6 @@
 [submodule "pack/plugins/start/gv.vim"]
 	path = pack/plugins/start/gv.vim
 	url = https://github.com/junegunn/gv.vim.git
-[submodule "pack/plugins/start/dwm.vim"]
-	path = pack/plugins/start/dwm.vim
-	url = https://github.com/shmup/dwm.vim.git
 [submodule "pack/plugins/start/ale"]
 	path = pack/plugins/start/ale
 	url = https://github.com/w0rp/ale.git
