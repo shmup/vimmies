@@ -28,24 +28,15 @@
 [submodule "pack/plugins/start/vim-surround"]
 	path = pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "pack/plugins/start/emmet-vim"]
-	path = pack/plugins/start/emmet-vim
-	url = https://github.com/mattn/emmet-vim.git
 [submodule "pack/plugins/start/supertab"]
 	path = pack/plugins/start/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "pack/plugins/start/vim-obsession"]
-	path = pack/plugins/start/vim-obsession
-	url = https://github.com/tpope/vim-obsession.git
 [submodule "pack/plugins/start/vim-matrix-screensaver"]
 	path = pack/plugins/start/vim-matrix-screensaver
 	url = https://github.com/shmup/vim-matrix-screensaver.git
 [submodule "pack/plugins/start/vim-rhubarb"]
 	path = pack/plugins/start/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
-[submodule "pack/plugins/start/vim-sneak"]
-	path = pack/plugins/start/vim-sneak
-	url = https://github.com/justinmk/vim-sneak.git
 [submodule "pack/plugins/start/gv.vim"]
 	path = pack/plugins/start/gv.vim
 	url = https://github.com/junegunn/gv.vim.git

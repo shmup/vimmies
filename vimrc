@@ -4,6 +4,8 @@ syntax on                 " turn on syntax highlighting
 
 colorscheme apprentice
 
+let mapleader = '\<Space>'
+
 set modelines=0           " security
 set number                " show line numbers
 set ruler                 " show file stats
@@ -103,7 +105,7 @@ noremap <silent> <space>ev :e ~/.vim/vimrc<cr>
 noremap <silent> <space>rv :so ~/.vim/vimrc<cr>
 
 " alt-tab
-nnoremap <space><leader> :b#<CR>
+nnoremap <space><space> :b#<CR>
 
 " better window changing
 map <C-h> <C-w>h
@@ -130,9 +132,8 @@ vmap <space>d "+d
 set statusline=%<%F " %F is full path to the file we are editing
 set statusline+=%m " %m shows [+] if the file is modified but not saved
 set statusline+=%r " %r shows [RO] if a file is read-only
-set statusline +=\ %{fugitive#statusline()}
 set statusline+=%= " separation point between the left and right items
-set statusline+=%{&fileformat}
+set statusline+=%5{&fileformat}
 set statusline+=%Y " %Y shows the filetype
 set statusline+=%5l " %l shows the line number
 set statusline+=,
@@ -148,6 +149,7 @@ let g:ackprg = 'rg --vimgrep'
 
 " leaderf
 map <space>v :LeaderfMru<cr>
+map <space>b :LeaderfBufferAll<cr>
 let g:Lf_CommandMap = {'<C-C>': ['<Esc>', '<C-C>']}
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_DefaultMode = 'FullPath'
