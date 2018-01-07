@@ -1,4 +1,3 @@
 wincmd J
-autocmd FileType qf nnoremap <buffer><silent> <esc> :quit<cr>
-autocmd FileType qf nnoremap <buffer><silent> q :quit<cr>
-
+autocmd FileType qf nmap <buffer><silent> <esc> :x<cr>
+autocmd FileType qf nmap <buffer><silent> q :x<cr>

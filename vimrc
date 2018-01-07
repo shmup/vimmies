@@ -29,7 +29,7 @@ set noshiftround
 " ui
 set lazyredraw " make things like macros run faster
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:full
 set shortmess=I " hide splash screen
 
 " cursor motion
@@ -161,7 +161,7 @@ nmap ga <Plug>(EasyAlign)
 
 " fugitive/rhubarb/gv
 nmap <space>gb :Gbrowse<cr>
-nmap <space>gs :Gstatus<cr>
+nmap <silent><space>gs :Gstatus <bar> /modified<cr>:noh<cr>
 nmap <space>gc :Gcommit<cr>
 nmap <space>ga :Gwrite<cr>
 nmap <space>gl :Git! log<cr>
