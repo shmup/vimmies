@@ -40,9 +40,6 @@
 [submodule "pack/plugins/start/gv.vim"]
 	path = pack/plugins/start/gv.vim
 	url = https://github.com/junegunn/gv.vim.git
-[submodule "pack/plugins/start/ale"]
-	path = pack/plugins/start/ale
-	url = https://github.com/w0rp/ale.git
 [submodule "pack/plugins/start/vim-dirvish"]
 	path = pack/plugins/start/vim-dirvish
 	url = https://github.com/justinmk/vim-dirvish.git
