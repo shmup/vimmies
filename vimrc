@@ -174,10 +174,6 @@ set statusline+=%-5v " %v shows the virtual column number;
 let g:jsx_ext_required = 0 " dont require .jsx extension
 let g:indentLine_color_term = 238
 
-" ack
-nnoremap <space>a :Ack!<space>
-let g:ackprg = 'rg --vimgrep'
-
 " leaderf
 map <space>v :LeaderfMru<cr>
 map <space>b :LeaderfBufferAll<cr>

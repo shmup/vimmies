@@ -4,9 +4,6 @@
 [submodule "pack/plugins/start/indentLine"]
 	path = pack/plugins/start/indentLine
 	url = https://github.com/Yggdroot/indentLine.git
-[submodule "pack/plugins/start/ack.vim"]
-	path = pack/plugins/start/ack.vim
-	url = https://github.com/mileszs/ack.vim.git
 [submodule "pack/plugins/start/vim-jsx"]
 	path = pack/plugins/start/vim-jsx
 	url = https://github.com/mxw/vim-jsx.git
