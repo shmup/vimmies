@@ -47,3 +47,6 @@
 	path = pack/plugins/start/vim-qlist
 	url = https://github.com/romainl/vim-qlist.git
         ignore = dirty
+[submodule "pack/plugins/start/vim-qf"]
+	path = pack/plugins/start/vim-qf
+	url = https://github.com/romainl/vim-qf.git

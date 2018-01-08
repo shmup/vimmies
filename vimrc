@@ -17,6 +17,37 @@ set mouse=a               " sometimesss i click
 set updatetime=250        " speed up gitgutter
 set autoindent
 
+" don't offer to open certain files/directories
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
+set wildignore+=*.pdf,*.psd
+set wildignore+=node_modules/*,bower_components/*
+
+" easier change and replace word
+nnoremap c* *Ncgn
+nnoremap c# #NcgN
+nnoremap cg* g*Ncgn
+nnoremap cg# g#NcgN
+
+" keep cursor put
+nnoremap * *``
+nnoremap # #``
+nnoremap g* g*``
+nnoremap g# g#``
+
+" quicker buffer
+nnoremap gb :ls<CR>:buffer<Space>
+nnoremap gB :ls<CR>:sbuffer<Space>
+
+" find mappings
+nnoremap ,f :find *
+nnoremap ,s :sfind *
+nnoremap ,v :vert sfind *
+nnoremap ,t :tabfind *
+nnoremap ,F :find ./**/*
+nnoremap ,S :sfind ./**/*
+nnoremap ,V :vert sfind ./**/*
+nnoremap ,T :tabfind ./**/*
+
 " whitespace
 set nowrap
 set textwidth=0
