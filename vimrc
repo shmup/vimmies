@@ -138,6 +138,19 @@ noremap <silent> <space>rv :so ~/.vim/vimrc<cr>
 " alt-tab
 nnoremap <space><space> :b#<CR>
 
+" search and replace
+nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<CR>\>/
+nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<CR>\>/
+
+" auto expansion
+inoremap (<CR> (<CR>)<Esc>O
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {; {<CR>};<Esc>O
+inoremap {, {<CR>},<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
+inoremap [; [<CR>];<Esc>O
+inoremap [, [<CR>],<Esc>O
+
 " better window changing
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -199,10 +212,6 @@ nmap <space>gf :GV!<cr>
 " gutter
 nmap [c <Plug>GitGutterPrevHunk
 nmap ]c <Plug>GitGutterNextHunk
-
-" ale
-nmap [e <Plug>(ale_previous_wrap)
-nmap ]e <Plug>(ale_next_wrap)
 
 " Add the virtualenv's site-packages to vim path
 if has("python")
