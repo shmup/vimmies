@@ -7,7 +7,6 @@ colorscheme apprentice
 let mapleader = '\<Space>'
 
 set modelines=0           " security
-set number                " show line numbers
 set ruler                 " show file stats
 set visualbell            " blink dont beep
 set encoding=utf-8        " encoding
@@ -212,6 +211,20 @@ nmap <space>gf :GV!<cr>
 " gutter
 nmap [c <Plug>GitGutterPrevHunk
 nmap ]c <Plug>GitGutterNextHunk
+
+" tab nav
+noremap <space>1 1gt
+noremap <space>2 2gt
+noremap <space>3 3gt
+noremap <space>4 4gt
+noremap <space>5 5gt
+noremap <space>6 6gt
+noremap <space>7 7gt
+noremap <space>8 8gt
+noremap <space>9 9gt
+
+" scratch bufferrrrr
+command! SC vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
 
 " Add the virtualenv's site-packages to vim path
 if has("python")
