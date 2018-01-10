@@ -74,7 +74,7 @@ nnoremap j gj
 nnoremap k gk
 
 " folds
-set foldmethod=syntax
+set foldmethod=indent
 set foldnestmax=10
 set foldlevelstart=10
 
