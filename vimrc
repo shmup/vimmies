@@ -19,7 +19,7 @@ set autoindent
 " don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
 set wildignore+=*.pdf,*.psd
-set wildignore+=node_modules/*,bower_components/*
+set wildignore+=node_modules/*,bower_components/*,*/.vim/junk/*
 
 " easier change and replace word
 nnoremap c* *Ncgn
