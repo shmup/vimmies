@@ -223,6 +223,9 @@ noremap <space>7 7gt
 noremap <space>8 8gt
 noremap <space>9 9gt
 
+" markdown shit
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
 " scratch bufferrrrr
 command! SC vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
 
