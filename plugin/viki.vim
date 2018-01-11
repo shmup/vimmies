@@ -14,13 +14,13 @@ augroup Viki
   autocmd BufEnter $VIM_VIKI_HOME/* call VikiSetup()
 augroup END
 
-function! VikiSetup()
+function! SetFiletypeAndMappings()
     setlocal ft=markdown.note
-    nnoremap <buffer><cr> :call SaveAndLeave()<cr>
+    nnoremap <buffer><cr> :call SaveAndEdit()<cr>
     nnoremap <buffer><bs> :b#<cr>
 endfunction
 
-function! SaveAndLeave()
+function! SaveAndEdit()
   let l:md = expand("<cword>")
   silent! write
   execute 'edit ' $VIM_VIKI_HOME.'/'.l:md.'.md'
