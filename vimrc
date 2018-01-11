@@ -4,7 +4,7 @@ syntax on                 " turn on syntax highlighting
 
 colorscheme apprentice
 
-let mapleader = '\<Space>'
+let mapleader = '\<space>'
 
 set modelines=0           " security
 set ruler                 " show file stats
@@ -34,8 +34,8 @@ nnoremap g* g*``
 nnoremap g# g#``
 
 " quicker buffer
-nnoremap gb :ls<CR>:buffer<Space>
-nnoremap gB :ls<CR>:sbuffer<Space>
+nnoremap gb :ls<cr>:buffer<space>
+nnoremap gB :ls<cr>:sbuffer<space>
 
 " find mappings
 nnoremap ,f :find *
@@ -118,11 +118,11 @@ nnoremap <left> :bp<cr>
 nnoremap <right> :bn<cr>
 
 " window management
-nmap <C-n> :new<cr>
-nmap <C-c> :x<cr>
+nmap <c-n> :new<cr>
+nmap <c-c> :x<cr>
 
 " mode exit
-imap jj <Esc>
+imap jj <esc>
 
 " kill highlight
 map <space>l :let @/=''<cr>
@@ -135,20 +135,20 @@ noremap <silent> <space>ev :e ~/.vim/vimrc<cr>
 noremap <silent> <space>rv :so ~/.vim/vimrc<cr>
 
 " alt-tab
-nnoremap <space><space> :b#<CR>
+nnoremap <space><space> :b#<cr>
 
 " search and replace
-nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<CR>\>/
-nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<CR>\>/
+nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<cr>\>/
+nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
 
 " auto expansion
-inoremap (<CR> (<CR>)<Esc>O
-inoremap {<CR> {<CR>}<Esc>O
-inoremap {; {<CR>};<Esc>O
-inoremap {, {<CR>},<Esc>O
-inoremap [<CR> [<CR>]<Esc>O
-inoremap [; [<CR>];<Esc>O
-inoremap [, [<CR>],<Esc>O
+inoremap (<cr> (<cr>)<esc>O
+inoremap {<cr> {<cr>}<esc>O
+inoremap {; {<cr>};<esc>O
+inoremap {, {<cr>},<esc>O
+inoremap [<cr> [<cr>]<esc>O
+inoremap [; [<cr>];<esc>O
+inoremap [, [<cr>],<esc>O
 
 " better window changing
 map <C-h> <C-w>h
@@ -189,14 +189,14 @@ let g:indentLine_color_term = 238
 " leaderf
 map <space>v :LeaderfMru<cr>
 map <space>b :LeaderfBufferAll<cr>
-let g:Lf_CommandMap = {'<C-C>': ['<Esc>', '<C-C>']}
-let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_CommandMap = {'<c-c>': ['<esc>', '<c-c>']}
+let g:Lf_ShortcutF = '<c-p>'
 let g:Lf_DefaultMode = 'FullPath'
 
 " easy align
-vmap <Enter> <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+vmap <enter> <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
+nmap ga <plug>(EasyAlign)
 
 " fugitive/rhubarb/gv
 nmap <space>gb :Gbrowse<cr>
@@ -209,8 +209,8 @@ nmap <space>gv :GV<cr>
 nmap <space>gf :GV!<cr>
 
 " gutter
-nmap [c <Plug>GitGutterPrevHunk
-nmap ]c <Plug>GitGutterNextHunk
+nmap [c <plug>GitGutterPrevHunk
+nmap ]c <plug>GitGutterNextHunk
 
 " tab nav
 noremap <space>1 1gt
