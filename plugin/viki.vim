@@ -11,7 +11,7 @@ nnoremap <space>ww :edit $VIM_VIKI_HOME/index.md<cr>
 
 augroup Viki
   autocmd!
-  autocmd BufEnter $VIM_VIKI_HOME/* call VikiSetup()
+  autocmd BufEnter $VIM_VIKI_HOME/* call SetFiletypeAndMappings()
 augroup END
 
 function! SetFiletypeAndMappings()

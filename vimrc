@@ -8,7 +8,7 @@ let mapleader = '\<space>'
 
 set modelines=0           " security
 set ruler                 " show file stats
-set visualbell            " blink dont beep
+set visualbell t_vb=.     " dont beep OR blink
 set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
@@ -28,9 +28,9 @@ nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
 
 " netrw
-nnoremap - :Ex<cr>
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
+" nnoremap - :Ex<cr>
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
 
 " keep cursor put
 nnoremap * *``
@@ -206,7 +206,7 @@ xmap ga <plug>(EasyAlign)
 nmap ga <plug>(EasyAlign)
 
 " fugitive/rhubarb/gv
-nmap <space>gb :Gbrowse<cr>
+nmap <space>gb :Gblame<cr>
 nmap <space>gs :Gstatus<cr>
 nmap <space>gc :Gcommit<cr>
 nmap <space>ga :Gwrite<cr>
