@@ -200,7 +200,7 @@ nmap ga <Plug>(EasyAlign)
 
 " fugitive/rhubarb/gv
 nmap <space>gb :Gbrowse<cr>
-nmap <silent><space>gs :Gstatus <bar> /modified<cr>:noh<cr>
+nmap <space>gs :Gstatus<cr>
 nmap <space>gc :Gcommit<cr>
 nmap <space>ga :Gwrite<cr>
 nmap <space>gl :Git! log<cr>
