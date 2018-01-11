@@ -27,6 +27,11 @@ nnoremap c# #NcgN
 nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
 
+" netrw
+nnoremap - :Ex<cr>
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+
 " keep cursor put
 nnoremap * *``
 nnoremap # #``
@@ -118,7 +123,9 @@ nnoremap <left> :bp<cr>
 nnoremap <right> :bn<cr>
 
 " window management
-nmap <c-n> :new<cr>
+set splitright
+nmap <c-s>n :enew<cr>
+nmap <c-n> :vnew<cr>
 nmap <c-c> :x<cr>
 
 " mode exit
