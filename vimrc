@@ -8,7 +8,8 @@ let mapleader = '\<space>'
 
 set modelines=0           " security
 set ruler                 " show file stats
-set visualbell t_vb=.     " dont beep OR blink
+set visualbell            " dont blink
+set t_vb=                 " dont beep
 set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
@@ -28,9 +29,10 @@ nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
 
 " netrw
-" nnoremap - :Ex<cr>
-" let g:netrw_banner = 0
-" let g:netrw_liststyle = 3
+nnoremap - :Ex<cr>
+let g:netrw_banner = 0
+let g:netrw_hide = 1
+let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
 
 " keep cursor put
 nnoremap * *``
@@ -127,6 +129,8 @@ set splitright
 nmap <c-s>n :enew<cr>
 nmap <c-n> :vnew<cr>
 nmap <c-c> :x<cr>
+" maximize
+nnoremap <C-w>m <C-w>\|<C-w>_
 
 " mode exit
 imap jj <esc>

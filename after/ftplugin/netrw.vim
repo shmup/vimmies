@@ -1,2 +1,2 @@
-nnoremap <buffer>- <c-u>|<cr>
-nnoremap <buffer><c-c> :b #<cr>
+nmap <buffer>~ :e.<cr>
+nmap <silent><buffer><c-c> :b #<cr>
