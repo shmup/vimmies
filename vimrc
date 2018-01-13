@@ -4,7 +4,7 @@ syntax on                 " turn on syntax highlighting
 
 colorscheme apprentice
 
-let mapleader = '\<space>'
+let mapleader = "\<Space>"
 
 set modelines=0           " security
 set ruler                 " show file stats
