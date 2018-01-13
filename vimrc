@@ -209,8 +209,8 @@ nmap <space>gc :Gcommit<cr>
 nmap <space>ga :Gwrite<cr>
 nmap <space>gl :Git! log<cr>
 nmap <space>gd :Gdiff<cr>
-nmap <space>gv :GV<cr>
-nmap <space>gf :GV!<cr>
+nmap <space>gv :GV!<cr>
+nmap <space>gf :GV<cr>
 
 " gutter
 nmap [c <plug>GitGutterPrevHunk
