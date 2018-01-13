@@ -196,6 +196,7 @@ set statusline+=%-5v " %v shows the virtual column number;
 " plugin shit
 let g:jsx_ext_required = 0 " dont require .jsx extension
 let g:indentLine_color_term = 238
+let g:indentLine_setConceal = 0 " messes with markdown too
 
 " easy align
 vmap <enter> <plug>(EasyAlign)
