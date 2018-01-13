@@ -197,13 +197,6 @@ set statusline+=%-5v " %v shows the virtual column number;
 let g:jsx_ext_required = 0 " dont require .jsx extension
 let g:indentLine_color_term = 238
 
-" leaderf
-map <space>v :LeaderfMru<cr>
-map <space>b :LeaderfBufferAll<cr>
-let g:Lf_CommandMap = {'<c-c>': ['<esc>', '<c-c>']}
-let g:Lf_ShortcutF = '<c-p>'
-let g:Lf_DefaultMode = 'FullPath'
-
 " easy align
 vmap <enter> <plug>(EasyAlign)
 xmap ga <plug>(EasyAlign)
