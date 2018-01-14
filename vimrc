@@ -182,32 +182,15 @@ cmap w!! %!sudo tee > /dev/null %
 vmap <space>y "+y
 vmap <space>d "+d
 
-" %< means truncate on the left if too long
-" set statusline=%F " %F is full path to the file we are editing
-" set statusline+=%m " %m shows [+] if the file is modified but not saved
-" set statusline+=%r " %r shows [RO] if a file is read-only
-" set statusline+=%= " move to the right side
-" set statusline+=%5{&fileformat}
-" set statusline+=%Y " %Y shows the filetype
-" set statusline+=%5l " %l shows the line number
-" set statusline+=,
-" set statusline+=%-5v " %v shows the virtual column number;
-
-set statusline=%5l " %l shows the line number
+set statusline=%3l   " show the line number
 set statusline+=,
-set statusline+=%-2v " %v shows the virtual column number;
-
-" set statusline+=%2{v:register} " %v shows the virtual column number;
-
-set statusline+=%5{&fileformat}
-set statusline+=%Y " %Y shows the filetype
-
-set statusline+=%= " move to the right side
-
-set statusline+=%<%F " %F is full path to the file we are editing
-set statusline+=%m " %m shows [+] if the file is modified but not saved
-set statusline+=%r " %r shows [RO] if a file is read-only
-
+set statusline+=%v   " show the virtual column number
+set statusline+=%Y   " show the filetype
+set statusline+=\ \  " spaces
+set statusline+=%=   " move to the right side
+set statusline+=%<%F " (truncated) full path to the file we are editing
+set statusline+=%m   " [+] if the file is modified but not saved
+set statusline+=%r   " show [RO] if a file is read-only
 
 " plugin shit
 let g:jsx_ext_required = 0 " dont require .jsx extension
