@@ -44,3 +44,6 @@
 [submodule "pack/plugins/start/fzf.vim"]
 	path = pack/plugins/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule "pack/plugins/start/vim-repeat"]
+	path = pack/plugins/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
