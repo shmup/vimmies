@@ -15,7 +15,7 @@ set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
 set mouse=a               " sometimesss i click
 set updatetime=250        " speed up gitgutter
-set autoindent
+set autoindent            " dont need smartindent. syntax files do that
 
 " don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
@@ -28,11 +28,18 @@ nnoremap c# #NcgN
 nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
 
-" netrw
-nnoremap - :Ex<cr>
-let g:netrw_banner = 0
-let g:netrw_hide = 1
-let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+" search and replace
+nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<cr>\>/
+nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
+
+" auto expansion
+inoremap (<cr> (<cr>)<esc>O
+inoremap {<cr> {<cr>}<esc>O
+inoremap {; {<cr>};<esc>O
+inoremap {, {<cr>},<esc>O
+inoremap [<cr> [<cr>]<esc>O
+inoremap [; [<cr>];<esc>O
+inoremap [, [<cr>],<esc>O
 
 " keep cursor put
 nnoremap * *``
@@ -148,19 +155,6 @@ noremap <silent> <space>rv :so ~/.vim/vimrc<cr>
 " alt-tab
 nnoremap <space><space> :b#<cr>
 
-" search and replace
-nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<cr>\>/
-nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
-
-" auto expansion
-inoremap (<cr> (<cr>)<esc>O
-inoremap {<cr> {<cr>}<esc>O
-inoremap {; {<cr>};<esc>O
-inoremap {, {<cr>},<esc>O
-inoremap [<cr> [<cr>]<esc>O
-inoremap [; [<cr>];<esc>O
-inoremap [, [<cr>],<esc>O
-
 " better window changing
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -183,14 +177,34 @@ vmap <space>y "+y
 vmap <space>d "+d
 
 set statusline=%3l   " show the line number
-set statusline+=,
+set statusline+=,    " and a comma
 set statusline+=%v   " show the virtual column number
 set statusline+=%Y   " show the filetype
-set statusline+=\ \  " spaces
+set statusline+=\ \  " and two spaces
 set statusline+=%=   " move to the right side
 set statusline+=%<%F " (truncated) full path to the file we are editing
 set statusline+=%m   " [+] if the file is modified but not saved
 set statusline+=%r   " show [RO] if a file is read-only
+
+" tab nav
+noremap <space>1 1gt
+noremap <space>2 2gt
+noremap <space>3 3gt
+noremap <space>4 4gt
+noremap <space>5 5gt
+noremap <space>6 6gt
+noremap <space>7 7gt
+noremap <space>8 8gt
+noremap <space>9 9gt
+
+" netrw
+nnoremap - :Ex<cr>
+let g:netrw_banner = 0
+let g:netrw_hide = 1
+let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+
+" markdown shit
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " plugin shit
 let g:jsx_ext_required = 0 " dont require .jsx extension
@@ -205,9 +219,9 @@ nmap ga <plug>(EasyAlign)
 " fugitive/rhubarb/gv
 nmap <space>gb :Gblame<cr>
 nmap <space>gs :Gstatus<cr>
-nmap <space>gc :Gcommit<cr>
-nmap <space>ga :Gwrite<cr>
-nmap <space>gl :Git! log<cr>
+nmap <space>gc :Gcommit -v<cr>
+nmap <space>ga :Git add -p<cr>
+nmap <space>gl :BCommits<cr>
 nmap <space>gd :Gdiff<cr>
 nmap <space>gv :GV!<cr>
 nmap <space>gf :GV<cr>
@@ -216,22 +230,8 @@ nmap <space>gf :GV<cr>
 nmap [c <plug>GitGutterPrevHunk
 nmap ]c <plug>GitGutterNextHunk
 
-" tab nav
-noremap <space>1 1gt
-noremap <space>2 2gt
-noremap <space>3 3gt
-noremap <space>4 4gt
-noremap <space>5 5gt
-noremap <space>6 6gt
-noremap <space>7 7gt
-noremap <space>8 8gt
-noremap <space>9 9gt
-
-" markdown shit
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-
 " scratch bufferrrrr
-command! SC vnew | setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+command! SC vnew | setlocal nobuflisted buftype=nofile filetype=markdown bufhidden=wipe noswapfile
 
 " Add the virtualenv's site-packages to vim path
 if has("python")
