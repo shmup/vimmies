@@ -77,7 +77,7 @@ set wildmode=list:full
 set shortmess=I " hide splash screen
 
 " cursor motion
-set scrolloff=3
+set scrolloff=1
 set backspace=indent,eol,start
 set matchpairs+=<:>        " use % to jump between pairs
 runtime! macros/matchit.vim

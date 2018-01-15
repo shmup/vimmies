@@ -22,9 +22,6 @@
 [submodule "pack/plugins/start/supertab"]
 	path = pack/plugins/start/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "pack/plugins/start/vim-matrix-screensaver"]
-	path = pack/plugins/start/vim-matrix-screensaver
-	url = https://github.com/shmup/vim-matrix-screensaver.git
 [submodule "pack/plugins/start/vim-rhubarb"]
 	path = pack/plugins/start/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
