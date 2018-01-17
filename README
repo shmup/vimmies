@@ -7,6 +7,7 @@ REQUIRES
 
 INSTALL
   git clone --recursive -j8 https://github.com/shmup/vimmies.git ~/.vim
+  git submodule update --init --recursive
   mkdir -p ~/.vim/junk/backup ~/.vim/junk/swp ~/.vim/junk/undo ~/.vim/junk/view
 
 UPDATE SUBMODULES
