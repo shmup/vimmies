@@ -118,7 +118,7 @@ noremap <buffer> <space>sh :!/bin/bash % <cr>
 " visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
 
-" undo shit
+" undo/backup shit
 set backupdir=~/.vim/junk/backup// " double slash means files are stored with
 set directory=~/.vim/junk/swp// " full path, to eliminate clobbering
 set undodir=~/.vim/junk/undo//
@@ -126,6 +126,7 @@ set viewdir=~/.vim//junk/view//
 set undofile
 set undolevels=1000
 set undoreload=10000
+set backupcopy=yes
 
 " better arrows
 nnoremap <left> :bp<cr>
@@ -180,6 +181,8 @@ set statusline=%3l   " show the line number
 set statusline+=,    " and a comma
 set statusline+=%v   " show the virtual column number
 set statusline+=%Y   " show the filetype
+set statusline+=\ \  " and two spaces
+set statusline+=%t   " show the filetype
 set statusline+=\ \  " and two spaces
 set statusline+=%=   " move to the right side
 set statusline+=%<%F " (truncated) full path to the file we are editing
