@@ -138,7 +138,7 @@ nmap <c-s>n :enew<cr>
 nmap <c-n> :vnew<cr>
 nmap <c-c> :x<cr>
 " maximize
-nnoremap <C-w>m <C-w>\|<C-w>_
+nnoremap <C-w>\ <C-w>\|<C-w>_
 
 " mode exit
 imap jj <esc>
