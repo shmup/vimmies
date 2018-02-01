@@ -112,7 +112,7 @@ set nojoinspaces
 
 " execute file being edited
 noremap <buffer> <space>pl :!/usr/bin/perl % <cr>
-noremap <buffer> <space>py :!/usr/bin/env python % <cr>
+noremap <buffer> <space>py :!python % <cr>
 noremap <buffer> <space>sh :!/bin/bash % <cr>
 
 " visualize tabs and newlines
