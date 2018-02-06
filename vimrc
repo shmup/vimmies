@@ -22,6 +22,10 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*,*/.vim/junk/*
 
+" when opening a file from quickfix, use existing tab if file is already
+" loaded there
+set switchbuf+=usetab
+
 " easier change and replace word
 nnoremap c* *Ncgn
 nnoremap c# #NcgN
