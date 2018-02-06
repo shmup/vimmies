@@ -1,5 +1,4 @@
 if executable('eslint')
-  setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
   setlocal makeprg=eslint\ --format\ compact
   nnoremap <buffer><space>m :silent make! % \| redraw!<cr>
 endif
