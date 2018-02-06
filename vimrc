@@ -32,6 +32,10 @@ nnoremap c# #NcgN
 nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
 
+" cd to file dir, or project root dir
+nnoremap <silent> ,cd :lcd %:p:h<cr>
+nnoremap <silent> ,ch :lcd <c-r>=fugitive#repo().tree()<cr><cr>
+
 " search and replace
 nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<cr>\>/
 nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
