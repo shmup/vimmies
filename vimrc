@@ -111,8 +111,6 @@ map <space>u vipJjjj
 set nojoinspaces
 
 " execute file being edited
-noremap <buffer> <space>pl :!/usr/bin/perl % <cr>
-noremap <buffer> <space>py :!python % <cr>
 noremap <buffer> <space>sh :!/bin/bash % <cr>
 
 " visualize tabs and newlines
@@ -224,10 +222,12 @@ nmap <space>gb :Gblame<cr>
 nmap <space>gs :Gstatus<cr>
 nmap <space>gc :Gcommit -v<cr>
 nmap <space>ga :Git add -p<cr>
+nmap <space>gp :Gcommit --amend<cr>
 nmap <space>gl :BCommits<cr>
 nmap <space>gd :Gdiff<cr>
 nmap <space>gv :GV!<cr>
 nmap <space>gf :GV<cr>
+nmap <space>gw :Gwrite<cr>
 
 " gutter
 nmap [c <plug>GitGutterPrevHunk
