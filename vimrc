@@ -32,7 +32,7 @@ nnoremap c# #NcgN
 nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
 
-" cd to file dir, or project root dir
+" i don't like autochdir, but i like to quickly do either of these
 nnoremap <silent> ,cd :lcd %:p:h<cr>
 nnoremap <silent> ,ch :lcd <c-r>=fugitive#repo().tree()<cr><cr>
 
@@ -126,7 +126,7 @@ set listchars=tab:▸\ ,eol:¬
 
 " undo/backup shit
 set backupdir=~/.vim/junk/backup// " double slash means files are stored with
-set directory=~/.vim/junk/swp// " full path, to eliminate clobbering
+set directory=~/.vim/junk/swp//    " full path, to eliminate clobbering
 set undodir=~/.vim/junk/undo//
 set viewdir=~/.vim//junk/view//
 set undofile
