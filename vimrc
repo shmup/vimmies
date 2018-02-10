@@ -169,8 +169,8 @@ nnoremap <silent><space>gg :GitGutterToggle<cr>
 cmap w!! %!sudo tee > /dev/null %
 
 " clipboard shit
-vmap <space>y "+y
-vmap <space>d "+d
+vnoremap <space>y "+y
+vnoremap <space>d "+d
 
 set statusline=%3l   " show the line number
 set statusline+=,    " and a comma
