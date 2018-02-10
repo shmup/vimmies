@@ -118,9 +118,6 @@ map <space>q gqip
 map <space>u vipJjjj
 set nojoinspaces
 
-" execute file being edited
-noremap <buffer> <space>sh :!/bin/bash % <cr>
-
 " visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
 
