@@ -192,15 +192,15 @@ set statusline+=%m   " [+] if the file is modified but not saved
 set statusline+=%r   " show [RO] if a file is read-only
 
 " tab nav
-noremap <space>1 1gt
-noremap <space>2 2gt
-noremap <space>3 3gt
-noremap <space>4 4gt
-noremap <space>5 5gt
-noremap <space>6 6gt
-noremap <space>7 7gt
-noremap <space>8 8gt
-noremap <space>9 9gt
+nnoremap <space>1 1gt
+nnoremap <space>2 2gt
+nnoremap <space>3 3gt
+nnoremap <space>4 4gt
+nnoremap <space>5 5gt
+nnoremap <space>6 6gt
+nnoremap <space>7 7gt
+nnoremap <space>8 8gt
+nnoremap <space>9 9gt
 
 " netrw
 nnoremap - :Ex<cr>
@@ -210,8 +210,6 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " plugin shit
 let g:jsx_ext_required = 0 " dont require .jsx extension
-let g:indentLine_color_term = 238
-let g:indentLine_setConceal = 0 " messes with markdown too
 
 " easy align
 vmap <enter> <plug>(EasyAlign)
