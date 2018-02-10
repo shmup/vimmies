@@ -22,8 +22,7 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*,*/.vim/junk/*
 
-" when opening a file from quickfix, use existing tab if file is already
-" loaded there
+" use existing tab if possible when loading a file from quickfix
 set switchbuf+=usetab
 
 " easier change and replace word
@@ -227,7 +226,7 @@ nmap <space>gb :Gblame<cr>
 nmap <space>gs :Gstatus<cr>
 nmap <space>gc :Gcommit -v<cr>
 nmap <space>ga :Git add -p<cr>
-nmap <space>gp :Gcommit --amend<cr>
+nmap <space>gm :Gcommit --amend<cr>
 nmap <space>gl :BCommits<cr>
 nmap <space>gd :Gdiff<cr>
 nmap <space>gv :GV!<cr>

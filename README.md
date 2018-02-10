@@ -31,7 +31,7 @@ git commit
 
 fzf and ripgrep are for fuzzy filtering and faster grepping
 
-the rest is for linting and formatting various languages
+the rest are for linting and formatting various languages
 
 * fzf        https://github.com/junegunn/fzf
 * ripgrep    https://github.com/BurntSushi/ripgrep
