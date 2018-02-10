@@ -204,9 +204,6 @@ noremap <space>9 9gt
 
 " netrw
 nnoremap - :Ex<cr>
-let g:netrw_banner = 0
-let g:netrw_hide = 1
-let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
 
 " markdown shit
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
