@@ -29,7 +29,9 @@ git commit
 
 **NOTES**
 
-a lot of my shit uses tools for linting/formatting
+fzf and ripgrep are for fuzzy filtering and faster grepping
+
+the rest is for linting and formatting various languages
 
 * fzf        https://github.com/junegunn/fzf
 * ripgrep    https://github.com/BurntSushi/ripgrep
