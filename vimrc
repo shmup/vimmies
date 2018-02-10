@@ -90,10 +90,6 @@ set matchpairs+=<:>        " use % to jump between pairs
 runtime! macros/matchit.vim
 set whichwrap+=<,>,h,l,[,] " wrap cursor on more shit
 
-" move up/down editor lines
-nnoremap j gj
-nnoremap k gk
-
 " folds
 set foldmethod=indent
 set foldnestmax=10
@@ -113,8 +109,6 @@ set smartcase
 set showmatch
 
 " formatting
-map <space>q gqip
-map <space>u vipJjjj
 set nojoinspaces
 
 " visualize tabs and newlines
@@ -136,7 +130,6 @@ nnoremap <right> :bn<cr>
 
 " window management
 set splitright
-nmap <c-s>n :enew<cr>
 nmap <c-n> :vnew<cr>
 nmap <c-c> :x<cr>
 " maximize
