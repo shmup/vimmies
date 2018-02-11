@@ -243,9 +243,6 @@ EOF
 endif
 
 augroup Convenience
-  " move this to ftdetect when i figure out HOW
-  autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
-
   " get completions from current syntax file
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
   set iskeyword+=-
