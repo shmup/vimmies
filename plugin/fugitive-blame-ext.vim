@@ -1,3 +1,6 @@
+" source: https://github.com/tommcdo/vim-fugitive-blame-ext
+" displays the commit message in statusline when going through Gblame
+
 function! s:log_message(commit)
 	if a:commit =~ '^0\+$'
 		return '(Not Committed Yet)'

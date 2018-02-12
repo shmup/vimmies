@@ -27,9 +27,9 @@ nnoremap <silent> <space>b :call fzf#run({
       \ })<CR>
 
 " recently viewed list
-map <space>v :FZFMru<cr>
+nnoremap <space>v :FZFMru<cr>
 
 " all files and git ls-files
-map <space>f :Files<cr>
-map <c-p> :GFiles<cr>
+nnoremap <space>f :Files<cr>
+nnoremap <c-p> :GFiles<cr>
 

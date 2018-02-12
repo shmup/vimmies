@@ -36,7 +36,7 @@ the rest are for linting and formatting various languages
 * fzf        https://github.com/junegunn/fzf
 * ripgrep    https://github.com/BurntSushi/ripgrep
 * shellcheck https://github.com/koalaman/shellcheck
-* flake8     https://github.com/koalaman/shellcheck
+* flake8     http://flake8.pycqa.org/en/latest
 * yapf       https://github.com/google/yapf
 * eslint     https://github.com/eslint/eslint
 * prettier   https://github.com/prettier/prettier
