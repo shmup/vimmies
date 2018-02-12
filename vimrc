@@ -195,9 +195,6 @@ nnoremap <space>7 7gt
 nnoremap <space>8 8gt
 nnoremap <space>9 9gt
 
-" netrw
-nnoremap - :Ex<cr>
-
 " markdown shit
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
