@@ -29,14 +29,17 @@ git commit
 
 **NOTES**
 
-fzf and ripgrep are for fuzzy filtering and faster grepping
+i'm working on a [WHY](WHY.md) thing that needs work, but explains my setup
 
-the rest are for linting and formatting various languages
+fzf and ripgrep are for fuzzy filtering and faster grepping
 
 * fzf        https://github.com/junegunn/fzf
 * ripgrep    https://github.com/BurntSushi/ripgrep
-* shellcheck https://github.com/koalaman/shellcheck
+
+these are for linting and formatting various languages
+
 * flake8     http://flake8.pycqa.org/en/latest
 * yapf       https://github.com/google/yapf
 * eslint     https://github.com/eslint/eslint
 * prettier   https://github.com/prettier/prettier
+* shellcheck https://github.com/koalaman/shellcheck

@@ -87,7 +87,7 @@ set shortmess=I " hide splash screen
 set scrolloff=1
 set backspace=indent,eol,start
 set matchpairs+=<:>        " use % to jump between pairs
-runtime! macros/matchit.vim
+packadd matchit
 set whichwrap+=<,>,h,l,[,] " wrap cursor on more shit
 
 " folds
