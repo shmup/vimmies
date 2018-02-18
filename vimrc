@@ -31,13 +31,13 @@ nnoremap c# #NcgN
 nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
 
-" i don't like autochdir, but i like to quickly do either of these
-nnoremap <silent> ,cd :lcd %:p:h<cr>
-nnoremap <silent> ,ch :lcd <c-r>=fugitive#repo().tree()<cr><cr>
-
 " search and replace
 nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<cr>\>/
 nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
+
+" i don't like autochdir, but i like to quickly do either of these
+nnoremap <silent> ,cd :lcd %:p:h<cr>
+nnoremap <silent> ,ch :lcd <c-r>=fugitive#repo().tree()<cr><cr>
 
 " auto expansion
 inoremap (<cr> (<cr>)<esc>O
@@ -194,6 +194,9 @@ nnoremap <space>6 6gt
 nnoremap <space>7 7gt
 nnoremap <space>8 8gt
 nnoremap <space>9 9gt
+
+nnoremap <space>tn :tabnew<cr>
+nnoremap <space>tc :tabclose<cr>
 
 " markdown shit
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
