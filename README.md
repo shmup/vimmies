@@ -5,10 +5,12 @@ gimme vimmies daddy
 
 [vim8 +python](https://github.com/shmup/vimmies/wiki/Installing-vim8)
 
+I forget but the git submodule commands below may specifically require a particular version of git
+
 **INSTALL**
 
 ```sh
-git clone --recursive -j8 https://github.com/shmup/vimmies.git ~/.vim
+git clone https://github.com/shmup/vimmies.git ~/.vim
 git submodule update --init --recursive
 mkdir -p ~/.vim/junk/backup ~/.vim/junk/swp ~/.vim/junk/undo ~/.vim/junk/view
 ```

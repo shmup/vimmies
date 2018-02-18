@@ -82,13 +82,13 @@ But I have some find file/grep mappings in my vimrc you can see.
 
 To see a nice **grep** example, press `,G` when your cursor is on a word you want to search all other files (recursively, from working directory) for.
 
-### vim-repeat
-
-In vim, commands can be repated with `.` but commands from plugins often cannot. tpope wrote a thing to let that happen, which allows command repating for things like vim-commentary which I described above.
-
 ### vim-surround
 
 Admittedly I only use this for one thing: _changing single quotes to double quotes or to backticks or similar things_. But it lets you remove quotes from things and also add html tags around things. Has a command followed by a pattern. Read `:help surround` if you wanna learn more.
+
+### vim-repeat
+
+In vim, commands can be repeated with `.` but commands from plugins often cannot. tpope wrote a thing which allows command repeating for things like vim-commentary and vim-surround.
 
 ### vim-javascript
 
