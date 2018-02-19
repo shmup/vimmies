@@ -6,6 +6,10 @@ colorscheme apprentice
 
 let mapleader = "\<Space>"
 
+if executable('rustfmt')
+  let &l:formatprg = 'rustfmt'
+endif
+
 set modelines=0           " security
 set ruler                 " show file stats
 set visualbell            " dont blink
