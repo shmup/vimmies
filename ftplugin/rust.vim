@@ -12,7 +12,10 @@ if executable('rustc')
   setlocal errorformat+=%C\ %#-->\ %f:%l:%c
   setlocal errorformat+=%-G\ \%#
 
-  set makeprg=rustc
+  setlocal makeprg=rustc
   nnoremap <buffer><space>m :silent make! % \| redraw!<cr>
 endif
 
+if executable('rustfmt')
+  let &l:formatprg = 'rustfmt'
+endif
