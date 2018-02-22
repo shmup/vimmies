@@ -100,8 +100,6 @@ set showmode
 set showcmd
 
 " searching
-nnoremap / /\v
-xnoremap / /\v
 set hlsearch
 set incsearch
 set ignorecase
@@ -197,6 +195,8 @@ nnoremap <space>9 9gt
 
 nnoremap <space>tn :tabnew<cr>
 nnoremap <space>tc :tabclose<cr>
+
+nnoremap <space>p :set paste!<cr>
 
 " markdown shit
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
