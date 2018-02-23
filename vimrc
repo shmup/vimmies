@@ -143,8 +143,8 @@ map <space>l :let @/=''<cr>
 nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
-noremap <silent> <space>ev :e ~/.vim/vimrc<cr>
-noremap <silent> <space>rv :so ~/.vim/vimrc<cr>
+noremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
+noremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 
 " alt-tab
 nnoremap <space><space> :b#<cr>
@@ -166,7 +166,7 @@ nnoremap <silent><space>gg :GitGutterToggle<cr>
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
 
-" clipboard shit
+" yank and delete to system clipboard
 vnoremap <space>y "+y
 vnoremap <space>d "+d
 

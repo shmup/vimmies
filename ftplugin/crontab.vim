@@ -1,1 +1,1 @@
-setl backupcopy=yes
+setlocal backupcopy=yes
