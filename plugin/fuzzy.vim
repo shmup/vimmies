@@ -1,5 +1,6 @@
 " fzf stuff
-" install https://github.com/junegunn/fzf
+" 1) install https://github.com/junegunn/fzf for your user/system
+" 2) i'm already providing plugins/fzf.vim which is another requirement
 
 " recently viewed list
 command! FZFMru call fzf#run({
