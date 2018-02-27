@@ -15,9 +15,9 @@ augroup Viki
 augroup END
 
 function! SetFiletypeAndMappings()
-    setlocal ft=markdown.note
-    nnoremap <buffer><cr> :call SaveAndEdit()<cr>
-    nnoremap <buffer><bs> :b#<cr>
+  setlocal ft=markdown.note
+  nnoremap <buffer><cr> :call SaveAndEdit()<cr>
+  nnoremap <buffer><bs> :b#<cr>
 endfunction
 
 function! SaveAndEdit()
