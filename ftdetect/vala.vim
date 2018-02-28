@@ -1,1 +1,1 @@
-autocmd BufRead,BufNewFile *.vala,*.vapi,*.valadoc setfiletype vala
+autocmd BufRead,BufNewFile *.vala,*.vapi,*.valadoc set filetype=vala
