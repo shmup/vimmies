@@ -1,4 +1,4 @@
-gimme vimmies daddy
+gimme 𝕧immies daddy
 ===================
 
 ### REQUIRES
@@ -45,6 +45,10 @@ These are for linting and formatting various languages
 * eslint     https://github.com/eslint/eslint
 * prettier   https://github.com/prettier/prettier
 * shellcheck https://github.com/koalaman/shellcheck
+
+I use grip for rendering markdown in the browser
+
+* grip       https://github.com/joeyespo/grip
 
 ### DIR STRUCTURE EXPLANATION
 
