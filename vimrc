@@ -198,9 +198,6 @@ nnoremap <space>tc :tabclose<cr>
 
 nnoremap <space>p :set paste!<cr>
 
-" markdown shit
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-
 " plugin shit
 let g:jsx_ext_required = 0 " dont require .jsx extension
 
