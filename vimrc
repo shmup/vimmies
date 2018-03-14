@@ -108,9 +108,11 @@ set showmatch
 
 " formatting
 set nojoinspaces
+nnoremap <space>q gggqG
 
 " visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
+let &showbreak = '↳ '
 
 " undo/backup shit
 set backupdir=~/.vim/junk/backup// " double slash means files are stored with
