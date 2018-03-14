@@ -9,3 +9,7 @@ endif
 if executable('prettier')
   let &l:formatprg = 'prettier --stdin --jsx-bracket-same-line --no-bracket-spacing --print-width 80 --single-quote --trailing-comma es5'
 endif
+
+if executable('jest')
+  nnoremap <buffer><space>t :Dispatch jest<cr>
+endif
