@@ -16,6 +16,7 @@ augroup END
 
 function! SetFiletypeAndMappings()
   setlocal ft=markdown.note
+  setlocal textwidth=80
   nnoremap <buffer><cr> :call SaveAndEdit()<cr>
   nnoremap <buffer><bs> :b#<cr>
 endfunction
