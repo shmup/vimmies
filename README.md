@@ -31,7 +31,7 @@ git commit
 
 ### NOTES
 
-I'm working on a [WHY](WHY.md) thing that needs work, but explains my setup
+I'm working on a [WHY](docs/WHY.md) thing that needs work, but explains my setup
 
 fzf and ripgrep are for fuzzy filtering and faster grepping
 
