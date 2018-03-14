@@ -69,13 +69,12 @@
 	path = pack/plugins/start/vim-salve
 	url = https://github.com/tpope/vim-salve.git
         ignore = dirty
-[submodule "pack/plugins/start/paredit.vim"]
-	path = pack/plugins/start/paredit.vim
-	url = https://github.com/vim-scripts/paredit.vim.git
-        ignore = dirty
 [submodule "pack/plugins/start/vim-projectionist"]
 	path = pack/plugins/start/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
 [submodule "pack/plugins/start/vim-classpath"]
 	path = pack/plugins/start/vim-classpath
 	url = https://github.com/tpope/vim-classpath.git
+[submodule "pack/plugins/start/vim-obsession"]
+	path = pack/plugins/start/vim-obsession
+	url = https://github.com/tpope/vim-obsession.git
