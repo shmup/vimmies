@@ -84,7 +84,7 @@ set wildmode=list:full
 set shortmess=I " hide splash screen
 
 " cursor motion
-set scrolloff=1
+set scrolloff=0
 set backspace=indent,eol,start
 set matchpairs+=<:>        " use % to jump between pairs
 packadd matchit
@@ -145,8 +145,8 @@ map <space>l :let @/=''<cr>
 nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
-noremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
-noremap <silent> <space>rv :source ~/.vim/vimrc<cr>
+nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
+nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 
 " alt-tab
 nnoremap <space><space> :b#<cr>
@@ -176,9 +176,10 @@ set statusline=%3l   " show the line number
 set statusline+=,    " and a comma
 set statusline+=%v   " show the virtual column number
 set statusline+=%Y   " show the filetype
-set statusline+=\ \  " and two spaces
+set statusline+=\    " and two spaces
+set statusline+=%{ObsessionStatus('●\ ','■\ ')}
 set statusline+=%t   " show the filetype
-set statusline+=\ \  " and two spaces
+set statusline+=\    " and two spaces
 set statusline+=%=   " move to the right side
 set statusline+=%<%F " (truncated) full path to the file we are editing
 set statusline+=%m   " [+] if the file is modified but not saved
