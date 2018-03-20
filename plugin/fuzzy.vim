@@ -14,6 +14,6 @@ nnoremap <space>v :FZFMru<cr>
 nnoremap <space>b :Buffers<cr>
 
 " all files versus files tracked in git
-nnoremap <space>f :Files<cr>
+nnoremap <c-f> :Files<cr>
 nnoremap <c-p> :GFiles<cr>
 

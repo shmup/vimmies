@@ -84,7 +84,7 @@ set wildmode=list:full
 set shortmess=I " hide splash screen
 
 " cursor motion
-set scrolloff=0
+set scrolloff=1
 set backspace=indent,eol,start
 set matchpairs+=<:>        " use % to jump between pairs
 packadd matchit
