@@ -164,6 +164,7 @@ nnoremap Y y$
 nnoremap <silent><space>w :set wrap!<cr>
 nnoremap <silent><space>n :set number!<cr>
 nnoremap <silent><space>gg :GitGutterToggle<cr>
+nnoremap <silent><space>p :set paste!<cr>
 
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
@@ -198,11 +199,6 @@ nnoremap <space>9 9gt
 
 nnoremap <space>tn :tabnew<cr>
 nnoremap <space>tc :tabclose<cr>
-
-nnoremap <space>p :set paste!<cr>
-
-" plugin shit
-let g:jsx_ext_required = 0 " dont require .jsx extension
 
 " easy align
 vmap <enter> <plug>(EasyAlign)
