@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+VIM=$HOME/.vim
+
 help="$(basename $0) [OPTION]
 
   - setup           setup vimmies
@@ -8,9 +10,11 @@ help="$(basename $0) [OPTION]
   - remove <name>   remove submodule
 "
 
+_exit() { echo $1 && exit 0; } # clean msg & exit
+
 _setup() {
   git submodule update --init --recursive
-  mkdir -p ~/.vim/junk/{backup,swp,undo,view}
+  mkdir -p $VIM/junk/{backup,swp,undo,view}
 }
 
 _update() {
@@ -18,22 +22,22 @@ _update() {
 }
 
 _install() {
-  if [ -z "$2" ]; then echo "Specify the submodule URL" && exit 0 ; fi
-  cd $HOME/.vim/pack/plugins/start
+  if [[ -z $2 ]]; then _exit "Specify the submodule URL"; fi
+  cd $VIM/pack/plugins/start
   git submodule add --force $2
   cd -
 }
 
 _remove() {
-  if [ -z "$2" ]; then echo "Specify the submodule dirname" && exit 0 ; fi
-  if [ ! -d "$HOME/.vim/pack/plugins/start/$2" ]; then echo "Submodule doesn't exist" && exit 0 ; fi
-  git submodule deinit -f ~/.vim/pack/plugins/start/"$2"
-  git rm -f ~/.vim/pack/plugins/start/"$2"
-  rm -Rf .git/modules/pack/plugins/start/"$2"
+  if [[ -z $2 ]]; then _exit "Specify the submodule dirname"; fi
+  if [[ ! -d $VIM/pack/plugins/start/$2 ]]; then _exit "Submodule doesn't exist"; fi
+  git submodule deinit -f $VIM/pack/plugins/start/$2
+  git rm -f $VIM/pack/plugins/start/$2
+  rm -Rf $VIM/.git/modules/pack/plugins/start/$2
 }
 
-if [[ $(type -t "_$1") = 'function' ]]; then
-    "_$1" $*
+if [[ $(type -t _$1) = 'function' ]]; then
+    _$1 $*
 else
   echo "$help"
 fi
