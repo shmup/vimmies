@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # usage: ./vimmies [OPTION]
 
 VIM=$HOME/.vim
@@ -27,7 +26,6 @@ _install() {
   if [[ -z $2 ]]; then _exit "Specify the submodule URL"; fi
   cd $VIM/pack/plugins/start
   git submodule add --force $2
-  cd -
 }
 
 _remove() {
@@ -39,7 +37,10 @@ _remove() {
 }
 
 if [[ $(type -t _$1) = 'function' ]]; then
+    # run all functions from .vim but return you back at the end
+    cd $VIM
     _$1 $*
+    cd -
 else
   echo "$help"
 fi
