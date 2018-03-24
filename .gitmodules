@@ -81,3 +81,7 @@
 [submodule "pack/plugins/start/Jenkinsfile-vim-syntax"]
 	path = pack/plugins/start/Jenkinsfile-vim-syntax
 	url = https://github.com/martinda/Jenkinsfile-vim-syntax.git
+[submodule "pack/plugins/start/gist.vim"]
+	path = pack/plugins/start/gist.vim
+	url = https://github.com/keith/gist.vim.git
+        ignore = dirty
