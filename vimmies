@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+help="$(basename $0) [OPTION]
+
+  - setup           setup vimmies
+  - update          update submodules
+  - install <url>   install submodule
+  - remove <name>   remove submodule
+"
+
+_setup() {
+  git submodule update --init --recursive
+  mkdir -p ~/.vim/junk/{backup,swp,undo,view}
+}
+
+_update() {
+  git submodule update --remote --merge
+}
+
+_install() {
+  if [ -z "$2" ]; then echo "Specify the submodule URL" && exit 0 ; fi
+  cd $HOME/.vim/pack/plugins/start
+  git submodule add --force $2
+  cd -
+}
+
+_remove() {
+  if [ -z "$2" ]; then echo "Specify the submodule dirname" && exit 0 ; fi
+  if [ ! -d "$HOME/.vim/pack/plugins/start/$2" ]; then echo "Submodule doesn't exist" && exit 0 ; fi
+  git submodule deinit -f ~/.vim/pack/plugins/start/"$2"
+  git rm -f ~/.vim/pack/plugins/start/"$2"
+  rm -Rf .git/modules/pack/plugins/start/"$2"
+}
+
+if [[ $(type -t "_$1") = 'function' ]]; then
+    "_$1" $*
+else
+  echo "$help"
+fi

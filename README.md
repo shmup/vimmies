@@ -12,7 +12,7 @@ I forget but the git submodule commands below may specifically require a particu
 ```sh
 git clone https://github.com/shmup/vimmies.git ~/.vim
 git submodule update --init --recursive
-mkdir -p ~/.vim/junk/backup ~/.vim/junk/swp ~/.vim/junk/undo ~/.vim/junk/view
+mkdir -p ~/.vim/junk/{backup,swp,undo,view}
 ```
 
 **UPDATE SUBMODULES**
