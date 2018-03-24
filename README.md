@@ -7,6 +7,8 @@ gimme 𝕧immies daddy
 
 I forget but the git submodule commands below may specifically require a particular version of git
 
+You can use the [vimmies script](https://github.com/shmup/vimmies/blob/master/vimmies) to help manage submodules, or just do the stuff below.
+
 **INSTALL**
 
 ```sh

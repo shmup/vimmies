@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# usage: ./vimmies [OPTION]
+
 VIM=$HOME/.vim
 
 help="$(basename $0) [OPTION]
