@@ -62,19 +62,9 @@
 [submodule "pack/plugins/start/vim-dispatch"]
 	path = pack/plugins/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
-[submodule "pack/plugins/start/vim-fireplace"]
-	path = pack/plugins/start/vim-fireplace
-	url = https://github.com/tpope/vim-fireplace.git
-[submodule "pack/plugins/start/vim-salve"]
-	path = pack/plugins/start/vim-salve
-	url = https://github.com/tpope/vim-salve.git
-        ignore = dirty
 [submodule "pack/plugins/start/vim-projectionist"]
 	path = pack/plugins/start/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
-[submodule "pack/plugins/start/vim-classpath"]
-	path = pack/plugins/start/vim-classpath
-	url = https://github.com/tpope/vim-classpath.git
 [submodule "pack/plugins/start/vim-obsession"]
 	path = pack/plugins/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
