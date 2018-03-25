@@ -11,7 +11,7 @@ help="$(basename $0) [OPTION]
   - remove <name>   remove submodule
 "
 
-_exit() { echo $1 && exit 0; } # clean msg & exit
+bail() { echo $1 && exit 0; } # clean msg & exit
 
 _setup() {
   git submodule update --init --recursive
@@ -23,14 +23,14 @@ _update() {
 }
 
 _install() {
-  if [[ -z $2 ]]; then _exit "Specify the submodule URL"; fi
+  if [[ -z $2 ]]; then bail "Specify the submodule URL"; fi
   cd $VIM/pack/plugins/start
   git submodule add --force $2
 }
 
 _remove() {
-  if [[ -z $2 ]]; then _exit "Specify the submodule dirname"; fi
-  if [[ ! -d $VIM/pack/plugins/start/$2 ]]; then _exit "Submodule doesn't exist"; fi
+  if [[ -z $2 ]]; then bail "Specify the submodule dirname"; fi
+  if [[ ! -d $VIM/pack/plugins/start/$2 ]]; then bail "Submodule doesn't exist"; fi
   git submodule deinit -f $VIM/pack/plugins/start/$2
   git rm -f $VIM/pack/plugins/start/$2
   rm -Rf $VIM/.git/modules/pack/plugins/start/$2

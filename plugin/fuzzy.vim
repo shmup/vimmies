@@ -8,12 +8,8 @@ command! FZFMru call fzf#run({
       \  'sink':    'e',
       \  'options': '-m -x +s',
       \  'down':    '40%'})
-nnoremap <space>v :FZFMru<cr>
 
-" buffer list
-nnoremap <space>b :Buffers<cr>
-
-" all files versus files tracked in git
-nnoremap <c-f> :Files<cr>
-nnoremap <c-p> :GFiles<cr>
-
+nnoremap <space>v :FZFMru<cr>  " mru
+nnoremap <space>b :Buffers<cr> " buffers
+nnoremap <c-f> :Files<cr>      " files
+nnoremap <c-p> :GFiles<cr>     " git files
