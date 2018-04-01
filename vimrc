@@ -211,6 +211,7 @@ nmap <space>gs :Gstatus<cr>
 nmap <space>gc :Gcommit -v<cr>
 nmap <space>ga :Git add -p<cr>
 nmap <space>gm :Gcommit --amend<cr>
+nmap <space>gp :Gpush<cr>
 nmap <space>gl :BCommits<cr>
 nmap <space>gd :Gdiff<cr>
 nmap <space>gv :GV!<cr>

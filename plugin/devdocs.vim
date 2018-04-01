@@ -15,5 +15,3 @@ let s:stub = s:cmds[<SID>Get_env()] . " 'http://devdocs.io/?q="
 command! -nargs=* DD silent! call system(len(split(<q-args>, ' ')) == 0 ?
       \ s:stub . &ft . ' ' . expand('<cword>') . "'" : len(split(<q-args>, ' ')) == 1 ?
       \ s:stub . &ft . ' ' . <q-args> . "'" : s:stub . <q-args> . "'")
-
-nnoremap <space>dd :DD<cr>
