@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # shit in here is just for vim to use
-
 shopt -s expand_aliases  
 
 . $HOME/src/z/z.sh

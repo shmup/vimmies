@@ -35,9 +35,10 @@ nnoremap cg# g#NcgN
 nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<cr>\>/
 nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
 
-" i don't like autochdir, but i like to quickly do either of these
+" change to file dir, repo dir, or Z result
 nnoremap <silent> ,cd :lcd %:p:h<cr>
 nnoremap <silent> ,ch :lcd <c-r>=fugitive#repo().tree()<cr><cr>
+nnoremap ,z :Z<space>
 
 " auto expansion
 inoremap (<cr> (<cr>)<esc>O
