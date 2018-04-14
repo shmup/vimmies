@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # usage: ./vimmies [OPTION]
 
-VIM=$HOME/.vim
+VIM_PATH=$PWD
 
 help="$(basename $0) [OPTION]
 
@@ -15,7 +15,7 @@ bail() { echo $1 && exit 0; } # clean msg & exit
 
 _setup() {
   git submodule update --init --recursive
-  mkdir -p $VIM/junk/{backup,swp,undo,view}
+  mkdir -p $VIM_PATH/junk/{backup,swp,undo,view}
 }
 
 _update() {
@@ -24,21 +24,21 @@ _update() {
 
 _install() {
   if [[ -z $2 ]]; then bail "Specify the submodule URL"; fi
-  cd $VIM/pack/plugins/start
+  cd $VIM_PATH/pack/plugins/start
   git submodule add --force $2
 }
 
 _remove() {
   if [[ -z $2 ]]; then bail "Specify the submodule dirname"; fi
-  if [[ ! -d $VIM/pack/plugins/start/$2 ]]; then bail "Submodule doesn't exist"; fi
-  git submodule deinit -f $VIM/pack/plugins/start/$2
-  git rm -f $VIM/pack/plugins/start/$2
-  rm -Rf $VIM/.git/modules/pack/plugins/start/$2
+  if [[ ! -d $VIM_PATH/pack/plugins/start/$2 ]]; then bail "Submodule doesn't exist"; fi
+  git submodule deinit -f $VIM_PATH/pack/plugins/start/$2
+  git rm -f $VIM_PATH/pack/plugins/start/$2
+  rm -Rf $VIM_PATH/.git/modules/pack/plugins/start/$2
 }
 
 if [[ $(type -t _$1) = 'function' ]]; then
     # run all functions from .vim but return you back at the end
-    cd $VIM
+    cd $VIM_PATH
     _$1 $*
     cd -
 else
