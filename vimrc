@@ -2,7 +2,8 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-colorscheme apprentice
+set background=dark
+colorscheme paramount
 
 let mapleader = "\<Space>"
 
@@ -14,7 +15,6 @@ set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
 set mouse=a               " sometimesss i click
-set updatetime=250        " speed up gitgutter
 set autoindent            " dont need smartindent. syntax files do that
 
 " don't offer to open certain files/directories
@@ -180,7 +180,7 @@ set statusline+=%v   " show the virtual column number
 set statusline+=%Y   " show the filetype
 set statusline+=\    " and two spaces
 set statusline+=%{ObsessionStatus('●\ ','■\ ')}
-set statusline+=%t   " show the filetype
+set statusline+=[%t]   " show the filename
 set statusline+=\    " and two spaces
 set statusline+=%=   " move to the right side
 set statusline+=%<%F " (truncated) full path to the file we are editing
@@ -222,6 +222,19 @@ nmap <space>gw :Gwrite<cr>
 " gutter
 nmap [c <plug>GitGutterPrevHunk
 nmap ]c <plug>GitGutterNextHunk
+
+" colors
+highlight SEND_HELP ctermbg=131 ctermfg=white
+highlight ColorColumn ctermbg=238
+
+augroup SpecialHighlights
+  autocmd!
+  autocmd WinEnter,BufEnter *
+    \  call clearmatches()
+    \| call matchadd('ColorColumn', '\s\+$', 100)
+    \| call matchadd('SEND_HELP', 'HACK')
+    \| call matchadd('SEND_HELP', 'ALERT', 101)
+augroup END
 
 " scratch bufferrrrr
 command! SC vnew | setlocal nobuflisted buftype=nofile filetype=markdown bufhidden=wipe noswapfile
