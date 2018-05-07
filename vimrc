@@ -3,7 +3,7 @@ filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
 set background=dark
-colorscheme paramount
+colorscheme apprentice
 
 let mapleader = "\<Space>"
 

@@ -1,5 +1,5 @@
 " so - is for dirvish, and _ is for a nerdtree kinda view
-nnoremap _ :Lex<cr> 
+nnoremap _ :Lex<cr>
 
 " this is set up for a nerdtree style pane on the left side
 " and p shows a preview in a vertical split

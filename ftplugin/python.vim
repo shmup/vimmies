@@ -1,4 +1,4 @@
-noremap <buffer> <space>py :!python % <cr>
+noremap <buffer> <space>py :!clear; python % <cr>
 
 if executable('flake8')
   setlocal errorformat=%f:%l:%c:%m
