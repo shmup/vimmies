@@ -7,6 +7,11 @@
 "   - type a word (foo) and press return on it to create foo.md
 "   - backspace takes you back a file
 
+" TODO
+" use namespaces so when pressing <CR> on foo from index.md
+" it creates index_foo.md, and pressing <cr> on bar in foo.md
+" creates index_foo_bar.md (possibly)
+
 nnoremap <space>ww :edit $VIM_VIKI_HOME/index.md<cr>
 
 augroup Viki

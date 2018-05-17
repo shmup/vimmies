@@ -211,7 +211,7 @@ nmap <space>gb :Gblame<cr>
 nmap <space>gs :Gstatus<cr>
 nmap <space>gc :Gcommit -v<cr>
 nmap <space>ga :Git add -p<cr>
-nmap <space>gm :Gcommit --amend<cr>
+nmap <space>gm :Gcommit -v --amend<cr>
 nmap <space>gp :Gpush<cr>
 nmap <space>gl :BCommits<cr>
 nmap <space>gd :Gdiff<cr>
@@ -225,6 +225,7 @@ nmap ]c <plug>GitGutterNextHunk
 
 " colors
 highlight SEND_HELP ctermbg=131 ctermfg=white
+highlight GENERIC cterm=reverse gui=reverse
 highlight ColorColumn ctermbg=238
 
 augroup SpecialHighlights
@@ -233,6 +234,7 @@ augroup SpecialHighlights
     \  call clearmatches()
     \| call matchadd('ColorColumn', '\s\+$', 100)
     \| call matchadd('SEND_HELP', 'HACK')
+    \| call matchadd('GENERIC', 'NOTE')
     \| call matchadd('SEND_HELP', 'ALERT', 101)
 augroup END
 
