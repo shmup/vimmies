@@ -82,3 +82,6 @@
 	path = pack/plugins/start/vim-sexp
 	url = https://github.com/guns/vim-sexp.git
 	ignore = dirty
+[submodule "pack/plugins/start/vim-better-javascript-completion"]
+	path = pack/plugins/start/vim-better-javascript-completion
+	url = git@github.com:shmup/vim-better-javascript-completion.git
