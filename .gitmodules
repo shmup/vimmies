@@ -47,9 +47,6 @@
 [submodule "pack/plugins/start/vim-unimpaired"]
 	path = pack/plugins/start/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
-[submodule "pack/plugins/start/vim-processing"]
-	path = pack/plugins/start/vim-processing
-	url = https://github.com/sophacles/vim-processing.git
 [submodule "pack/plugins/start/scss-syntax.vim"]
 	path = pack/plugins/start/scss-syntax.vim
 	url = https://github.com/cakebaker/scss-syntax.vim.git
@@ -75,16 +72,6 @@
 	path = pack/plugins/start/gist.vim
 	url = https://github.com/keith/gist.vim.git
         ignore = dirty
-[submodule "pack/plugins/start/vim-fireplace"]
-	path = pack/plugins/start/vim-fireplace
-	url = https://github.com/tpope/vim-fireplace.git
-[submodule "pack/plugins/start/vim-sexp"]
-	path = pack/plugins/start/vim-sexp
-	url = https://github.com/guns/vim-sexp.git
-	ignore = dirty
-[submodule "pack/plugins/start/vim-better-javascript-completion"]
-	path = pack/plugins/start/vim-better-javascript-completion
-	url = git@github.com:shmup/vim-better-javascript-completion.git
 [submodule "pack/plugins/start/vim-tbone"]
 	path = pack/plugins/start/vim-tbone
 	url = https://github.com/tpope/vim-tbone.git

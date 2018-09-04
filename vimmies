@@ -12,7 +12,7 @@ YOU="skeletor"
 help="$(basename "$0") [OPTION]
 
   - setup           setup vimmies
-  - update          update submodules
+  - update          build latest vim & update submodules
   - install <url>   install submodule
   - remove <name>   remove submodule
 "
