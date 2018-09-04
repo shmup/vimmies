@@ -11,3 +11,5 @@ let g:gitgutter_terminal_reports_focus=0
 " https://github.com/mxw/vim-jsx#usage
 let g:jsx_ext_required = 0 " dont require .jsx extension
 
+" projectionist
+nnoremap ,a :A<cr>
