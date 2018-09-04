@@ -2,8 +2,14 @@
 # usage: ./vimmies [OPTION]
 
 VIM_PATH=$PWD
+REPO=/home/jared/src/vim
+PY2=/usr/lib/python2.7/config-x86_64-linux-gnu
+PY3=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu
+RUBY=$(which ruby)
+PROCS=4
+YOU="skeletor"
 
-help="$(basename $0) [OPTION]
+help="$(basename "$0") [OPTION]
 
   - setup           setup vimmies
   - update          update submodules
@@ -11,36 +17,67 @@ help="$(basename $0) [OPTION]
   - remove <name>   remove submodule
 "
 
-bail() { echo $1 && exit 0; } # clean msg & exit
+bail() { echo "$1" && exit 0; } # clean msg & exit
 
 _setup() {
   git submodule update --init --recursive
-  mkdir -p $VIM_PATH/junk/{backup,swp,undo,view}
+  mkdir -p "$VIM_PATH/junk/{backup,swp,undo,view}"
 }
 
 _update() {
   git submodule update --remote --merge
+
+  if cd $REPO; then git pull; else git clone https://github.com/vim/vim.git $REPO; fi
+
+  sudo rm -rf /usr/local/share/vim /usr/bin/vim
+
+  cd "$REPO" || exit
+
+  make distclean
+
+  ./configure \
+  --enable-multibyte \
+  --enable-perlinterp=dynamic \
+  --enable-rubyinterp=dynamic \
+  --with-ruby-command="$RUBY" \
+  --enable-pythoninterp=dynamic \
+  --with-python-config-dir="$PY2" \
+  --enable-python3interp \
+  --with-python3-config-dir="$PY3" \
+  --enable-luainterp \
+  --with-luajit \
+  --enable-cscope \
+  --enable-gui=auto \
+  --with-features=huge \
+  --with-x \
+  --enable-fontset \
+  --enable-largefile \
+  --disable-netbeans \
+  --with-compiledby="$YOU" \
+  --enable-fail-if-missing
+
+  make -j "$PROCS" && sudo make -j "$PROCS" install
 }
 
 _install() {
-  if [[ -z $2 ]]; then bail "Specify the submodule URL"; fi
-  cd $VIM_PATH/pack/plugins/start
-  git submodule add --force $2
+  if [[ -z $2 ]]; then bail "Specify the submodule remote address"; fi
+  cd "$VIM_PATH/pack/plugins/start" || exit
+  git submodule add --force "$2"
 }
 
 _remove() {
-  if [[ -z $2 ]]; then bail "Specify the submodule dirname"; fi
+  if [[ -z $2 ]]; then bail "Specify the submodule name"; fi
   if [[ ! -d $VIM_PATH/pack/plugins/start/$2 ]]; then bail "Submodule doesn't exist"; fi
-  git submodule deinit -f $VIM_PATH/pack/plugins/start/$2
-  git rm -f $VIM_PATH/pack/plugins/start/$2
-  rm -Rf $VIM_PATH/.git/modules/pack/plugins/start/$2
+  git submodule deinit -f "$VIM_PATH/pack/plugins/start/$2"
+  git rm -f "$VIM_PATH/pack/plugins/start/$2"
+  rm -Rf "$VIM_PATH/.git/modules/pack/plugins/start/$2"
 }
 
-if [[ $(type -t _$1) = 'function' ]]; then
+if [[ $(type -t _"$1") = 'function' ]]; then
     # run all functions from .vim but return you back at the end
-    cd $VIM_PATH
+    cd "$VIM_PATH" || exit
     _$1 $*
-    cd -
+    cd - || exit
 else
   echo "$help"
 fi
