@@ -234,8 +234,9 @@ augroup SpecialHighlights
     \  call clearmatches()
     \| call matchadd('ColorColumn', '\s\+$', 100)
     \| call matchadd('SEND_HELP', 'HACK')
-    \| call matchadd('GENERIC', 'NOTE')
+    \| call matchadd('SEND_HELP', 'BUG')
     \| call matchadd('SEND_HELP', 'ALERT', 101)
+    \| call matchadd('GENERIC', 'NOTE')
 augroup END
 
 " scratch bufferrrrr
