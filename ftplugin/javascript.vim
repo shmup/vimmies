@@ -11,7 +11,7 @@ if executable('prettier')
 endif
 
 if executable('tmux')
-  nnoremap <buffer>,t :Dispatch npm run local-integration-wip<cr>
+  nnoremap <buffer>,t :Dispatch npm run --prefix portal local-integration-wip<cr>
   nnoremap <buffer>,d :Dispatch<cr>
 endif
 

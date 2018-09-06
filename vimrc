@@ -37,7 +37,7 @@ nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
 
 " change to file dir, repo dir, or Z result
 nnoremap <silent> ,cd :lcd %:p:h<cr>
-nnoremap <silent> ,ch :lcd <c-r>=fugitive#repo().tree()<cr><cr>
+nnoremap <silent> ,cr :lcd <c-r>=fugitive#repo().tree()<cr><cr>
 nnoremap ,z :Z<space>
 
 " auto expansion
