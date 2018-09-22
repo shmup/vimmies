@@ -174,18 +174,20 @@ cmap w!! %!sudo tee > /dev/null %
 vnoremap <space>y "+y
 vnoremap <space>d "+d
 
-set statusline=%3l   " show the line number
-set statusline+=,    " and a comma
-set statusline+=%v   " show the virtual column number
-set statusline+=%Y   " show the filetype
-set statusline+=\    " and two spaces
+set statusline=%3l             " show the line number
+set statusline+=,              " and a comma
+set statusline+=%v             " show the virtual column number
+set statusline+=,              " and a comma
+set statusline+=%{strlen(@\")} " byte count in register
+set statusline+=%Y             " show the filetype
+set statusline+=\              " and two spaces
 set statusline+=%{ObsessionStatus('●\ ','■\ ')}
-set statusline+=[%t]   " show the filename
-set statusline+=\    " and two spaces
-set statusline+=%=   " move to the right side
-set statusline+=%<%F " (truncated) full path to the file we are editing
-set statusline+=%m   " [+] if the file is modified but not saved
-set statusline+=%r   " show [RO] if a file is read-only
+set statusline+=[%t]           " show the filename
+set statusline+=\              " and two spaces
+set statusline+=%=             " move to the right side
+set statusline+=%<%F           " (truncated) full path to the file we are editing
+set statusline+=%m             " [+] if the file is modified but not saved
+set statusline+=%r             " show [RO] if a file is read-only
 
 " tab nav
 nnoremap <space>1 1gt
