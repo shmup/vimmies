@@ -242,8 +242,14 @@ augroup SpecialHighlights
     \| call matchadd('GENERIC', 'NOTE')
 augroup END
 
-" scratch bufferrrrr
+" scratch buffer
 command! SC vnew | setlocal nobuflisted buftype=nofile filetype=markdown bufhidden=wipe noswapfile
+
+" remove all but current buffer
+command! BufOnly silent! execute "%bd|e#|bd#"
+
+" delete current file & buffer
+command! DeleteFile call DeleteFileAndCloseBuffer()
 
 augroup Convenience
   " get completions from current syntax file
