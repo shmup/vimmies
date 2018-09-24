@@ -39,6 +39,7 @@ nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
 nnoremap <silent> ,cd :lcd %:p:h<cr>
 nnoremap <silent> ,cr :lcd <c-r>=fugitive#repo().tree()<cr><cr>
 nnoremap ,z :Z<space>
+nnoremap ,e :Zedit<space>
 
 " auto expansion
 inoremap (<cr> (<cr>)<esc>O

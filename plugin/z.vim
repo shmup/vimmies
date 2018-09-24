@@ -15,3 +15,10 @@ function! Z(...)
   echo l:z_path
 endfunction
 command! -nargs=+ Z call Z(<f-args>)
+
+function! Zedit(...)
+  let l:z_path = get(systemlist('z -e ' . join(a:000)), 0, getcwd())
+  execute 'edit ' . l:z_path
+  echo l:z_path
+endfunction
+command! -nargs=+ Zedit call Zedit(<f-args>)
