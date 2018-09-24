@@ -1,5 +1,3 @@
-command! BufOnly silent! execute "%bd|e#|bd#"
-
 " quick and dirty whitespace based alignment
 function! Align()
   '<,'>!column -t|sed 's/  \(\S\)/ \1/g'
