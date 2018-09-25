@@ -167,6 +167,7 @@ nnoremap <silent><space>w :set wrap!<cr>
 nnoremap <silent><space>n :set number!<cr>
 nnoremap <silent><space>gg :GitGutterToggle<cr>
 nnoremap <silent><space>p :set paste!<cr>
+nnoremap <silent> ,q :QFix<cr>
 
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
@@ -250,6 +251,10 @@ command! BufOnly silent! execute "%bd|e#|bd#"
 
 " delete current file & buffer
 command! DeleteFile call DeleteFileAndCloseBuffer()
+
+command! -nargs=1 Silent
+\ | execute ':silent !'.<q-args>
+\ | execute ':redraw!'
 
 augroup Convenience
   " get completions from current syntax file

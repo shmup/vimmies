@@ -1,4 +1,5 @@
 setlocal foldmethod=syntax
+setlocal commentstring=\/\/\ %s
 
 if executable('eslint')
   setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
@@ -11,7 +12,8 @@ if executable('prettier')
 endif
 
 if executable('tmux')
-  nnoremap <buffer>,t :Dispatch npm run --prefix portal local-integration-wip<cr>
+  nnoremap <buffer>,r :Dispatch remmina -c /home/jared/.local/share/remmina/1534271139285.remmina<cr>
+  nnoremap <buffer>,t :Dispatch npm run --prefix $HOME/workspace/platform/portal local-integration-wip<cr>
   nnoremap <buffer>,d :Dispatch<cr>
 endif
 

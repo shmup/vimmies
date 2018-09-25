@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # usage: ./vimmies [OPTION]
 
-VIM_PATH=$PWD
+VIM_PATH=$HOME/.vim
+PLUGINS_PATH=$VIM_PATH/pack/plugins/start
 REPO=/home/jared/src/vim
 PY2=/usr/lib/python2.7/config-x86_64-linux-gnu
 PY3=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu
@@ -61,16 +62,23 @@ _update() {
 
 _install() {
   if [[ -z $2 ]]; then bail "Specify the submodule remote address"; fi
-  cd "$VIM_PATH/pack/plugins/start" || exit
+  cd "$PLUGINS_PATH" || exit
   git submodule add --force "$2"
 }
 
 _remove() {
-  if [[ -z $2 ]]; then bail "Specify the submodule name"; fi
-  if [[ ! -d $VIM_PATH/pack/plugins/start/$2 ]]; then bail "Submodule doesn't exist"; fi
-  git submodule deinit -f "$VIM_PATH/pack/plugins/start/$2"
-  git rm -f "$VIM_PATH/pack/plugins/start/$2"
-  rm -Rf "$VIM_PATH/.git/modules/pack/plugins/start/$2"
+  if ! [ -x "$(command -v fzy)" ]; then
+    plug=$2
+  else
+    plug=$(ls $PLUGINS_PATH | fzy)
+  fi
+
+  if [[ -z $plug ]]; then bail "Specify the submodule name"; fi
+  if [[ ! -d $PLUGINS_PATH/$plug ]]; then bail "Submodule doesn't exist"; fi
+
+  git submodule deinit -f "$PLUGINS_PATH/$plug"
+  git rm -f "$PLUGINS_PATH/$plug"
+  rm -Rf "$PLUGINS_PATH/$plug"
 }
 
 if [[ $(type -t _"$1") = 'function' ]]; then

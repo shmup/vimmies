@@ -1,8 +1,6 @@
 " http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
 " toggles the quickfix window.
 
-nnoremap <silent> ,q :QFix<cr>
-
 command -bang -nargs=? QFix call QFixToggle(<bang>0)
 function! QFixToggle(forced)
   if exists("g:qfix_win") && a:forced == 0
