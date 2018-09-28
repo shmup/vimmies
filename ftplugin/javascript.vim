@@ -1,8 +1,6 @@
 setlocal foldmethod=syntax
 setlocal commentstring=\/\/\ %s
 
-let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype
-
 if executable('eslint')
   setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
   setlocal makeprg=eslint\ --no-ignore\ --format\ compact

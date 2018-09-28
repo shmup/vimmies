@@ -1,5 +1,9 @@
-# receives filetype and keyword
-# filetype replaces . with spaces in case of multiple filetypes
-# i.e. javascript.jsx
+#!/usr/bin/env bash
 
-firefox "https://duckduckgo.com/?q=${1//[.]/+}+$2&ia=qa"
+# searches the filetype & keyword
+# in case of two filetypes (javascript.jsx) we just use the first
+
+firefox "https://duckduckgo.com/?q=$(echo $1| cut -d'.' -f1)+$2"
+
+# this uses all filetypes and replaces . with space
+# firefox "https://duckduckgo.com/?q=${1//[.]/+}+$2&ia=qa"
