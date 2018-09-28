@@ -1,0 +1,3 @@
+_vimmies_options='setup update install remove'
+complete -W "${_vimmies_options}" 'vimmies'
+
