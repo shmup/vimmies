@@ -28,6 +28,8 @@ endfunction
 
 function! SaveAndEdit()
   let l:md = expand("<cword>")
-  silent! write
-  execute 'edit ' $VIM_VIKI_HOME.'/'.l:md.'.md'
+  if l:md != ''
+    silent! write
+    silent! execute 'edit ' $VIM_VIKI_HOME.'/'.l:md.'.md'
+  endif
 endfunction

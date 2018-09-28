@@ -167,7 +167,7 @@ nnoremap <silent><space>w :set wrap!<cr>
 nnoremap <silent><space>n :set number!<cr>
 nnoremap <silent><space>gg :GitGutterToggle<cr>
 nnoremap <silent><space>p :set paste!<cr>
-nnoremap <silent> ,q :QFix<cr>
+nnoremap <silent> ,q :QFix<cr>G
 
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
