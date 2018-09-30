@@ -1,5 +1,5 @@
 " using tpope's vim-markdown you can get syntax on fenced languages
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript', 'jsx']
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 
 setlocal wrap
 setlocal listchars=

@@ -14,6 +14,4 @@ endif
 if executable('tmux')
   nnoremap <buffer>,r :Dispatch remmina -c /home/jared/.local/share/remmina/1534271139285.remmina &>2<cr>
   nnoremap <buffer>,t :Dispatch npm run --prefix $HOME/workspace/platform/portal local-integration-wip<cr>
-  nnoremap <buffer>,d :Dispatch<cr>
 endif
-

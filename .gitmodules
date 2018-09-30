@@ -50,9 +50,6 @@
 [submodule "pack/plugins/start/vim-css3-syntax"]
 	path = pack/plugins/start/vim-css3-syntax
 	url = https://github.com/hail2u/vim-css3-syntax.git
-[submodule "pack/plugins/start/vim-markdown"]
-	path = pack/plugins/start/vim-markdown
-	url = https://github.com/tpope/vim-markdown.git
 [submodule "pack/plugins/start/vim-dispatch"]
 	path = pack/plugins/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
@@ -72,9 +69,15 @@
 [submodule "pack/plugins/start/vim-tbone"]
 	path = pack/plugins/start/vim-tbone
 	url = https://github.com/tpope/vim-tbone.git
-[submodule "pack/plugins/start/vim-jsx-pretty"]
-	path = pack/plugins/start/vim-jsx-pretty
-	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
 [submodule "pack/plugins/start/emmet-vim"]
 	path = pack/plugins/start/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
+[submodule "pack/plugins/start/vim-perl"]
+	path = pack/plugins/start/vim-perl
+	url = https://github.com/vim-perl/vim-perl.git
+[submodule "pack/plugins/start/vim-jsx-pretty"]
+	path = pack/plugins/start/vim-jsx-pretty
+	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
+[submodule "pack/plugins/start/vim-markdown"]
+	path = pack/plugins/start/vim-markdown
+	url = https://github.com/tpope/vim-markdown.git

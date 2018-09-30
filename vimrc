@@ -167,7 +167,7 @@ nnoremap <silent><space>w :set wrap!<cr>
 nnoremap <silent><space>n :set number!<cr>
 nnoremap <silent><space>gg :GitGutterToggle<cr>
 nnoremap <silent><space>p :set paste!<cr>
-nnoremap <silent> ,q :QFix<cr>G
+nnoremap <silent> ,q :QFix<cr>
 
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
@@ -261,7 +261,7 @@ augroup Convenience
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
   set iskeyword+=-
 
-  autocmd Filetype * if &ft!="python" && &ft!="vim"
+  autocmd Filetype * if &ft!="python" && &ft!="vim" && &ft!="perl6"
     \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
 
   " when editing a file, always jump to the last cursor position

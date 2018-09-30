@@ -3,7 +3,7 @@
 
 VIM_PATH=$HOME/.vim
 PLUGINS_PATH=$VIM_PATH/pack/plugins/start
-CACHE=$VIM_PATH/cache
+CACHE=$VIM_PATH/junk/cache
 
 REPO=/home/jared/src/vim
 PY2=/usr/lib/python2.7/config-x86_64-linux-gnu
@@ -65,7 +65,7 @@ _update() {
 
 _install() {
   if [[ -z $2 ]]; then
-    PLUGIN=$(cat $CACHE | uniq | fzy)
+    PLUGIN=$(cat $CACHE | sort | uniq | fzy)
   else
     PLUGIN=$2
   fi
