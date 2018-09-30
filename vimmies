@@ -64,9 +64,14 @@ _update() {
 }
 
 _install() {
-  if [[ -z $2 ]]; then bail "Specify the submodule remote address"; fi
+  if [[ -z $2 ]]; then
+    PLUGIN=$(cat $CACHE | uniq | fzy)
+  else
+    PLUGIN=$2
+  fi
+
   cd "$PLUGINS_PATH" || exit
-  git submodule add --force "$2"
+  git submodule add --force "$PLUGIN"
 }
 
 _remove() {
@@ -79,6 +84,11 @@ _remove() {
   if [[ -z $PLUGIN ]]; then bail "Specify the submodule name"; fi
   if [[ ! -d $PLUGINS_PATH/$PLUGIN ]]; then bail "Submodule doesn't exist"; fi
 
+  # cache some shit and trim dupes
+  cd $PLUGINS_PATH/$PLUGIN
+  git remote get-url origin >> $CACHE
+  [ -d "$OLDPWD" ] && cd "$OLDPWD"
+
   git submodule deinit -f "$PLUGINS_PATH/$PLUGIN"
   git rm -f "$PLUGINS_PATH/$PLUGIN"
   rm -Rf "$PLUGINS_PATH/$PLUGIN"
@@ -88,7 +98,7 @@ if [[ $(type -t _"$1") = 'function' ]]; then
     # run all functions from .vim but return you back at the end
     cd "$VIM_PATH" || exit
     _$1 $*
-    [ -d "$PWDOLD" ] && cd "$PWDOLD"
+    [ -d "$OLDPWD" ] && cd "$OLDPWD"
 else
   echo "$help"
 fi
