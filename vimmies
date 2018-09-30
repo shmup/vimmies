@@ -86,7 +86,7 @@ if [[ $(type -t _"$1") = 'function' ]]; then
     # run all functions from .vim but return you back at the end
     cd "$VIM_PATH" || exit
     _$1 $*
-    cd - || exit
+    [ -d "$PWDOLD" ] && cd "$PWDOLD"
 else
   echo "$help"
 fi
