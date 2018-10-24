@@ -1,5 +1,3 @@
-let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/perl6.sh " . &l:filetype
-
 if executable('perl6')
   noremap <buffer> <space>pl :!perl6 % <cr>
 endif
@@ -17,4 +15,6 @@ if executable('tmux')
   nnoremap <buffer>,d :Dispatch<cr>
 endif
 
-set keywordprg=p6doc
+if executable('fzy') && executable('firefox')
+  noremap <buffer> ,p :Start p6<cr>
+endif

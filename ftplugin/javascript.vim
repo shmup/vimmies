@@ -1,6 +1,8 @@
 setlocal foldmethod=syntax
 setlocal commentstring=\/\/\ %s
 
+noremap <buffer> <space>js :!node % <cr>
+
 if executable('eslint')
   setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
   setlocal makeprg=eslint\ --no-ignore\ --format\ compact

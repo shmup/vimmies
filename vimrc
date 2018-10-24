@@ -162,6 +162,9 @@ map <C-l> <C-w>l
 " make Y like C/D
 nnoremap Y y$
 
+" nnoremap <space>m :Make! ./upload.sh<cr>
+nnoremap ,d :Dispatch!<cr>
+
 " toggles
 nnoremap <silent><space>w :set wrap!<cr>
 nnoremap <silent><space>n :set number!<cr>
@@ -182,9 +185,11 @@ set statusline+=%v             " show the virtual column number
 set statusline+=,              " and a comma
 set statusline+=%{strlen(@\")} " byte count in register
 set statusline+=%Y             " show the filetype
+set statusline+=,%{FugitiveHead(6)}
 set statusline+=\              " and two spaces
 set statusline+=%{ObsessionStatus('●\ ','■\ ')}
 set statusline+=[%t]           " show the filename
+
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
 set statusline+=%<%F           " (truncated) full path to the file we are editing
@@ -243,8 +248,11 @@ augroup SpecialHighlights
     \| call matchadd('GENERIC', 'NOTE')
 augroup END
 
+" show the groupings under cursor
+command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+
 " scratch buffer
-command! SC vnew | setlocal nobuflisted buftype=nofile filetype=markdown bufhidden=wipe noswapfile
+command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
 
 " remove all but current buffer
 command! BufOnly silent! execute "%bd|e#|bd#"
@@ -261,7 +269,10 @@ augroup Convenience
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
   set iskeyword+=-
 
-  autocmd Filetype * if &ft!="python" && &ft!="vim" && &ft!="perl6"
+  let ignorelist =['python','vim','help']
+
+  autocmd! Filetype * if (index(ignorelist, &ft) == -1)
+    "\ | let &l:keywordprg=":Dispatch " . fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
     \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
 
   " when editing a file, always jump to the last cursor position
