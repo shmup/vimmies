@@ -50,9 +50,9 @@ if s:is_win
   " Use utf-8 for fzf.vim commands
   " Return array of shell commands for cmd.exe
   function! s:wrap_cmds(cmds)
-    return ['@echo off', 'for /f "tokens=4" %%a in (''chcp'') do set origchcp=%%a', 'chcp 65001 > nul'] +
+    return map(['@echo off', 'for /f "tokens=4" %%a in (''chcp'') do set origchcp=%%a', 'chcp 65001 > nul'] +
           \ (type(a:cmds) == type([]) ? a:cmds : [a:cmds]) +
-          \ ['chcp %origchcp% > nul']
+          \ ['chcp %origchcp% > nul'], 'v:val."\r"')
   endfunction
 else
   let s:term_marker = ";#FZF"
@@ -231,6 +231,7 @@ function! s:common_sink(action, lines) abort
         doautocmd BufEnter
       endif
     endfor
+  catch /^Vim:Interrupt$/
   finally
     let &autochdir = autochdir
     silent! autocmd! fzf_swap
@@ -356,7 +357,7 @@ try
     throw v:exception
   endtry
 
-  if has('nvim') && !has_key(dict, 'dir')
+  if !has_key(dict, 'dir')
     let dict.dir = s:fzf_getcwd()
   endif
   if has('win32unix') && has_key(dict, 'dir')
@@ -454,15 +455,17 @@ endfunction
 function! s:pushd(dict)
   if s:present(a:dict, 'dir')
     let cwd = s:fzf_getcwd()
-    if get(a:dict, 'prev_dir', '') ==# cwd
-      return 1
-    endif
-    let a:dict.prev_dir = cwd
+    let w:fzf_pushd = {
+    \   'command': haslocaldir() ? 'lcd' : (exists(':tcd') && haslocaldir(-1) ? 'tcd' : 'cd'),
+    \   'origin': cwd
+    \ }
     execute 'lcd' s:escape(a:dict.dir)
-    let a:dict.dir = s:fzf_getcwd()
-    return 1
+    let cwd = s:fzf_getcwd()
+    let w:fzf_pushd.dir = cwd
+    let a:dict.pushd = w:fzf_pushd
+    return cwd
   endif
-  return 0
+  return ''
 endfunction
 
 augroup fzf_popd
@@ -471,11 +474,29 @@ augroup fzf_popd
 augroup END
 
 function! s:dopopd()
-  if !exists('w:fzf_dir') || s:fzf_getcwd() != w:fzf_dir[1]
+  if !exists('w:fzf_pushd')
     return
   endif
-  execute 'lcd' s:escape(w:fzf_dir[0])
-  unlet w:fzf_dir
+
+  " FIXME: We temporarily change the working directory to 'dir' entry
+  " of options dictionary (set to the current working directory if not given)
+  " before running fzf.
+  "
+  " e.g. call fzf#run({'dir': '/tmp', 'source': 'ls', 'sink': 'e'})
+  "
+  " After processing the sink function, we have to restore the current working
+  " directory. But doing so may not be desirable if the function changed the
+  " working directory on purpose.
+  "
+  " So how can we tell if we should do it or not? A simple heuristic we use
+  " here is that we change directory only if the current working directory
+  " matches 'dir' entry. However, it is possible that the sink function did
+  " change the directory to 'dir'. In that case, the user will have an
+  " unexpected result.
+  if s:fzf_getcwd() ==# w:fzf_pushd.dir
+    execute w:fzf_pushd.command s:escape(w:fzf_pushd.origin)
+  endif
+  unlet w:fzf_pushd
 endfunction
 
 function! s:xterm_launcher()
@@ -533,9 +554,7 @@ function! s:execute(dict, command, use_height, temps) abort
       let fzf.dict = a:dict
       let fzf.temps = a:temps
       function! fzf.on_exit(job_id, exit_status, event) dict
-        if s:present(self.dict, 'dir')
-          execute 'lcd' s:escape(self.dict.dir)
-        endif
+        call s:pushd(self.dict)
         let lines = s:collect(self.temps)
         call s:callback(self.dict, lines)
       endfunction
@@ -562,9 +581,10 @@ endfunction
 
 function! s:execute_tmux(dict, command, temps) abort
   let command = a:command
-  if s:pushd(a:dict)
+  let cwd = s:pushd(a:dict)
+  if len(cwd)
     " -c '#{pane_current_path}' is only available on tmux 1.9 or above
-    let command = join(['cd', fzf#shellescape(a:dict.dir), '&&', command])
+    let command = join(['cd', fzf#shellescape(cwd), '&&', command])
   endif
 
   call system(command)
@@ -586,7 +606,7 @@ function! s:calc_size(max, val, dict)
     let srcsz = len(a:dict.source)
   endif
 
-  let opts = get(a:dict, 'options', '').$FZF_DEFAULT_OPTS
+  let opts = s:evaluate_opts(get(a:dict, 'options', '')).$FZF_DEFAULT_OPTS
   let margin = stridx(opts, '--inline-info') > stridx(opts, '--no-inline-info') ? 1 : 2
   let margin += stridx(opts, '--header') > stridx(opts, '--no-header')
   return srcsz >= 0 ? min([srcsz + margin, size]) : size
@@ -685,9 +705,7 @@ function! s:execute_term(dict, command, temps) abort
   endfunction
 
   try
-    if s:present(a:dict, 'dir')
-      execute 'lcd' s:escape(a:dict.dir)
-    endif
+    call s:pushd(a:dict)
     if s:is_win
       let fzf.temps.batchfile = s:fzf_tempname().'.bat'
       call writefile(s:wrap_cmds(a:command), fzf.temps.batchfile)
@@ -705,9 +723,7 @@ function! s:execute_term(dict, command, temps) abort
       endif
     endif
   finally
-    if s:present(a:dict, 'dir')
-      lcd -
-    endif
+    call s:dopopd()
   endtry
   setlocal nospell bufhidden=wipe nobuflisted nonumber
   setf fzf
@@ -726,21 +742,9 @@ function! s:collect(temps) abort
 endfunction
 
 function! s:callback(dict, lines) abort
-  " Since anything can be done in the sink function, there is no telling that
-  " the change of the working directory was made by &autochdir setting.
-  "
-  " We use the following heuristic to determine whether to restore CWD:
-  " - Always restore the current directory when &autochdir is disabled.
-  "   FIXME This makes it impossible to change directory from inside the sink
-  "   function when &autochdir is not used.
-  " - In case of an error or an interrupt, a:lines will be empty.
-  "   And it will be an array of a single empty string when fzf was finished
-  "   without a match. In these cases, we presume that the change of the
-  "   directory is not expected and should be undone.
-  let popd = has_key(a:dict, 'prev_dir') &&
-        \ (!&autochdir || (empty(a:lines) || len(a:lines) == 1 && empty(a:lines[0])))
+  let popd = has_key(a:dict, 'pushd')
   if popd
-    let w:fzf_dir = [a:dict.prev_dir, a:dict.dir]
+    let w:fzf_pushd = a:dict.pushd
   endif
 
   try
@@ -764,7 +768,7 @@ function! s:callback(dict, lines) abort
 
   " We may have opened a new window or tab
   if popd
-    let w:fzf_dir = [a:dict.prev_dir, a:dict.dir]
+    let w:fzf_pushd = a:dict.pushd
     call s:dopopd()
   endif
 endfunction
