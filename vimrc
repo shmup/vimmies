@@ -166,8 +166,6 @@ nnoremap Y y$
 nnoremap ,d :Dispatch!<cr>
 
 " toggles
-nnoremap <silent><space>w :set wrap!<cr>
-nnoremap <silent><space>n :set number!<cr>
 nnoremap <silent><space>gg :GitGutterToggle<cr>
 nnoremap <silent><space>p :set paste!<cr>
 nnoremap <silent> ,q :QFix<cr>
@@ -195,6 +193,10 @@ set statusline+=%=             " move to the right side
 set statusline+=%<%F           " (truncated) full path to the file we are editing
 set statusline+=%m             " [+] if the file is modified but not saved
 set statusline+=%r             " show [RO] if a file is read-only
+
+" clean up bc i am a filthy slob
+nnoremap <space>o :only<cr>
+nnoremap <space>O :BufOnly<cr>
 
 " tab nav
 nnoremap <space>1 1gt
