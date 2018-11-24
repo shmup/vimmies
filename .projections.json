@@ -1,0 +1,21 @@
+{
+  "*": {
+    "dispatch": "./update.sh"
+  },
+  "vimrc": {
+    "alternate": "ftplugin/",
+    "type": "source"
+  },
+  "ftplugin/*": {
+    "alternate": "colors/apprentice.vim",
+    "type": "source"
+  },
+  "src/producers/build/*.html": {
+    "alternate": "src/producers/src/{}.js",
+    "type": "source"
+  },
+  "src/producers/src/*.js": {
+    "alternate": "src/producers/src/views/{}.template.html",
+    "type": "source"
+  }
+}

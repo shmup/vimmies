@@ -13,3 +13,6 @@ let g:jsx_ext_required = 0 " dont require .jsx extension
 
 " projectionist
 nnoremap ,a :A<cr>
+
+" qf
+let g:qf_mapping_ack_style = 1

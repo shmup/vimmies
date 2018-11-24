@@ -92,6 +92,8 @@ set matchpairs+=<:>        " use % to jump between pairs
 packadd matchit
 set whichwrap+=<,>,h,l,[,] " wrap cursor on more shit
 
+packadd cfilter
+
 " folds
 set foldmethod=indent
 set foldnestmax=10
@@ -168,7 +170,8 @@ nnoremap ,d :Dispatch!<cr>
 " toggles
 nnoremap <silent><space>gg :GitGutterToggle<cr>
 nnoremap <silent><space>p :set paste!<cr>
-nnoremap <silent> ,q :QFix<cr>
+nmap ,q <Plug>(qf_qf_switch)
+nmap ,Q <Plug>(qf_qf_toggle_stay)
 
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
@@ -236,6 +239,7 @@ nmap ]c <plug>GitGutterNextHunk
 
 " colors
 highlight SEND_HELP ctermbg=131 ctermfg=white
+highlight CLEAN ctermbg=white ctermfg=black
 highlight GENERIC cterm=reverse gui=reverse
 highlight ColorColumn ctermbg=238
 
@@ -248,6 +252,7 @@ augroup SpecialHighlights
     \| call matchadd('SEND_HELP', 'BUG')
     \| call matchadd('SEND_HELP', 'ALERT', 101)
     \| call matchadd('GENERIC', 'NOTE')
+    \| call matchadd('CLEAN', 'CLEANME')
 augroup END
 
 " show the groupings under cursor
@@ -271,7 +276,7 @@ augroup Convenience
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
   set iskeyword+=-
 
-  let ignorelist =['python','vim','help']
+  let ignorelist =['vim','help']
 
   autocmd! Filetype * if (index(ignorelist, &ft) == -1)
     "\ | let &l:keywordprg=":Dispatch " . fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
