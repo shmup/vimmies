@@ -295,5 +295,7 @@ augroup CursorLine
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
+source plugin/settings.vim
+
 packloadall
 silent! helptags ALL
