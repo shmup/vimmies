@@ -22,4 +22,3 @@ hi GitGutterAdd          ctermbg=234 ctermfg=108 guibg=NONE guifg=#bcbcbc cterm=
 hi GitGutterChange       ctermbg=234 ctermfg=229 guibg=NONE guifg=#bcbcbc cterm=NONE gui=NONE
 hi GitGutterDelete       ctermbg=234 ctermfg=131 guibg=NONE guifg=#bcbcbc cterm=NONE gui=NONE
 hi GitGutterChangeDelete ctermbg=234 ctermfg=229 guibg=NONE guifg=#bcbcbc cterm=NONE gui=NONE
-
