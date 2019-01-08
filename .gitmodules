@@ -84,3 +84,6 @@
 [submodule "pack/plugins/start/vim-jinja"]
 	path = pack/plugins/start/vim-jinja
 	url = https://github.com/niftylettuce/vim-jinja.git
+[submodule "pack/plugins/start/typescript-vim"]
+	path = pack/plugins/start/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git

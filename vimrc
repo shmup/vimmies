@@ -268,8 +268,8 @@ command! BufOnly silent! execute "%bd|e#|bd#"
 command! DeleteFile call DeleteFileAndCloseBuffer()
 
 command! -nargs=1 Silent
-\ | execute ':silent !'.<q-args>
-\ | execute ':redraw!'
+  \ | execute ':silent !'.<q-args>
+  \ | execute ':redraw!'
 
 augroup Convenience
   " get completions from current syntax file
