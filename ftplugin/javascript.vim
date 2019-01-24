@@ -1,5 +1,8 @@
 setlocal foldmethod=syntax
 setlocal commentstring=\/\/\ %s
+setlocal include=from
+setlocal suffixesadd=.jsx,.js
+setlocal define=class\\s
 
 noremap <buffer> <space>js :!node % <cr>
 

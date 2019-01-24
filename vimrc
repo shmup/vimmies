@@ -4,6 +4,7 @@ syntax on                 " turn on syntax highlighting
 
 set background=dark
 colorscheme apprentice
+" colorscheme paramount
 
 let mapleader = "\<Space>"
 
@@ -129,8 +130,8 @@ set undoreload=10000
 set backupcopy=yes
 
 " better arrows
-nnoremap <left> :bp<cr>
-nnoremap <right> :bn<cr>
+" nnoremap <left> :bp<cr>
+" nnoremap <right> :bn<cr>
 
 " window management
 set splitright
@@ -223,6 +224,7 @@ nmap ga <plug>(EasyAlign)
 " fugitive/rhubarb/gv
 nmap <space>gb :Gblame<cr>
 nmap <space>gs :Gstatus<cr>
+nmap <space>ge :Gedit<cr>
 nmap <space>gc :Gcommit -v<cr>
 nmap <space>ga :Git add -p<cr>
 nmap <space>gm :Gcommit -v --amend<cr>

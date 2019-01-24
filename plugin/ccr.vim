@@ -36,4 +36,4 @@ function! CCR()
         return "\<CR>"
     endif
 endfunction
-" cnoremap <expr> <CR> CCR()
+cnoremap <expr> <CR> CCR()
