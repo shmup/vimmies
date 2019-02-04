@@ -238,6 +238,9 @@ nmap <space>gw :Gwrite<cr>
 " gutter
 nmap [c <plug>GitGutterPrevHunk
 nmap ]c <plug>GitGutterNextHunk
+nmap <space>hs <Plug>GitGutterStageHunk
+nmap <space>hu <Plug>GitGutterUndoHunk
+nmap <space>hv <Plug>GitGutterPreviewHunk
 
 " colors
 highlight SEND_HELP ctermbg=131 ctermfg=white
