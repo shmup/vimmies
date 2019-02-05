@@ -89,4 +89,4 @@
 	url = https://github.com/leafgarland/typescript-vim.git
 [submodule "pack/plugins/start/Colorizer"]
 	path = pack/plugins/start/Colorizer
-	url = https://github.com/shmup/Colorizer.git
+	url = https://github.com/chrisbra/Colorizer.git
