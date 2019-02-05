@@ -87,3 +87,6 @@
 [submodule "pack/plugins/start/typescript-vim"]
 	path = pack/plugins/start/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "pack/plugins/start/Colorizer"]
+	path = pack/plugins/start/Colorizer
+	url = https://github.com/chrisbra/Colorizer.git
