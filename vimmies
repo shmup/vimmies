@@ -15,7 +15,8 @@ YOU="skeletor"
 help="$(basename "$0") [OPTION]
 
   - setup           setup vimmies
-  - update          build latest vim & update submodules
+  - update          update all the submodules
+  - upgrade         upgrade vim
   - install <url>   install submodule
   - remove <name>   remove submodule
 "
@@ -30,7 +31,9 @@ _setup() {
 
 _update() {
   git submodule update --remote --merge
+}
 
+_upgrade() {
   if cd $REPO; then git pull; else git clone https://github.com/vim/vim.git $REPO; fi
 
   sudo rm -rf /usr/local/share/vim /usr/bin/vim
