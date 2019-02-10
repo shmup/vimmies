@@ -243,6 +243,7 @@ nmap <space>hu <Plug>GitGutterUndoHunk
 nmap <space>hv <Plug>GitGutterPreviewHunk
 
 " colors
+command! CT silent! execute "ColorToggle"
 highlight SEND_HELP ctermbg=131 ctermfg=white
 highlight CLEAN ctermbg=white ctermfg=black
 highlight GENERIC cterm=reverse gui=reverse
