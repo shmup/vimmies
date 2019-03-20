@@ -3,8 +3,8 @@ filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
 set background=dark
-colorscheme paramount
-" colorscheme apprentice
+" colorscheme paramount
+colorscheme apprentice
 
 let mapleader = "\<Space>"
 
@@ -21,7 +21,8 @@ set autoindent            " dont need smartindent. syntax files do that
 " don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
 set wildignore+=*.pdf,*.psd
-set wildignore+=node_modules/*,bower_components/*,*/.vim/junk/*
+set wildignore+=bower_components/*,*/.vim/junk/*
+set wildignore+=**/node_modules/**
 
 " use existing tab if possible when loading a file from quickfix
 set switchbuf+=usetab
@@ -255,14 +256,19 @@ augroup SpecialHighlights
     \  call clearmatches()
     \| call matchadd('ColorColumn', '\s\+$', 100)
     \| call matchadd('SEND_HELP', 'HACK')
+    \| call matchadd('SEND_HELP', 'TEMPORARY')
     \| call matchadd('SEND_HELP', 'BUG')
     \| call matchadd('SEND_HELP', 'ALERT', 101)
     \| call matchadd('GENERIC', 'NOTE')
+    \| call matchadd('GENERIC', 'EXCEPTION')
     \| call matchadd('CLEAN', 'CLEANME')
 augroup END
 
 " show the groupings under cursor
 command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+
+" Tig current file
+command! Tig execute "Start tig " . expand('%:p')
 
 " scratch buffer
 command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
@@ -293,6 +299,11 @@ augroup Convenience
   \ if line("'\"") > 0 && line ("'\"") <= line("$") |
   \   exe "normal g'\"" |
   \ endif
+
+  " https://github.com/tpope/tpope/blob/master/.vimrc
+  autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
+    \ if isdirectory(expand("<amatch>:h"))
+    \ | let &swapfile = &modified | endif
 augroup END
 
 augroup CursorLine
