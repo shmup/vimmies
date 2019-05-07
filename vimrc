@@ -152,6 +152,8 @@ nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
+nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
+nnoremap <silent> <space>en :edit ~/.ns1_aliases<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 
 " alt-tab
@@ -227,6 +229,7 @@ nmap <space>gb :Gblame<cr>
 nmap <space>gs :Gstatus<cr>
 nmap <space>ge :Gedit<cr>
 nmap <space>gc :Gcommit -v<cr>
+nmap <space>gn :Gcommit -v --no-verify<cr>
 nmap <space>ga :Git add -p<cr>
 nmap <space>gm :Gcommit -v --amend<cr>
 nmap <space>gp :Gpush<cr>
@@ -257,7 +260,6 @@ augroup SpecialHighlights
     \| call matchadd('ColorColumn', '\s\+$', 100)
     \| call matchadd('SEND_HELP', 'HACK')
     \| call matchadd('SEND_HELP', 'TEMPORARY')
-    \| call matchadd('SEND_HELP', 'BUG')
     \| call matchadd('SEND_HELP', 'ALERT', 101)
     \| call matchadd('GENERIC', 'NOTE')
     \| call matchadd('GENERIC', 'EXCEPTION')

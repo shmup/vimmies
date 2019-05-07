@@ -19,13 +19,6 @@
 [submodule "pack/plugins/start/gv.vim"]
 	path = pack/plugins/start/gv.vim
 	url = https://github.com/junegunn/gv.vim.git
-[submodule "pack/plugins/start/vim-qlist"]
-	path = pack/plugins/start/vim-qlist
-	url = https://github.com/romainl/vim-qlist.git
-        ignore = dirty
-[submodule "pack/plugins/start/vim-qf"]
-	path = pack/plugins/start/vim-qf
-	url = https://github.com/romainl/vim-qf.git
 [submodule "pack/plugins/start/vim-gitgutter"]
 	path = pack/plugins/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
@@ -90,3 +83,12 @@
 [submodule "pack/plugins/start/Colorizer"]
 	path = pack/plugins/start/Colorizer
 	url = https://github.com/chrisbra/Colorizer.git
+[submodule "pack/plugins/start/vim-qlist"]
+	path = pack/plugins/start/vim-qlist
+	url = https://github.com/romainl/vim-qlist.git
+[submodule "pack/plugins/start/vim-qf"]
+	path = pack/plugins/start/vim-qf
+	url = https://github.com/romainl/vim-qf.git
+[submodule "pack/plugins/start/Jenkinsfile-vim-syntax"]
+	path = pack/plugins/start/Jenkinsfile-vim-syntax
+	url = https://github.com/martinda/Jenkinsfile-vim-syntax.git
