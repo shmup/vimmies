@@ -1,6 +1,6 @@
 " minimal vim wiki
 " save this to .vim/plugin/viki.vim
-" add `export VIM_VIKI_HOME=$HOME/Dropbox/example` to .bashrc
+" add `export VIM_VIKI_HOME=/keybase/private/example/notes` to .bashrc
 
 " features:
 "   - open index with <space>ww
@@ -12,7 +12,7 @@
 " it creates index_foo.md, and pressing <cr> on bar in foo.md
 " creates index_foo_bar.md (possibly)
 
-nnoremap <space>ww :edit $VIM_VIKI_HOME/index.md<cr>
+nnoremap <space>ww :edit $VIM_VIKI_HOME/index.txt<cr>
 
 augroup Viki
   autocmd!
@@ -20,16 +20,17 @@ augroup Viki
 augroup END
 
 function! SetFiletypeAndMappings()
-  setlocal ft=markdown.note
+  setlocal ft=text.note
+  setlocal nospell
   setlocal textwidth=80
   nnoremap <buffer><cr> :call SaveAndEdit()<cr>
   nnoremap <buffer><bs> :b#<cr>
 endfunction
 
 function! SaveAndEdit()
-  let l:md = expand("<cword>")
-  if l:md != ''
+  let l:txt = expand("<cword>")
+  if l:txt != ''
     silent! write
-    silent! execute 'edit ' $VIM_VIKI_HOME.'/'.l:md.'.md'
+    silent! execute 'edit ' $VIM_VIKI_HOME.'/'.l:txt.'.txt'
   endif
 endfunction

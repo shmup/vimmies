@@ -3,8 +3,20 @@ filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
 set background=dark
-" colorscheme paramount
+
+function! LouderComments() abort
+  highlight Comment ctermbg=131 ctermfg=231
+  highlight Todo ctermbg=131 ctermfg=231 cterm=reverse
+endfunction
+
+augroup Apprentice
+  autocmd!
+  autocmd ColorScheme * call LouderComments()
+augroup END
+
 colorscheme apprentice
+
+let g:colorizer_disable_bufleave = 1
 
 let mapleader = "\<Space>"
 
@@ -18,7 +30,7 @@ set laststatus=2          " always show status bar
 set mouse=a               " sometimesss i click
 set autoindent            " dont need smartindent. syntax files do that
 
-" don't offer to open certain files/directories
+" TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
 set wildignore+=*.pdf,*.psd
 set wildignore+=bower_components/*,*/.vim/junk/*
@@ -131,8 +143,8 @@ set undoreload=10000
 set backupcopy=yes
 
 " better arrows
-" nnoremap <left> :bp<cr>
-" nnoremap <right> :bn<cr>
+nnoremap <left> :bp<cr>
+nnoremap <right> :bn<cr>
 
 " window management
 set splitright
@@ -218,6 +230,7 @@ nnoremap <space>9 9gt
 
 nnoremap <space>tn :tabnew<cr>
 nnoremap <space>tc :tabclose<cr>
+nnoremap <space>to :tabonly<cr>
 
 " easy align
 vmap <enter> <plug>(EasyAlign)

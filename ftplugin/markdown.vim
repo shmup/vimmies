@@ -4,6 +4,7 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript', 'j
 setlocal wrap
 setlocal listchars=
 setlocal linebreak
+setlocal nospell
 
 " display the rendered markdown in your browser
 if executable('grip')

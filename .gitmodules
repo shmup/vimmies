@@ -86,6 +86,3 @@
 [submodule "pack/plugins/start/Jenkinsfile-vim-syntax"]
 	path = pack/plugins/start/Jenkinsfile-vim-syntax
 	url = https://github.com/martinda/Jenkinsfile-vim-syntax.git
-[submodule "pack/plugins/start/vim-qlist"]
-	path = pack/plugins/start/vim-qlist
-	url = https://github.com/romainl/vim-qlist.git

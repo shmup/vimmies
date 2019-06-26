@@ -10,7 +10,8 @@
 " vim_bash should minimally contain two things:
 "   shopt -s expand_aliases
 "   . $HOME/path/to/z.sh
-" let $BASH_ENV="~/.vim/vim_bash"
+
+let $BASH_ENV="~/.vim/vim_bash"
 
 function! Z(...)
   let l:z_path = get(systemlist('z -e ' . join(a:000)), 0, getcwd())
