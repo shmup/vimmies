@@ -5,8 +5,7 @@ if executable("rg")
 endif
 
 function! Grep(args)
-	let args = split(a:args, ' ')
-	return system(join([&grepprg, shellescape(args[0]), get(args, 1, '')], ' '))
+  return system(join([&grepprg, shellescape(a:args)]))
 endfunction
 
 command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<q-args>)
