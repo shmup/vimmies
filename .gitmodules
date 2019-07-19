@@ -53,12 +53,6 @@
 	path = pack/plugins/start/gist.vim
 	url = https://github.com/keith/gist.vim.git
         ignore = dirty
-[submodule "pack/plugins/start/vim-tbone"]
-	path = pack/plugins/start/vim-tbone
-	url = https://github.com/tpope/vim-tbone.git
-[submodule "pack/plugins/start/emmet-vim"]
-	path = pack/plugins/start/emmet-vim
-	url = https://github.com/mattn/emmet-vim.git
 [submodule "pack/plugins/start/vim-jsx-pretty"]
 	path = pack/plugins/start/vim-jsx-pretty
 	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
@@ -71,9 +65,6 @@
 [submodule "pack/plugins/start/supertab"]
 	path = pack/plugins/start/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "pack/plugins/start/goyo.vim"]
-	path = pack/plugins/start/goyo.vim
-	url = https://github.com/junegunn/goyo.vim.git
 [submodule "pack/plugins/start/vim-jinja"]
 	path = pack/plugins/start/vim-jinja
 	url = https://github.com/niftylettuce/vim-jinja.git
