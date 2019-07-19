@@ -49,34 +49,21 @@
 [submodule "pack/plugins/start/vim-obsession"]
 	path = pack/plugins/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "pack/plugins/start/gist.vim"]
-	path = pack/plugins/start/gist.vim
-	url = https://github.com/keith/gist.vim.git
-        ignore = dirty
 [submodule "pack/plugins/start/vim-jsx-pretty"]
 	path = pack/plugins/start/vim-jsx-pretty
 	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
 [submodule "pack/plugins/start/vim-markdown"]
 	path = pack/plugins/start/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
-[submodule "pack/plugins/start/vim-perl"]
-	path = pack/plugins/start/vim-perl
-	url = https://github.com/vim-perl/vim-perl.git
 [submodule "pack/plugins/start/supertab"]
 	path = pack/plugins/start/supertab
 	url = https://github.com/ervandew/supertab.git
 [submodule "pack/plugins/start/vim-jinja"]
 	path = pack/plugins/start/vim-jinja
 	url = https://github.com/niftylettuce/vim-jinja.git
-[submodule "pack/plugins/start/typescript-vim"]
-	path = pack/plugins/start/typescript-vim
-	url = https://github.com/leafgarland/typescript-vim.git
 [submodule "pack/plugins/start/vim-qf"]
 	path = pack/plugins/start/vim-qf
 	url = https://github.com/romainl/vim-qf.git
-[submodule "pack/plugins/start/Jenkinsfile-vim-syntax"]
-	path = pack/plugins/start/Jenkinsfile-vim-syntax
-	url = https://github.com/martinda/Jenkinsfile-vim-syntax.git
 [submodule "pack/plugins/start/vim-qlist"]
 	path = pack/plugins/start/vim-qlist
 	url = https://github.com/romainl/vim-qlist.git

@@ -1,0 +1,37 @@
+# YES PILE
+
+  ## code modification
+  supertab
+  vim-easy-align
+  vim-surround
+  vim-unimpaired
+  vim-commentary
+  vim-repeat
+
+  ## improve the quickfix/location list
+  vim-qf
+  vim-qlist
+
+  ## project management/navigation
+  vim-fugitive      # stage hunks/files, commit/amend, etc
+  vim-gitgutter     # in buffer staging and navigating to next/prev hunk
+  fzf.vim           # handles fuzzy finding files/buffers
+  vim-dirvish       # FLAGGED for possible removal
+  vim-obsession     # FLAGGED for possible removal
+  vim-projectionist # toggle between *action.js and *reducer.js
+  vim-dispatch      # run builds/tests asyncronously
+
+  ## language fuckin specific mostly syntax/style bullshit
+  vim-css3-syntax
+  scss-syntax.vim
+  vim-javascript
+  vim-jsx-pretty
+  vim-jinja
+  vim-markdown
+
+# MAYBE PILE
+
+  ## git
+  vim-rhubarb # FLAGGED for possible removal
+  gv.vim      # FLAGGED for possible removal
+

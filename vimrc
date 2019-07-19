@@ -168,7 +168,7 @@ nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
 nnoremap <silent> <space>en :edit ~/.ns1_aliases<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 
-" alt-tab
+" alt-tab between two buffers
 nnoremap <space><space> :b#<cr>
 
 " better window changing
