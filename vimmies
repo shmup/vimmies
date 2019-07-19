@@ -68,7 +68,7 @@ _upgrade() {
 
 _install() {
   if [[ -z $2 ]]; then
-    PLUGIN=$(cat $CACHE | sort | uniq | fzy)
+    PLUGIN=$(cat $CACHE | sort | uniq | fzy -l 100 )
   else
     PLUGIN=$2
   fi
@@ -80,10 +80,10 @@ _install() {
 }
 
 _remove() {
-  if ! [ -x "$(command -v fzy)" ]; then
+  if ! [ -x "$(command -v fzy -l 100)" ]; then
     PLUGIN=$2
   else
-    PLUGIN=$(ls $PLUGINS_PATH | fzy)
+    PLUGIN=$(ls $PLUGINS_PATH | fzy -l 100)
   fi
 
   [[ -z $PLUGIN ]] && exit 0;
