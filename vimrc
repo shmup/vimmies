@@ -306,8 +306,7 @@ augroup Convenience
   let ignorelist =['vim','help']
 
   autocmd! Filetype * if (index(ignorelist, &ft) == -1)
-    "\ | let &l:keywordprg=":Dispatch " . fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
-    \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
+    \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/.vim/tools/search.sh " . &l:filetype | endif
 
   " when editing a file, always jump to the last cursor position
   autocmd BufReadPost *
