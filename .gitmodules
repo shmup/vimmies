@@ -52,9 +52,6 @@
 [submodule "pack/plugins/start/vim-markdown"]
 	path = pack/plugins/start/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
-[submodule "pack/plugins/start/supertab"]
-	path = pack/plugins/start/supertab
-	url = https://github.com/ervandew/supertab.git
 [submodule "pack/plugins/start/vim-jinja"]
 	path = pack/plugins/start/vim-jinja
 	url = https://github.com/niftylettuce/vim-jinja.git
@@ -67,3 +64,12 @@
 [submodule "pack/plugins/start/vim-rhubarb"]
 	path = pack/plugins/start/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "pack/plugins/start/supertab"]
+	path = pack/plugins/start/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "pack/plugins/start/Colorizer"]
+	path = pack/plugins/start/Colorizer
+	url = https://github.com/chrisbra/Colorizer.git
+[submodule "pack/plugins/start/emmet-vim"]
+	path = pack/plugins/start/emmet-vim
+	url = https://github.com/mattn/emmet-vim.git
