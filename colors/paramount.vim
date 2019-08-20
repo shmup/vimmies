@@ -47,6 +47,7 @@ let s:yellow          = { "gui": "#F3E430", "cterm": "11"  }
 let s:light_yellow    = { "gui": "#ffff87", "cterm": "228"   }
 let s:dark_yellow     = { "gui": "#A89C14", "cterm": "3"   }
 
+set background=dark
 let s:background = &background
 
 if &background == "dark"

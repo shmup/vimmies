@@ -13,6 +13,7 @@
 " creates index_foo_bar.md (possibly)
 
 nnoremap <space>ww :edit $VIM_VIKI_HOME/index.txt<cr>
+nnoremap <space>wt :edit $VIM_VIKI_HOME/todo.txt<cr>
 
 augroup Viki
   autocmd!

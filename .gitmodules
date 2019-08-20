@@ -40,9 +40,6 @@
 [submodule "pack/plugins/start/vim-dispatch"]
 	path = pack/plugins/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
-[submodule "pack/plugins/start/vim-projectionist"]
-	path = pack/plugins/start/vim-projectionist
-	url = https://github.com/tpope/vim-projectionist.git
 [submodule "pack/plugins/start/vim-obsession"]
 	path = pack/plugins/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
@@ -64,12 +61,21 @@
 [submodule "pack/plugins/start/vim-rhubarb"]
 	path = pack/plugins/start/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
-[submodule "pack/plugins/start/supertab"]
-	path = pack/plugins/start/supertab
-	url = https://github.com/ervandew/supertab.git
 [submodule "pack/plugins/start/Colorizer"]
 	path = pack/plugins/start/Colorizer
 	url = https://github.com/chrisbra/Colorizer.git
 [submodule "pack/plugins/start/emmet-vim"]
 	path = pack/plugins/start/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
+[submodule "pack/plugins/start/vim-projectionist"]
+	path = pack/plugins/start/vim-projectionist
+	url = https://github.com/tpope/vim-projectionist.git
+[submodule "pack/plugins/start/traces.vim"]
+	path = pack/plugins/start/traces.vim
+	url = https://github.com/markonm/traces.vim.git
+[submodule "pack/plugins/start/supertab"]
+	path = pack/plugins/start/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "pack/plugins/start/vim-racket"]
+	path = pack/plugins/start/vim-racket
+	url = https://github.com/wlangstroth/vim-racket.git
