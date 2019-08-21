@@ -182,9 +182,12 @@ nnoremap Y y$
 
 " nnoremap <space>m :Make! ./upload.sh<cr>
 nnoremap ,d :Dispatch!<cr>
+nnoremap <space>m :Make<cr>
 
 " toggles
-nnoremap <silent><space>gg :GitGutterToggle<cr>
+nnoremap <silent>yot :exec "color " .
+      \ ((g:colors_name == "apprentice") ? "modest" : "apprentice")<CR>
+nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent><space>p :set paste!<cr>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
