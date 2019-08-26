@@ -1,8 +1,7 @@
 " i unmap these so a single q mapping fires instantly
-nunmap <buffer> qL
-nunmap <buffer> qF
-nunmap <buffer> qf
-nunmap <buffer> qb
-
-nnoremap <buffer> q :x<cr>
+silent! nunmap <buffer> qL
+silent! nunmap <buffer> qF
+silent! nunmap <buffer> qf
+silent! nunmap <buffer> qb
+silent! nnoremap <buffer> q :x<cr>
 
