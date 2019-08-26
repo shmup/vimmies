@@ -4,16 +4,6 @@ syntax on                 " turn on syntax highlighting
 
 set background=dark
 
-function! LouderComments() abort
-  highlight Comment ctermbg=131 ctermfg=231
-  highlight Todo ctermbg=131 ctermfg=231 cterm=reverse
-endfunction
-
-augroup Apprentice
-  autocmd!
-  autocmd ColorScheme * call LouderComments()
-augroup END
-
 colorscheme apprentice
 
 let g:colorizer_disable_bufleave = 1
@@ -78,11 +68,11 @@ nnoremap gB :ls<cr>:sbuffer<space>
 nnoremap ,f :find *
 nnoremap ,s :sfind *
 nnoremap ,v :vert sfind *
-nnoremap ,t :tabfind *
 nnoremap ,F :find ./**/*
 nnoremap ,S :sfind ./**/*
 nnoremap ,V :vert sfind ./**/*
-nnoremap ,T :tabfind ./**/*
+" nnoremap ,t :tabfind *
+" nnoremap ,T :tabfind ./**/*
 
 " whitespace
 set nowrap
