@@ -79,3 +79,6 @@
 [submodule "pack/plugins/start/vim-racket"]
 	path = pack/plugins/start/vim-racket
 	url = https://github.com/wlangstroth/vim-racket.git
+[submodule "pack/plugins/start/goyo.vim"]
+	path = pack/plugins/start/goyo.vim
+	url = https://github.com/junegunn/goyo.vim.git
