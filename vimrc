@@ -6,8 +6,6 @@ set background=dark
 
 colorscheme apprentice
 
-let g:colorizer_disable_bufleave = 1
-
 let mapleader = "\<Space>"
 
 set modelines=0           " security
@@ -71,8 +69,8 @@ nnoremap ,v :vert sfind *
 nnoremap ,F :find ./**/*
 nnoremap ,S :sfind ./**/*
 nnoremap ,V :vert sfind ./**/*
-" nnoremap ,t :tabfind *
-" nnoremap ,T :tabfind ./**/*
+nnoremap ,t :tabfind *
+nnoremap ,T :tabfind ./**/*
 
 " whitespace
 set nowrap
@@ -246,11 +244,11 @@ nmap <space>gf :GV<cr>
 nmap <space>gw :Gwrite<cr>
 
 " gutter
-nmap [c <plug>GitGutterPrevHunk
-nmap ]c <plug>GitGutterNextHunk
-nmap <space>hs <Plug>GitGutterStageHunk
-nmap <space>hu <Plug>GitGutterUndoHunk
-nmap <space>hv <Plug>GitGutterPreviewHunk
+nmap [c <plug>(GitGutterPrevHunk)
+nmap ]c <plug>(GitGutterNextHunk)
+nmap <space>hs <Plug>(GitGutterStageHunk)
+nmap <space>hu <Plug>(GitGutterUndoHunk)
+nmap <space>hv <Plug>(GitGutterPreviewHunk)
 
 " colors
 command! CT silent! execute "ColorToggle"
