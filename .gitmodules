@@ -82,3 +82,6 @@
 [submodule "pack/plugins/start/goyo.vim"]
 	path = pack/plugins/start/goyo.vim
 	url = https://github.com/junegunn/goyo.vim.git
+[submodule "pack/plugins/start/vim-fireplace"]
+	path = pack/plugins/start/vim-fireplace
+	url = https://github.com/tpope/vim-fireplace.git
