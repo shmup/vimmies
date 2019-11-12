@@ -85,7 +85,7 @@ set noshiftround
 set lazyredraw " make things like macros run faster
 set wildmenu
 set wildmode=list:full
-set shortmess=I " hide splash screen
+set shortmess+=WI
 
 " cursor motion
 set scrolloff=1
@@ -153,6 +153,8 @@ nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 " vimrc
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
+nnoremap <silent> <space>ea :edit ~/.bash_aliases<cr>
+nnoremap <silent> <space>ef :edit ~/.bash_functions<cr>
 nnoremap <silent> <space>en :edit ~/.ns1_aliases<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 
@@ -196,7 +198,7 @@ set statusline+=%Y             " show the filetype
 " set statusline+=,%{FugitiveHead(6)}
 set statusline+=,%t           " show the filename
 set statusline+=\              " and two spaces
-set statusline+=%{ObsessionStatus('●\ ','■\ ')}
+set statusline+=%{ObsessionStatus('☺\ ','■\ ')}
 
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side

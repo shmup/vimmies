@@ -14,6 +14,6 @@ nnoremap ,a :A<cr>
 let g:qf_mapping_ack_style = 1
 
 " git gutter shit
-set updatetime=200
+set updatetime=100
 let g:gitgutter_terminal_reports_focus=0
 let g:gitgutter_enabled = 0
