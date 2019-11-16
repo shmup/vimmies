@@ -13,9 +13,6 @@
 [submodule "pack/plugins/start/vim-surround"]
 	path = pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "pack/plugins/start/gv.vim"]
-	path = pack/plugins/start/gv.vim
-	url = https://github.com/junegunn/gv.vim.git
 [submodule "pack/plugins/start/vim-gitgutter"]
 	path = pack/plugins/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
@@ -61,9 +58,6 @@
 [submodule "pack/plugins/start/vim-rhubarb"]
 	path = pack/plugins/start/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
-[submodule "pack/plugins/start/Colorizer"]
-	path = pack/plugins/start/Colorizer
-	url = https://github.com/chrisbra/Colorizer.git
 [submodule "pack/plugins/start/emmet-vim"]
 	path = pack/plugins/start/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
@@ -79,9 +73,6 @@
 [submodule "pack/plugins/start/vim-racket"]
 	path = pack/plugins/start/vim-racket
 	url = https://github.com/wlangstroth/vim-racket.git
-[submodule "pack/plugins/start/goyo.vim"]
-	path = pack/plugins/start/goyo.vim
-	url = https://github.com/junegunn/goyo.vim.git
 [submodule "pack/plugins/start/vim-fireplace"]
 	path = pack/plugins/start/vim-fireplace
 	url = https://github.com/tpope/vim-fireplace.git

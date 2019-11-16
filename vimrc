@@ -240,9 +240,8 @@ nmap <space>ga :Git add -p<cr>
 nmap <space>gm :Gcommit -v --amend<cr>
 nmap <space>gp :Gpush<cr>
 nmap <space>gl :BCommits<cr>
+nmap <space>gL :Commits<cr>
 nmap <space>gd :Gdiff<cr>
-nmap <space>gv :GV!<cr>
-nmap <space>gf :GV<cr>
 nmap <space>gw :Gwrite<cr>
 
 " gutter
