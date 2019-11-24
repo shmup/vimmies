@@ -50,9 +50,17 @@ if s:is_win
   " Use utf-8 for fzf.vim commands
   " Return array of shell commands for cmd.exe
   function! s:wrap_cmds(cmds)
-    return map(['@echo off', 'for /f "tokens=4" %%a in (''chcp'') do set origchcp=%%a', 'chcp 65001 > nul'] +
-          \ (type(a:cmds) == type([]) ? a:cmds : [a:cmds]) +
-          \ ['chcp %origchcp% > nul'], 'v:val."\r"')
+    let use_chcp = executable('sed')
+    return map([
+      \ '@echo off',
+      \ 'setlocal enabledelayedexpansion']
+    \ + (use_chcp ? [
+      \ 'for /f "usebackq" %%a in (`chcp ^| sed "s/[^0-9]//gp"`) do set origchcp=%%a',
+      \ 'chcp 65001 > nul'] : [])
+    \ + (type(a:cmds) == type([]) ? a:cmds : [a:cmds])
+    \ + (use_chcp ? ['chcp !origchcp! > nul'] : [])
+    \ + ['endlocal'],
+    \ 'v:val."\r"')
   endfunction
 else
   let s:term_marker = ";#FZF"
@@ -254,7 +262,7 @@ endfunction
 function! s:defaults()
   let rules = copy(get(g:, 'fzf_colors', {}))
   let colors = join(map(items(filter(map(rules, 'call("s:get_color", v:val)'), '!empty(v:val)')), 'join(v:val, ":")'), ',')
-  return empty(colors) ? '' : ('--color='.colors)
+  return empty(colors) ? '' : fzf#shellescape('--color='.colors)
 endfunction
 
 function! s:validate_layout(layout)
@@ -518,6 +526,10 @@ endif
 
 function! s:exit_handler(code, command, ...)
   if a:code == 130
+    return 0
+  elseif has('nvim') && a:code == 129
+    " When deleting the terminal buffer while fzf is still running,
+    " Nvim sends SIGHUP.
     return 0
   elseif a:code > 1
     call s:error('Error running ' . a:command)
