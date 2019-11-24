@@ -124,7 +124,7 @@ let &showbreak = '↳ '
 set backupdir=~/.vim/junk/backup// " double slash means files are stored with
 set directory=~/.vim/junk/swp//    " full path, to eliminate clobbering
 set undodir=~/.vim/junk/undo//
-set viewdir=~/.vim//junk/view//
+set viewdir=~/.vim/junk/view//
 set undofile
 set undolevels=1000
 set undoreload=10000
@@ -136,7 +136,7 @@ nnoremap <right> :bn<cr>
 
 " window management
 set splitright
-nmap <c-n> :vnew<cr>
+nmap <c-n> :SC<cr>
 nmap <c-c> :x<cr>
 " maximize
 nnoremap <C-w>\ <C-w>\|<C-w>_
@@ -286,10 +286,6 @@ command! BufOnly silent! execute "%bd|e#|bd#"
 " delete current file & buffer
 command! DeleteFile call DeleteFileAndCloseBuffer()
 
-command! -nargs=1 Silent
-  \ | execute ':silent !'.<q-args>
-  \ | execute ':redraw!'
-
 augroup Convenience
   " get completions from current syntax file
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
@@ -298,7 +294,7 @@ augroup Convenience
   let ignorelist =['vim','help']
 
   autocmd! Filetype * if (index(ignorelist, &ft) == -1)
-    \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/.vim/tools/search.sh " . &l:filetype | endif
+    \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
 
   " when editing a file, always jump to the last cursor position
   autocmd BufReadPost *
