@@ -4,15 +4,20 @@ if executable("rg")
   set grepprg=rg\ --vimgrep
 endif
 
-" currently does not let you pass arguments to Rg
-" https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
-function! Grep(string)
+function LazyGrep(string)
+  " currently just throw it all at your &grepprg
   return system(join([&grepprg, shellescape(a:string)]))
 endfunction
 
+function! Grep(args)
+  let args = split(a:args, ' ')
+  return system(join([&grepprg, shellescape(args[0]), len(args) > 1 ? join(args[1:-1], ' ') : ''], ' '))
+endfunction
+
 command! -nargs=+ -complete=file_in_path -bar Piss  cgetexpr Piss(<q-args>)
-command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<q-args>)
-command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<q-args>)
+command! -nargs=+ -complete=file_in_path -bar LazyGrep  cgetexpr LazyGrep(<q-args>)
+command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr LazyGrep(<q-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr LazyGrep(<q-args>)
 
 augroup quickfix
 	autocmd!
@@ -20,12 +25,12 @@ augroup quickfix
 	autocmd QuickFixCmdPost lgetexpr lwindow
 augroup END
 
-nnoremap <silent> ,G :Grep <C-r><C-w><CR>
-nnoremap <space>z :Piss<space>
-nnoremap <space>a :Grep<space>
+nnoremap <silent> ,G :LazyGrep <C-r><C-w><CR>
+nnoremap <space>a :LazyGrep<space>
+
+xnoremap <silent> ,G :<C-u>let cmd = "LazyGrep " . visual#GetSelection() <bar>
+      \ call histadd("cmd", cmd) <bar>
+      \ execute cmd<CR>
 
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
-xnoremap <silent> ,G :<C-u>let cmd = "Grep " . visual#GetSelection() <bar>
-      \ call histadd("cmd", cmd) <bar>
-      \ execute cmd<CR>
