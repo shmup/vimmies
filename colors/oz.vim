@@ -1,0 +1,1 @@
+/home/jared/src/keybase/src/oz/colors/oz.vim
