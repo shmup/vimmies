@@ -153,6 +153,8 @@ function! s:Init()
    exec 'mksession! ' . s:session_file
    let s:num_orig_win = winnr("$")
 
+   colorscheme oz
+
    " move to top window, so created window will become window 1,
    " then attempt to create new window
    1 wincmd w
@@ -265,6 +267,8 @@ function! s:Cleanup()
    let &so = s:o_so
    let &ve = s:o_ve
    unlet s:o_ch s:o_ls s:o_lz s:o_siso s:o_sm s:o_smd s:o_so s:o_ve
+
+   colorscheme apprentice
 
    " Restore old buffers
    exec 'source ' . s:session_file
