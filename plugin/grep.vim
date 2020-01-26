@@ -33,3 +33,5 @@ xnoremap <silent> ,G :<C-u>let cmd = "LazyGrep " . visual#GetSelection() <bar>
       \ execute cmd<CR>
 
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+command! -bang Source call fzf#run({'source': 'ls', 'sink': 'source', 'dir': '~/sessions'})
