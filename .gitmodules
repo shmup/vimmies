@@ -70,12 +70,21 @@
 [submodule "pack/plugins/start/Colorizer"]
 	path = pack/plugins/start/Colorizer
 	url = https://github.com/chrisbra/Colorizer.git
-[submodule "pack/plugins/start/vim-js"]
-	path = pack/plugins/start/vim-js
-	url = https://github.com/yuezk/vim-js.git
 [submodule "pack/plugins/start/traces.vim"]
 	path = pack/plugins/start/traces.vim
 	url = https://github.com/markonm/traces.vim.git
 [submodule "pack/plugins/start/vim-rhubarb"]
 	path = pack/plugins/start/vim-rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "pack/plugins/start/goyo.vim"]
+	path = pack/plugins/start/goyo.vim
+	url = https://github.com/junegunn/goyo.vim.git
+[submodule "pack/plugins/start/vim-jsdoc"]
+	path = pack/plugins/start/vim-jsdoc
+	url = https://github.com/heavenshell/vim-jsdoc.git
+[submodule "pack/plugins/start/vim-javascript"]
+	path = pack/plugins/start/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "pack/plugins/start/vim-jdaddy"]
+	path = pack/plugins/start/vim-jdaddy
+	url = https://github.com/tpope/vim-jdaddy.git
