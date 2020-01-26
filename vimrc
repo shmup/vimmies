@@ -8,6 +8,25 @@ colorscheme apprentice
 
 let mapleader = "\<Space>"
 
+" TODO - move this somewhere
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+nnoremap <S-h> :call ToggleHiddenAll()<CR>
+
 set modelines=0           " security
 set ruler                 " show file stats
 set visualbell            " dont blink
@@ -91,10 +110,13 @@ set shortmess+=WI
 set scrolloff=1
 set backspace=indent,eol,start
 set matchpairs+=<:>        " use % to jump between pairs
-packadd matchit
 set whichwrap+=<,>,h,l,[,] " wrap cursor on more shit
 
-packadd cfilter
+" TODO - investigate if you want these
+packadd! cfilter
+packadd! editexisting
+packadd! matchit
+packadd! justify
 
 " folds
 set foldmethod=indent
@@ -157,6 +179,7 @@ nnoremap <silent> <space>ea :edit ~/.bash_aliases<cr>
 nnoremap <silent> <space>ef :edit ~/.bash_functions<cr>
 nnoremap <silent> <space>en :edit ~/.ns1_aliases<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
+nnoremap <silent> <space>et :edit ~/todos<cr>
 
 " alt-tab between two buffers
 nnoremap <space><space> :b#<cr>
@@ -313,6 +336,11 @@ augroup CursorLine
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
+
+" lazy timestamp stuff
+nmap <F4> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
+imap <F4> <C-R>=strftime("%Y-%m-%d")<CR>
+cmap <F4> <C-R>=strftime("%Y-%m-%d")<CR>
 
 packloadall
 silent! helptags ALL

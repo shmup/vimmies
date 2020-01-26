@@ -7,6 +7,9 @@ let g:gist_yank_register = '+'
 " https://github.com/mxw/vim-jsx#usage
 let g:jsx_ext_required = 0 " dont require .jsx extension
 
+" https://github.com/pangloss/vim-javascript
+let g:javascript_plugin_jsdoc = 1
+
 " projectionist
 nnoremap ,a :A<cr>
 
