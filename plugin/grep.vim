@@ -26,6 +26,8 @@ augroup quickfix
 augroup END
 
 nnoremap <silent> ,G :LazyGrep <C-r><C-w><CR>
+nnoremap <silent> ,L :Lines <C-r><C-w><CR>
+nnoremap <silent> ,B :BLines <C-r><C-w><CR>
 nnoremap <space>a :LazyGrep<space>
 
 xnoremap <silent> ,G :<C-u>let cmd = "LazyGrep " . visual#GetSelection() <bar>
