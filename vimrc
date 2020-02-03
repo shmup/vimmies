@@ -315,6 +315,7 @@ augroup Convenience
   set iskeyword+=-
 
   let ignorelist =['vim','help']
+  let g:vim_json_warnings = 0
 
   autocmd! Filetype * if (index(ignorelist, &ft) == -1)
     \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
