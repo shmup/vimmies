@@ -36,6 +36,7 @@ set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
 set mouse=a               " sometimesss i click
 set autoindent            " dont need smartindent. syntax files do that
+set linebreak             " breaks on space + :set breakat?
 
 " TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg

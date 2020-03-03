@@ -1,7 +1,10 @@
 " Vim color file
 " Maintainer:   matveyt
-" Last Change:  2019 Jul 31
+" Last Change:  2020 Feb 15
 " URL:          https://github.com/matveyt/vim-modest
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 hi clear
 if exists('g:syntax_on')
@@ -23,7 +26,7 @@ let s:palette.LightSeaGreen = ['DarkCyan', 37, '#20b2aa']
 let s:palette.Mantis = ['DarkGreen', 77, '#74c365']
 let s:palette.DarkChestnut = ['Brown', 95, '#986960']
 
-function! s:hilite(group, fg, bg, ...)
+function s:hilite(group, fg, bg, ...)
     let l:fg = get(s:palette, a:fg, [a:fg, a:fg, a:fg])
     let l:bg = get(s:palette, a:bg, [a:bg, a:bg, a:bg])
     if !a:0
@@ -40,9 +43,26 @@ function! s:hilite(group, fg, bg, ...)
     execute 'hi' a:group l:term l:ctermfg l:ctermbg l:guifg l:guibg
 endfunction
 
-function! s:hilink(to_group, ...)
+function s:hilink(to_group, ...)
     for l:from_group in a:000
         execute 'hi! link' l:from_group a:to_group
+    endfor
+endfunction
+
+function s:setansicolors(colors)
+    if !has('nvim')
+        let g:terminal_ansi_colors = []
+    endif
+
+    for l:idx in range(len(a:colors))
+        let l:name = a:colors[l:idx]
+        let l:value = get(s:palette, l:name)[2]
+        let l:color = empty(l:value) ? l:name : l:value
+        if !has('nvim')
+            call add(g:terminal_ansi_colors, l:color)
+        else
+            let g:terminal_color_{l:idx} = l:color
+        endif
     endfor
 endfunction
 
@@ -71,13 +91,13 @@ call s:hilite('TabLineSel', 'fg', 'bg', 'bold')
 call s:hilite('Visual', 'bg', 'fg', 'NONE')
 
 call s:hilink('Normal', 'CursorLineNr', 'Function', 'Identifier', 'ModeMsg')
-call s:hilink('Comment', 'FoldColumn', 'Folded', 'LineNr', 'NonText', 'SignColumn',
-    \ 'SpecialKey')
+call s:hilink('Comment', 'Conceal', 'FoldColumn', 'Folded', 'LineNr', 'NonText',
+    \ 'SignColumn', 'SpecialKey')
 call s:hilink('PreProc', 'cDefine', 'cInclude', 'cPreCondit', 'cPreProc')
 call s:hilink('Statement', 'Constant', 'Directory', 'helpHyperTextEntry',
     \ 'helpHyperTextJump', 'helpOption', 'MoreMsg', 'Question', 'Special',
     \ 'texStatement', 'Title', 'Type')
-call s:hilink('CursorLine', 'ColorColumn', 'CursorColumn')
+call s:hilink('CursorLine', 'ColorColumn', 'CursorColumn', 'VertSplit')
 call s:hilink('Error', 'DiffDelete', 'ErrorMsg', 'MatchParen', 'PmenuThumb',
     \ 'WarningMsg')
 call s:hilink('StatusLine', 'StatusLineTerm', 'ToolbarButton')
@@ -86,5 +106,17 @@ call s:hilink('StatusLineNC', 'Cursor', 'DiffChange', 'helpNote', 'lCursor', 'Se
 call s:hilink('TabLine', 'ToolbarLine')
 call s:hilink('Underlined', 'SpellBad', 'SpellCap', 'SpellLocal', 'SpellRare',
     \ 'VisualNOS')
-call s:hilink('Visual', 'Pmenu', 'PmenuSbar', 'TabLineFill', 'VertSplit')
+call s:hilink('Visual', 'Pmenu', 'PmenuSbar', 'TabLineFill')
 call s:hilink('WildMenu', 'DiffAdd', 'DiffText', 'IncSearch', 'PmenuSel', 'Todo')
+
+call s:setansicolors(['Eigengrau', 'Firebrick', 'Mantis', 'DarkChestnut', 'EgyptianBlue',
+    \ 'DarkOrchid', 'LightSeaGreen', 'AshGrey', 'GreyGreen', 'Red2', 'LawnGreen',
+    \ 'Goldenrod', 'CornflowerBlue', 'Orchid', 'Aqua', 'Beige'])
+
+unlet s:palette
+delfunction s:hilite
+delfunction s:hilink
+delfunction s:setansicolors
+
+let &cpo = s:save_cpo
+unlet s:save_cpo

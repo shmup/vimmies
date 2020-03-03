@@ -4,7 +4,7 @@ setlocal include=from
 setlocal suffixesadd=.jsx,.js
 setlocal define=class\\s
 
-noremap <buffer> <space>js :!node % <cr>
+noremap <buffer> <space>js :Dispatch node % <cr>
 
 if executable('eslint')
   setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
