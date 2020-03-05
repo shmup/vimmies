@@ -2,8 +2,6 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-set background=dark
-
 colorscheme apprentice
 
 let mapleader = "\<Space>"
@@ -199,8 +197,7 @@ nnoremap ,d :Dispatch!<cr>
 nnoremap <space>m :Make<cr>
 
 " toggles
-nnoremap <silent>yot :exec "color " .
-      \ ((g:colors_name == "apprentice") ? "modest" : "apprentice")<CR>
+nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'apprentice')
 nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent><space>p :set paste!<cr>
 nmap ,q <Plug>(qf_qf_switch)

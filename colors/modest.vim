@@ -12,7 +12,6 @@ if exists('g:syntax_on')
 endif
 
 let g:colors_name = 'modest'
-set background=light
 
 let s:palette = {}
 let s:palette.Eigengrau = ['Black', 234, '#16161d']
