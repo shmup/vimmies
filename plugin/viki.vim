@@ -18,12 +18,13 @@ nnoremap <space>wt :edit $VIM_VIKI_HOME/todo.txt<cr>
 augroup Viki
   autocmd!
   autocmd BufEnter $VIM_VIKI_HOME/* call SetFiletypeAndMappings()
+  autocmd BufEnter */kbfs/private/jtm/* call SetFiletypeAndMappings()
 augroup END
 
 function! SetFiletypeAndMappings()
-  setlocal ft=text.note
+  setlocal ft=markdown.note
   setlocal nospell
-  setlocal textwidth=80
+  setlocal nowrap
   nnoremap <buffer><cr> :call SaveAndEdit()<cr>
   nnoremap <buffer><bs> :b#<cr>
 endfunction

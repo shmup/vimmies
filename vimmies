@@ -30,7 +30,20 @@ _setup() {
 }
 
 _update() {
-  git submodule update --remote --merge
+  if [[ $2 == "-a" ]]; then
+    git submodule update --remote --merge
+    curl -q https://raw.githubusercontent.com/junegunn/fzf.vim/master/plugin/fzf.vim > $VIM_PATH/plugin/fzf.vim
+  else
+    if ! [ -x "$(command -v fzy -l 100)" ]; then
+      PLUGIN=$2
+    else
+      PLUGIN=$(ls $PLUGINS_PATH | fzy -l 100)
+    fi
+    [[ -z $PLUGIN ]] && exit 0
+    git submodule update --remote --merge -- $PLUGINS_PATH/$PLUGIN
+  fi
+  # curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > $VIM_PATH/colors/apprentice.vim
+  # curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > $VIM_PATH/colors/modest.vim
 }
 
 _upgrade() {
