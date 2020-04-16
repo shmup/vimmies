@@ -13,7 +13,6 @@ if executable('eslint')
 endif
 
 if executable('prettier')
-  " let &l:formatprg = 'prettier-standard --stdin'
   let &l:formatprg = 'prettier-eslint --stdin'
 endif
 

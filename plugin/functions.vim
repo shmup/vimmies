@@ -4,7 +4,7 @@ function! Align()
   normal gv=
 endfunction
 
-" adjust split height to visual selection height
+" adjust buffer height to visual selection height
 function! Resize()
   '<
   exec "resize" (line("'>") - line("'<") + 1)

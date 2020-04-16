@@ -2,28 +2,12 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
+set background=dark
+
 colorscheme apprentice
 
 let mapleader = "\<Space>"
 
-" TODO - move this somewhere
-let s:hidden_all = 0
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-nnoremap <S-h> :call ToggleHiddenAll()<CR>
 
 set modelines=0           " security
 set ruler                 " show file stats
@@ -192,10 +176,6 @@ map <C-l> <C-w>l
 " make Y like C/D
 nnoremap Y y$
 
-" nnoremap <space>m :Make! ./upload.sh<cr>
-nnoremap ,d :Dispatch!<cr>
-nnoremap <space>m :Make<cr>
-
 " toggles
 nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'apprentice')
 nnoremap <silent>yog :GitGutterToggle<cr>
@@ -292,6 +272,10 @@ augroup SpecialHighlights
     \| call matchadd('CLEAN', 'CLEANME')
 augroup END
 
+" Session management
+command! -bang Source call fzf#run({'source': 'ls', 'sink': 'source', 'dir': '~/.vim_sessions'})
+command! -bang SourceOverwrite call fzf#run({'Obsession': 'ls', 'sink': 'Obsession', 'dir': '~/.vim_sessions'})
+
 " show the groupings under cursor
 command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 
@@ -299,7 +283,8 @@ command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 command! Tig execute "Start tig " . expand('%:p')
 
 " scratch buffer
-command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
+command! SC new | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
+command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
 
 " remove all but current buffer
 command! BufOnly silent! execute "%bd|e#|bd#"
