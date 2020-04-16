@@ -1,4 +1,7 @@
-noremap <buffer> <space>py :!clear; python % <cr>
+" ftplugin/python.vim
+" http://ix.io/2ijM/vim
+
+noremap <buffer><space>py :!clear; python %<cr>
 
 if executable('flake8')
   setlocal errorformat=%f:%l:%c:%m
@@ -6,11 +9,12 @@ if executable('flake8')
   nnoremap <buffer><space>m :silent make! % \| redraw!<cr>
 endif
 
+" gq{motion}
 if executable('yapf')
   let &l:formatprg = 'yapf'
 endif
 
-" Add the virtualenv's site-packages to vim path
+" add the virtualenv's site-packages to vim path
 if has("python")
 py << EOF
 import os.path
