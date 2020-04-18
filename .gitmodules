@@ -37,9 +37,6 @@
 [submodule "pack/plugins/start/vim-obsession"]
 	path = pack/plugins/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "pack/plugins/start/vim-jsx-pretty"]
-	path = pack/plugins/start/vim-jsx-pretty
-	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
 [submodule "pack/plugins/start/vim-markdown"]
 	path = pack/plugins/start/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
@@ -82,9 +79,12 @@
 [submodule "pack/plugins/start/vim-jsdoc"]
 	path = pack/plugins/start/vim-jsdoc
 	url = https://github.com/heavenshell/vim-jsdoc.git
-[submodule "pack/plugins/start/vim-javascript"]
-	path = pack/plugins/start/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
 [submodule "pack/plugins/start/vim-jdaddy"]
 	path = pack/plugins/start/vim-jdaddy
 	url = https://github.com/tpope/vim-jdaddy.git
+[submodule "pack/plugins/start/vim-xml"]
+	path = pack/plugins/start/vim-xml
+	url = https://github.com/amadeus/vim-xml.git
+[submodule "pack/plugins/start/vim-jsx-pretty"]
+	path = pack/plugins/start/vim-jsx-pretty
+	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
