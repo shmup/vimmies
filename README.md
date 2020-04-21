@@ -5,8 +5,8 @@ gimme 𝕧immies daddy
 
 ### REQUIRES
 
-[vim8 +python](https://github.com/shmup/vimmies/wiki/Installing-vim8)
-..and various other command line tools I lean on..
+- [vim8 +python](https://github.com/shmup/vimmies/wiki/Installing-vim8)
+- leans on but not so much requires: fzf, rg, various linters, etc
 
 You can use the [vimmies script](https://github.com/shmup/vimmies/blob/master/vimmies) to help manage submodules, or just do the stuff below.
 
@@ -34,5 +34,6 @@ git commit
 
 ### NOTES
 
-- Learn from https://github.com/romainl/idiomatic-vimrc
+- First timers, watch this: https://www.youtube.com/watch?v=wlR5gYd6um0
+- Learn from: https://github.com/romainl/idiomatic-vimrc
 - Reduce bullshit

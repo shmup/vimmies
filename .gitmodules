@@ -76,9 +76,6 @@
 [submodule "pack/plugins/start/goyo.vim"]
 	path = pack/plugins/start/goyo.vim
 	url = https://github.com/junegunn/goyo.vim.git
-[submodule "pack/plugins/start/vim-jsdoc"]
-	path = pack/plugins/start/vim-jsdoc
-	url = https://github.com/heavenshell/vim-jsdoc.git
 [submodule "pack/plugins/start/vim-jdaddy"]
 	path = pack/plugins/start/vim-jdaddy
 	url = https://github.com/tpope/vim-jdaddy.git
