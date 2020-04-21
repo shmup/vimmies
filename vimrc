@@ -8,6 +8,8 @@ colorscheme apprentice
 
 let mapleader = "\<Space>"
 
+nnoremap j gj
+nnoremap k gk
 
 set modelines=0           " security
 set ruler                 " show file stats
@@ -193,13 +195,15 @@ vnoremap <space>d "+d
 set statusline=%3l             " show the line number
 set statusline+=,              " and a comma
 set statusline+=%v             " show the virtual column number
-set statusline+=,              " and a comma
+set statusline+=\              " and two spaces
+set statusline+=(              " and a (
 set statusline+=%{strlen(@\")} " byte count in register
+set statusline+=)\              " and a )
 set statusline+=%Y             " show the filetype
 " set statusline+=,%{FugitiveHead(6)}
-set statusline+=,%t           " show the filename
+" set statusline+=,%t           " show the filename
 set statusline+=\              " and two spaces
-set statusline+=%{ObsessionStatus('☺\ ','■\ ')}
+set statusline+=%{ObsessionStatus('●\ ','■\ ')}
 
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
@@ -256,6 +260,7 @@ nmap <space>hv <Plug>(GitGutterPreviewHunk)
 command! CT silent! execute "ColorToggle"
 highlight SEND_HELP ctermbg=131 ctermfg=white
 highlight CLEAN ctermbg=white ctermfg=black
+highlight PASS ctermbg=131 ctermfg=65
 highlight GENERIC cterm=reverse gui=reverse
 highlight ColorColumn ctermbg=238
 
@@ -283,7 +288,7 @@ command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 command! Tig execute "Start tig " . expand('%:p')
 
 " scratch buffer
-command! SC new | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
+command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
 command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
 
 " remove all but current buffer
