@@ -21,6 +21,7 @@ set laststatus=2          " always show status bar
 set mouse=a               " sometimesss i click
 set autoindent            " dont need smartindent. syntax files do that
 set linebreak             " breaks on space + :set breakat?
+set noequalalways         " don't equalize window sizes when splitting
 
 " TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
@@ -119,6 +120,12 @@ set ignorecase
 set smartcase
 set showmatch
 
+" change cursor from block to i-beam in insert mode
+" https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
+" may need but idk:  autocmd VimEnter * silent !echo -ne "\e[1 q"
+let &t_SI = "\e[5 q"
+let &t_EI = "\e[1 q"
+
 " formatting
 set nojoinspaces
 nnoremap <space>q gggqG
@@ -200,11 +207,8 @@ set statusline+=(              " and a (
 set statusline+=%{strlen(@\")} " byte count in register
 set statusline+=)\              " and a )
 set statusline+=%Y             " show the filetype
-" set statusline+=,%{FugitiveHead(6)}
-" set statusline+=,%t           " show the filename
 set statusline+=\              " and two spaces
 set statusline+=%{ObsessionStatus('●\ ','■\ ')}
-
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
 set statusline+=%<%F           " (truncated) full path to the file we are editing
@@ -237,7 +241,7 @@ nmap ga <plug>(EasyAlign)
 
 " fugitive/rhubarb/gv
 nmap <space>gb :Gblame<cr>
-nmap <space>gs :Gstatus<cr>
+nmap <space>gs :Git<cr>
 nmap <space>ge :Gedit<cr>
 nmap <space>gc :Gcommit -v<cr>
 nmap <space>gn :Gcommit -v --no-verify<cr>
@@ -246,7 +250,7 @@ nmap <space>gm :Gcommit -v --amend<cr>
 nmap <space>gp :Gpush<cr>
 nmap <space>gl :BCommits<cr>
 nmap <space>gL :Commits<cr>
-nmap <space>gd :Gdiff<cr>
+nmap <space>gd :Gdiffsplit<cr>
 nmap <space>gw :Gwrite<cr>
 
 " gutter

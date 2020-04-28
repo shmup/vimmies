@@ -1,4 +1,4 @@
-noremap <buffer> <space>sh :Dispatch /bin/bash % <cr>
+noremap <buffer><space>sh :!clear; bash %<cr>
 
 if executable('shellcheck')
   setlocal makeprg=shellcheck\ -f\ gcc\ %

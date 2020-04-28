@@ -4,16 +4,6 @@ function! Align()
   normal gv=
 endfunction
 
-" adjust buffer height to visual selection height
-function! Resize()
-  '<
-  exec "resize" (line("'>") - line("'<") + 1)
-  setl scrolloff=0
-  norm! zt
-endfunction
-command! -range Resize call Resize()
-vnoremap <space>r :Resize<cr>
-
 function! DeleteFileAndCloseBuffer()
   let choice = confirm("Delete file and close buffer?", "&Yes\n&No", 1)
   if choice == 1 | call delete(expand('%:p')) | b# | bd# | endif
