@@ -1,7 +1,7 @@
 " tmux related mappings to re-run commands in X pane
 
-" tmux: leader + q to see pane numbers.
-" pane: run command so that !! will rerun it
+" get the pane # by running `tmux_leader + q`
+" run your command in that pane so that !! reruns it
 
 " use the mappings below to rerun your tests or whatever the fuck you're doing
 nnoremap tm1 :Tmux send-keys -t 1 '!!' Enter<CR>
