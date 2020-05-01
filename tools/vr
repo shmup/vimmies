@@ -5,20 +5,19 @@
 
 # vr - open vim with all currently modified files
 # vr X - same as above plus all files modified in last X commits (e.g. vr 2)
-function vr {
-  local IGNORES='.svg\|.png\|.jpg'
-  local LIST=''
 
-  # only if we're in a git repo
-  if git rev-parse --git-dir > /dev/null 2>&1; then
-    # list all currently modified files, staged or unstaged
-    LIST=$(git status --short | cut -c 4- | paste -s -d" ")
+IGNORES='.svg\|.png\|.jpg'
+LIST=''
 
-    if [[ $# -gt 0 ]]; then
-      # list all files modified since X commits
-      LIST="${LIST} $(git diff-tree --no-commit-id --name-only -r HEAD~${1:-1} HEAD)"
-    fi
+# only if we're in a git repo
+if git rev-parse --git-dir > /dev/null 2>&1; then
+  # list all currently modified files, staged or unstaged
+  LIST=$(git status --short | cut -c 4- | paste -s -d" ")
+
+  if [[ $# -gt 0 ]]; then
+    # list all files modified since X commits
+    LIST="${LIST} $(git diff-tree --no-commit-id --name-only -r HEAD~${1:-1} HEAD)"
   fi
+fi
 
-  vim $(echo "$LIST" | grep -v $IGNORES)
-}
+vim $(echo "$LIST" | grep -v $IGNORES)
