@@ -6,6 +6,7 @@ noremap <buffer><space>py :!clear; python %<cr>
 if executable('flake8')
   setlocal errorformat=%f:%l:%c:%m
   setlocal makeprg=flake8
+  " nnoremap <buffer><space>m !mypy % \| redraw!<cr>
   nnoremap <buffer><space>m :silent make! % \| redraw!<cr>
   nnoremap <buffer><space>M :silent make! --ignore=E501 % \| redraw!<cr>
 endif

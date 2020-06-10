@@ -169,7 +169,7 @@ nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
 nnoremap <silent> <space>ea :edit ~/.bash_aliases<cr>
 nnoremap <silent> <space>ef :edit ~/.bash_functions<cr>
-nnoremap <silent> <space>en :edit ~/.ns1_aliases<cr>
+nnoremap <silent> <space>en :edit ~/workspace/ns1.bashrc<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 nnoremap <silent> <space>et :edit ~/todos<cr>
 
