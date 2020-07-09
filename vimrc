@@ -291,7 +291,7 @@ command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 command! Tig execute "Start tig " . expand('%:p')
 
 " scratch buffer
-command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
+command! SC new | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
 command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
 
 " remove all but current buffer

@@ -61,7 +61,6 @@ _upgrade() {
   --enable-python3interp \
   --with-python3-config-dir="$PY3" \
   --enable-luainterp=yes \
-  --with-luajit \
   --enable-cscope \
   --enable-gui=auto \
   --with-features=huge \
