@@ -1,4 +1,4 @@
-gimme 𝕧immies daddy
+gimme リ工从从工乇丂 daddy
 ===================
 
 ![vim on fire](https://jtm.keybase.pub/tmp/vim_on_fire.gif)
