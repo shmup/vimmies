@@ -188,6 +188,8 @@ nnoremap Y y$
 " toggles
 nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'apprentice')
 nnoremap <silent>yog :GitGutterToggle<cr>
+nnoremap <silent>yoS :SCREAM<CR>
+nnoremap <silent>yoW :WHISPER<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
 

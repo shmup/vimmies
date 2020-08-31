@@ -79,12 +79,21 @@
 [submodule "pack/plugins/start/vim-tbone"]
 	path = pack/plugins/start/vim-tbone
 	url = https://github.com/tpope/vim-tbone.git
-[submodule "pack/plugins/start/vim-jsx-improve"]
-	path = pack/plugins/start/vim-jsx-improve
-	url = https://github.com/neoclide/vim-jsx-improve.git
 [submodule "pack/plugins/start/vim-qlist"]
 	path = pack/plugins/start/vim-qlist
 	url = https://github.com/romainl/vim-qlist.git
 [submodule "pack/plugins/start/file-line"]
 	path = pack/plugins/start/file-line
 	url = https://github.com/bogado/file-line.git
+[submodule "pack/plugins/start/ultisnips"]
+	path = pack/plugins/start/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule "pack/plugins/start/vim-go"]
+	path = pack/plugins/start/vim-go
+	url = git@github.com:fatih/vim-go.git
+[submodule "pack/plugins/start/vim-jsx-pretty"]
+	path = pack/plugins/start/vim-jsx-pretty
+	url = https://github.com/MaxMEllon/vim-jsx-pretty
+[submodule "pack/plugins/start/vim-renamer"]
+	path = pack/plugins/start/vim-renamer
+	url = git@github.com:qpkorr/vim-renamer.git
