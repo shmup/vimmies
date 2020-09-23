@@ -1,1 +1,0 @@
-/home/jared/src/keybase/src/bw/colors/bw.vim
