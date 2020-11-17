@@ -1,6 +1,7 @@
 " Vim color file
 " Maintainer:   matveyt
-" Last Change:  2020 Mar 17
+" Last Change:  2020 Aug 09
+" License:      VIM License
 " URL:          https://github.com/matveyt/vim-modest
 
 let s:save_cpo = &cpo
@@ -16,14 +17,14 @@ let g:colors_name = 'modest'
 let s:palette = {}
 let s:palette.Eigengrau     = ['#16161d', 234, 'Black']
 let s:palette.Grey19        = ['#272733', 236, 'NONE']
-let s:palette.GreyGreen     = ['#5e716a', 242, 'DarkGrey']
+let s:palette.GreyGreen     = ['#5e716a', 242, has('nvim') ? 8 : 'DarkGrey']
 let s:palette.AshGrey       = ['#b2beb5', 250, 'LightGrey']
 let s:palette.Grey85        = ['#e6e6cf', 187, 'NONE']
 let s:palette.Beige         = ['#f5f5dc', 230, 'White']
 let s:palette.EgyptianBlue  = ['#1034a6',  19, 'DarkBlue']
 let s:palette.LightSeaGreen = ['#20b2aa',  37, 'DarkCyan']
 let s:palette.Mantis        = ['#74c365',  77, 'DarkGreen']
-let s:palette.DarkChestnut  = ['#986960',  95, 'Brown']
+let s:palette.DarkChestnut  = ['#986960',  95, 'DarkYellow']
 
 function s:hilite(group, fg, bg, ...) abort
     if !a:0
@@ -35,15 +36,21 @@ function s:hilite(group, fg, bg, ...) abort
     endif
     let l:fg = get(s:palette, a:fg, [a:fg, a:fg, a:fg])
     let l:bg = get(s:palette, a:bg, [a:bg, a:bg, a:bg])
+    if exists('g:colors_8bit')
+        let l:ict = g:colors_8bit ? 1 : 2
+    else
+        let l:ict = (&t_Co >= 256) ? 1 : 2
+    endif
+    let l:ctermfg = 'ctermfg='..l:fg[l:ict]
+    let l:ctermbg = 'ctermbg='..l:bg[l:ict]
     let l:guifg = 'guifg='..l:fg[0]
     let l:guibg = 'guibg='..l:bg[0]
-    let l:ctermfg = 'ctermfg='..l:fg[1 + (&t_Co<256)]
-    let l:ctermbg = 'ctermbg='..l:bg[1 + (&t_Co<256)]
     execute 'hi' a:group l:term l:ctermfg l:ctermbg l:guifg l:guibg
 endfunction
 
 function s:hilink(to_group, ...) abort
     for l:from_group in a:000
+        execute 'hi clear' l:from_group
         execute 'hi! link' l:from_group a:to_group
     endfor
 endfunction
@@ -63,7 +70,7 @@ function s:setansicolors(...) abort
     endfor
 endfunction
 
-if &bg ==# 'dark'
+if &background is# 'dark'
     call s:hilite('Normal', 'AshGrey', 'Eigengrau')
     call s:hilite('Statement', 'Mantis', 'NONE', 'NONE')
     call s:hilite('CursorLine', 'NONE', 'Grey19', 'NONE')
@@ -88,9 +95,12 @@ call s:hilite('StatusLineNC', 'NONE', 'NONE', 'reverse')
 call s:hilite('TabLineSel', 'fg', 'bg', 'bold')
 call s:hilite('Visual', 'bg', 'fg', 'NONE')
 
-call s:hilink('Normal', 'CursorLineNr', 'Function', 'Identifier', 'ModeMsg')
-call s:hilink('Comment', 'Conceal', 'FoldColumn', 'Folded', 'LineNr', 'NonText',
-    \ 'SignColumn', 'SpecialKey')
+" Do NOT link any group to Normal but clear them instead!
+" This makes a difference for Neovim
+call s:hilink('NONE', 'CursorLineNr', 'Function', 'Identifier', 'ModeMsg', 'vimUserFunc')
+
+call s:hilink('Comment', 'Conceal', 'EndOfBuffer', 'FoldColumn', 'Folded', 'Ignore',
+    \ 'LineNr', 'NonText', 'SignColumn', 'SpecialKey')
 call s:hilink('PreProc', 'cDefine', 'cInclude', 'cPreCondit', 'cPreProc')
 call s:hilink('Statement', 'Constant', 'Directory', 'helpHyperTextEntry',
     \ 'helpHyperTextJump', 'helpOption', 'MoreMsg', 'Question', 'Special',
@@ -99,13 +109,13 @@ call s:hilink('CursorLine', 'ColorColumn', 'CursorColumn', 'VertSplit')
 call s:hilink('Error', 'MatchParen', 'PmenuThumb')
 call s:hilink('ErrorMsg', 'DiffDelete', 'WarningMsg')
 call s:hilink('StatusLine', 'StatusLineTerm', 'ToolbarButton')
-call s:hilink('StatusLineNC', 'Cursor', 'DiffAdd', 'DiffChange', 'helpNote', 'lCursor', 'Search',
+call s:hilink('StatusLineNC', 'Cursor', 'DiffChange', 'helpNote', 'lCursor', 'Search',
     \ 'StatusLineTermNC')
 call s:hilink('TabLine', 'ToolbarLine')
 call s:hilink('Underlined', 'SpellBad', 'SpellCap', 'SpellLocal', 'SpellRare',
     \ 'VisualNOS')
 call s:hilink('Visual', 'Pmenu', 'PmenuSbar', 'TabLineFill')
-call s:hilink('WildMenu', 'DiffText', 'IncSearch', 'PmenuSel',
+call s:hilink('WildMenu', 'DiffAdd', 'DiffText', 'IncSearch', 'PmenuSel',
     \ 'QuickFixLine', 'Todo')
 
 call s:setansicolors('Eigengrau', 'Firebrick', 'Mantis', 'DarkChestnut', 'EgyptianBlue',
@@ -119,4 +129,3 @@ delfunction s:setansicolors
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-

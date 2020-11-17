@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-# usage: ./vimmies [OPTION]
+# http://ix.io/2Evs/bash
+# currently requires https://github.com/jhawthorn/fzy
+
+# usage: ./vimmies -h
 
 VIM_PATH=$HOME/.vim
+JUNK_PATH=$VIM_PATH/junk
 PLUGINS_PATH=$VIM_PATH/pack/plugins/start
 CACHE=$VIM_PATH/junk/cache
 
@@ -12,10 +16,10 @@ PROCS=8
 YOU="skeletor"
 
 help="$(basename "$0") [OPTION]
-
-  - setup           setup vimmies
-  - update          update all the submodules
-  - upgrade         upgrade vim
+  - setup           initial setup for plugins/completion/junk dirs
+  - cleanup         rm -rf all files in $JUNK_PATH dirs
+  - update          update all the submodules in $PLUGINS_PATH
+  - upgrade         get latest in $REPO and compile
   - install <url>   install submodule
   - remove <name>   remove submodule
 "
@@ -26,6 +30,22 @@ _setup() {
   git submodule update --init --recursive
   sudo ln -s $VIM_PATH/vimmies_completion /etc/bash_completion.d/vimmies_completion
   mkdir -p $VIM_PATH/junk/{backup,swp,undo,view}
+}
+
+_cleanup() {
+  local files=$(find junk/ -maxdepth 1 -mindepth 1 -type d -exec rm -rf "{}/*" \;)
+  [[ -z $files ]] && echo "aint shit to nuke" && exit 0
+
+  echo $files
+  read -p "sure you wanna nuke these? " -n 1 -r
+
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+    rm -rf $JUNK_PATH/swp/*
+    rm -rf $JUNK_PATH/undo/*
+    rm -rf $JUNK_PATH/view/*
+    rm -rf $JUNK_PATH/backup/*
+  fi
 }
 
 _update() {
@@ -41,8 +61,8 @@ _update() {
     [[ -z $PLUGIN ]] && exit 0
     git submodule update --remote --merge -- $PLUGINS_PATH/$PLUGIN
   fi
-  # curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > $VIM_PATH/colors/apprentice.vim
-  # curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > $VIM_PATH/colors/modest.vim
+  curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > $VIM_PATH/colors/apprentice.vim
+  curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > $VIM_PATH/colors/modest.vim
 }
 
 _upgrade() {

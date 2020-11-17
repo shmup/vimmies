@@ -22,7 +22,7 @@ augroup Viki
 augroup END
 
 function! SetFiletypeAndMappings()
-  setlocal ft=text.note
+  " setlocal ft=text.note
   setlocal nospell
   setlocal nowrap
   nnoremap <buffer><cr> :call SaveAndEdit()<cr>

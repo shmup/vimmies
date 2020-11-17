@@ -1,7 +1,8 @@
 " ftplugin/python.vim
 " http://ix.io/2ijM/vim
 
-noremap <buffer><space>py :!clear; python %<cr>
+" noremap <buffer><space>py :!clear; python3.9 %<cr>
+nnoremap <buffer><space>py :!clear; %:p<cr>
 
 if executable('flake8')
   setlocal errorformat=%f:%l:%c:%m

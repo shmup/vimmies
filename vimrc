@@ -11,7 +11,7 @@ let mapleader = "\<Space>"
 nnoremap j gj
 nnoremap k gk
 
-set modelines=0           " security
+" set modelines=0           " security
 set ruler                 " show file stats
 set visualbell            " dont blink
 set t_vb=                 " dont beep

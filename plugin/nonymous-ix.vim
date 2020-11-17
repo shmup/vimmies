@@ -1,7 +1,13 @@
 " nonymous-ix.vim uses .netrc for auth, and fucks with ix.io
+
 " insert  :IX [optional visual selection] - copies url to system clipboard
 " replace :RX <URL> [optional visual selection]
 " delete  :DX <URL>
+
+" example $HOME/.netrc
+"   machine ix.io
+"   login foo
+"   password bar
 
 if has('win64') || has('win32') || has('win16')
   let s:env = 'WINDOWS'
@@ -22,3 +28,6 @@ if s:env =~ 'DARWIN'
   command! -nargs=1 -range=% RX <line1>,<line2>w !curl -n -X PUT -F 'f:1=<-' <args> | tr -d '\n' | tee >(pbcopy)
   command! -nargs=1 -range=% DX w !curl -n -X DELETE <args>
 endif
+
+" http://ix.io/2ic8
+

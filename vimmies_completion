@@ -1,3 +1,2 @@
-_vimmies_options='setup update install remove'
+_vimmies_options='setup cleanup update upgrade install remove'
 complete -W "${_vimmies_options}" 'vimmies'
-
