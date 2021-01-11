@@ -82,15 +82,9 @@
 [submodule "pack/plugins/start/file-line"]
 	path = pack/plugins/start/file-line
 	url = https://github.com/bogado/file-line.git
-[submodule "pack/plugins/start/ultisnips"]
-	path = pack/plugins/start/ultisnips
-	url = https://github.com/SirVer/ultisnips
 [submodule "pack/plugins/start/vim-go"]
 	path = pack/plugins/start/vim-go
 	url = git@github.com:fatih/vim-go.git
-[submodule "pack/plugins/start/vim-renamer"]
-	path = pack/plugins/start/vim-renamer
-	url = git@github.com:qpkorr/vim-renamer.git
 [submodule "pack/plugins/start/vim-fugitive"]
 	path = pack/plugins/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
@@ -100,3 +94,6 @@
 [submodule "pack/plugins/start/vim-jsx-pretty"]
 	path = pack/plugins/start/vim-jsx-pretty
 	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
+[submodule "pack/plugins/start/elm-vim"]
+	path = pack/plugins/start/elm-vim
+	url = git@github.com:ElmCast/elm-vim.git

@@ -831,14 +831,16 @@ function! s:execute_term(dict, command, temps) abort
     if has('nvim')
       call termopen(command, fzf)
     else
-      let term_opts = {'exit_cb': function(fzf.on_exit)}
+      let term_opts = {'exit_cb': function(fzf.on_exit), 'term_kill': 'term'}
       if is_popup
         let term_opts.hidden = 1
       else
         let term_opts.curwin = 1
       endif
       let fzf.buf = term_start([&shell, &shellcmdflag, command], term_opts)
-      call setbufvar(fzf.buf, '&termwinkey', '<c-z>')
+      if exists('&termwinkey')
+        call setbufvar(fzf.buf, '&termwinkey', '<c-z>')
+      endif
       if is_popup && exists('#TerminalWinOpen')
         doautocmd <nomodeline> TerminalWinOpen
       endif

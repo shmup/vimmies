@@ -165,6 +165,7 @@ map <space>l :let @/=''<cr>
 nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
+nnoremap <silent> <space>ej :edit ~/trove/Dropbox/text/notes/logs<cr>
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
 nnoremap <silent> <space>ea :edit ~/.bash_aliases<cr>
