@@ -1,3 +1,4 @@
+; https://stackoverflow.com/q/3240881/463678
 [submodule "pack/plugins/start/vim-easy-align"]
 	path = pack/plugins/start/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
@@ -97,3 +98,7 @@
 [submodule "pack/plugins/start/elm-vim"]
 	path = pack/plugins/start/elm-vim
 	url = git@github.com:ElmCast/elm-vim.git
+[submodule "pack/plugins/start/vim-renamer"]
+	path = pack/plugins/start/vim-renamer
+	url = git@github.com:qpkorr/vim-renamer.git
+	ignore = dirty
