@@ -13,7 +13,7 @@ You can use the [vimmies script](https://github.com/shmup/vimmies/blob/master/vi
 **INSTALL**
 
 ```sh
-git clone https://github.com/shmup/vimmies.git ~/.vim
+git clone https://github.com/shmup/vimmies.git ~/.vim && cd ~/.vim
 git submodule update --init --recursive
 mkdir -p ~/.vim/junk/{backup,swp,undo,view}
 ```
@@ -37,10 +37,3 @@ git commit
 - First timers, watch this: https://www.youtube.com/watch?v=wlR5gYd6um0
 - Learn from: https://github.com/romainl/idiomatic-vimrc
 - Reduce bullshit
-
-
-# TODO
-
-apt install build-essential ncurses-dev python2 xclip libx11-dev libxtst-dev libxt-dev libsm-dev libxpm-dev
-
-apt install tlp
