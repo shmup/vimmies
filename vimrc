@@ -217,7 +217,8 @@ set statusline+=%<%F           " (truncated) full path to the file we are editin
 set statusline+=%m             " [+] if the file is modified but not saved
 set statusline+=%r             " show [RO] if a file is read-only
 
-" clean up bc i am a filthy slob
+" it's a mood thing
+command! BufOnly silent! execute "%bd|e#|bd#"
 nnoremap <space>o :only<cr>
 nnoremap <space>O :BufOnly<cr>
 
@@ -231,7 +232,6 @@ nnoremap <space>6 6gt
 nnoremap <space>7 7gt
 nnoremap <space>8 8gt
 nnoremap <space>9 9gt
-
 nnoremap <space>tn :tabnew<cr>
 nnoremap <space>tc :tabclose<cr>
 nnoremap <space>to :tabonly<cr>
@@ -301,6 +301,10 @@ command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascri
 command! BufOnly silent! execute "%bd|e#|bd#"
 
 " delete current file & buffer
+function! DeleteFileAndCloseBuffer()
+  let choice = confirm("Delete file and close buffer?", "&Yes\n&No", 1)
+  if choice == 1 | call delete(expand('%:p')) | b# | bd# | endif
+endfun
 command! DeleteFile call DeleteFileAndCloseBuffer()
 
 augroup Convenience

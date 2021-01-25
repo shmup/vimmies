@@ -66,6 +66,10 @@ _update() {
 }
 
 _upgrade() {
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew update && brew upgrade vim && brew cleanup vim && exit 0
+  fi
+
   if cd $REPO; then git pull; else git clone https://github.com/vim/vim.git $REPO; fi
 
   sudo rm -rf /usr/local/share/vim /usr/bin/vim

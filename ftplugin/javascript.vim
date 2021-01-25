@@ -4,8 +4,8 @@ setlocal include=from
 setlocal suffixesadd=.jsx,.js
 setlocal define=class\\s
 
-# Uses eslint, eslint-cli, and eslint-prettier.
-# Only eslint-cli should be installed globally.
+" Uses eslint, eslint-cli, and eslint-prettier.
+" Only eslint-cli should be installed globally.
 
 let &l:formatprg = 'prettier-eslint --parser=babel --stdin'
 
