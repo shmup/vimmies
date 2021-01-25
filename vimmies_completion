@@ -1,2 +1,2 @@
-_vimmies_options='setup cleanup update upgrade install remove'
+_vimmies_options='setup update-plugins install-plugin remove-plugin upgrade-vim flush-junk'
 complete -W "${_vimmies_options}" 'vimmies'

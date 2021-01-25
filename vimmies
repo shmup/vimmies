@@ -16,23 +16,29 @@ PROCS=8
 YOU="skeletor"
 
 help="$(basename "$0") [OPTION]
-  - setup           initial setup for plugins/completion/junk dirs
-  - cleanup         rm -rf all files in $JUNK_PATH dirs
-  - update          update all the submodules in $PLUGINS_PATH
-  - upgrade         get latest in $REPO and compile
-  - install <url>   install submodule
-  - remove <name>   remove submodule
+  - setup                 initial setup for plugins/completion/junk dirs
+  - install-plugin <url>  install submodule
+  - remove-plugin <name>  remove submodule
+  - update-plugins        update all the submodules in $PLUGINS_PATH
+  - upgrade-vim           get latest in $REPO and compile
+  - flush-junk            rm -rf all files in $JUNK_PATH dirs
 "
 
 bail() { echo "$1" && exit 0; } # clean msg & exit
 
 _setup() {
   git submodule update --init --recursive
-  sudo ln -s $VIM_PATH/vimmies_completion /etc/bash_completion.d/vimmies_completion
   mkdir -p $VIM_PATH/junk/{backup,swp,undo,view}
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sudo ln -s $VIM_PATH/vimmies_completion /usr/local/etc/bash_completion.d/vimmies_completion
+  else
+    brew install bash-completion
+    sudo ln -s $VIM_PATH/vimmies_completion /etc/bash_completion.d/vimmies_completion
+  fi
 }
 
-_cleanup() {
+_flush-junk() {
   local files=$(find junk/ -maxdepth 1 -mindepth 1 -type d -exec rm -rf "{}/*" \;)
   [[ -z $files ]] && echo "aint shit to nuke" && exit 0
 
@@ -48,7 +54,7 @@ _cleanup() {
   fi
 }
 
-_update() {
+_update-plugins() {
   if [[ $2 == "-a" ]]; then
     git submodule update --remote --merge
     curl -q https://raw.githubusercontent.com/junegunn/fzf/master/plugin/fzf.vim > $VIM_PATH/plugin/fzf.vim
@@ -63,9 +69,10 @@ _update() {
   fi
   curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > $VIM_PATH/colors/apprentice.vim
   curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > $VIM_PATH/colors/modest.vim
+  curl -q https://raw.githubusercontent.com/cideM/yui/master/colors/yui.vim > $VIM_PATH/colors/yui.vim
 }
 
-_upgrade() {
+_upgrade-vim() {
   if [[ "$OSTYPE" == "darwin"* ]]; then
     brew update && brew upgrade vim && brew cleanup vim && exit 0
   fi
@@ -97,7 +104,7 @@ _upgrade() {
   && make -j "$PROCS" && sudo make -j "$PROCS" install
 }
 
-_install() {
+_install-plugin() {
   if [[ -z $2 ]]; then
     PLUGIN=$(cat $CACHE | sort | uniq | fzy -l 100 )
   else
@@ -110,7 +117,7 @@ _install() {
   git submodule add --force "$PLUGIN"
 }
 
-_remove() {
+_remove-plugin() {
   if ! [ -x "$(command -v fzy -l 100)" ]; then
     PLUGIN=$2
   else

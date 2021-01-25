@@ -324,10 +324,10 @@ augroup Convenience
   \   exe "normal g'\"" |
   \ endif
 
-  " https://github.com/tpope/tpope/blob/master/.vimrc
+  " https://vi.stackexchange.com/a/69/287
+  " prevents unmodified buffer + crash = bullshit swap file
   autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
-    \ if isdirectory(expand("<amatch>:h"))
-    \ | let &swapfile = &modified | endif
+    \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
 augroup END
 
 augroup CursorLine
@@ -335,11 +335,6 @@ augroup CursorLine
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
-
-" lazy timestamp stuff
-nmap <F4> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
-imap <F4> <C-R>=strftime("%Y-%m-%d")<CR>
-cmap <F4> <C-R>=strftime("%Y-%m-%d")<CR>
 
 packloadall
 silent! helptags ALL
