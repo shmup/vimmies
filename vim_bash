@@ -4,5 +4,3 @@
 shopt -s expand_aliases
 
 . $HOME/src/tools/z.sh
-
-alias yapf='PYTHONPATH=$HOME/src/yapf python3 $HOME/src/yapf/yapf'

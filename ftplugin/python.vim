@@ -15,6 +15,7 @@ endif
 " gq{motion}
 if executable('yapf')
   let &l:formatprg = 'yapf'
+  setlocal equalprg=yapf
 endif
 
 " add the virtualenv's site-packages to vim path
