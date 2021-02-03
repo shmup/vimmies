@@ -9,7 +9,7 @@ JUNK_PATH=$VIM_PATH/junk
 PLUGINS_PATH=$VIM_PATH/pack/plugins/start
 CACHE=$VIM_PATH/junk/cache
 
-REPO="/home/jared/src/vim"
+REPO="$HOME/src/vim"
 PY3=$(python3-config --configdir)
 
 PROCS=8
@@ -76,11 +76,8 @@ _upgrade() {
 
   ./configure \
   --enable-multibyte \
-  --enable-perlinterp=yes \
-  --enable-rubyinterp=yes \
   --enable-python3interp \
   --with-python3-config-dir="$PY3" \
-  --enable-luainterp=yes \
   --enable-cscope \
   --enable-gui=auto \
   --with-features=huge \
