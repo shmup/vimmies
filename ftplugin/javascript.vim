@@ -4,10 +4,9 @@ setlocal include=from
 setlocal suffixesadd=.jsx,.js
 setlocal define=class\\s
 
-# Uses eslint, eslint-cli, and eslint-prettier.
-# Only eslint-cli should be installed globally.
-
-let &l:formatprg = 'prettier-eslint --parser=babel --stdin'
+" Uses eslint-cli globally
+" Uses eslint and prettier-eslint as a project --save-dev
+let &l:formatprg = '$(npm bin)/prettier-eslint --parser=babel --stdin'
 
 noremap <buffer> <space>js :Dispatch node % <cr>
 
