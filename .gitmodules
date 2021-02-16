@@ -102,3 +102,6 @@
 	path = pack/plugins/start/vim-renamer
 	url = git@github.com:qpkorr/vim-renamer.git
 	ignore = dirty
+[submodule "pack/plugins/start/zig.vim"]
+	path = pack/plugins/start/zig.vim
+	url = https://github.com/ziglang/zig.vim.git
