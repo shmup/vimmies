@@ -24,7 +24,7 @@ set linebreak             " breaks on space + :set breakat?
 set noequalalways         " don't equalize window sizes when splitting
 
 " TODO don't offer to open certain files/directories
-set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
+" set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
 set wildignore+=*.pdf,*.psd
 set wildignore+=bower_components/*,*/.vim/junk/*
 set wildignore+=**/node_modules/**
@@ -279,6 +279,7 @@ augroup SpecialHighlights
     \| call matchadd('SEND_HELP', 'TEMPORARY')
     \| call matchadd('SEND_HELP', 'ALERT', 101)
     \| call matchadd('GENERIC', 'NOTE')
+    \| call matchadd('GENERIC', 'NOTES')
     \| call matchadd('GENERIC', 'EXCEPTION')
     \| call matchadd('CLEAN', 'CLEANME')
 augroup END
@@ -294,7 +295,7 @@ command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 command! Tig execute "Start tig " . expand('%:p')
 
 " scratch buffer
-command! SC new | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
+command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
 command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
 
 " remove all but current buffer
