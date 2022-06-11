@@ -29,9 +29,6 @@
 [submodule "pack/plugins/start/vim-markdown"]
 	path = pack/plugins/start/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
-[submodule "pack/plugins/start/vim-jinja"]
-	path = pack/plugins/start/vim-jinja
-	url = https://github.com/niftylettuce/vim-jinja.git
 [submodule "pack/plugins/start/vim-qf"]
 	path = pack/plugins/start/vim-qf
 	url = https://github.com/romainl/vim-qf.git
