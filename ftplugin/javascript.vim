@@ -16,3 +16,8 @@ if executable('eslint')
   setlocal makeprg=eslint\ --no-ignore\ --format\ compact
   nnoremap <buffer><space>m :silent make! % \| redraw!<cr>
 endif
+
+if executable('prettier')
+  nmap <leader>p <Plug>(PrettierAsync)
+endif
+

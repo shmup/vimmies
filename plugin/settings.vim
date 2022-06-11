@@ -14,3 +14,9 @@ let g:gitgutter_enabled = 0
 
 " fzf
 let g:fzf_preview_window = ''
+
+" typescript
+let g:typescript_indent_disable = 1
+
+" EditorConfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']

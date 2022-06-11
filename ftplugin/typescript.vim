@@ -3,6 +3,13 @@ setlocal commentstring=\/\/\ %s
 
 noremap <buffer> <space>js :!node % <cr>
 
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" inoremap <silent><expr> <tab> coc#refresh()
+
 if executable('tsc')
   setlocal makeprg=tsc
   nnoremap <buffer><space>m :Dispatch tsc %<cr>

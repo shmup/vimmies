@@ -4,3 +4,4 @@ if executable('php')
   nnoremap <buffer> <silent> <f5> :update<bar>sil! make<bar>cwindow<cr>
 endif
 
+let g:PHP_outdentphpescape = 0
