@@ -1,19 +1,10 @@
 ; https://stackoverflow.com/q/3240881/463678
-[submodule "pack/plugins/start/vim-easy-align"]
-	path = pack/plugins/start/vim-easy-align
-	url = https://github.com/junegunn/vim-easy-align.git
 [submodule "pack/plugins/start/vim-commentary"]
 	path = pack/plugins/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
 [submodule "pack/plugins/start/vim-surround"]
 	path = pack/plugins/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "pack/plugins/start/vim-gitgutter"]
-	path = pack/plugins/start/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "pack/plugins/start/fzf.vim"]
-	path = pack/plugins/start/fzf.vim
-	url = https://github.com/junegunn/fzf.vim.git
 [submodule "pack/plugins/start/vim-repeat"]
 	path = pack/plugins/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
@@ -83,9 +74,6 @@
 [submodule "pack/plugins/start/file-line"]
 	path = pack/plugins/start/file-line
 	url = https://github.com/bogado/file-line.git
-[submodule "pack/plugins/start/vim-go"]
-	path = pack/plugins/start/vim-go
-	url = git@github.com:fatih/vim-go.git
 [submodule "pack/plugins/start/vim-fugitive"]
 	path = pack/plugins/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
@@ -97,8 +85,32 @@
 	url = https://github.com/MaxMEllon/vim-jsx-pretty.git
 [submodule "pack/plugins/start/elm-vim"]
 	path = pack/plugins/start/elm-vim
-	url = git@github.com:ElmCast/elm-vim.git
+	url = https://github.com/ElmCast/elm-vim.git
 [submodule "pack/plugins/start/vim-renamer"]
 	path = pack/plugins/start/vim-renamer
-	url = git@github.com:qpkorr/vim-renamer.git
+	url = https://github.com/qpkorr/vim-renamer.git
 	ignore = dirty
+[submodule "pack/plugins/start/php-vim-syntax"]
+	path = pack/plugins/start/php-vim-syntax
+	url = https://github.com/TysonAndre/php-vim-syntax.git
+[submodule "pack/plugins/start/vim-vue"]
+	path = pack/plugins/start/vim-vue
+	url = https://github.com/posva/vim-vue.git
+[submodule "pack/plugins/start/typescript-vim"]
+	path = pack/plugins/start/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "pack/plugins/start/vim-prettier"]
+	path = pack/plugins/start/vim-prettier
+	url = https://github.com/prettier/vim-prettier.git
+[submodule "pack/plugins/start/vim-gitgutter"]
+	path = pack/plugins/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "pack/plugins/start/vim-easy-align"]
+	path = pack/plugins/start/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "pack/plugins/start/vim-go"]
+	path = pack/plugins/start/vim-go
+	url = git@github.com:fatih/vim-go.git
+[submodule "pack/plugins/start/fzf.vim"]
+	path = pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
