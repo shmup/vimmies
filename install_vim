@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+VIM_PATH=$HOME/.vim
+JUNK_PATH=$VIM_PATH/junk
+PLUGINS_PATH=$VIM_PATH/pack/plugins/start
+CACHE=$VIM_PATH/junk/cache
+
+REPO="$HOME/src/vim"
+PY3=$(python3-config --configdir)
+
+PROCS=8
+YOU="hogfather"
+
+help="$(basename "$0") [OPTION]
+  - setup           initial setup for plugins/completion/junk dirs
+  - cleanup         rm -rf all files in $JUNK_PATH dirs
+  - update          update all the submodules in $PLUGINS_PATH
+  - upgrade         get latest in $REPO and compile
+  - install <url>   install submodule
+  - remove <name>   remove submodule
+"
+
+bail() { echo "$1" && exit 0; } # clean msg & exit
+
+if cd $REPO; then git pull; else git clone https://github.com/vim/vim.git $REPO; fi
+
+sudo rm -rf /usr/local/share/vim /usr/bin/vim
+
+cd "$REPO" || exit
+
+make distclean
+
+./configure \
+--enable-multibyte \
+--enable-python3interp \
+--with-python3-config-dir="$PY3" \
+--enable-cscope \
+--enable-gui=auto \
+--with-features=huge \
+--with-x \
+--enable-fontset \
+--enable-largefile \
+--disable-netbeans \
+--with-compiledby="$YOU" \
+--enable-fail-if-missing \
+&& make -j "$PROCS" && sudo make -j "$PROCS" install
