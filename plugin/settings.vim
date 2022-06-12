@@ -20,3 +20,37 @@ let g:typescript_indent_disable = 1
 
 " EditorConfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+" coc
+highlight CocErrorFloat ctermfg=206 ctermbg=233
+highlight CocErrorSign ctermfg=206 ctermbg=233
+highlight CocWarningFloat ctermfg=229 ctermbg=233
+highlight CocWarningSign ctermfg=229 ctermbg=233
+highlight CocHintFloat ctermfg=87 ctermbg=233
+highlight CocHintSign  ctermfg=87 ctermbg=233
+highlight CocInfoFloat ctermfg=253 ctermbg=233
+highlight CocInfoSign ctermfg=253 ctermbg=233
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+" end coq

@@ -8,47 +8,8 @@ colorscheme apprentice
 
 let mapleader = "\<Space>"
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-highlight CocErrorFloat ctermfg=206 ctermbg=233
-highlight CocErrorSign ctermfg=206 ctermbg=233
-
-highlight CocWarningFloat ctermfg=229 ctermbg=233
-highlight CocWarningSign ctermfg=229 ctermbg=233
-
-highlight CocHintFloat ctermfg=87 ctermbg=233
-highlight CocHintSign  ctermfg=87 ctermbg=233
-
-" the spammiest, so use something not annoying
-highlight CocInfoFloat ctermfg=253 ctermbg=233
-highlight CocInfoSign ctermfg=253 ctermbg=233
-
 nnoremap j gj
 nnoremap k gk
-
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
 
 " set modelines=0           " security
 set ruler                 " show file stats
@@ -325,8 +286,6 @@ augroup SpecialHighlights
     \| call matchadd('GENERIC', 'EXCEPTION')
     \| call matchadd('CLEAN', 'CLEANME')
 augroup END
-
-set rtp+=/opt/homebrew/opt/fzf
 
 " Session management
 command! -bang Source call fzf#run({'source': 'ls', 'sink': 'source', 'dir': '~/.vim_sessions'})
