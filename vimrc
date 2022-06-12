@@ -242,6 +242,15 @@ vmap <enter> <plug>(EasyAlign)
 xmap ga <plug>(EasyAlign)
 nmap ga <plug>(EasyAlign)
 
+" GoTo code navigation.
+nmap <silent> cd :CocDiagnostics<cr>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" inoremap <silent><expr> <tab> coc#refresh()
+
+
 " fugitive/rhubarb/gv
 nmap <space>gb :Git blame<cr>
 nmap <space>gs :Git<cr>

@@ -111,10 +111,10 @@
 [submodule "pack/plugins/start/vim-jsx-typescript"]
 	path = pack/plugins/start/vim-jsx-typescript
 	url = https://github.com/peitalin/vim-jsx-typescript.git
-[submodule "pack/plugins/start/coc.nvim"]
-	path = pack/plugins/start/coc.nvim
-	url = https://github.com/neoclide/coc.nvim.git
 [submodule "pack/plugins/start/vim-sexp"]
 	path = pack/plugins/start/vim-sexp
 	url = https://github.com/guns/vim-sexp.git
 	ignore = dirty
+[submodule "pack/plugins/start/coc.nvim"]
+	path = pack/plugins/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
