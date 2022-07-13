@@ -12,13 +12,12 @@
 " it creates index_foo.md, and pressing <cr> on bar in foo.md
 " creates index_foo_bar.md (possibly)
 
-nnoremap <space>ww :edit $VIM_VIKI_HOME/index.txt<cr>
-nnoremap <space>wt :edit $VIM_VIKI_HOME/todo.txt<cr>
+nnoremap <space>ww :edit ~/brain/pages/index.txt<cr>
+nnoremap <space>wt :edit ~/brain/pages/todo.txt<cr>
 
 augroup Viki
   autocmd!
-  autocmd BufEnter $VIM_VIKI_HOME/*.txt call SetFiletypeAndMappings()
-  autocmd BufEnter */kbfs/private/jtm/*.txt call SetFiletypeAndMappings()
+  autocmd BufEnter ~/brain/pages/*.txt call SetFiletypeAndMappings()
 augroup END
 
 function! SetFiletypeAndMappings()
@@ -33,6 +32,6 @@ function! SaveAndEdit()
   let l:txt = expand("<cword>")
   if l:txt != ''
     silent! write
-    silent! execute 'edit ' $VIM_VIKI_HOME.'/'.l:txt.'.txt'
+    silent! execute 'edit ~/brain/pages/'.l:txt.'.txt'
   endif
 endfunction

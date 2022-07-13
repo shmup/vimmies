@@ -30,6 +30,14 @@ highlight CocHintFloat ctermfg=87 ctermbg=233
 highlight CocHintSign  ctermfg=87 ctermbg=233
 highlight CocInfoFloat ctermfg=253 ctermbg=233
 highlight CocInfoSign ctermfg=253 ctermbg=233
+highlight CocInfoSign ctermfg=253 ctermbg=233
+highlight CocSelectedLine ctermfg=229 ctermbg=233
+" highlight CocLocationLine ctermfg=229 ctermbg=233
+" highlight CocLocationName ctermfg=229 ctermbg=233
+" highlight CocSelectedText ctermfg=229 ctermbg=233
+" highlight CocHighlightText ctermfg=229 ctermbg=233
+
+" CocSelectedLine, CocSelectedText, CocHighlightText
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped

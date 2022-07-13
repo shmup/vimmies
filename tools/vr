@@ -21,3 +21,6 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
 fi
 
 vim $(echo "$LIST" | grep -v $IGNORES)
+
+# http://ix.io/41Y3
+
