@@ -239,8 +239,8 @@ nnoremap <space>to :tabonly<cr>
 
 " easy align
 vmap <enter> <plug>(EasyAlign)
-xmap ga <plug>(EasyAlign)
-nmap ga <plug>(EasyAlign)
+" xmap ga <plug>(EasyAlign)
+" nmap ga <plug>(EasyAlign)
 
 " GoTo code navigation.
 nmap <silent> cd :CocDiagnostics<cr>
