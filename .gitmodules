@@ -102,9 +102,6 @@
 [submodule "pack/plugins/start/vim-easy-align"]
 	path = pack/plugins/start/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
-[submodule "pack/plugins/start/vim-go"]
-	path = pack/plugins/start/vim-go
-	url = git@github.com:fatih/vim-go.git
 [submodule "pack/plugins/start/fzf.vim"]
 	path = pack/plugins/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
@@ -121,3 +118,6 @@
 [submodule "pack/plugins/start/vim-gist"]
 	path = pack/plugins/start/vim-gist
 	url = https://github.com/mattn/vim-gist.git
+[submodule "pack/plugins/start/markdown-preview.nvim"]
+	path = pack/plugins/start/markdown-preview.nvim
+	url = https://github.com/iamcco/markdown-preview.nvim.git
