@@ -1,7 +1,5 @@
 if executable('rustc')
   setlocal errorformat=%-G
-  setlocal errorformat+=%-G%.\ %.%#
-  setlocal errorformat+=%-G\ \ \|%.%#
   setlocal errorformat+=%-Gerror:\ aborting\ %.%#
   setlocal errorformat+=%-Gerror:\ Could\ not\ compile\ %.%#
   setlocal errorformat+=%Eerror:\ %m
@@ -10,11 +8,10 @@ if executable('rustc')
   setlocal errorformat+=%Wwarning:\ %m
   setlocal errorformat+=%Inote:\ %m
   setlocal errorformat+=%C\ %#-->\ %f:%l:%c
-  setlocal errorformat+=%-G\ \%#
 
   if filereadable("Cargo.toml")
-    setlocal makeprg=cargo\ run
-    nnoremap <buffer><space>m :Dispatch cargo run<cr>
+    setlocal makeprg=cargo\ build
+    nnoremap <buffer><space>m :Dispatch<cr>
   else
     setlocal makeprg=rustc\ %
     nnoremap <buffer><space>m :silent make! \| redraw!<cr>

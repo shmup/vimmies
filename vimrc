@@ -162,6 +162,9 @@ imap jj <esc>
 " kill highlight
 map <space>l :let @/=''<cr>
 
+nnoremap gf gF
+nnoremap gF gf
+
 " kill whitespace
 nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
@@ -201,6 +204,8 @@ cmap w!! %!sudo tee > /dev/null %
 " yank and delete to system clipboard
 vnoremap <space>y "+y
 vnoremap <space>d "+d
+
+command! -range GOpen execute 'silent ! git browse ' . expand('%') . ' ' . <line1> . ' ' . <line2> | checktime | redraw!
 
 set statusline=%3l             " show the line number
 set statusline+=,              " and a comma
@@ -257,7 +262,6 @@ nmap <space>gs :Git<cr>
 nmap <space>ge :Gedit<cr>
 nmap <space>gc :Gcommit -v<cr>
 nmap <space>gn :Gcommit -v --no-verify<cr>
-nmap <space>ga :Git add -p<cr>
 nmap <space>gm :Gcommit -v --amend<cr>
 nmap <space>gp :Gpush<cr>
 nmap <space>gl :BCommits<cr>
@@ -276,6 +280,7 @@ nmap <space>hu <Plug>(GitGutterUndoHunk)
 nmap <space>hv <Plug>(GitGutterPreviewHunk)
 
 " colors
+hi SpellBad term=reverse ctermbg=226 ctermfg=0
 command! CT silent! execute "ColorToggle"
 highlight SEND_HELP ctermbg=131 ctermfg=white
 highlight CLEAN ctermbg=white ctermfg=black
@@ -292,6 +297,7 @@ augroup SpecialHighlights
     \| call matchadd('SEND_HELP', 'TEMPORARY')
     \| call matchadd('SEND_HELP', 'ALERT', 101)
     \| call matchadd('GENERIC', 'NOTE')
+    \| call matchadd('GENERIC', 'NOTES')
     \| call matchadd('GENERIC', 'EXCEPTION')
     \| call matchadd('CLEAN', 'CLEANME')
 augroup END
@@ -307,7 +313,7 @@ command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 command! Tig execute "Start tig " . expand('%:p')
 
 " scratch buffer
-command! SC new | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
+command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
 command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
 
 " remove all but current buffer

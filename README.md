@@ -5,7 +5,7 @@ gimme リ工从从工乇丂 daddy
 
 ### REQUIRES
 
-- [vim8 +python](https://github.com/shmup/vimmies/wiki/Installing-vim8)
+- [vim9 +python](https://github.com/shmup/vimmies/wiki/Installing-vim8)
 - leans on but not so much requires: fzf, rg, various linters, etc
 
 You can use the [vimmies script](https://github.com/shmup/vimmies/blob/master/vimmies) to help manage submodules, or just do the stuff below.

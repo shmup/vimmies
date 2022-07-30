@@ -1,9 +1,14 @@
-let &l:formatprg = 'npx prettier-eslint --parser=babel --stdin'
+" let &l:formatprg = 'npx prettier-eslint --parser=babel --stdin'
 
 noremap <buffer> <space>la :Dispatch lua % <cr>
 
+setlocal sw=4
+
+if executable('prettier')
+  setlocal formatprg=prettier\ --parser\ lua
+endif
+
 if executable('luacheck')
-  " setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
   setlocal makeprg=luacheck\ --no-color
   nnoremap <buffer><space>m :silent make! % \| redraw!<cr>
 endif

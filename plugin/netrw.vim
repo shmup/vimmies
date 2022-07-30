@@ -8,8 +8,20 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-let g:netrw_winsize = 25
+let g:netrw_winsize = 18
 let g:netrw_preview = 1
 
 command! ExploreFind let @/=expand("%:t") | execute 'Vexplore' expand("%:h") | normal n
 nnoremap _ :ExploreFind<cr>
+
+" Remove this dumb mapping so I can navigate out of the netrc easily
+augroup vimrc
+  autocmd!
+  autocmd FileType netrw call s:RemoveNetrwMap()
+augroup END
+
+function s:RemoveNetrwMap()
+  if hasmapto('<Plug>NetrwRefresh')
+    unmap <buffer> <C-l>
+  endif
+endfunction

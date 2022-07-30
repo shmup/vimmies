@@ -8,7 +8,13 @@ function! Grep(...)
   return system(join(extend([&grepprg], a:000), ' '))
 endfunction
 
+" <nova> devilegg, also :grep "\b<c-r><c-w>\b"  h c_CTRL-R_CTRL-W
+function! ExactGrep(...)
+  return system(join(extend([&grepprg, '-w'], a:000), ' '))
+endfunction
+
 command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<q-args>)
+command! -nargs=+ -complete=file_in_path -bar ExactGrep  cgetexpr ExactGrep(<q-args>)
 
 augroup quickfix
 	autocmd!
@@ -18,6 +24,7 @@ augroup END
 
 nnoremap <space>a :Grep<space>
 nnoremap <silent> ,G :Grep <C-r><C-w><CR>
+nnoremap <silent> ,E :ExactGrep <C-r><C-w><CR>
 nnoremap <silent> ,L :Lines <C-r><C-w><CR>
 nnoremap <silent> ,B :BLines <C-r><C-w><CR>
 xnoremap <silent> ,G :<C-u>let cmd = "Grep " . visual#GetSelection() <bar>

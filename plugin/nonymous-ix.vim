@@ -1,8 +1,8 @@
 " nonymous-ix.vim uses .netrc for auth, and fucks with ix.io
 
 " insert  :IX [optional visual selection] - copies url to system clipboard
-" replace :RX <URL> [optional visual selection]
-" delete  :DX <URL>
+" replace :RX <URL or ID> [optional visual selection]
+" delete  :DX <URL or ID>
 
 " example $HOME/.netrc
 "   machine ix.io
@@ -29,5 +29,5 @@ if s:env =~ 'DARWIN'
   command! -nargs=1 -range=% DX w !curl -n -X DELETE <args>
 endif
 
-" http://ix.io/2ic8
+" http://ix.io/452u
 
