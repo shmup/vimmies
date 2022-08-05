@@ -67,9 +67,15 @@ _update-plugins() {
     [[ -z $PLUGIN ]] && exit 0
     git submodule update --remote --merge -- $PLUGINS_PATH/$PLUGIN
   fi
-  curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > $VIM_PATH/colors/apprentice.vim
   curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > $VIM_PATH/colors/modest.vim
-  curl -q https://raw.githubusercontent.com/cideM/yui/master/colors/yui.vim > $VIM_PATH/colors/yui.vim
+  curl -q https://raw.githubusercontent.com/wadackel/vim-dogrun/main/colors/dogrun.vim > $VIM_PATH/colors/dogrun.vim
+
+  curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > $VIM_PATH/colors/apprentice.vim
+  curl -q https://raw.githubusercontent.com/habamax/vim-saturnite/master/colors/saturnite.vim > $VIM_PATH/colors/saturnite.vim
+  curl -q https://git.sr.ht/~swalladge/antarctic-vim/blob/master/colors/antarctic.vim > $VIM_PATH/colors/antarctic.vim
+  curl -q https://git.sr.ht/~swalladge/paper.vim/blob/master/colors/paper.vim > $VIM_PATH/colors/paper.vim
+  curl -q https://raw.githubusercontent.com/benwr/tuftish/master/colors/tuftish.vim > $VIM_PATH/colors/tuftish.vim
+  curl -q https://raw.githubusercontent.com/hardselius/warlock/master/colors/warlock.vim > $VIM_PATH/colors/warlock.vim
 }
 
 _upgrade-vim() {

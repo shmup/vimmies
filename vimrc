@@ -2,8 +2,6 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-set background=dark
-
 colorscheme apprentice
 
 let mapleader = "\<Space>"
