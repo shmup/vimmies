@@ -23,8 +23,8 @@ set noequalalways         " don't equalize window sizes when splitting
 set signcolumn=number
 
 " TODO don't offer to open certain files/directories
-set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.svg
-set wildignore+=*.pdf,*.psd
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+set wildignore+=*.pdf,*.psd,*.com
 set wildignore+=bower_components/*,*/.vim/junk/*
 set wildignore+=**/node_modules/**
 

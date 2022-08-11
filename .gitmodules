@@ -80,10 +80,6 @@
 [submodule "pack/plugins/start/elm-vim"]
 	path = pack/plugins/start/elm-vim
 	url = https://github.com/ElmCast/elm-vim.git
-[submodule "pack/plugins/start/vim-renamer"]
-	path = pack/plugins/start/vim-renamer
-	url = https://github.com/qpkorr/vim-renamer.git
-	ignore = dirty
 [submodule "pack/plugins/start/php-vim-syntax"]
 	path = pack/plugins/start/php-vim-syntax
 	url = https://github.com/TysonAndre/php-vim-syntax.git
@@ -112,12 +108,12 @@
 	path = pack/plugins/start/vim-sexp
 	url = https://github.com/guns/vim-sexp.git
 	ignore = dirty
-[submodule "pack/plugins/start/coc.nvim"]
-	path = pack/plugins/start/coc.nvim
-	url = https://github.com/neoclide/coc.nvim.git
 [submodule "pack/plugins/start/vim-gist"]
 	path = pack/plugins/start/vim-gist
 	url = https://github.com/mattn/vim-gist.git
 [submodule "pack/plugins/start/markdown-preview.nvim"]
 	path = pack/plugins/start/markdown-preview.nvim
 	url = https://github.com/iamcco/markdown-preview.nvim.git
+[submodule "pack/plugins/start/coc.nvim"]
+	path = pack/plugins/start/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git

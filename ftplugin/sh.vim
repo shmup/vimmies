@@ -3,7 +3,6 @@ noremap <buffer><space>sh :!clear; bash %<cr>
 " .vim/ftplugin/sh.vim
 " formatprg and makeprg config for bash shit
 
-
 " go https://github.com/mvdan/sh#shfmt
 " gggqG
 if executable('shfmt')

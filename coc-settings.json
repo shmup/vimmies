@@ -1,8 +1,45 @@
 {
   "suggest.autoTrigger": "none",
+  "suggest.noselect": true,
   "diagnostic.enable": true,
   "python.pythonPath": "/usr/bin/python",
+  "languageserver": {
+    "vala": {
+      "command": "vala-language-server",
+      "filetypes": ["vala", "genie"]
+    }
+  },
   "Lua.diagnostics.globals": [
-    "LaunchBrowser"
+    "DecodeBase64",
+    "EncodeBase64",
+    "EncodeJson",
+    "EncodeLua",
+    "EncodeUrl",
+    "EscapePath",
+    "FormatIp",
+    "GetCryptoHash",
+    "GetLastModifiedTime",
+    "GetLogLevel",
+    "GetPass",
+    "GetRandomBytes",
+    "GetTime",
+    "GetUser",
+    "GetZipPaths",
+    "LaunchBrowser",
+    "LoadAsset",
+    "ParseHttpDateTime",
+    "ParseUrl",
+    "ProgramHeartbeatInterval",
+    "ProgramLogPath",
+    "ServeAsset",
+    "ServeIndex",
+    "argon2",
+    "kLogDebug",
+    "kLogError",
+    "kLogInfo",
+    "kLogVerbose",
+    "kLogWarn",
+    "runSchedule",
+    "unix"
   ]
 }

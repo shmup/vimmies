@@ -7,7 +7,11 @@ setlocal define=class\\s
 " Uses eslint, eslint-cli, and eslint-prettier.
 " Only eslint-cli should be installed globally.
 
-let &l:formatprg = 'prettier-eslint --parser=babel --stdin'
+
+if executable('prettier')
+  " setlocal formatprg=prettier\ --parser\ javascript
+  let &l:formatprg = 'prettier --stdin-filepath %'
+endif
 
 noremap <buffer> <space>js :Dispatch node % <cr>
 

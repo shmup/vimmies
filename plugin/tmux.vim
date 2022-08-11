@@ -4,11 +4,14 @@
 " run your command in that pane so that !! reruns it
 
 " use the mappings below to rerun your tests or whatever the fuck you're doing
+nnoremap tk0 :Tmux send-keys -t 0 'C-c' Enter '!!' Enter<CR>
+nnoremap tk1 :Tmux send-keys -t 1 'C-c' Enter '!!' Enter<CR>
+nnoremap tk2 :Tmux send-keys -t 2 'C-c' Enter '!!' Enter<CR>
+nnoremap tk3 :Tmux send-keys -t 3 'C-c' Enter '!!' Enter<CR>
+nnoremap tm0 :Tmux send-keys -t 0 '!!' Enter<CR>
 nnoremap tm1 :Tmux send-keys -t 1 '!!' Enter<CR>
 nnoremap tm2 :Tmux send-keys -t 2 '!!' Enter<CR>
 nnoremap tm3 :Tmux send-keys -t 3 '!!' Enter<CR>
-nnoremap tm4 :Tmux send-keys -t 4 '!!' Enter<CR>
-nnoremap tm5 :Tmux send-keys -t 5 '!!' Enter<CR>
 
 " obv you can make these command more customized but this technique allowed me
 " to be minimal and very dynamic via `!!` referring to `previous command`
