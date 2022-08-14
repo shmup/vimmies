@@ -7,9 +7,16 @@
     "vala": {
       "command": "vala-language-server",
       "filetypes": ["vala", "genie"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
     }
   },
   "Lua.diagnostics.globals": [
+    "ProgramPort",
     "DecodeBase64",
     "EncodeBase64",
     "EncodeJson",
