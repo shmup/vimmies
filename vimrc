@@ -2,7 +2,12 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-colorscheme apprentice
+let hour = strftime("%H")
+if hour >= 00 && hour <= 06
+  colorscheme saturnite
+else
+  colorscheme apprentice
+endif
 
 let mapleader = "\<Space>"
 
