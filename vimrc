@@ -2,14 +2,12 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-colorscheme moonfly
-
-" let hour = strftime("%H")
-" if hour >= 22 || hour <= 06
-"   colorscheme moonfly
-" else
-"   colorscheme apprentice
-" endif
+let hour = strftime("%H")
+if hour >= 22 || hour <= 06
+  colorscheme dogrun
+else
+  colorscheme apprentice
+endif
 
 let mapleader = "\<Space>"
 
