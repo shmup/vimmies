@@ -3,8 +3,8 @@ filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
 let hour = strftime("%H")
-if hour >= 00 && hour <= 06
-  colorscheme saturnite
+if hour >= 22 || hour <= 06
+  colorscheme dogrun
 else
   colorscheme apprentice
 endif
@@ -51,6 +51,20 @@ nnoremap <silent> ,cd :lcd %:p:h<cr>
 nnoremap <silent> ,cr :lcd <c-r>=FugitiveWorkTree()<cr><cr>
 nnoremap ,z :Z<space>
 nnoremap ,e :silent Zedit<space>
+
+
+let g:coc_global_extensions = [
+      \'coc-clangd',
+      \'coc-go',
+      \'coc-json',
+      \'coc-lua',
+      \'coc-pyright',
+      \'coc-python',
+      \'coc-rls',
+      \'coc-rust-analyzer',
+      \'coc-sql',
+      \'coc-tsserver'
+      \]
 
 " auto expansion
 inoremap (<cr> (<cr>)<esc>O
