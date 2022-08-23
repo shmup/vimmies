@@ -104,7 +104,6 @@ _upgrade-vim() {
   --enable-cscope \
   --enable-gui=auto \
   --with-features=huge \
-  --with-x \
   --enable-fontset \
   --enable-largefile \
   --disable-netbeans \
