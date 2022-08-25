@@ -241,6 +241,13 @@ set statusline+=%<%F           " (truncated) full path to the file we are editin
 set statusline+=%m             " [+] if the file is modified but not saved
 set statusline+=%r             " show [RO] if a file is read-only
 
+if system('uname -r') =~ "microsoft"
+  augroup Yank
+  autocmd!
+  autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+  augroup END
+endif
+
 " it's a mood thing
 command! BufOnly silent! execute "%bd|e#|bd#"
 nnoremap <space>o :only<cr>

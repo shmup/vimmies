@@ -12,12 +12,12 @@
 " it creates index_foo.md, and pressing <cr> on bar in foo.md
 " creates index_foo_bar.md (possibly)
 
-nnoremap <space>ww :edit ~/brain/pages/index.txt<cr>
-nnoremap <space>wt :edit ~/brain/pages/todo.txt<cr>
+nnoremap <space>ww :edit ~/jtm/brain/pages/index.txt<cr>
+nnoremap <space>wt :edit ~/jtm/brain/pages/todo.txt<cr>
 
 augroup Viki
   autocmd!
-  autocmd BufEnter ~/brain/pages/*.txt call SetFiletypeAndMappings()
+  autocmd BufEnter ~/jtm/brain/pages/*.txt call SetFiletypeAndMappings()
 augroup END
 
 function! SetFiletypeAndMappings()
