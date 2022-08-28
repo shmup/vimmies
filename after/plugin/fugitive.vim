@@ -4,7 +4,7 @@ endfunction
 
 function! InWindows() abort
   " /home/jtm/jtm is a symlink to /mnt/c/Users/jtm
-  return StartsWith($PWD, '/mnt') || StartsWith($PWD, '/home/jtm/jtm')
+  return StartsWith(getcwd(), '/mnt') || StartsWith(getcwd(), '/home/jtm/jtm')
 endfunction
 
 function! FugitiveGitPath(path) abort
