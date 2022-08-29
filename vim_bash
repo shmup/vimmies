@@ -3,6 +3,6 @@
 # shit in here is just for vim to use
 shopt -s expand_aliases
 
-. $HOME/src/tools/z.sh
+. $HOME/src/z/z.sh
 
 alias yapf='PYTHONPATH=$HOME/src/yapf python3 $HOME/src/yapf/yapf'

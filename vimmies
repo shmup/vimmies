@@ -9,7 +9,7 @@ JUNK_PATH=$VIM_PATH/junk
 PLUGINS_PATH=$VIM_PATH/pack/plugins/start
 CACHE=$VIM_PATH/junk/cache
 
-REPO="/home/jared/src/vim"
+REPO="$HOME/src/vim"
 PY3=$(python3-config --configdir)
 
 PROCS=8
@@ -69,6 +69,7 @@ _update-plugins() {
   fi
   curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > "$VIM_PATH/colors/modest.vim" &
   curl -q https://raw.githubusercontent.com/wadackel/vim-dogrun/main/colors/dogrun.vim > "$VIM_PATH/colors/dogrun.vim" &
+  curl -q https://raw.githubusercontent.com/bluz71/vim-moonfly-colors/master/colors/moonfly.vim > "$VIM_PATH/colors/moonfly.vim" &
 
   curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > "$VIM_PATH/colors/apprentice.vim" &
   curl -q https://raw.githubusercontent.com/habamax/vim-saturnite/master/colors/saturnite.vim > "$VIM_PATH/colors/saturnite.vim" &
@@ -87,7 +88,7 @@ _upgrade-vim() {
 
   if cd $REPO; then git pull; else git clone https://github.com/vim/vim.git $REPO; fi
 
-  sudo rm -rf /usr/local/share/vim /usr/bin/vim
+  # sudo rm -rf /usr/local/share/vim /usr/bin/vim
 
   cd "$REPO" || exit
 
@@ -137,12 +138,14 @@ _remove-plugin() {
   if [[ ! -d $PLUGINS_PATH/$PLUGIN ]]; then bail "Submodule doesn't exist"; fi
 
   # cache some shit and trim dupes
-  cd $PLUGINS_PATH/$PLUGIN
-  git remote get-url origin >> $CACHE
+  cd "$PLUGINS_PATH/$PLUGIN" || exit
+  git remote get-url origin >> "$CACHE"
   [ -d "$OLDPWD" ] && cd "$OLDPWD"
 
   git submodule deinit -f "$PLUGINS_PATH/$PLUGIN"
-  git rm -f "$PLUGINS_PATH/$PLUGIN"
+  git rm --cached "$PLUGINS_PATH/$PLUGIN"
+  git rm -rf "$PLUGINS_PATH/$PLUGIN"
+  rm -Rf ".git/modules/$PLUGINS_PATH/$PLUGIN"
   rm -Rf "$PLUGINS_PATH/$PLUGIN"
 }
 

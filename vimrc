@@ -2,12 +2,14 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-let hour = strftime("%H")
-if hour >= 22 || hour <= 06
-  colorscheme dogrun
-else
-  colorscheme apprentice
-endif
+colorscheme moonfly
+
+" let hour = strftime("%H")
+" if hour >= 22 || hour <= 06
+"   colorscheme moonfly
+" else
+"   colorscheme apprentice
+" endif
 
 let mapleader = "\<Space>"
 
@@ -188,6 +190,7 @@ nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 " vimrc
 nnoremap <silent> <space>ej :edit ~/trove/Dropbox/text/notes/logs<cr>
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
+nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
 nnoremap <silent> <space>ea :edit ~/.bash_aliases<cr>
 nnoremap <silent> <space>ef :edit ~/.bash_functions<cr>
@@ -208,7 +211,7 @@ map <C-l> <C-w>l
 nnoremap Y y$
 
 " toggles
-nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'apprentice')
+nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'moonfly')
 nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>

@@ -47,6 +47,7 @@
     "kLogVerbose",
     "kLogWarn",
     "runSchedule",
-    "unix"
+    "unix",
+    "lsqlite3"
   ]
 }
