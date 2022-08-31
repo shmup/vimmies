@@ -32,6 +32,6 @@ function! SaveAndEdit()
   let l:txt = expand("<cword>")
   if l:txt != ''
     silent! write
-    silent! execute 'edit ~/brain/pages/'.l:txt.'.txt'
+    silent! execute 'edit ~/jtm/brain/pages/'.l:txt.'.txt'
   endif
 endfunction

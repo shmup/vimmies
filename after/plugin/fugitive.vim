@@ -4,7 +4,7 @@ endfunction
 
 function! InWindows() abort
   " /home/jtm/jtm is a symlink to /mnt/c/Users/jtm
-  return StartsWith(getcwd(), '/mnt') || StartsWith(getcwd(), '/home/jtm/jtm')
+  return StartsWith(fnameescape(FugitiveWorkTree()), '/mnt') || StartsWith(fnameescape(FugitiveWorkTree()), '/home/jtm/jtm')
 endfunction
 
 function! FugitiveGitPath(path) abort
@@ -18,9 +18,9 @@ function! FugitiveGitPath(path) abort
 endfunction
 
 function! FugitiveVimPath(path) abort
-  if InWindows()
-    return substitute(a:path, '^\(\a\):/', '/mnt/\1/', '')
-  endif
+  " if InWindows()
+  "   return substitute(a:path, '^\(\a\):/', '/mnt/\1/', '')
+  " endif
 
   return a:path
 endfunction
