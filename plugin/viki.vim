@@ -29,9 +29,13 @@ function! SetFiletypeAndMappings()
 endfunction
 
 function! SaveAndEdit()
-  let l:txt = expand("<cword>")
-  if l:txt != ''
-    silent! write
-    silent! execute 'edit ~/brain/pages/'.l:txt.'.txt'
+  let l:txt = expand("<cfile>")
+  if l:txt == '' | return | endif
+
+  if count(l:txt, ".") == 0
+    let l:txt = l:txt.'.txt'
   endif
+
+  silent! write
+  silent! execute 'edit ~/brain/pages/'.l:txt
 endfunction
