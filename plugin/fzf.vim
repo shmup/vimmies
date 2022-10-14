@@ -143,7 +143,7 @@ function! fzf#install()
     if !filereadable(script)
       throw script.' not found'
     endif
-    let script = 'powershell -ExecutionPolicy Bypass -file ' . script
+    let script = 'powershell -ExecutionPolicy Bypass -file ' . shellescape(script)
   else
     let script = s:base_dir.'/install'
     if !executable(script)
@@ -464,7 +464,7 @@ try
   let temps  = { 'result': s:fzf_tempname() }
   let optstr = s:evaluate_opts(get(dict, 'options', ''))
   try
-    let fzf_exec = fzf#shellescape(fzf#exec())
+    let fzf_exec = shellescape(fzf#exec())
   catch
     throw v:exception
   endtry

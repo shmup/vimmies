@@ -120,3 +120,6 @@
 [submodule "pack/plugins/start/xterm-color-table.vim"]
 	path = pack/plugins/start/xterm-color-table.vim
 	url = git@github.com:shmup/xterm-color-table.vim.git
+[submodule "pack/plugins/start/crawlrc.vim"]
+	path = pack/plugins/start/crawlrc.vim
+	url = git@github.com:shmup/crawlrc.vim.git
