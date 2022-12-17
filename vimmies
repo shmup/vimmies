@@ -70,7 +70,6 @@ _update-plugins() {
   curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > "$VIM_PATH/colors/modest.vim" &
   curl -q https://raw.githubusercontent.com/wadackel/vim-dogrun/main/colors/dogrun.vim > "$VIM_PATH/colors/dogrun.vim" &
   curl -q https://raw.githubusercontent.com/bluz71/vim-moonfly-colors/master/colors/moonfly.vim > "$VIM_PATH/colors/moonfly.vim" &
-
   curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > "$VIM_PATH/colors/apprentice.vim" &
   curl -q https://raw.githubusercontent.com/habamax/vim-saturnite/master/colors/saturnite.vim > "$VIM_PATH/colors/saturnite.vim" &
   curl -q https://git.sr.ht/~swalladge/antarctic-vim/blob/master/colors/antarctic.vim > "$VIM_PATH/colors/antarctic.vim" &

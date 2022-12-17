@@ -3,6 +3,10 @@
   "suggest.noselect": true,
   "diagnostic.enable": true,
   "python.pythonPath": "/usr/bin/python",
+  "zig.enabled": true,
+  "zig.startUpMessage": true,
+  "zig.path": "~/.zls/zls",
+  "zig.debugLog": false,
   "languageserver": {
     "vala": {
       "command": "vala-language-server",

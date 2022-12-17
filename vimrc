@@ -192,7 +192,7 @@ nnoremap <silent> <space>ej :edit ~/trove/Dropbox/text/notes/logs<cr>
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
-nnoremap <silent> <space>ea :edit ~/.bash_aliases<cr>
+nnoremap <silent> <space>ea :edit ~/.config/alacritty/alacritty.yml<cr>
 nnoremap <silent> <space>ef :edit ~/.bash_functions<cr>
 nnoremap <silent> <space>en :edit ~/workspace/ns1.bashrc<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>

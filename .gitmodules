@@ -123,3 +123,6 @@
 [submodule "pack/plugins/start/crawlrc.vim"]
 	path = pack/plugins/start/crawlrc.vim
 	url = git@github.com:shmup/crawlrc.vim.git
+[submodule "pack/plugins/start/zig.vim"]
+	path = pack/plugins/start/zig.vim
+	url = https://github.com/ziglang/zig.vim
