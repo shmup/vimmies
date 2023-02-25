@@ -1,10 +1,9 @@
 gimme リ工从从工乇丂 daddy
 ===================
 
-![vim on fire](https://jtm.keybase.pub/tmp/vim_on_fire.gif)
+![vim on fire](junk/vim_on_fire.gif)
 
 ### REQUIRES
-
 - [vim9 +python](https://github.com/shmup/vimmies/wiki/Installing-vim8)
 - leans on but not so much requires: fzf, rg, various linters, etc
 
@@ -32,8 +31,7 @@ rm -Rf .git/modules/pack/plugins/start/supertab
 git commit
 ```
 
-### NOTES
-
-- First timers, watch this: https://www.youtube.com/watch?v=wlR5gYd6um0
+### THOUGHTS
+- If you're new watch this: https://www.youtube.com/watch?v=wlR5gYd6um0
 - Learn from: https://github.com/romainl/idiomatic-vimrc
-- Reduce bullshit
+- Remove any stuff ya don't need

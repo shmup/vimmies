@@ -2,21 +2,22 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-colorscheme moonfly
+" set termguicolors
 
-" let hour = strftime("%H")
-" if hour >= 22 || hour <= 06
-"   colorscheme moonfly
-" else
-"   colorscheme apprentice
-" endif
+" paused experiment
+let hour = strftime("%H")
+if hour >= 22 || hour <= 06
+  colorscheme apprentice
+else
+  colorscheme apprentice
+endif
 
 let mapleader = "\<Space>"
 
 nnoremap j gj
 nnoremap k gk
 
-" set modelines=0           " security
+set modelines=0           " security
 set ruler                 " show file stats
 set visualbell            " dont blink
 set t_vb=                 " dont beep
@@ -31,7 +32,7 @@ set signcolumn=number
 
 " TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
-set wildignore+=*.pdf,*.psd,*.com
+set wildignore+=*.pdf,*.psd,*.com,*.tdy
 set wildignore+=bower_components/*,*/.vim/junk/*
 set wildignore+=**/node_modules/**
 
@@ -192,8 +193,9 @@ nnoremap <silent> <space>ej :edit ~/trove/Dropbox/text/notes/logs<cr>
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
+nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
 nnoremap <silent> <space>ea :edit ~/.config/alacritty/alacritty.yml<cr>
-nnoremap <silent> <space>ef :edit ~/.bash_functions<cr>
+nnoremap <silent> <space>ef :edit ~/.mozilla/firefox/jtm/chrome/userChrome.css<cr>
 nnoremap <silent> <space>en :edit ~/workspace/ns1.bashrc<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 nnoremap <silent> <space>et :edit ~/todos<cr>
@@ -211,7 +213,7 @@ map <C-l> <C-w>l
 nnoremap Y y$
 
 " toggles
-nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'moonfly')
+nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'apprentice')
 nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
@@ -315,7 +317,7 @@ augroup SpecialHighlights
     \| call matchadd('ColorColumn', '\s\+$', 100)
     \| call matchadd('SEND_HELP', 'HACK')
     \| call matchadd('SEND_HELP', 'TEMPORARY')
-    \| call matchadd('SEND_HELP', 'ALERT', 101)
+    \| call matchadd('SEND_HELP', '\<ALERT\>', 101)
     \| call matchadd('GENERIC', 'NOTE')
     \| call matchadd('GENERIC', 'NOTES')
     \| call matchadd('GENERIC', 'EXCEPTION')
@@ -351,7 +353,7 @@ augroup Convenience
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
   set iskeyword+=-
 
-  let ignorelist =['vim','help']
+  let ignorelist =['vim','help','perl','sh']
   let g:vim_json_warnings = 0
 
   autocmd! Filetype * if (index(ignorelist, &ft) == -1)
