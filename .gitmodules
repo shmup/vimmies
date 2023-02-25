@@ -126,3 +126,16 @@
 [submodule "pack/plugins/start/zig.vim"]
 	path = pack/plugins/start/zig.vim
 	url = https://github.com/ziglang/zig.vim
+[submodule "pack/plugins/start/greplace.vim"]
+	path = pack/plugins/start/greplace.vim
+	url = https://github.com/vim-scripts/greplace.vim.git
+[submodule "pack/plugins/start/far.vim"]
+	path = pack/plugins/start/far.vim
+	url = https://github.com/brooth/far.vim.git
+[submodule "pack/plugins/start/vim-raku"]
+	path = pack/plugins/start/vim-raku
+	url = https://github.com/Raku/vim-raku.git
+	ignore = dirty
+[submodule "lsp/RakuNavigator"]
+	path = lsp/RakuNavigator
+	url = https://github.com/bscan/RakuNavigator
