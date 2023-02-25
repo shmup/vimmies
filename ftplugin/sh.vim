@@ -6,7 +6,7 @@ noremap <buffer><space>sh :!clear; bash %<cr>
 " go https://github.com/mvdan/sh#shfmt
 " gggqG
 if executable('shfmt')
-  setlocal formatprg=shfmt
+  setlocal formatprg=shfmt\ -i\ 2
 endif
 
 " cabal or npm https://github.com/koalaman/shellcheck#installing
