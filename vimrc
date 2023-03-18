@@ -189,16 +189,14 @@ nnoremap gF gf
 nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
-nnoremap <silent> <space>ej :edit ~/trove/Dropbox/text/notes/logs<cr>
+nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
+nnoremap <silent> <space>et :edit ~/.tmux.conf<cr>
+nnoremap <silent> <space>ef :edit ~/.mozilla/firefox/jtm/chrome/userChrome.css<cr>
 nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
 nnoremap <silent> <space>ea :edit ~/.config/alacritty/alacritty.yml<cr>
-nnoremap <silent> <space>ef :edit ~/.mozilla/firefox/jtm/chrome/userChrome.css<cr>
-nnoremap <silent> <space>en :edit ~/workspace/ns1.bashrc<cr>
-nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
-nnoremap <silent> <space>et :edit ~/todos<cr>
 
 " alt-tab between two buffers
 nnoremap <space><space> :b#<cr>
@@ -212,7 +210,8 @@ map <C-l> <C-w>l
 " make Y like C/D
 nnoremap Y y$
 
-" toggles
+" toggles, also :help *unimpaired-toggling*
+" https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt#L77-L95
 nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'apprentice')
 nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
@@ -315,13 +314,13 @@ augroup SpecialHighlights
   autocmd WinEnter,BufEnter *
     \  call clearmatches()
     \| call matchadd('ColorColumn', '\s\+$', 100)
-    \| call matchadd('SEND_HELP', 'HACK')
-    \| call matchadd('SEND_HELP', 'TEMPORARY')
+    \| call matchadd('SEND_HELP', '\<HACK\>')
+    \| call matchadd('SEND_HELP', '\<TEMPORARY\>')
     \| call matchadd('SEND_HELP', '\<ALERT\>', 101)
-    \| call matchadd('GENERIC', 'NOTE')
-    \| call matchadd('GENERIC', 'NOTES')
-    \| call matchadd('GENERIC', 'EXCEPTION')
-    \| call matchadd('CLEAN', 'CLEANME')
+    \| call matchadd('GENERIC', '\<NOTE\>')
+    \| call matchadd('GENERIC', '\<NOTES\>')
+    \| call matchadd('GENERIC', '\<EXCEPTION\>')
+    \| call matchadd('CLEAN', '\<CLEANME\>')
 augroup END
 
 " Session management

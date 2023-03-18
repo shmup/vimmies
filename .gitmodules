@@ -139,3 +139,6 @@
 [submodule "lsp/RakuNavigator"]
 	path = lsp/RakuNavigator
 	url = https://github.com/bscan/RakuNavigator
+[submodule "pack/plugins/start/html5.vim"]
+	path = pack/plugins/start/html5.vim
+	url = https://github.com/othree/html5.vim.git
