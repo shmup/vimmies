@@ -9,7 +9,6 @@ nnoremap <silent><space>yd :call YankLineAndDiagnosticToClipboard()<CR>
 
 function! GetDiagnosticForLine(lineNumber)
     let diagList = CocAction('diagnosticList')
-
     for diagItem in diagList
         if a:lineNumber == diagItem['lnum']
             return trim(diagItem['message'])
