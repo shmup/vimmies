@@ -1,10 +1,11 @@
-noremap <buffer><space>sh :!clear; bash %<cr>
+" .vim/after/ftplugin/sh.vim
 
-" .vim/ftplugin/sh.vim
 " formatprg and makeprg config for bash shit
 
+noremap <buffer><space>sh :!clear; bash %<cr>
+
 " go https://github.com/mvdan/sh#shfmt
-" gggqG
+" gq<motion>
 if executable('shfmt')
   setlocal formatprg=shfmt\ -i\ 2
 endif

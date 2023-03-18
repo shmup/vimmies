@@ -76,6 +76,7 @@ _update-plugins() {
   curl -q https://git.sr.ht/~shmup/paper.vim/blob/main/colors/paper.vim> "$VIM_PATH/colors/paper.vim" &
   curl -q https://raw.githubusercontent.com/benwr/tuftish/master/colors/tuftish.vim > "$VIM_PATH/colors/tuftish.vim" &
   curl -q https://raw.githubusercontent.com/hardselius/warlock/master/colors/warlock.vim > "$VIM_PATH/colors/warlock.vim" &
+  curl -q https://raw.githubusercontent.com/andreasvc/vim-256noir/master/colors/256_noir.vim > "$VIM_PATH/colors/256_noir.vim" &
 
   cd $PLUGINS_PATH/coc.nvim && yarn
 }

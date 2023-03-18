@@ -12,6 +12,11 @@ set updatetime=100
 let g:gitgutter_terminal_reports_focus=0
 let g:gitgutter_enabled = 0
 
+" goyo
+let g:goyo_width = 90
+let g:goyo_height = '95%'
+let g:goyo_linenr = 0
+
 " fzf
 let g:fzf_preview_window = ''
 
@@ -74,8 +79,4 @@ function! CheckBackspace() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-@> coc#refresh()
