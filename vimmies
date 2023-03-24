@@ -94,23 +94,8 @@ _upgrade-vim() {
 
   make distclean
 
-  ./configure \
-  --enable-multibyte \
-  --enable-perlinterp=yes \
-  --enable-rubyinterp=yes \
-  --enable-python3interp \
-  --with-python3-config-dir="$PY3" \
-  --enable-luainterp=yes \
-  --enable-cscope \
-  --enable-gui=auto \
-  --with-features=huge \
-  --with-x \
-  --enable-fontset \
-  --enable-largefile \
-  --disable-netbeans \
-  --with-compiledby="$YOU" \
-  --enable-fail-if-missing \
-  && make -j "$PROCS" && sudo make -j "$PROCS" install
+  ./configure --with-features=huge --enable-python3interp \
+    && make -j "$PROCS" && sudo make -j "$PROCS" install
 }
 
 _install-plugin() {

@@ -5,7 +5,7 @@ if executable("rg")
 endif
 
 function! Grep(...)
-  return system(join(extend([&grepprg], a:000), ' '))
+  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' ')) "romainls
 endfunction
 
 " <nova> devilegg, also :grep "\b<c-r><c-w>\b"  h c_CTRL-R_CTRL-W
@@ -13,8 +13,8 @@ function! ExactGrep(...)
   return system(join(extend([&grepprg, '-w'], a:000), ' '))
 endfunction
 
-command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<q-args>)
-command! -nargs=+ -complete=file_in_path -bar ExactGrep  cgetexpr ExactGrep(<q-args>)
+command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar ExactGrep  cgetexpr ExactGrep(<f-args>)
 
 augroup quickfix
 	autocmd!

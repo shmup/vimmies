@@ -165,10 +165,6 @@ set undolevels=1000
 set undoreload=10000
 set backupcopy=yes
 
-" better arrows
-nnoremap <left> :bp<cr>
-nnoremap <right> :bn<cr>
-
 " window management
 set splitright
 nmap <c-n> :SC<cr>
@@ -216,6 +212,7 @@ nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'l
 nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
+nnoremap <silent>yoz :syntax sync fromstart<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
 
@@ -312,15 +309,15 @@ highlight ColorColumn ctermbg=238
 augroup SpecialHighlights
   autocmd!
   autocmd WinEnter,BufEnter *
-    \  call clearmatches()
-    \| call matchadd('ColorColumn', '\s\+$', 100)
-    \| call matchadd('SEND_HELP', '\<HACK\>')
-    \| call matchadd('SEND_HELP', '\<TEMPORARY\>')
-    \| call matchadd('SEND_HELP', '\<ALERT\>', 101)
-    \| call matchadd('GENERIC', '\<NOTE\>')
-    \| call matchadd('GENERIC', '\<NOTES\>')
-    \| call matchadd('GENERIC', '\<EXCEPTION\>')
-    \| call matchadd('CLEAN', '\<CLEANME\>')
+        \  call clearmatches()
+        \| call matchadd('ColorColumn', '\s\+$', 100)
+        \| call matchadd('SEND_HELP', '\<HACK\>')
+        \| call matchadd('SEND_HELP', '\<TEMPORARY\>')
+        \| call matchadd('SEND_HELP', '\<ALERT\>', 101)
+        \| call matchadd('GENERIC', '\<NOTE\>')
+        \| call matchadd('GENERIC', '\<NOTES\>')
+        \| call matchadd('GENERIC', '\<EXCEPTION\>')
+        \| call matchadd('CLEAN', '\<CLEANME\>')
 augroup END
 
 " Session management
@@ -356,18 +353,12 @@ augroup Convenience
   let g:vim_json_warnings = 0
 
   autocmd! Filetype * if (index(ignorelist, &ft) == -1)
-    \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
-
-  " when editing a file, always jump to the last cursor position
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal g'\"" |
-  \ endif
+        \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
 
   " https://vi.stackexchange.com/a/69/287
   " prevents unmodified buffer + crash = bullshit swap file
   autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
-    \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+        \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
 augroup END
 
 augroup CursorLine

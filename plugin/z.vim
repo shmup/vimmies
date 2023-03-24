@@ -26,3 +26,5 @@ function! Zedit(...)
   echo l:z_path
 endfunction
 command! -nargs=+ Zedit call Zedit(<f-args>)
+
+" http://ix.io/4rsR

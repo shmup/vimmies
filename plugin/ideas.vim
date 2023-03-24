@@ -6,9 +6,10 @@ endfunction
 command! Align call Align()
 
 " lazy timestamp stuff
-nmap <F4> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
-imap <F4> <C-R>=strftime("%Y-%m-%d")<CR>
-cmap <F4> <C-R>=strftime("%Y-%m-%d")<CR>
+nmap <F4> i<C-R>=strftime("%FT%T%z")<CR><Esc>
+imap <F4> <C-R>=strftime("%FT%T%z")<CR>
+cmap <F4> <C-R>=strftime("%FT%T%z")<CR>
+
 
 " TODO - BufKeep and BufReject
 " reference https://stackoverflow.com/questions/3155461/how-to-delete-multiple-buffers-in-vim

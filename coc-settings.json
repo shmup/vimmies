@@ -7,6 +7,8 @@
   "zig.startUpMessage": true,
   "zig.path": "~/.zls/zls",
   "zig.debugLog": false,
+  "codeLens.enable": true,
+  "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
   "languageserver": {
     "vala": {
       "command": "vala-language-server",
@@ -17,6 +19,10 @@
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
+    },
+    "raku": {
+      "command": "raku-navigator",
+      "filetypes": ["raku", "rakumod", "rakudoc", "rakutest", "t", "pl6", "pm6", "p6", "t6"]
     }
   },
   "Lua.diagnostics.globals": [
@@ -53,5 +59,8 @@
     "runSchedule",
     "unix",
     "lsqlite3"
-  ]
+  ],
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.referencesCodeLens.showOnAllFunctions": false
 }
