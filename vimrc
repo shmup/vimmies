@@ -55,7 +55,6 @@ nnoremap <silent> ,cr :lcd <c-r>=FugitiveWorkTree()<cr><cr>
 nnoremap ,z :Z<space>
 nnoremap ,e :silent Zedit<space>
 
-
 let g:coc_global_extensions = [
       \'coc-clangd',
       \'coc-go',
@@ -213,6 +212,8 @@ nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
 nnoremap <silent>yoz :syntax sync fromstart<CR>
+nnoremap <silent>yoo :AIVnewChat<CR>
+nnoremap <silent>yoO :AIChat<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
 
@@ -352,8 +353,12 @@ augroup Convenience
   let ignorelist =['vim','help','perl','sh']
   let g:vim_json_warnings = 0
 
-  autocmd! Filetype * if (index(ignorelist, &ft) == -1)
+  autocmd Filetype * if (index(ignorelist, &ft) == -1)
         \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
+
+  " when editing a file, always jump to the last cursor position
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+        \ exe "normal! g'\"" | endif
 
   " https://vi.stackexchange.com/a/69/287
   " prevents unmodified buffer + crash = bullshit swap file
