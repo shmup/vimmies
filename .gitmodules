@@ -144,6 +144,15 @@
 	url = https://github.com/othree/html5.vim.git
 [submodule "pack/plugins/start/aichat.vim"]
 	path = pack/plugins/start/aichat.vim
-	url = git@github.com:shmup/aichat.vim.git
+	url = /home/jtm/projects/aichat.vim/
         branch = main
 	ignore = dirty
+[submodule "pack/plugins/start/vim-ai"]
+	path = pack/plugins/start/vim-ai
+	url = https://github.com/madox2/vim-ai.git
+[submodule "pack/plugins/start/python-syntax"]
+	path = pack/plugins/start/python-syntax
+	url = https://github.com/vim-python/python-syntax.git
+[submodule "pack/plugins/start/vim-jinja"]
+	path = pack/plugins/start/vim-jinja
+	url = git@github.com:shmup/vim-jinja.git

@@ -164,7 +164,7 @@ function s:get_version(bin)
   if has_key(s:versions, a:bin)
     return s:versions[a:bin]
   end
-  let command = (&shell =~ 'powershell' ? '&' : '') . s:fzf_call('shellescape', a:bin) . ' --version --no-height'
+  let command = (&shell =~ 'powershell\|pwsh' ? '&' : '') . s:fzf_call('shellescape', a:bin) . ' --version --no-height'
   let output = systemlist(command)
   if v:shell_error || empty(output)
     return ''
@@ -511,8 +511,8 @@ try
     let height = s:calc_size(&lines, dict.down, dict)
     let optstr .= ' --height='.height
   endif
-  " Respect --border option given in 'options'
-  let optstr = join([s:border_opt(get(dict, 'window', 0)), optstr])
+  " Respect --border option given in $FZF_DEFAULT_OPTS and 'options'
+  let optstr = join([s:border_opt(get(dict, 'window', 0)), $FZF_DEFAULT_OPTS, optstr])
   let prev_default_command = $FZF_DEFAULT_COMMAND
   if len(source_command)
     let $FZF_DEFAULT_COMMAND = source_command
