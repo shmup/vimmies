@@ -156,3 +156,6 @@
 [submodule "pack/plugins/start/vim-jinja"]
 	path = pack/plugins/start/vim-jinja
 	url = git@github.com:shmup/vim-jinja.git
+[submodule "pack/plugins/start/vim-cs"]
+	path = pack/plugins/start/vim-cs
+	url = https://github.com/jlcrochet/vim-cs.git

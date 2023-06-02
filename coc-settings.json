@@ -17,6 +17,10 @@
       "command": "vala-language-server",
       "filetypes": ["vala", "genie"]
     },
+    "cs": {
+      "command": "csharp-ls",
+      "filetypes": ["cs"],
+    },
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
