@@ -31,10 +31,10 @@ _setup() {
   mkdir -p $VIM_PATH/junk/{backup,swp,undo,view}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    sudo ln -s $VIM_PATH/vimmies_completion /usr/local/etc/bash_completion.d/vimmies_completion
-  else
     brew install bash-completion
     sudo ln -s $VIM_PATH/vimmies_completion /etc/bash_completion.d/vimmies_completion
+  else
+    sudo ln -s $VIM_PATH/vimmies_completion /usr/local/etc/bash_completion.d/vimmies_completion
   fi
 }
 
