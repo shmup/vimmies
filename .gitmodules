@@ -34,7 +34,7 @@
 	url = https://github.com/romainl/vim-qf.git
 [submodule "pack/plugins/start/emmet-vim"]
 	path = pack/plugins/start/emmet-vim
-	url = https://github.com/mattn/emmet-vim.git
+	url = git@github.com:shmup/emmet-vim.git
 [submodule "pack/plugins/start/vim-projectionist"]
 	path = pack/plugins/start/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
@@ -159,3 +159,15 @@
 [submodule "pack/plugins/start/vim-cs"]
 	path = pack/plugins/start/vim-cs
 	url = https://github.com/jlcrochet/vim-cs.git
+[submodule "pack/plugins/start/vim-table-mode"]
+	path = pack/plugins/start/vim-table-mode
+	url = https://github.com/dhruvasagar/vim-table-mode.git
+[submodule "pack/plugins/start/vim-just"]
+	path = pack/plugins/start/vim-just
+	url = https://github.com/NoahTheDuke/vim-just.git
+[submodule "pack/plugins/start/vim-svelte"]
+	path = pack/plugins/start/vim-svelte
+	url = https://github.com/evanleck/vim-svelte.git
+[submodule "pack/plugins/start/vim-lua"]
+	path = pack/plugins/start/vim-lua
+	url = https://github.com/tbastos/vim-lua.git
