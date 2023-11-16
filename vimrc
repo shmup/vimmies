@@ -175,9 +175,14 @@ nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
+nnoremap <silent> <space>eg :edit ~/.vim/tools/gpt/<cr>
+nnoremap <silent> <space>el :edit ~/brain/journals/<cr>
+nnoremap <silent> <space>eu :edit ~/txt/unicode.txt<cr>
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
+nnoremap <silent> <space>ex :edit ~/.Xdefaults<cr>
+nnoremap <silent> <space>ed :edit ~/projects/xom.world/txt/shmup.crawlrc<cr>
 nnoremap <silent> <space>et :edit ~/.tmux.conf<cr>
 nnoremap <silent> <space>ef :edit ~/.mozilla/firefox/jtm/chrome/userChrome.css<cr>
 nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
