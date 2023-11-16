@@ -264,7 +264,8 @@ vmap <enter> <plug>(EasyAlign)
 " nmap ga <plug>(EasyAlign)
 
 " GoTo code navigation.
-nmap <silent> cd :CocDiagnostics<cr>
+nmap <silent><space>m :CocList --height=10 diagnostics<cr>
+nmap <silent><space>M :CocDiagnostics 10<cr>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
