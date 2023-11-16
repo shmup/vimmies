@@ -34,7 +34,7 @@ hi CursorLine guibg=#2a2c3f ctermbg=236 gui=NONE cterm=NONE
 hi CursorLineNr guifg=#535f98 ctermfg=61 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Conceal guifg=#ac8b83 ctermfg=138 guibg=#222433 ctermbg=235 gui=NONE cterm=NONE
 hi NormalFloat guifg=#8085a6 ctermfg=103 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi FloatBorder guifg=#545c8c ctermfg=60 guibg=#222433 ctermbg=235 gui=NONE cterm=NONE
+hi FloatBorder guifg=#545c8c ctermfg=60 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Folded guifg=#666c99 ctermfg=60 guibg=#32364c ctermbg=237 gui=NONE cterm=NONE
 hi FoldColumn guifg=#32364c ctermfg=237 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi MatchParen guibg=#2f3147 ctermbg=236
@@ -252,6 +252,7 @@ hi TelescopePromptPrefix guifg=#73c1a9 ctermfg=79
 hi TelescopePromptCounter guifg=#545c8c ctermfg=60
 hi TelescopeMultiIcon guifg=#a8a384 ctermfg=144
 hi TelescopeMultiSelection guifg=#a8a384 ctermfg=144
+hi CopilotSuggestion guifg=#545c8c ctermfg=60
 hi CleverFChar guifg=#a6afff ctermfg=147 guibg=#6471e5 ctermbg=63 gui=underline cterm=underline
 hi ConflictMarkerBegin guibg=#548e7c ctermbg=66 gui=bold cterm=bold
 hi ConflictMarkerOurs guibg=#26463b ctermbg=23 gui=NONE cterm=NONE
@@ -261,6 +262,9 @@ hi ConflictMarkerSeparator guifg=#363859 ctermfg=60 gui=bold cterm=bold
 hi EasyMotionTarget guifg=#a8a384 ctermfg=144 gui=bold cterm=bold
 hi EasyMotionShade guifg=#545c8c ctermfg=60 guibg=#222433 ctermbg=235
 hi EasyMotionIncCursor guifg=#9ea3c0 ctermfg=146 guibg=#222433 ctermbg=235
+hi FlashPrompt guifg=#929be5 ctermfg=104 gui=bold cterm=bold
+hi FlashPromptIcon guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
+hi FlashLabel guifg=#b871b8 ctermfg=133 gui=bold cterm=bold
 hi FidgetTitle guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
 hi FidgetTask guifg=#545c8c ctermfg=60
 if has("nvim")
