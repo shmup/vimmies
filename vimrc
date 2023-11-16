@@ -45,10 +45,6 @@ nnoremap c# #NcgN
 nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
 
-" search and replace
-nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<cr>\>/
-nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
-
 " change to file dir, repo dir, or Z result
 nnoremap <silent> ,cd :lcd %:p:h<cr>
 nnoremap <silent> ,cr :lcd <c-r>=FugitiveWorkTree()<cr><cr>
