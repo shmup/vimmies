@@ -1,11 +1,24 @@
 " https://github.com/MaxMEllon/vim-jsx-pretty
-let g:vim_jsx_pretty_highlight_close_tag = 1 
+let g:vim_jsx_pretty_highlight_close_tag = 1
+let g:system_seed = "To assist: Be terse. Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize. Ask questions when unsure."
+
+" vimgpt
+let g:vim_ai_chat_options = {
+      \  "model": "gpt-4-1106-preview",
+      \  "temperature": 0.7,
+      \}
 
 " projectionist
 nnoremap ,a :A<cr>
 
+" let g:coc_default_semantic_highlight_groups = 0
+
 " qf
 let g:qf_mapping_ack_style = 1
+
+" gruvbox
+" https://github.com/morhetz/gruvbox/wiki/Configuration
+let g:gruvbox_contrast_light = 'hard'
 
 " git gutter shit
 set updatetime=100

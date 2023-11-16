@@ -153,7 +153,7 @@ function! s:Init()
    exec 'mksession! ' . s:session_file
    let s:num_orig_win = winnr("$")
 
-   colorscheme matrix
+   " colorscheme matrix
 
    " move to top window, so created window will become window 1,
    " then attempt to create new window

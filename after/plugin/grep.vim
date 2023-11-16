@@ -4,6 +4,24 @@ if executable("rg")
   set grepprg=rg\ --vimgrep
 endif
 
+" search and replace
+nnoremap <space>s :'{,'}s/\<<C-r>=expand('<cword>')<cr>\>/
+nnoremap <space>% :%s/\<<C-r>=expand('<cword>')<cr>\>/
+
+function! ReplaceText()
+    " Get the current word under the cursor
+    let l:original_text = expand('<cword>')
+
+    " Construct the command
+    let l:cmd = "!git grep -l '" . l:original_text . "' | xargs sed -i '' -e 's/" . l:original_text . "/"
+
+    " Place the command on the command-line
+    call feedkeys(":" . l:cmd)
+endfunction
+
+" Map <Space>R to call this function
+nnoremap <Space>R :call ReplaceText()<CR>
+
 function! Grep(...)
   return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' ')) "romainls
 endfunction
