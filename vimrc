@@ -202,7 +202,7 @@ nnoremap Y y$
 
 " toggles, also :help *unimpaired-toggling*
 " https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt#L77-L95
-nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'modest' : 'apprentice')
+nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'flattened_light' : 'apprentice')
 nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
