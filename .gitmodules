@@ -171,3 +171,9 @@
 [submodule "pack/plugins/start/vim-lua"]
 	path = pack/plugins/start/vim-lua
 	url = https://github.com/tbastos/vim-lua.git
+[submodule "pack/plugins/start/vim-go"]
+	path = pack/plugins/start/vim-go
+	url = git@github.com:fatih/vim-go.git
+[submodule "pack/plugins/start/yuescript-vim"]
+	path = pack/plugins/start/yuescript-vim
+	url = https://github.com/pigpigyyy/yuescript-vim.git
