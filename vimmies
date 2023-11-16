@@ -71,11 +71,11 @@ _update-plugins() {
   curl -q https://raw.githubusercontent.com/wadackel/vim-dogrun/main/colors/dogrun.vim > "$VIM_PATH/colors/dogrun.vim" &
   curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > "$VIM_PATH/colors/apprentice.vim" &
   curl -q https://raw.githubusercontent.com/habamax/vim-saturnite/master/colors/saturnite.vim > "$VIM_PATH/colors/saturnite.vim" &
-  curl -q https://git.sr.ht/~swalladge/antarctic-vim/blob/master/colors/antarctic.vim > "$VIM_PATH/colors/antarctic.vim" &
   curl -q https://git.sr.ht/~shmup/paper.vim/blob/main/colors/paper.vim> "$VIM_PATH/colors/paper.vim" &
   curl -q https://raw.githubusercontent.com/benwr/tuftish/master/colors/tuftish.vim > "$VIM_PATH/colors/tuftish.vim" &
   curl -q https://raw.githubusercontent.com/hardselius/warlock/master/colors/warlock.vim > "$VIM_PATH/colors/warlock.vim" &
   curl -q https://raw.githubusercontent.com/andreasvc/vim-256noir/master/colors/256_noir.vim > "$VIM_PATH/colors/256_noir.vim" &
+  curl -q https://raw.githubusercontent.com/romainl/flattened/master/colors/flattened_light.vim > "$VIM_PATH/colors/flattened_light.vim" &
 
   cd $PLUGINS_PATH/coc.nvim && yarn
 }
