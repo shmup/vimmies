@@ -177,3 +177,6 @@
 [submodule "pack/plugins/start/yuescript-vim"]
 	path = pack/plugins/start/yuescript-vim
 	url = https://github.com/pigpigyyy/yuescript-vim.git
+[submodule "pack/plugins/start/copilot.vim"]
+	path = pack/plugins/start/copilot.vim
+	url = https://github.com/github/copilot.vim.git
