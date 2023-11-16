@@ -157,7 +157,7 @@ set backupcopy=yes
 " window management
 set splitright
 nmap <c-n> :SC<cr>
-nmap <c-c> :x<cr>
+nmap <c-c> :q<cr>
 " maximize
 nnoremap <C-w>\ <C-w>\|<C-w>_
 
