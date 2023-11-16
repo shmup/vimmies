@@ -51,17 +51,11 @@ nnoremap <silent> ,cr :lcd <c-r>=FugitiveWorkTree()<cr><cr>
 nnoremap ,z :Z<space>
 nnoremap ,e :silent Zedit<space>
 
+" i like a lil LSP
 let g:coc_global_extensions = [
+      \'coc-tsserver',
       \'coc-clangd',
-      \'coc-go',
-      \'coc-json',
-      \'coc-lua',
       \'coc-pyright',
-      \'coc-python',
-      \'coc-rls',
-      \'coc-rust-analyzer',
-      \'coc-sql',
-      \'coc-tsserver'
       \]
 
 " auto expansion
