@@ -299,10 +299,14 @@ nmap <space>hv <Plug>(GitGutterPreviewHunk)
 hi SpellBad term=reverse ctermbg=226 ctermfg=0
 command! CT silent! execute "ColorToggle"
 highlight SEND_HELP ctermbg=131 ctermfg=white
+highlight SEND_WARNING ctermbg=129 ctermfg=white
 highlight CLEAN ctermbg=white ctermfg=black
 highlight PASS ctermbg=131 ctermfg=65
 highlight GENERIC cterm=reverse gui=reverse
 highlight ColorColumn ctermbg=238
+highlight YELLOW ctermbg=black ctermfg=yellow
+highlight GREEN ctermbg=black ctermfg=green
+highlight RED ctermbg=black ctermfg=red
 
 augroup SpecialHighlights
   autocmd!
@@ -310,9 +314,24 @@ augroup SpecialHighlights
         \  call clearmatches()
         \| call matchadd('ColorColumn', '\s\+$', 100)
         \| call matchadd('SEND_HELP', '\<HACK\>')
-        \| call matchadd('SEND_HELP', '\<TEMPORARY\>')
+        \| call matchadd('SEND_HELP', '\<ERROR\>')
+        \| call matchadd('SEND_HELP', '\<CLOSED\>')
+        \| call matchadd('SEND_HELP', '\<BLOCKED\>')
+        \| call matchadd('SEND_HELP', '\<REMOVED\>')
         \| call matchadd('SEND_HELP', '\<ALERT\>', 101)
+        \| call matchadd('GENERIC', '^\<EMILY\>', 101)
+        \| call matchadd('GENERIC', '^\<KRISTIAN\>', 101)
+        \| call matchadd('GENERIC', '\<TODO\>')
         \| call matchadd('GENERIC', '\<NOTE\>')
+        \| call matchadd('YELLOW', '^\<ASK\>')
+        \| call matchadd('YELLOW', '#\d\+')
+        \| call matchadd('SEND_WARNING', '\*priority\*')
+        \| call matchadd('SEND_WARNING', '\*deprioritize\*')
+        \| call matchadd('RED', '^\zs>')
+        \| call matchadd('YELLOW', '^\zs<')
+        \| call matchadd('GREEN', '^\zs!')
+        \| call matchadd('YELLOW', '\/\/\s\+@.*')
+        \| call matchadd('YELLOW', '\d\{4}-\d\{2}-\d\{2}T\d\{2}:\d\{2}:\d\{2}-\d\{4}')
         \| call matchadd('GENERIC', '\<NOTES\>')
         \| call matchadd('GENERIC', '\<EXCEPTION\>')
         \| call matchadd('CLEAN', '\<CLEANME\>')
