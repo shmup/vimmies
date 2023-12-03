@@ -212,6 +212,9 @@ nnoremap <silent>yoO :AIChat<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
 
+autocmd BufEnter * let b:copilot_enabled = v:false
+nnoremap <silent> ,cc :silent! let b:copilot_enabled = !get(b:, 'copilot_enabled', v:false)<CR>
+
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
 
@@ -233,6 +236,7 @@ set statusline+=\              " and two spaces
 set statusline+=%Y             " show the filetype
 set statusline+=\              " and two spaces
 set statusline+=%{ObsessionStatus('●\ ','■\ ')}
+set statusline+=%{get(b:,'copilot_enabled',0)?'👂':'🙉'}
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
 set statusline+=%<%F           " (truncated) full path to the file we are editing
