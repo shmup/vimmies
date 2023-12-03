@@ -207,8 +207,8 @@ nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
 nnoremap <silent>yoz :syntax sync fromstart<CR>
-nnoremap <silent>yoo :AIVnewChat<CR>
-nnoremap <silent>yoO :AIChat<CR>
+nnoremap <silent>yoO :AIVnewChat<CR>
+nnoremap <silent>yoo :AIChat<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
 
