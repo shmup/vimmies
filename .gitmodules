@@ -92,9 +92,6 @@
 [submodule "pack/plugins/start/vim-prettier"]
 	path = pack/plugins/start/vim-prettier
 	url = https://github.com/prettier/vim-prettier.git
-[submodule "pack/plugins/start/vim-gitgutter"]
-	path = pack/plugins/start/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "pack/plugins/start/vim-easy-align"]
 	path = pack/plugins/start/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
@@ -144,7 +141,7 @@
 	url = https://github.com/othree/html5.vim.git
 [submodule "pack/plugins/start/aichat.vim"]
 	path = pack/plugins/start/aichat.vim
-	url = /home/jtm/projects/aichat.vim/
+	url = git@github.com:shmup/aichat.vim.git
         branch = main
 	ignore = dirty
 [submodule "pack/plugins/start/vim-ai"]
@@ -180,3 +177,6 @@
 [submodule "pack/plugins/start/copilot.vim"]
 	path = pack/plugins/start/copilot.vim
 	url = https://github.com/github/copilot.vim.git
+[submodule "pack/plugins/start/vim-gitgutter"]
+	path = pack/plugins/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
