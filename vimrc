@@ -2,8 +2,6 @@ set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-set termguicolors
-
 " paused experiment
 let hour = strftime("%H")
 if hour >= 22 || hour <= 06
@@ -14,21 +12,19 @@ endif
 
 let mapleader = "\<Space>"
 
-nnoremap j gj
-nnoremap k gk
-
-set modelines=0           " security
-set ruler                 " show file stats
-set visualbell            " dont blink
-set t_vb=                 " dont beep
+set autoindent            " dont need smartindent. syntax files do that
 set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
-set mouse=a               " sometimesss i click
-set autoindent            " dont need smartindent. syntax files do that
 set linebreak             " breaks on space + :set breakat?
+set modelines=0           " security
+set mouse=a               " sometimesss i click
 set noequalalways         " don't equalize window sizes when splitting
+set ruler                 " show file stats
 set signcolumn=number
+set t_vb=                 " dont beep
+set termguicolors
+set visualbell            " dont blink
 
 " TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
@@ -38,54 +34,6 @@ set wildignore+=**/node_modules/**
 
 " use existing tab if possible when loading a file from quickfix
 set switchbuf+=usetab
-
-" easier change and replace word
-nnoremap c* *Ncgn
-nnoremap c# #NcgN
-nnoremap cg* g*Ncgn
-nnoremap cg# g#NcgN
-
-" change to file dir, repo dir, or Z result
-nnoremap <silent> ,cd :lcd %:p:h<cr>
-nnoremap <silent> ,cr :lcd <c-r>=FugitiveWorkTree()<cr><cr>
-nnoremap ,z :Z<space>
-nnoremap ,e :silent Zedit<space>
-
-" i like a lil LSP
-let g:coc_global_extensions = [
-      \'coc-tsserver',
-      \'coc-clangd',
-      \'coc-pyright',
-      \]
-
-" auto expansion
-inoremap (<cr> (<cr>)<esc>O
-inoremap {<cr> {<cr>}<esc>O
-inoremap {; {<cr>};<esc>O
-inoremap {, {<cr>},<esc>O
-inoremap [<cr> [<cr>]<esc>O
-inoremap [; [<cr>];<esc>O
-inoremap [, [<cr>],<esc>O
-
-" keep cursor put
-nnoremap * *``
-nnoremap # #``
-nnoremap g* g*``
-nnoremap g# g#``
-
-" quicker buffer
-nnoremap gb :ls<cr>:buffer<space>
-nnoremap gB :ls<cr>:sbuffer<space>
-
-" find mappings
-nnoremap ,f :find *
-nnoremap ,s :sfind *
-nnoremap ,v :vert sfind *
-nnoremap ,F :find ./**/*
-nnoremap ,S :sfind ./**/*
-nnoremap ,V :vert sfind ./**/*
-nnoremap ,t :tabfind *
-nnoremap ,T :tabfind ./**/*
 
 " whitespace
 set nowrap
@@ -107,12 +55,6 @@ set scrolloff=1
 set backspace=indent,eol,start
 set matchpairs+=<:>        " use % to jump between pairs
 set whichwrap+=<,>,h,l,[,] " wrap cursor on more shit
-
-" TODO - investigate if you want these
-packadd! cfilter
-packadd! editexisting
-packadd! matchit
-packadd! justify
 
 " folds
 set foldmethod=indent
@@ -207,12 +149,59 @@ nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
 nnoremap <silent>yoz :syntax sync fromstart<CR>
-nnoremap <silent>yoO :AIVnewChat<CR>
-nnoremap <silent>yoo :AIChat<CR>
+nnoremap yoo :ToggleChad<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
 
-autocmd BufEnter * let b:copilot_enabled = v:false
+" just do it
+inoremap <C-x> ✅
+
+nnoremap <leader>j :% !jq .<CR>
+
+nnoremap j gj
+nnoremap k gk
+
+" easier change and replace word
+nnoremap c* *Ncgn
+nnoremap c# #NcgN
+nnoremap cg* g*Ncgn
+nnoremap cg# g#NcgN
+
+" change to file dir, repo dir, or Z result
+nnoremap <silent> ,cd :lcd %:p:h<cr>
+nnoremap <silent> ,cr :lcd <c-r>=FugitiveWorkTree()<cr><cr>
+nnoremap ,z :Z<space>
+nnoremap ,e :silent Zedit<space>
+
+" auto expansion
+inoremap (<cr> (<cr>)<esc>O
+inoremap {<cr> {<cr>}<esc>O
+inoremap {; {<cr>};<esc>O
+inoremap {, {<cr>},<esc>O
+inoremap [<cr> [<cr>]<esc>O
+inoremap [; [<cr>];<esc>O
+inoremap [, [<cr>],<esc>O
+
+" keep cursor put
+nnoremap * *``
+nnoremap # #``
+nnoremap g* g*``
+nnoremap g# g#``
+
+" quicker buffer
+nnoremap gb :ls<cr>:buffer<space>
+nnoremap gB :ls<cr>:sbuffer<space>
+
+" find mappings
+nnoremap ,f :find *
+nnoremap ,s :sfind *
+nnoremap ,v :vert sfind *
+nnoremap ,F :find ./**/*
+nnoremap ,S :sfind ./**/*
+nnoremap ,V :vert sfind ./**/*
+nnoremap ,t :tabfind *
+nnoremap ,T :tabfind ./**/*
+
 nnoremap <silent> ,cc :silent! let b:copilot_enabled = !get(b:, 'copilot_enabled', v:false)<CR>
 
 " let me save with sudo when needed
@@ -221,27 +210,6 @@ cmap w!! %!sudo tee > /dev/null %
 " yank and delete to system clipboard
 vnoremap <space>y "+y
 vnoremap <space>d "+d
-
-command! -range GOpen execute 'silent ! git browse ' . expand('%') . ' ' . <line1> . ' ' . <line2> | checktime | redraw!
-
-set statusline=%3l             " show the line number
-set statusline+=,              " and a comma
-set statusline+=%v             " show the virtual column number
-set statusline+=\              " and two spaces
-set statusline+=(              " and a (
-set statusline+=%{strlen(@\")} " byte count in register
-set statusline+=)\              " and a )
-set statusline+=%{printf('x%X',char2nr(getline('.')[getpos('.')[2]-1]))}
-set statusline+=\              " and two spaces
-set statusline+=%Y             " show the filetype
-set statusline+=\              " and two spaces
-set statusline+=%{ObsessionStatus('●\ ','■\ ')}
-set statusline+=%{get(b:,'copilot_enabled',0)?'👂':'🙉'}
-set statusline+=\              " and two spaces
-set statusline+=%=             " move to the right side
-set statusline+=%<%F           " (truncated) full path to the file we are editing
-set statusline+=%m             " [+] if the file is modified but not saved
-set statusline+=%r             " show [RO] if a file is read-only
 
 " it's a mood thing
 command! BufOnly silent! execute "%bd|e#|bd#"
@@ -300,9 +268,82 @@ nmap <space>hs <Plug>(GitGutterStageHunk)
 nmap <space>hu <Plug>(GitGutterUndoHunk)
 nmap <space>hv <Plug>(GitGutterPreviewHunk)
 
+command! -range GOpen execute 'silent ! git browse ' . expand('%') . ' ' . <line1> . ' ' . <line2> | checktime | redraw!
+
+set statusline=%3l             " show the line number
+set statusline+=,              " and a comma
+set statusline+=%v             " show the virtual column number
+set statusline+=\              " and two spaces
+set statusline+=(              " and a (
+set statusline+=%{strlen(@\")} " byte count in register
+set statusline+=)\              " and a )
+set statusline+=%{printf('x%X',char2nr(getline('.')[getpos('.')[2]-1]))}
+set statusline+=\              " and two spaces
+set statusline+=%Y             " show the filetype
+set statusline+=\              " and two spaces
+set statusline+=%{ObsessionStatus('●\ ','■\ ')}
+set statusline+=%{get(b:,'copilot_enabled',0)?'👂':'🙉'}
+set statusline+=\              " and two spaces
+set statusline+=%=             " move to the right side
+set statusline+=%<%F           " (truncated) full path to the file we are editing
+set statusline+=%m             " [+] if the file is modified but not saved
+set statusline+=%r             " show [RO] if a file is read-only
+
+" Show words and codes as colors, coc.nvim does this in some filetypes
+command! CT silent! execute "ColorToggle"
+
+" Session management
+command! -bang Source call fzf#run({'source': 'ls', 'sink': 'source', 'dir': '~/.vim_sessions'})
+command! -bang SourceOverwrite call fzf#run({'Obsession': 'ls', 'sink': 'Obsession', 'dir': '~/.vim_sessions'})
+
+" show the groupings under cursor
+command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+
+" Tig current file
+command! Tig execute "Start tig " . expand('%:p')
+
+" scratch buffer
+command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
+command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
+
+" delete current file & buffer
+function! DeleteFileAndCloseBuffer()
+  let choice = confirm("Delete file and close buffer?", "&Yes\n&No", 1)
+  if choice == 1 | call delete(expand('%:p')) | b# | bd# | endif
+endfun
+command! DeleteFile call DeleteFileAndCloseBuffer()
+
+augroup Convenience
+  autocmd BufEnter * let b:copilot_enabled = v:false
+
+  " get completions from current syntax file
+  autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
+  set iskeyword+=-
+
+  let ignorelist =['vim','help','perl','sh']
+  let g:vim_json_warnings = 0
+
+  autocmd Filetype * if (index(ignorelist, &ft) == -1)
+        \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
+
+  " when editing a file, always jump to the last cursor position
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+        \ exe "normal! g'\"" | endif
+
+  " https://vi.stackexchange.com/a/69/287
+  " prevents unmodified buffer + crash = bullshit swap file
+  autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
+        \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+augroup END
+
+augroup CursorLine
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+
 " colors
 hi SpellBad term=reverse ctermbg=226 ctermfg=0
-command! CT silent! execute "ColorToggle"
 highlight SEND_HELP ctermbg=131 ctermfg=white
 highlight SEND_WARNING ctermbg=129 ctermfg=white
 highlight CLEAN ctermbg=white ctermfg=black
@@ -342,54 +383,11 @@ augroup SpecialHighlights
         \| call matchadd('CLEAN', '\<CLEANME\>')
 augroup END
 
-" Session management
-command! -bang Source call fzf#run({'source': 'ls', 'sink': 'source', 'dir': '~/.vim_sessions'})
-command! -bang SourceOverwrite call fzf#run({'Obsession': 'ls', 'sink': 'Obsession', 'dir': '~/.vim_sessions'})
-
-" show the groupings under cursor
-command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-
-" Tig current file
-command! Tig execute "Start tig " . expand('%:p')
-
-" scratch buffer
-command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
-command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
-
-
-" delete current file & buffer
-function! DeleteFileAndCloseBuffer()
-  let choice = confirm("Delete file and close buffer?", "&Yes\n&No", 1)
-  if choice == 1 | call delete(expand('%:p')) | b# | bd# | endif
-endfun
-command! DeleteFile call DeleteFileAndCloseBuffer()
-
-augroup Convenience
-  " get completions from current syntax file
-  autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
-  set iskeyword+=-
-
-  let ignorelist =['vim','help','perl','sh']
-  let g:vim_json_warnings = 0
-
-  autocmd Filetype * if (index(ignorelist, &ft) == -1)
-        \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
-
-  " when editing a file, always jump to the last cursor position
-  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
-        \ exe "normal! g'\"" | endif
-
-  " https://vi.stackexchange.com/a/69/287
-  " prevents unmodified buffer + crash = bullshit swap file
-  autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
-        \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
-augroup END
-
-augroup CursorLine
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-augroup END
+" TODO - investigate if you want these
+packadd! cfilter
+packadd! editexisting
+packadd! matchit
+packadd! justify
 
 packloadall
 silent! helptags ALL
