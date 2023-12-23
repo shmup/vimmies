@@ -5,19 +5,19 @@ let g:coc_global_extensions = [
       \'coc-pyright',
       \]
 
+let g:chad_seed = "To assist: Be terse. Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize. Ask questions when unsure."
 let g:chad_options = {
     \ 'api_key': $CHAD,
     \ 'model': "gpt-4-1106-preview",
-    \ 'temperature': 0.7,
+    \ 'temperature': 0.3,
+    \ 'top_p': 0.5,
     \ 'max_tokens': 150,
-    \ 'presence_penalty': 0,
-    \ 'frequency_penalty': 0,
-    \ 'cache_path': $HOME . '/.vim/cache/'
+    \ 'presence_penalty': 0.1,
+    \ 'frequency_penalty': 0.6
 \ }
 
 " https://github.com/MaxMEllon/vim-jsx-pretty
 let g:vim_jsx_pretty_highlight_close_tag = 1
-let g:system_seed = "To assist: Be terse. Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize. Ask questions when unsure."
 
 " projectionist
 nnoremap ,a :A<cr>
