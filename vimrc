@@ -1,14 +1,7 @@
-set nocompatible          " don't try to be vi compatible
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-" paused experiment
-let hour = strftime("%H")
-if hour >= 22 || hour <= 06
-  colorscheme apprentice
-else
-  colorscheme apprentice
-endif
+colorscheme apprentice
 
 let mapleader = "\<Space>"
 
@@ -34,6 +27,8 @@ set wildignore+=**/node_modules/**
 
 " use existing tab if possible when loading a file from quickfix
 set switchbuf+=usetab
+
+nnoremap <Leader>ch <Cmd>Chistory<Cr>
 
 " whitespace
 set nowrap
@@ -72,12 +67,6 @@ set ignorecase
 set smartcase
 set showmatch
 
-" change cursor from block to i-beam in insert mode
-" https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
-" may need but idk:  autocmd VimEnter * silent !echo -ne "\e[1 q"
-let &t_SI = "\e[5 q"
-let &t_EI = "\e[1 q"
-
 " formatting
 set nojoinspaces
 nnoremap <space>q gggqG
@@ -95,6 +84,12 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 set backupcopy=yes
+
+" change cursor from block to i-beam in insert mode
+" https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
+" may need but idk:  autocmd VimEnter * silent !echo -ne "\e[1 q"
+let &t_SI = "\e[5 q"
+let &t_EI = "\e[1 q"
 
 " window management
 set splitright
@@ -268,8 +263,6 @@ nmap <space>hs <Plug>(GitGutterStageHunk)
 nmap <space>hu <Plug>(GitGutterUndoHunk)
 nmap <space>hv <Plug>(GitGutterPreviewHunk)
 
-command! -range GOpen execute 'silent ! git browse ' . expand('%') . ' ' . <line1> . ' ' . <line2> | checktime | redraw!
-
 set statusline=%3l             " show the line number
 set statusline+=,              " and a comma
 set statusline+=%v             " show the virtual column number
@@ -281,13 +274,15 @@ set statusline+=%{printf('x%X',char2nr(getline('.')[getpos('.')[2]-1]))}
 set statusline+=\              " and two spaces
 set statusline+=%Y             " show the filetype
 set statusline+=\              " and two spaces
-set statusline+=%{ObsessionStatus('●\ ','■\ ')}
-set statusline+=%{get(b:,'copilot_enabled',0)?'👂':'🙉'}
+set statusline+=%{ObsessionStatus('💾\ ','')}
+set statusline+=%{get(b:,'copilot_enabled',0)?'👂\ ':''}
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
 set statusline+=%<%F           " (truncated) full path to the file we are editing
 set statusline+=%m             " [+] if the file is modified but not saved
 set statusline+=%r             " show [RO] if a file is read-only
+
+command! -range GOpen execute 'silent ! git browse ' . expand('%') . ' ' . <line1> . ' ' . <line2> | checktime | redraw!
 
 " Show words and codes as colors, coc.nvim does this in some filetypes
 command! CT silent! execute "ColorToggle"
@@ -382,12 +377,3 @@ augroup SpecialHighlights
         \| call matchadd('GENERIC', '\<EXCEPTION\>')
         \| call matchadd('CLEAN', '\<CLEANME\>')
 augroup END
-
-" TODO - investigate if you want these
-packadd! cfilter
-packadd! editexisting
-packadd! matchit
-packadd! justify
-
-packloadall
-silent! helptags ALL
