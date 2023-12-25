@@ -4,6 +4,8 @@
 " noremap <buffer><space>py :!clear; python3.9 %<cr>
 nnoremap <buffer><space>py :!clear; %:p<cr>
 
+set sw=2
+
 if executable('flake8')
   setlocal errorformat=%f:%l:%c:%m
   setlocal makeprg=flake8
