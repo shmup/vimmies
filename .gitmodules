@@ -183,3 +183,9 @@
 [submodule "pack/plugins/start/chad.vim"]
 	path = pack/plugins/start/chad.vim
 	url = git@github.com:shmup/chad.vim.git
+[submodule "pack/plugins/start/vim-qf-history"]
+	path = pack/plugins/start/vim-qf-history
+	url = https://github.com/bfrg/vim-qf-history.git
+[submodule "pack/plugins/start/vim-scriptease"]
+	path = pack/plugins/start/vim-scriptease
+	url = https://github.com/tpope/vim-scriptease.git
