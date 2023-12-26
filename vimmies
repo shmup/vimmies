@@ -94,12 +94,19 @@ _upgrade-vim() {
   make distclean
 
   ./configure --with-features=huge --enable-python3interp \
+    --enable-luainterp=yes \
     && make -j "$PROCS" && sudo make -j "$PROCS" install
 }
 
 _install-plugin() {
+  local installed_plugins
+
+  # Get a list of installed plugin directories as basenames
+  installed_plugins=$(find "$PLUGINS_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
+
   if [[ -z $2 ]]; then
-    PLUGIN=$(cat $CACHE | sort | uniq | fzy -l 100 )
+    # filter out installed plugins from cache by matching the end of the URL with directory names
+    PLUGIN=$(grep -vFf <(echo "${installed_plugins// /.git$'\n'}") "$CACHE" | sort | uniq | fzy -l 100)
   else
     PLUGIN=$2
   fi
