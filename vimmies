@@ -57,7 +57,7 @@ _flush-junk() {
 _update-plugins() {
   if [[ $2 == "-a" ]]; then
     git submodule update --remote --merge
-    curl -q https://raw.githubusercontent.com/junegunn/fzf/master/plugin/fzf.vim > $VIM_PATH/plugin/fzf.vim
+    curl -q https://raw.githubusercontent.com/junegunn/fzf/master/plugin/fzf.vim > "$VIM_PATH/after/plugin/fzf.vim"
   else
     if ! [ -x "$(command -v fzy -l 100)" ]; then
       PLUGIN=$2
