@@ -10,10 +10,8 @@ PLUGINS_PATH=$VIM_PATH/pack/plugins/start
 CACHE=$VIM_PATH/junk/cache
 
 REPO="$HOME/src/vim"
-PY3=$(python3-config --configdir)
 
 PROCS=8
-YOU="skeletor"
 
 help="$(basename "$0") [OPTION]
   - setup                 initial setup for plugins/completion/junk dirs
@@ -28,29 +26,30 @@ bail() { echo "$1" && exit 0; } # clean msg & exit
 
 _setup() {
   git submodule update --init --recursive
-  mkdir -p $VIM_PATH/junk/{backup,swp,undo,view}
+  mkdir -p "$VIM_PATH/junk/{backup,swp,undo,view}"
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install bash-completion
-    sudo ln -s $VIM_PATH/vimmies_completion /etc/bash_completion.d/vimmies_completion
+    sudo ln -s "$VIM_PATH/vimmies_completion" /etc/bash_completion.d/vimmies_completion
   else
-    sudo ln -s $VIM_PATH/vimmies_completion /usr/local/etc/bash_completion.d/vimmies_completion
+    sudo ln -s "$VIM_PATH/vimmies_completion" /usr/local/etc/bash_completion.d/vimmies_completion
   fi
 }
 
 _flush-junk() {
-  local files=$(find junk/ -maxdepth 1 -mindepth 1 -type d -exec rm -rf "{}/*" \;)
+  local files
+  files=$(find junk/ -maxdepth 1 -mindepth 1 -type d -exec rm -rf "{}/*" \;)
   [[ -z $files ]] && echo "aint shit to nuke" && exit 0
 
-  echo $files
+  echo "$files"
   read -p "sure you wanna nuke these? " -n 1 -r
 
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
-    rm -rf $JUNK_PATH/swp/*
-    rm -rf $JUNK_PATH/undo/*
-    rm -rf $JUNK_PATH/view/*
-    rm -rf $JUNK_PATH/backup/*
+    rm -rf "$JUNK_PATH/swp/*"
+    rm -rf "$JUNK_PATH/undo/*"
+    rm -rf "$JUNK_PATH/view/*"
+    rm -rf "$JUNK_PATH/backup/*"
   fi
 }
 
@@ -85,7 +84,7 @@ _upgrade-vim() {
     brew update && brew upgrade vim && brew cleanup vim && exit 0
   fi
 
-  if cd $REPO; then git pull; else git clone https://github.com/vim/vim.git $REPO; fi
+  if cd "$REPO"; then git pull; else git clone https://github.com/vim/vim.git "$REPO"; fi
 
   # sudo rm -rf /usr/local/share/vim /usr/bin/vim
 
@@ -131,20 +130,20 @@ _remove-plugin() {
   # cache some shit and trim dupes
   cd "$PLUGINS_PATH/$PLUGIN" || exit
   git remote get-url origin >> "$CACHE"
-  [ -d "$OLDPWD" ] && cd "$OLDPWD"
+  [ -d "$OLDPWD" ] && cd "$OLDPWD" || exit
 
   git submodule deinit -f "$PLUGINS_PATH/$PLUGIN"
   git rm --cached "$PLUGINS_PATH/$PLUGIN"
   git rm -rf "$PLUGINS_PATH/$PLUGIN"
   rm -Rf ".git/modules/$PLUGINS_PATH/$PLUGIN"
-  rm -Rf "$PLUGINS_PATH/$PLUGIN"
+  rm -Rf "${PLUGINS_PATH:?}/$PLUGIN"
 }
 
 if [[ $(type -t _"$1") = 'function' ]]; then
     # run all functions from .vim but return you back at the end
     cd "$VIM_PATH" || exit
     _$1 $*
-    [ -d "$OLDPWD" ] && cd "$OLDPWD"
+    [ -d "$OLDPWD" ] && cd "$OLDPWD" || exit
 else
   echo "$help"
 fi
