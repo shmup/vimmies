@@ -96,7 +96,7 @@ if exists("moo_unknown_builtin_functions")
 endif
 
 " Enclosed expressions
-syn match mooUnenclosedError display ~[')\]|}]~
+syn match mooUnenclosedError display "~[^'\"()]\zs);\ze[^']" containedin=ALLBUT,mooParentheses,mooBrackets,mooBraces
 syn match mooParenthesesError display ~[';\]|}]~ contained
 syn region mooParentheses start=~(~ end=~)~ transparent contains=@mooEnclosedContents,mooParenthesesError
 syn match mooBracketsError display ~[');|}]~ contained
