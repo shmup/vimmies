@@ -190,3 +190,6 @@
 [submodule "pack/plugins/start/vim-scriptease"]
 	path = pack/plugins/start/vim-scriptease
 	url = https://github.com/tpope/vim-scriptease.git
+[submodule "pack/plugins/start/vim-svelte-plugin"]
+	path = pack/plugins/start/vim-svelte-plugin
+	url = https://github.com/leafOfTree/vim-svelte-plugin.git
