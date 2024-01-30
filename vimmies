@@ -19,6 +19,7 @@ help="$(basename "$0") [OPTION]
   - remove-plugin <name>  remove submodule
   - update-plugins        update all the submodules in $PLUGINS_PATH
   - upgrade-vim           get latest in $REPO and compile
+  - plugin-changes        print out last few commits from plugins
   - flush-junk            rm -rf all files in $JUNK_PATH dirs
 "
 
@@ -32,7 +33,7 @@ _setup() {
     brew install bash-completion
     sudo ln -s "$VIM_PATH/vimmies_completion" /etc/bash_completion.d/vimmies_completion
   else
-    sudo ln -s "$VIM_PATH/vimmies_completion" /usr/local/etc/bash_completion.d/vimmies_completion
+    sudo ln -s "$VIM_PATH/vimmies_completion" /etc/bash_completion.d/vimmies_completion
   fi
 }
 
@@ -137,6 +138,18 @@ _remove-plugin() {
   git rm -rf "$PLUGINS_PATH/$PLUGIN"
   rm -Rf ".git/modules/$PLUGINS_PATH/$PLUGIN"
   rm -Rf "${PLUGINS_PATH:?}/$PLUGIN"
+}
+
+_plugin-changes() {
+  local status_output submodule_paths
+  status_output=$(git status --porcelain)
+  submodule_paths=$(echo "${status_output}" | grep 'start/' | awk '{print $2}')
+
+  for path in ${submodule_paths}; do
+    echo "Submodule: $path"
+    (cd "${VIM_PATH}/${path}" && git log -7 --oneline)
+    echo
+  done
 }
 
 if [[ $(type -t _"$1") = 'function' ]]; then
