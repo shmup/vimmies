@@ -123,7 +123,7 @@ nnoremap <silent> <space>ed :edit ~/projects/xom.world/txt/shmup.crawlrc<cr>
 nnoremap <silent> <space>et :edit ~/.tmux.conf<cr>
 nnoremap <silent> <space>ef :edit ~/.mozilla/firefox/jtm/chrome/userChrome.css<cr>
 nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
-nnoremap <silent> <space>ea :edit ~/.config/alacritty/alacritty.yml<cr>
+nnoremap <silent> <space>ea :edit ~/.config/alacritty/alacritty.toml<cr>
 
 " alt-tab between two buffers
 nnoremap <space><space> :b#<cr>
