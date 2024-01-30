@@ -332,6 +332,11 @@ augroup CursorLine
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
+nnoremap <silent> <S-Right> :vertical resize +5<CR>
+nnoremap <silent> <S-Left> :vertical resize -5<CR>
+nnoremap <silent> <S-Up> :resize +5<CR>
+nnoremap <silent> <S-Down> :resize -5<CR>
+
 " colors
 hi SpellBad term=reverse ctermbg=226 ctermfg=0
 highlight SEND_HELP ctermbg=131 ctermfg=white
