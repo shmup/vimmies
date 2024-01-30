@@ -212,18 +212,13 @@ nnoremap <space>o :only<cr>
 nnoremap <space>O :BufOnly<cr>
 
 " tab nav
-nnoremap <space>1 1gt
-nnoremap <space>2 2gt
-nnoremap <space>3 3gt
-nnoremap <space>4 4gt
-nnoremap <space>5 5gt
-nnoremap <space>6 6gt
-nnoremap <space>7 7gt
-nnoremap <space>8 8gt
-nnoremap <space>9 9gt
 nnoremap <space>tn :tabnew<cr>
 nnoremap <space>tc :tabclose<cr>
 nnoremap <space>to :tabonly<cr>
+for i in range(1, 9)
+  execute 'nnoremap <Space>'.i.' '.i.'gt'
+  execute 'nnoremap <Space>tm'.i.' :tabmove '.(i-1).'<CR>'
+endfor
 
 " easy align
 vmap <enter> <plug>(EasyAlign)
