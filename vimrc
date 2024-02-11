@@ -332,6 +332,19 @@ augroup CursorLine
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
+function! DeleteCurrentSwap()
+  let swapfile_path = $HOME . '/.vim/junk/swp/' .
+        \ substitute(expand('%:p'), '/', '%', 'g') . '.swp'
+  if filereadable(swapfile_path)
+    call delete(swapfile_path)
+    echo "swap deleted"
+  else
+    echo "no swap found"
+  endif
+endfunction
+
+command! DeleteSwap call DeleteCurrentSwap()
+
 function! WrapWithAsciiWalls() range
   let l:start = a:firstline
   let l:end = a:lastline
