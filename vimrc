@@ -332,6 +332,22 @@ augroup CursorLine
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
+function! WrapWithAsciiWalls() range
+  let l:start = a:firstline
+  let l:end = a:lastline
+
+  if a:firstline == 0 && a:lastline == 0
+    let l:start = line('.')
+    let l:end = l:start
+  endif
+
+  let l:lines = getline(l:start, l:end)
+  let l:wrapped_lines = map(l:lines, '"█▓▒░ " . v:val . " ░▒▓█"')
+  call setline(l:start, l:wrapped_lines)
+endfunction
+
+command! -range H <line1>,<line2>call WrapWithAsciiWalls()
+
 nnoremap <silent> <S-Right> :vertical resize +5<CR>
 nnoremap <silent> <S-Left> :vertical resize -5<CR>
 nnoremap <silent> <S-Up> :resize +5<CR>
