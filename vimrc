@@ -406,3 +406,5 @@ augroup SpecialHighlights
         \| call matchadd('GENERIC', '\<EXCEPTION\>')
         \| call matchadd('CLEAN', '\<CLEANME\>')
 augroup END
+
+packadd! matchit
