@@ -8,7 +8,7 @@ let g:coc_global_extensions = [
 let g:chad_seed = "To assist: Be terse. Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize. Ask questions when unsure."
 let g:chad_options = {
     \ 'api_key': $CHAD,
-    \ 'model': "gpt-4-1106-preview",
+    \ 'model': "gpt-4-turbo-preview",
     \ 'temperature': 0.3,
     \ 'top_p': 0.5,
     \ 'max_tokens': 150,
@@ -104,3 +104,26 @@ endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-@> coc#refresh()
+
+" Obsession Helpers
+command! Source call LoadSessionPauseObsession()
+
+function! LoadSessionPauseObsession()
+  let l:options = {
+        \ 'source': 'ls ~/.vim_sessions/',
+        \ 'sink': function('s:SourceSessionPauseObsession'),
+        \ }
+  call fzf#run(l:options)
+endfunction
+
+function! s:SourceSessionPauseObsession(sessionFile)
+  let l:sessionFile = substitute(a:sessionFile, '\n\+$', '', '')
+
+  if l:sessionFile != ''
+    let l:fullPath = expand('~/.vim_sessions/' . l:sessionFile)
+    execute 'source ' . fnameescape(l:fullPath)
+    Obsession
+  else
+    echo "No session selected."
+  endif
+endfunction

@@ -16,9 +16,9 @@ function! CycleColors(direction, all_colors=0)
   echo colorscheme_names[next_colorscheme]
 endfunction
 
-nnoremap <silent> <Right> :call CycleColors('→')<CR>
-nnoremap <silent> <Left> :call CycleColors('←')<CR>
-nnoremap <silent> <Up> :call CycleColors('→', 1)<CR>
-nnoremap <silent> <Down> :call CycleColors('←', 1)<CR>
+" nnoremap <silent> <Right> :call CycleColors('→')<CR>
+" nnoremap <silent> <Left> :call CycleColors('←')<CR>
+" nnoremap <silent> <Up> :call CycleColors('→', 1)<CR>
+" nnoremap <silent> <Down> :call CycleColors('←', 1)<CR>
 
 " http://ix.io/4rDX

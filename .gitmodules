@@ -187,9 +187,11 @@
 [submodule "pack/plugins/start/vim-qf-history"]
 	path = pack/plugins/start/vim-qf-history
 	url = https://github.com/bfrg/vim-qf-history.git
+	ignore = dirty
 [submodule "pack/plugins/start/vim-scriptease"]
 	path = pack/plugins/start/vim-scriptease
 	url = https://github.com/tpope/vim-scriptease.git
+	ignore = dirty
 [submodule "pack/plugins/start/vim-svelte-plugin"]
 	path = pack/plugins/start/vim-svelte-plugin
 	url = https://github.com/leafOfTree/vim-svelte-plugin.git

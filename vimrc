@@ -10,8 +10,7 @@ set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
 set laststatus=2          " always show status bar
 set linebreak             " breaks on space + :set breakat?
-set modelines=0           " security
-set mouse=a               " sometimesss i click
+set modelines=1           " security
 set noequalalways         " don't equalize window sizes when splitting
 set ruler                 " show file stats
 set signcolumn=number
@@ -21,7 +20,8 @@ set visualbell            " dont blink
 
 " TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
-set wildignore+=*.pdf,*.psd,*.com,*.tdy
+set wildignore+=*.pdf,*.psd,*.com,*.tdy,*.dll,*.exe
+set wildignore+=*.o,*.obj,*.so,*.a,*.lib;
 set wildignore+=bower_components/*,*/.vim/junk/*
 set wildignore+=**/node_modules/**
 
@@ -197,6 +197,18 @@ nnoremap ,V :vert sfind ./**/*
 nnoremap ,t :tabfind *
 nnoremap ,T :tabfind ./**/*
 
+function! ToggleCoc()
+    if exists('g:coc_enabled') && g:coc_enabled
+        CocDisable
+        let g:coc_enabled = 0
+    else
+        CocEnable
+        let g:coc_enabled = 1
+    endif
+endfunction
+
+nnoremap <silent> ,co :call ToggleCoc()<CR>
+
 nnoremap <silent> ,cc :silent! let b:copilot_enabled = !get(b:, 'copilot_enabled', v:false)<CR>
 
 " let me save with sudo when needed
@@ -270,7 +282,8 @@ set statusline+=\              " and two spaces
 set statusline+=%Y             " show the filetype
 set statusline+=\              " and two spaces
 set statusline+=%{ObsessionStatus('💾\ ','')}
-set statusline+=%{get(b:,'copilot_enabled',0)?'👂\ ':''}
+set statusline+=%{get(b:,'copilot_enabled',0)?'👂\':''}
+set statusline+=%{g:coc_enabled?'😊':'😴'}
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
 set statusline+=%<%F           " (truncated) full path to the file we are editing
@@ -281,10 +294,6 @@ command! -range GOpen execute 'silent ! git browse ' . expand('%') . ' ' . <line
 
 " Show words and codes as colors, coc.nvim does this in some filetypes
 command! CT silent! execute "ColorToggle"
-
-" Session management
-command! -bang Source call fzf#run({'source': 'ls', 'sink': 'source', 'dir': '~/.vim_sessions'})
-command! -bang SourceOverwrite call fzf#run({'Obsession': 'ls', 'sink': 'Obsession', 'dir': '~/.vim_sessions'})
 
 " show the groupings under cursor
 command! SS echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
@@ -304,7 +313,8 @@ endfun
 command! DeleteFile call DeleteFileAndCloseBuffer()
 
 augroup Convenience
-  autocmd BufEnter * let b:copilot_enabled = v:false
+  " autocmd BufEnter * let b:copilot_enabled = v:false
+  " autocmd VimEnter * CocDisable
 
   " get completions from current syntax file
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
@@ -345,7 +355,7 @@ endfunction
 
 command! DeleteSwap call DeleteCurrentSwap()
 
-function! WrapWithAsciiWalls() range
+function! WrapWithAsciiWalls(style) range
   let l:start = a:firstline
   let l:end = a:lastline
 
@@ -355,16 +365,35 @@ function! WrapWithAsciiWalls() range
   endif
 
   let l:lines = getline(l:start, l:end)
-  let l:wrapped_lines = map(l:lines, '"█▓▒░ " . v:val . " ░▒▓█"')
+
+  " Determine the wrapping characters based on the style parameter.
+  let l:wrap_chars = get({
+        \ 'H': ['█▓▒░ ', ' ░▒▓█'],
+        \ 'H2': ['▓▒░ ', ' ░▒▓'],
+        \ 'H3': ['▒░ ', ' ░▒'],
+        \ 'H4': ['░ ', ' ░'],
+        \ }, a:style, v:null)
+
+  if l:wrap_chars is v:null
+    throw "Invalid style: ".a:style
+  endif
+
+  " Apply wrapping characters to each line.
+  let l:wrapped_lines = map(l:lines, '"'.l:wrap_chars[0].'" . v:val . "'.l:wrap_chars[1].'"')
+
   call setline(l:start, l:wrapped_lines)
 endfunction
 
-command! -range H <line1>,<line2>call WrapWithAsciiWalls()
+command! -range H <line1>,<line2>call WrapWithAsciiWalls('H')
+command! -range H1 <line1>,<line2>call WrapWithAsciiWalls('H1')
+command! -range H2 <line1>,<line2>call WrapWithAsciiWalls('H2')
+command! -range H3 <line1>,<line2>call WrapWithAsciiWalls('H3')
+command! -range H4 <line1>,<line2>call WrapWithAsciiWalls('H4')
 
-nnoremap <silent> <S-Right> :vertical resize +5<CR>
-nnoremap <silent> <S-Left> :vertical resize -5<CR>
-nnoremap <silent> <S-Up> :resize +5<CR>
-nnoremap <silent> <S-Down> :resize -5<CR>
+" nnoremap <silent> <S-Right> :vertical resize +5<CR>
+" nnoremap <silent> <S-Left> :vertical resize -5<CR>
+" nnoremap <silent> <S-Up> :resize +5<CR>
+" nnoremap <silent> <S-Down> :resize -5<CR>
 
 " colors
 hi SpellBad term=reverse ctermbg=226 ctermfg=0
