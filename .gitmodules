@@ -17,9 +17,6 @@
 [submodule "pack/plugins/start/scss-syntax.vim"]
 	path = pack/plugins/start/scss-syntax.vim
 	url = https://github.com/cakebaker/scss-syntax.vim.git
-[submodule "pack/plugins/start/vim-css3-syntax"]
-	path = pack/plugins/start/vim-css3-syntax
-	url = https://github.com/hail2u/vim-css3-syntax.git
 [submodule "pack/plugins/start/vim-dispatch"]
 	path = pack/plugins/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
@@ -35,6 +32,7 @@
 [submodule "pack/plugins/start/emmet-vim"]
 	path = pack/plugins/start/emmet-vim
 	url = git@github.com:shmup/emmet-vim.git
+        ignore = dirty
 [submodule "pack/plugins/start/vim-projectionist"]
 	path = pack/plugins/start/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
@@ -195,3 +193,6 @@
 [submodule "pack/plugins/start/vim-svelte-plugin"]
 	path = pack/plugins/start/vim-svelte-plugin
 	url = https://github.com/leafOfTree/vim-svelte-plugin.git
+[submodule "pack/plugins/start/vim-css3-syntax"]
+	path = pack/plugins/start/vim-css3-syntax
+	url = https://github.com/hail2u/vim-css3-syntax.git
