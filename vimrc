@@ -224,7 +224,7 @@ nnoremap <space>o :only<cr>
 nnoremap <space>O :BufOnly<cr>
 
 " tab nav
-nnoremap <space>tn :tabnew<cr>
+nnoremap <space>tn :tabnew<cr>:tabmove 0<cr>
 nnoremap <space>tc :tabclose<cr>
 nnoremap <space>to :tabonly<cr>
 for i in range(1, 9)
