@@ -196,3 +196,6 @@
 [submodule "pack/plugins/start/vim-css3-syntax"]
 	path = pack/plugins/start/vim-css3-syntax
 	url = https://github.com/hail2u/vim-css3-syntax.git
+[submodule "pack/plugins/start/vim-characterize"]
+	path = pack/plugins/start/vim-characterize
+	url = https://github.com/tpope/vim-characterize.git
