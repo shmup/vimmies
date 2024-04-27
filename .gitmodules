@@ -38,7 +38,7 @@
 	url = https://github.com/tpope/vim-projectionist.git
 [submodule "pack/plugins/start/vim-racket"]
 	path = pack/plugins/start/vim-racket
-	url = https://github.com/wlangstroth/vim-racket.git
+	url = https://github.com/benknoble/vim-racket.git
 [submodule "pack/plugins/start/vim-fireplace"]
 	path = pack/plugins/start/vim-fireplace
 	url = https://github.com/tpope/vim-fireplace.git
@@ -101,7 +101,7 @@
 	url = https://github.com/peitalin/vim-jsx-typescript.git
 [submodule "pack/plugins/start/vim-sexp"]
 	path = pack/plugins/start/vim-sexp
-	url = https://github.com/guns/vim-sexp.git
+	url = https://github.com/benknoble/vim-sexp.git
 	ignore = dirty
 [submodule "pack/plugins/start/vim-gist"]
 	path = pack/plugins/start/vim-gist
@@ -199,3 +199,15 @@
 [submodule "pack/plugins/start/vim-characterize"]
 	path = pack/plugins/start/vim-characterize
 	url = https://github.com/tpope/vim-characterize.git
+[submodule "pack/plugins/start/vscode.nvim"]
+	path = pack/plugins/start/vscode.nvim
+	url = https://github.com/Mofiqul/vscode.nvim.git
+[submodule "pack/plugins/start/vim-slime"]
+	path = pack/plugins/start/vim-slime
+	url = https://github.com/jpalardy/vim-slime.git
+[submodule "pack/plugins/start/vim-sexp-mappings-for-regular-people"]
+	path = pack/plugins/start/vim-sexp-mappings-for-regular-people
+	url = https://github.com/tpope/vim-sexp-mappings-for-regular-people.git
+[submodule "pack/plugins/start/yats.vim"]
+	path = pack/plugins/start/yats.vim
+	url = https://github.com/HerringtonDarkholme/yats.vim.git
