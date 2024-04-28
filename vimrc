@@ -355,6 +355,19 @@ endfunction
 
 command! DeleteSwap call DeleteCurrentSwap()
 
+"-=-=-=-=-=-"
+function! CloseNamelessBuffers()
+  let buffer_range = range(1, bufnr('$'))
+  let IsNameless = {idx, val -> buflisted(val) && bufname(val) == ''}
+  let target_buffers = filter(buffer_range, IsNameless)
+  
+  for l:buffer_number in target_buffers
+    execute 'bdelete' . ' ' . l:buffer_number
+  endfor
+endfunction
+command! CloseNamelessBuffers call CloseNamelessBuffers()
+"-=-=-=-=-=-"
+
 function! WrapWithAsciiWalls(style) range
   let l:start = a:firstline
   let l:end = a:lastline
