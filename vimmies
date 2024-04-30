@@ -77,7 +77,7 @@ _update-plugins() {
   curl -q https://raw.githubusercontent.com/andreasvc/vim-256noir/master/colors/256_noir.vim > "$VIM_PATH/colors/256_noir.vim" &
   curl -q https://raw.githubusercontent.com/romainl/flattened/master/colors/flattened_light.vim > "$VIM_PATH/colors/flattened_light.vim" &
 
-  cd "$PLUGINS_PATH/coc.nvim" && npm i
+  cd "$PLUGINS_PATH/coc.nvim" && nvm deactivate && npm ci
 }
 
 _upgrade-vim() {
