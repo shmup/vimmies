@@ -23,7 +23,25 @@
     },
     "cs": {
       "command": "csharp-ls",
-      "filetypes": ["cs"],
+      "filetypes": ["cs"]
+    },
+    "javascript": {
+      "implentationsCodeLens": {
+        "enabled": false
+      },
+      "referencesCodeLens": {
+        "enabled": false,
+        "showOnAllFunctions": false
+      }
+    },
+    "typescript": {
+      "implentationsCodeLens": {
+        "enabled": false
+      },
+      "referencesCodeLens": {
+        "enabled": false,
+        "showOnAllFunctions": false
+      }
     },
     "bash": {
       "command": "bash-language-server",
@@ -31,8 +49,12 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     },
+    "racket": {
+      "command": "racket -l racket-langserver",
+      "filetypes": ["rkt"]
+    },
     "raku": {
-      "command": "raku-navigator",
+      "command": "node ~/src/RakuNavigator/server/out/server.js --stdio",
       "filetypes": ["raku", "rakumod", "rakudoc", "rakutest", "t", "pl6", "pm6", "p6", "t6"]
     }
   },
@@ -74,6 +96,10 @@
   "typescript.referencesCodeLens.enabled": true,
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.referencesCodeLens.showOnAllFunctions": false,
-  "tsserver.enable": true,
-  "tsserver.log": "verbose"
+     "tsserver": {
+       "enable": true,
+       "log": "verbose",
+       "importModuleSpecifier": "relative",
+       "autoImportSuggestions.enabled": true
+     }
 }
