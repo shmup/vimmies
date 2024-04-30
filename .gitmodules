@@ -36,9 +36,6 @@
 [submodule "pack/plugins/start/vim-projectionist"]
 	path = pack/plugins/start/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
-[submodule "pack/plugins/start/vim-racket"]
-	path = pack/plugins/start/vim-racket
-	url = https://github.com/benknoble/vim-racket.git
 [submodule "pack/plugins/start/vim-fireplace"]
 	path = pack/plugins/start/vim-fireplace
 	url = https://github.com/tpope/vim-fireplace.git
@@ -212,3 +209,6 @@
 [submodule "pack/plugins/start/yats.vim"]
 	path = pack/plugins/start/yats.vim
 	url = https://github.com/HerringtonDarkholme/yats.vim.git
+[submodule "pack/plugins/start/vim-racket"]
+	path = pack/plugins/start/vim-racket
+	url = https://github.com/benknoble/vim-racket.git
