@@ -50,8 +50,10 @@
       "ignoredRootPaths": ["~"]
     },
     "racket": {
-      "command": "racket -l racket-langserver",
-      "filetypes": ["rkt"]
+      "command": "racket",
+      "args": ["--lib", "racket-langserver"],
+      "filetypes": ["racket"],
+      "ignoredRootPaths": ["~"]
     },
     "raku": {
       "command": "node ~/src/RakuNavigator/server/out/server.js --stdio",

@@ -1,3 +1,5 @@
+let g:slime_no_mappings = 1 " needs to be before it loads.. hm
+
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 

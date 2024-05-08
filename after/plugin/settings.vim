@@ -61,37 +61,14 @@ endfunction
 inoremap <silent><expr> <c-@> coc#refresh()
 
 " racket/lisp stuff
-let g:slime_target = "slime-vimterminal"
-let g:bracketed_paste = 1
-let g:slime_no_mappings = 1
+let g:slime_target = "tmux"
 
-" nmap <Plug>NoSlimeRegionSend <Plug>SlimeRegionSend
-" nmap <Plug>NoSlimeSend <Plug>SlimeSend
-" nmap <Plug>NoSlimeParagraphSend <Plug>SlimeParagraphSend
-" nmap <Plug>NoSlimeConfig <Plug>SlimeConfig
-
-" xmap ,cc <Plug>SlimeRegionSend
-" nnoremap ,cc <Plug>SlimeParagraphSend
-" nnoremap ,cc :call SlimeSendBuffer()<CR>
-
-xmap <space>cc <Plug>SlimeRegionSend
-nmap <space>cc <Plug>SlimeParagraphSend
-nmap <space>cl <Plug>SlimeSend
-nmap <space>cv <Plug>SlimeConfig
-
-if exists("g:loaded_slime")
- xunmap <c-c><c-c>
- nunmap <c-c><c-c>
- nunmap <c-c>v
-endif
-
-"
-function! SlimeSendBuffer()
-    " let's ignore the 
-    let save_pos = getpos(".")
-    %SlimeSend
-    call setpos('.', save_pos)
-endfunction
+xmap ,cc <Plug>SlimeRegionSend
+nnoremap ,cc <Plug>SlimeParagraphSend
+nnoremap ,cs <Plug>SlimeSendCell
+let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+let g:slime_dont_ask_default = 1
+let g:slime_preserve_curpos = 0
 
 "  ▄▄▄· ▪       ▄▄· ▄▄▄   ▄▄▄·  ▄▄▄·
 " ▐█ ▀█ ██     ▐█ ▌▪▀▄ █·▐█ ▀█ ▐█ ▄█
