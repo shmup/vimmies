@@ -3,13 +3,25 @@ let g:slime_no_mappings = 1 " needs to be before it loads.. hm
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-colorscheme apprentice
+if strftime("%H") < 16
+    " set background=light
+    " colorscheme komau
+    set background=dark
+    colorscheme apprentice
+else
+    set background=dark
+    colorscheme apprentice
+endif
 
+let g:copilot_enabled = 1
 let mapleader = "\<Space>"
+
+inoremap <C-\> <Plug>(copilot-suggest)
 
 set autoindent            " dont need smartindent. syntax files do that
 set encoding=utf-8        " encoding
 set hidden                " allow hidden buffers
+set iskeyword+=-
 set laststatus=2          " always show status bar
 set linebreak             " breaks on space + :set breakat?
 set modelines=1           " security
@@ -19,6 +31,7 @@ set signcolumn=number
 set t_vb=                 " dont beep
 set termguicolors
 set visualbell            " dont blink
+set mouse=a               " enable mouse
 
 " TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
@@ -26,6 +39,8 @@ set wildignore+=*.pdf,*.psd,*.com,*.tdy,*.dll,*.exe
 set wildignore+=*.o,*.obj,*.so,*.a,*.lib;
 set wildignore+=bower_components/*,*/.vim/junk/*
 set wildignore+=**/node_modules/**
+
+inoremap <C-l> λ
 
 " use existing tab if possible when loading a file from quickfix
 set switchbuf+=usetab
@@ -77,6 +92,9 @@ nnoremap <space>q gggqG
 set listchars=tab:▸\ ,eol:¬
 let &showbreak = '↳ '
 
+" set guitablabel=%f
+set guitablabel=%t
+
 " undo/backup shit
 set backupdir=~/.vim/junk/backup// " double slash means files are stored with
 set directory=~/.vim/junk/swp//    " full path, to eliminate clobbering
@@ -114,6 +132,7 @@ nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
+nnoremap <silent> <space>er :edit ~/lisp/notes/learnxiny.rkt<cr>
 nnoremap <silent> <space>eg :edit ~/.vim/tools/gpt/<cr>
 nnoremap <silent> <space>el :edit ~/brain/journals/<cr>
 nnoremap <silent> <space>eu :edit ~/txt/unicode.txt<cr>
@@ -174,10 +193,10 @@ nnoremap ,e :silent Zedit<space>
 inoremap (<cr> (<cr>)<esc>O
 inoremap {<cr> {<cr>}<esc>O
 inoremap {; {<cr>};<esc>O
-inoremap {, {<cr>},<esc>O
+" inoremap {, {<cr>},<esc>O
 inoremap [<cr> [<cr>]<esc>O
 inoremap [; [<cr>];<esc>O
-inoremap [, [<cr>],<esc>O
+" inoremap [, [<cr>],<esc>O
 
 " keep cursor put
 nnoremap * *``
@@ -199,19 +218,13 @@ nnoremap ,V :vert sfind ./**/*
 nnoremap ,t :tabfind *
 nnoremap ,T :tabfind ./**/*
 
-function! ToggleCoc()
-    if exists('g:coc_enabled') && g:coc_enabled
-        CocDisable
-        let g:coc_enabled = 0
-    else
-        CocEnable
-        let g:coc_enabled = 1
-    endif
-endfunction
+nnoremap <silent> ,cl :CocCommand document.toggleCodeLens<CR>
+nnoremap <silent> ,cp :silent! let g:copilot_enabled = !get(g:, 'copilot_enabled', v:false) \| let b:copilot_enabled = g:copilot_enabled \| echo "Copilot " . (g:copilot_enabled ? "enabled" : "disabled")<CR>
 
-nnoremap <silent> ,co :call ToggleCoc()<CR>
-
-nnoremap <silent> ,cc :silent! let b:copilot_enabled = !get(b:, 'copilot_enabled', v:false)<CR>
+" augroup CopilotSync
+"  autocmd!
+"  autocmd BufEnter * if !exists('b:copilot_enabled') | let b:copilot_enabled = get(g:, 'copilot_enabled', 0) | endif
+" augroup END
 
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
@@ -227,6 +240,7 @@ nnoremap <space>O :BufOnly<cr>
 
 " tab nav
 nnoremap <space>tn :tabnew<cr>:tabmove 0<cr>
+nnoremap <space>tN :tabnew<cr>
 nnoremap <space>tc :tabclose<cr>
 nnoremap <space>to :tabonly<cr>
 for i in range(1, 9)
@@ -247,7 +261,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " inoremap <silent><expr> <tab> coc#refresh()
-
 
 " fugitive/rhubarb/gv
 nmap <space>gb :Git blame<cr>
@@ -284,7 +297,8 @@ set statusline+=\              " and two spaces
 set statusline+=%Y             " show the filetype
 set statusline+=\              " and two spaces
 set statusline+=%{ObsessionStatus('💾\ ','')}
-set statusline+=%{get(b:,'copilot_enabled',0)?'👂\':''}
+" set statusline+=%{get(b:,'copilot_enabled',0)?'👂\':'🙉'}
+set statusline+=\              " and two spaces
 set statusline+=%{g:coc_enabled?'😊':'😴'}
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
@@ -307,28 +321,17 @@ command! Tig execute "Start tig " . expand('%:p')
 command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
 command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
 
-" delete current file & buffer
-function! DeleteFileAndCloseBuffer()
-  let choice = confirm("Delete file and close buffer?", "&Yes\n&No", 1)
-  if choice == 1 | call delete(expand('%:p')) | b# | bd# | endif
-endfun
-command! DeleteFile call DeleteFileAndCloseBuffer()
-
 augroup Convenience
-  " autocmd BufEnter * let b:copilot_enabled = v:false
-  " autocmd VimEnter * CocDisable
-
   " get completions from current syntax file
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
-  set iskeyword+=-
 
-  let ignorelist =['vim','help','perl','sh']
-  let g:vim_json_warnings = 0
+  autocmd BufNewFile,BufReadPost,BufFilePost * let b:workspace_folder = FugitiveWorkTree()
 
-  autocmd Filetype * if (index(ignorelist, &ft) == -1)
-        \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
+  " let ignorelist =['vim', 'help', 'perl', 'sh', 'racket']
+  " autocmd Filetype * if (index(ignorelist, &ft) == -1)
+  "       \ | let &l:keywordprg=fnamemodify($MYVIMRC, ":h") . "/tools/search.sh " . &l:filetype | endif
 
-  " when editing a file, always jump to the last cursor position
+  " jump to last cursor position
   autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
         \ exe "normal! g'\"" | endif
 
@@ -344,31 +347,6 @@ augroup CursorLine
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
-function! DeleteCurrentSwap()
-  let swapfile_path = $HOME . '/.vim/junk/swp/' .
-        \ substitute(expand('%:p'), '/', '%', 'g') . '.swp'
-  if filereadable(swapfile_path)
-    call delete(swapfile_path)
-    echo "swap deleted"
-  else
-    echo "no swap found"
-  endif
-endfunction
-
-command! DeleteSwap call DeleteCurrentSwap()
-
-"-=-=-=-=-=-"
-function! CloseNamelessBuffers()
-  let buffer_range = range(1, bufnr('$'))
-  let IsNameless = {idx, val -> buflisted(val) && bufname(val) == ''}
-  let target_buffers = filter(buffer_range, IsNameless)
-  
-  for l:buffer_number in target_buffers
-    execute 'bdelete' . ' ' . l:buffer_number
-  endfor
-endfunction
-command! CloseNamelessBuffers call CloseNamelessBuffers()
-"-=-=-=-=-=-"
 
 function! WrapWithAsciiWalls(style) range
   let l:start = a:firstline
@@ -412,6 +390,7 @@ command! -range H4 <line1>,<line2>call WrapWithAsciiWalls('H4')
 
 " colors
 hi SpellBad term=reverse ctermbg=226 ctermfg=0
+
 highlight SEND_HELP ctermbg=131 ctermfg=white
 highlight SEND_WARNING ctermbg=129 ctermfg=white
 highlight CLEAN ctermbg=white ctermfg=black
@@ -432,9 +411,11 @@ augroup SpecialHighlights
         \| call matchadd('SEND_HELP', '\<CLOSED\>')
         \| call matchadd('SEND_HELP', '\<BLOCKED\>')
         \| call matchadd('SEND_HELP', '\<REMOVED\>')
+        \| call matchadd('SEND_HELP', '\<BREAKING CHANGE\>')
         \| call matchadd('SEND_HELP', '\<ALERT\>', 101)
         \| call matchadd('GENERIC', '^\<EMILY\>', 101)
         \| call matchadd('GENERIC', '^\<KRISTIAN\>', 101)
+        \| call matchadd('GENERIC', '\<FIXED\>')
         \| call matchadd('GENERIC', '\<TODO\>')
         \| call matchadd('GENERIC', '\<NOTE\>')
         \| call matchadd('YELLOW', '^\<ASK\>')

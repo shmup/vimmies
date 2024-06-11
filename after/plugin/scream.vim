@@ -3,8 +3,9 @@
 " :WHISPER - Apprentice defaults
 
 function! LouderComments() abort
-  highlight Comment ctermbg=131 ctermfg=231
-  highlight Todo ctermbg=131 ctermfg=231 cterm=reverse
+  highlight Comment ctermbg=222 ctermfg=235
+  highlight JsComment ctermbg=222 ctermfg=235
+  highlight Todo ctermbg=222 ctermfg=235 cterm=reverse
 endfunction
 
 command! SCREAM silent! call LouderComments()

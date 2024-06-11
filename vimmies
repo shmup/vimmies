@@ -66,6 +66,7 @@ _update-plugins() {
     fi
     [[ -z $PLUGIN ]] && exit 0
     git submodule update --remote --merge -- "$PLUGINS_PATH/$PLUGIN"
+    exit 0
   fi
   curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > "$VIM_PATH/colors/modest.vim" &
   curl -q https://raw.githubusercontent.com/wadackel/vim-dogrun/main/colors/dogrun.vim > "$VIM_PATH/colors/dogrun.vim" &
@@ -87,14 +88,12 @@ _upgrade-vim() {
 
   if cd "$REPO"; then git pull; else git clone https://github.com/vim/vim.git "$REPO"; fi
 
-  # sudo rm -rf /usr/local/share/vim /usr/bin/vim
-
-  cd "$REPO" || exit
-
   make distclean
 
   ./configure --with-features=huge --enable-python3interp \
     --enable-luainterp=yes \
+    --enable-mzschemeinterp \
+    --with-plthome=/usr/local \
     && make -j "$PROCS" && sudo make -j "$PROCS" install
 }
 

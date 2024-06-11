@@ -9,5 +9,5 @@ if executable('tsc')
 endif
 
 if executable('prettier')
-  let &l:formatprg = 'prettier --stdin-filepath %'
+  let &l:formatprg = 'prettier --std-in'
 endif

@@ -35,6 +35,7 @@ hi CursorLineNr guifg=#535f98 ctermfg=61 guibg=NONE ctermbg=NONE gui=NONE cterm=
 hi Conceal guifg=#ac8b83 ctermfg=138 guibg=#222433 ctermbg=235 gui=NONE cterm=NONE
 hi NormalFloat guifg=#8085a6 ctermfg=103 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi FloatBorder guifg=#545c8c ctermfg=60 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi WinSeparator guifg=#363859 ctermfg=60 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Folded guifg=#666c99 ctermfg=60 guibg=#32364c ctermbg=237 gui=NONE cterm=NONE
 hi FoldColumn guifg=#32364c ctermfg=237 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi MatchParen guibg=#2f3147 ctermbg=236
@@ -214,6 +215,30 @@ hi GitGutterChange guifg=#a8a384 ctermfg=144
 hi GitGutterDelete guifg=#b871b8 ctermfg=133
 hi GitGutterChangeDelete guifg=#28795c ctermfg=29
 hi fugitiveHeader guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
+hi DiffviewDim1 guifg=#545c8c ctermfg=60
+hi DiffviewPrimary guifg=#929be5 ctermfg=104
+hi DiffviewSecondary guifg=#b871b8 ctermfg=133
+hi DiffviewStatusAdded guifg=#589ec6 ctermfg=74
+hi DiffviewStatusUntracked guifg=#a8a384 ctermfg=144
+hi DiffviewStatusModified guifg=#73c1a9 ctermfg=79
+hi DiffviewStatusRenamed guifg=#73c1a9 ctermfg=79
+hi DiffviewStatusCopied guifg=#73c1a9 ctermfg=79
+hi DiffviewStatusTypeChanged guifg=#73c1a9 ctermfg=79
+hi DiffviewStatusUnmerged guifg=#b871b8 ctermfg=133
+hi DiffviewStatusUnknown guifg=#a8a384 ctermfg=144
+hi DiffviewStatusDeleted guifg=#8085a6 ctermfg=103
+hi DiffviewStatusBroken guifg=#b871b8 ctermfg=133
+hi DiffviewStatusIgnored guifg=#a8a384 ctermfg=144
+hi DiffviewFilePanelRootPath guifg=#6f78be ctermfg=104
+hi DiffviewFilePanelTitle guifg=#929be5 ctermfg=104 gui=bold cterm=bold
+hi DiffviewFilePanelCounter guifg=#8085a6 ctermfg=103 gui=bold cterm=bold
+hi DiffviewFilePanelFileName guifg=#9ea3c0 ctermfg=146
+hi DiffviewFilePanelPath guifg=#545c8c ctermfg=60 gui=bold cterm=bold
+hi DiffviewFilePanelSelected guifg=#a8a384 ctermfg=144
+hi DiffviewFilePanelInsertions guifg=#73c1a9 ctermfg=79
+hi DiffviewFilePanelDeletions guifg=#b871b8 ctermfg=133
+hi DiffviewFilePanelConflicts guifg=#ac8b83 ctermfg=138
+hi DiffviewHash guifg=#6f78be ctermfg=104
 hi ALEWarningSign guifg=#ac8b83 ctermfg=138 gui=bold cterm=bold
 hi ALEInfoSign guifg=#82dabf ctermfg=115 gui=NONE cterm=NONE
 hi NullLsInfoBorder guifg=#545c8c ctermfg=60 guibg=#222433 ctermbg=235 gui=NONE cterm=NONE
@@ -308,8 +333,12 @@ if has("nvim-0.8.0")
   hi @parameter guifg=#929be5 ctermfg=104
   hi @property guifg=#929be5 ctermfg=104
   hi @keyword guifg=#b871b8 ctermfg=133
+  hi @operator guifg=#929be5 ctermfg=104
+  hi @module guifg=#9ea3c0 ctermfg=146
   hi @type guifg=#ac8b83 ctermfg=138
   hi @type.builtin guifg=#ac8b83 ctermfg=138
+  hi @function.tsx guifg=#9ea3c0 ctermfg=146
+  hi @punctuation.special.typescript guifg=#8085a6 ctermfg=103
   hi @include guifg=#929be5 ctermfg=104
   hi @variable guifg=#9ea3c0 ctermfg=146
   hi @variable.builtin guifg=#ac8b83 ctermfg=138
@@ -318,6 +347,7 @@ if has("nvim-0.8.0")
   hi @tag guifg=#9ea3c0 ctermfg=146
   hi @tag.delimiter guifg=#929be5 ctermfg=104
   hi @tag.attribute guifg=#929be5 ctermfg=104
+  hi @tag.builtin.tsx guifg=#9ea3c0 ctermfg=146
   hi @markup.heading guifg=#a8a384 ctermfg=144 gui=bold cterm=bold
   hi @markup.strong gui=bold cterm=bold
   hi @markup.list guifg=#545c8c ctermfg=60

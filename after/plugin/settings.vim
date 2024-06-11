@@ -66,9 +66,10 @@ let g:slime_target = "tmux"
 xmap ,cc <Plug>SlimeRegionSend
 nnoremap ,cc <Plug>SlimeParagraphSend
 nnoremap ,cs <Plug>SlimeSendCell
-let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
-let g:slime_dont_ask_default = 1
+" let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+let g:slime_dont_ask_default = 0
 let g:slime_preserve_curpos = 0
+let g:sexp_enable_insert_mode_mappings = 1
 
 "  ▄▄▄· ▪       ▄▄· ▄▄▄   ▄▄▄·  ▄▄▄·
 " ▐█ ▀█ ██     ▐█ ▌▪▀▄ █·▐█ ▀█ ▐█ ▄█
@@ -80,19 +81,13 @@ let g:slime_preserve_curpos = 0
 let g:chad_seed = "To assist: Be terse. Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize. Ask questions when unsure."
 let g:chad_options = {
     \ 'api_key': $CHAD,
-    \ 'model': "gpt-4-turbo",
+    \ 'model': "gpt-4o",
     \ 'temperature': 0.3,
     \ 'top_p': 0.5,
     \ 'max_tokens': 1000,
     \ 'presence_penalty': 0.1,
     \ 'frequency_penalty': 0.6
 \ }
-
-let g:copilot_workspace_folders = [
-\ '~/workspace/lelander/display-screen',
-\ '~/workspace/lelander/rome/romewaaweb',
-\ '~/workspace/lelander/rome/romewaaapi'
-\]
 
 
 " ▄▄▌   ▄▄▄·  ▐ ▄  ▄▄ • ▄• ▄▌ ▄▄▄·  ▄▄ • ▄▄▄ ..▄▄ ·
