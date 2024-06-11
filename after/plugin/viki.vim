@@ -10,7 +10,7 @@ let s:wiki_home = expand("$VIM_VIKI_HOME")
 "   - use foo.md if you want to specify the extension
 "   - backspace takes you back a file
 
-execute 'nnoremap <space>ww :edit' s:wiki_home . '/index.txt<cr>'
+execute 'nnoremap <space>ww :edit' s:wiki_home . '/pages/index.txt<cr>'
 
 augroup Viki
   autocmd!
@@ -38,5 +38,5 @@ function! SaveAndEdit()
   endif
 
   silent! write
-  silent! execute 'edit '.s:wiki_home.'/'.l:txt
+  silent! execute 'edit '.s:wiki_home.'/pages/'.l:txt
 endfunction
