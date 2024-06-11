@@ -212,3 +212,6 @@
 [submodule "pack/plugins/start/vim-racket"]
 	path = pack/plugins/start/vim-racket
 	url = https://github.com/benknoble/vim-racket.git
+[submodule "pack/plugins/start/vim-gruvbox8"]
+	path = pack/plugins/start/vim-gruvbox8
+	url = https://github.com/lifepillar/vim-gruvbox8.git
