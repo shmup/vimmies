@@ -9,16 +9,18 @@ if exists("syntax_on")
   syntax reset
 endif
 
+set background=light
+
 let colors_name = "tuftish"
 
 if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
     hi Normal ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
-    set background=light
     hi NonText ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
     hi Comment ctermbg=7 ctermfg=6 cterm=NONE guibg=#fdfbf4 guifg=#81b7f2 gui=NONE
     hi Constant ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
     hi Error ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
     hi Identifier ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
+    hi Function ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
     hi Ignore ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
     hi PreProc ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
     hi Special ctermbg=7 ctermfg=0 cterm=NONE guibg=#fdfbf4 guifg=#333333 gui=NONE
@@ -74,12 +76,12 @@ if ($TERM =~ '256' || &t_Co >= 256) || has("gui_running")
 elseif &t_Co == 8 || $TERM !~# '^linux' || &t_Co == 16
     set t_Co=16
     hi Normal ctermbg=white ctermfg=black cterm=NONE
-    set background=light
     hi NonText ctermbg=white ctermfg=black cterm=NONE
     hi Comment ctermbg=white ctermfg=cyan cterm=NONE
     hi Constant ctermbg=white ctermfg=black cterm=NONE
     hi Error ctermbg=white ctermfg=black cterm=NONE
     hi Identifier ctermbg=white ctermfg=black cterm=NONE
+    hi Function ctermbg=white ctermfg=black cterm=NONE
     hi Ignore ctermbg=white ctermfg=black cterm=NONE
     hi PreProc ctermbg=white ctermfg=black cterm=NONE
     hi Special ctermbg=white ctermfg=black cterm=NONE
