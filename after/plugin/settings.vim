@@ -83,10 +83,11 @@ let g:chad_options = {
     \ 'api_key': $CHAD,
     \ 'model': "gpt-4o",
     \ 'temperature': 0.3,
-    \ 'top_p': 0.5,
+    \ 'top_p': 1,
+    \ 'top_k': 5,
     \ 'max_tokens': 1000,
-    \ 'presence_penalty': 0.1,
-    \ 'frequency_penalty': 0.6
+    \ 'presence_penalty': 0.0,
+    \ 'frequency_penalty': 0.0
 \ }
 
 
