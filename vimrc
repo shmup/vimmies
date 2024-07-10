@@ -321,11 +321,11 @@ command! Tig execute "Start tig " . expand('%:p')
 command! SC vnew | setlocal nobuflisted buftype=nofile nospell filetype=markdown bufhidden=wipe noswapfile
 command! JS vsplit ~/tmp/tmp.js | setlocal nobuflisted nospell filetype=javascript bufhidden=wipe noswapfile
 
+command! Workspaced let g:copilot_workspace_folders = FugitiveWorkTree()
+
 augroup Convenience
   " get completions from current syntax file
   autocmd BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
-
-  autocmd BufNewFile,BufReadPost,BufFilePost * let b:workspace_folder = FugitiveWorkTree()
 
   " let ignorelist =['vim', 'help', 'perl', 'sh', 'racket']
   " autocmd Filetype * if (index(ignorelist, &ft) == -1)
