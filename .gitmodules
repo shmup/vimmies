@@ -218,3 +218,6 @@
 [submodule "pack/plugins/start/vim-rst"]
 	path = pack/plugins/start/vim-rst
 	url = https://github.com/habamax/vim-rst.git
+[submodule "pack/plugins/start/vim-fauna"]
+	path = pack/plugins/start/vim-fauna
+	url = git@github.com:shmup/vim-fauna.git
