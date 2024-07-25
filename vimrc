@@ -126,12 +126,13 @@ nnoremap gF gf
 nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
+nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
+nnoremap <silent> <space>es :edit ~/.vim/after/plugin/settings.vim<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 nnoremap <silent> <space>er :edit ~/lisp/notes/learnxiny.rkt<cr>
 nnoremap <silent> <space>eg :edit ~/.vim/tools/gpt/<cr>
 nnoremap <silent> <space>el :edit ~/brain/journals/<cr>
 nnoremap <silent> <space>eu :edit ~/txt/unicode.txt<cr>
-nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
 nnoremap <silent> <space>ex :edit ~/.Xdefaults<cr>
@@ -186,6 +187,7 @@ nnoremap ,e :silent Zedit<space>
 
 " auto expansion
 inoremap (<cr> (<cr>)<esc>O
+inoremap `<cr> `<cr>`<esc>O
 inoremap {<cr> {<cr>}<esc>O
 inoremap {; {<cr>};<esc>O
 " inoremap {, {<cr>},<esc>O
