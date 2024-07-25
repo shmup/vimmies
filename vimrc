@@ -3,15 +3,10 @@ let g:slime_no_mappings = 1 " needs to be before it loads.. hm
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-if strftime("%H") < 16
-    " set background=light
-    " colorscheme komau
-    set background=dark
-    colorscheme apprentice
-else
-    set background=dark
-    colorscheme apprentice
-endif
+let lightscheme = 'komau'
+let darkscheme = 'apprentice'
+
+execute 'colorscheme ' . darkscheme
 
 let g:copilot_enabled = 1
 let mapleader = "\<Space>"
@@ -160,7 +155,7 @@ nnoremap Y y$
 
 " toggles, also :help *unimpaired-toggling*
 " https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt#L77-L95
-nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? 'flattened_light' : 'apprentice')
+nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? lightscheme : darkscheme)
 nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
