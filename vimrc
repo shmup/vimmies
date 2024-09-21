@@ -217,6 +217,7 @@ nnoremap ,T :tabfind ./**/*
 
 nnoremap <silent> ,cl :CocCommand document.toggleCodeLens<CR>
 nnoremap <silent> ,cp :silent! let g:copilot_enabled = !get(g:, 'copilot_enabled', v:false) \| let b:copilot_enabled = g:copilot_enabled \| echo "Copilot " . (g:copilot_enabled ? "enabled" : "disabled")<CR>
+nnoremap <silent> ,cw :Workspaced<CR>
 
 " augroup CopilotSync
 "  autocmd!
