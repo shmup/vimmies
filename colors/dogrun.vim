@@ -64,6 +64,8 @@ hi Error guifg=#ff9494 ctermfg=210 guibg=#222433 ctermbg=235 gui=bold cterm=bold
 hi ErrorMsg guifg=#ff9494 ctermfg=210 guibg=NONE ctermbg=NONE gui=bold cterm=bold
 hi WarningMsg guifg=#ac8b83 ctermfg=138 gui=bold cterm=bold
 hi MoreMsg guifg=#73c1a9 ctermfg=79
+hi ModeMsg guifg=#73c1a9 ctermfg=79
+hi Debug guifg=#9ea3c0 ctermfg=146
 hi Todo guifg=#a8a384 ctermfg=144 guibg=NONE ctermbg=NONE gui=bold cterm=bold
 hi Pmenu guifg=#9ea3c0 ctermfg=146 guibg=#32364c ctermbg=237
 hi PmenuSel guifg=#9ea3c0 ctermfg=146 guibg=#424865 ctermbg=60
@@ -79,9 +81,12 @@ hi SpellBad guifg=#ff9494 ctermfg=210 gui=underline cterm=underline
 hi SpellCap gui=underline cterm=underline
 hi SpellLocal guifg=#ff9494 ctermfg=210 gui=underline cterm=underline
 hi SpellRare guifg=#a8a384 ctermfg=144 gui=underline cterm=underline
-hi DiffAdd guibg=#1c394b ctermbg=237 gui=bold cterm=bold
-hi DiffChange guibg=#26463b ctermbg=23 gui=bold cterm=bold
-hi DiffDelete guifg=#d2d9ff ctermfg=189 guibg=#5e3e5e ctermbg=96 gui=bold cterm=bold
+hi Added guifg=#c7cef3 ctermfg=189 guibg=#1c394b ctermbg=237 gui=NONE cterm=NONE
+hi Removed guifg=#d2d9ff ctermfg=189 guibg=#5e3e5e ctermbg=96 gui=NONE cterm=NONE
+hi Changed guifg=#c7cef3 ctermfg=189 guibg=#26463b ctermbg=23 gui=NONE cterm=NONE
+hi DiffAdd guibg=#1c394b ctermbg=237 gui=NONE cterm=NONE
+hi DiffChange guibg=#26463b ctermbg=23 gui=NONE cterm=NONE
+hi DiffDelete guifg=#d2d9ff ctermfg=189 guibg=#5e3e5e ctermbg=96 gui=NONE cterm=NONE
 hi DiffText guibg=#28795c ctermbg=29 gui=NONE cterm=NONE
 hi QuickFixLine guifg=#9ea3c0 ctermfg=146 guibg=#363e7f ctermbg=61
 hi StatusLine guifg=#757aa5 ctermfg=103 guibg=#2a2c3f ctermbg=236 gui=bold cterm=bold
@@ -103,6 +108,7 @@ hi DiagnosticInfo guifg=#82dabf ctermfg=115
 hi DiagnosticVirtualTextInfo guifg=#545c8c ctermfg=60 gui=bold cterm=bold
 hi DiagnosticUnderlineInfo gui=underline cterm=underline
 hi DiagnosticHint guifg=#82dabf ctermfg=115
+hi DiagnosticOk guifg=#82dabf ctermfg=115
 hi DiagnosticVirtualTextHint guifg=#545c8c ctermfg=60 gui=bold cterm=bold
 hi DiagnosticUnderlineHint gui=underline cterm=underline
 hi LspSignatureActiveParameter gui=italic cterm=italic
@@ -177,8 +183,8 @@ hi Defx_git_Modified guifg=#26463b ctermfg=23
 hi Defx_git_Unmerged guifg=#b871b8 ctermfg=133
 hi Defx_git_Deleted guifg=#5e3e5e ctermfg=96
 hi Defx_git_Staged guifg=#73c1a9 ctermfg=79
-hi NvimTreeSymlink guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
-hi NvimTreeSymlinkFolderName guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
+hi NvimTreeSymlink guifg=#5b9a87 ctermfg=72 gui=NONE cterm=NONE
+hi NvimTreeSymlinkFolderName guifg=#5b9a87 ctermfg=72 gui=NONE cterm=NONE
 hi NvimTreeFolderName guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
 hi NvimTreeRootFolder guifg=#464c79 ctermfg=60 gui=bold cterm=bold
 hi NvimTreeFolderIcon guifg=#6f78be ctermfg=104 gui=NONE cterm=NONE
@@ -199,12 +205,12 @@ hi NvimTreeGitNewIcon guifg=#73c1a9 ctermfg=79 gui=NONE cterm=NONE
 hi NvimTreeGitDeletedIcon guifg=#28795c ctermfg=29 gui=NONE cterm=NONE
 hi NvimTreeWindowPicker guifg=#222433 ctermfg=235 guibg=#929be5 ctermbg=104 gui=bold cterm=bold
 hi NvimTreeNormal guifg=#8085a6 ctermfg=103 gui=NONE cterm=NONE
-hi NvimTreeLiveFilterPrefix guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
+hi NvimTreeLiveFilterPrefix guifg=#5b9a87 ctermfg=72 gui=NONE cterm=NONE
 hi NvimTreeLiveFilterValue guifg=#73c1a9 ctermfg=79 gui=NONE cterm=NONE
 hi NvimTreeBookmarkIcon guifg=#a8a384 ctermfg=144 gui=NONE cterm=NONE
 hi FernBranchSymbol guifg=#6f78be ctermfg=104 gui=NONE cterm=NONE
 hi FernBranchText guifg=#929be5 ctermfg=104 gui=NONE cterm=NONE
-hi FernLeafSymbol guifg=#548e7c ctermfg=66 gui=NONE cterm=NONE
+hi FernLeafSymbol guifg=#5b9a87 ctermfg=72 gui=NONE cterm=NONE
 hi FernLeafText guifg=#9ea3c0 ctermfg=146 gui=NONE cterm=NONE
 hi FernMarked guifg=#59b6b6 ctermfg=73 gui=NONE cterm=NONE
 hi GitSignsAdd guifg=#7cbe8c ctermfg=108
@@ -267,16 +273,23 @@ hi LspCodeActionText guifg=#6f78be ctermfg=104 gui=bold cterm=bold
 hi CmpItemAbbr guifg=#9ea3c0 ctermfg=146
 hi CmpItemAbbrMatch guifg=#929be5 ctermfg=104 gui=bold cterm=bold
 hi CmpItemAbbrMatchFuzzy guifg=#929be5 ctermfg=104 gui=bold cterm=bold
+hi CmpItemAbbrDeprecated guifg=#545c8c ctermfg=60 gui=strikethrough cterm=strikethrough
+hi CmpItemMenu guifg=#545c8c ctermfg=60 gui=italic cterm=italic
 hi CmpItemKind guifg=#8085a6 ctermfg=103
-hi CmpItemKindDefault guifg=#8085a6 ctermfg=103
 hi CmpItemKindText guifg=#8085a6 ctermfg=103
-hi CmpItemKindVariable guifg=#8085a6 ctermfg=103
-hi CmpItemKindKeyword guifg=#8085a6 ctermfg=103
-hi CmpItemKindInterface guifg=#8085a6 ctermfg=103
-hi CmpItemKindFunction guifg=#8085a6 ctermfg=103
-hi CmpItemKindMethod guifg=#8085a6 ctermfg=103
-hi CmpItemKindProperty guifg=#8085a6 ctermfg=103
-hi CmpItemKindUnit guifg=#8085a6 ctermfg=103
+hi CmpItemKindVariable guifg=#73c1a9 ctermfg=79
+hi CmpItemKindConstant guifg=#73c1a9 ctermfg=79
+hi CmpItemKindEnum guifg=#73c1a9 ctermfg=79
+hi CmpItemKindInterface guifg=#73c1a9 ctermfg=79
+hi CmpItemKindClass guifg=#73c1a9 ctermfg=79
+hi CmpItemKindFunction guifg=#ac8b83 ctermfg=138
+hi CmpItemKindMethod guifg=#ac8b83 ctermfg=138
+hi CmpItemKindModule guifg=#ac8b83 ctermfg=138
+hi CmpItemKindConstructor guifg=#ac8b83 ctermfg=138
+hi CmpItemKindKeyword guifg=#a8a384 ctermfg=144
+hi CmpItemKindProperty guifg=#a8a384 ctermfg=144
+hi CmpItemKindField guifg=#a8a384 ctermfg=144
+hi CmpItemKindUnit guifg=#a8a384 ctermfg=144
 hi FloatTitle guifg=#929be5 ctermfg=104 guibg=#222433 ctermbg=235 gui=NONE cterm=NONE
 hi TelescopeNormal guifg=#8085a6 ctermfg=103
 hi TelescopeTitle guifg=#929be5 ctermfg=104
@@ -289,7 +302,7 @@ hi TelescopeMultiSelection guifg=#a8a384 ctermfg=144
 hi CopilotSuggestion guifg=#545c8c ctermfg=60
 hi CleverFChar guifg=#a6afff ctermfg=147 guibg=#6471e5 ctermbg=63 gui=underline cterm=underline
 hi MiniJump guifg=#a6afff ctermfg=147 guibg=#6471e5 ctermbg=63 gui=underline cterm=underline
-hi ConflictMarkerBegin guibg=#548e7c ctermbg=66 gui=bold cterm=bold
+hi ConflictMarkerBegin guibg=#5b9a87 ctermbg=72 gui=bold cterm=bold
 hi ConflictMarkerOurs guibg=#26463b ctermbg=23 gui=NONE cterm=NONE
 hi ConflictMarkerTheirs guibg=#1c394b ctermbg=237 gui=NONE cterm=NONE
 hi ConflictMarkerEnd guibg=#417593 ctermbg=31 gui=bold cterm=bold
@@ -299,13 +312,36 @@ hi EasyMotionShade guifg=#545c8c ctermfg=60 guibg=#222433 ctermbg=235
 hi EasyMotionIncCursor guifg=#9ea3c0 ctermfg=146 guibg=#222433 ctermbg=235
 hi HopNextKey guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
 hi HopNextKey1 guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
-hi HopNextKey2 guifg=#548e7c ctermfg=66 gui=bold cterm=bold
+hi HopNextKey2 guifg=#5b9a87 ctermfg=72 gui=bold cterm=bold
 hi HopUnmatched guifg=#545c8c ctermfg=60
 hi FlashPrompt guifg=#929be5 ctermfg=104 gui=bold cterm=bold
 hi FlashPromptIcon guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
 hi FlashLabel guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
 hi FidgetTitle guifg=#73c1a9 ctermfg=79 gui=bold cterm=bold
 hi FidgetTask guifg=#545c8c ctermfg=60
+hi HlSearchLens guifg=#545c8c ctermfg=60 gui=italic cterm=italic
+hi HlSearchLensNear guifg=#545c8c ctermfg=60 gui=italic cterm=italic
+hi NotifyBackground guibg=#222433 ctermbg=235
+hi NotifyERRORBorder guifg=#cc8a8a ctermfg=174
+hi NotifyWARNBorder guifg=#796b68 ctermfg=242
+hi NotifyINFOBorder guifg=#628e80 ctermfg=66
+hi NotifyDEBUGBorder guifg=#82838d ctermfg=102
+hi NotifyTRACEBorder guifg=#628e80 ctermfg=66
+hi NotifyERRORIcon guifg=#ff9494 ctermfg=210
+hi NotifyWARNIcon guifg=#ac8b83 ctermfg=138
+hi NotifyINFOIcon guifg=#82dabf ctermfg=115
+hi NotifyDEBUGIcon guifg=#9ea3c0 ctermfg=146
+hi NotifyTRACEIcon guifg=#82dabf ctermfg=115
+hi NotifyERRORTitle guifg=#ff9494 ctermfg=210
+hi NotifyWARNTitle guifg=#ac8b83 ctermfg=138
+hi NotifyINFOTitle guifg=#82dabf ctermfg=115
+hi NotifyDEBUGTitle guifg=#9ea3c0 ctermfg=146
+hi NotifyTRACETitle guifg=#82dabf ctermfg=115
+hi NotifyERRORBody guifg=#9ea3c0 ctermfg=146
+hi NotifyWARNBody guifg=#9ea3c0 ctermfg=146
+hi NotifyINFOBody guifg=#9ea3c0 ctermfg=146
+hi NotifyDEBUGBody guifg=#9ea3c0 ctermfg=146
+hi NotifyTRACEBody guifg=#9ea3c0 ctermfg=146
 if has("nvim")
   let g:terminal_color_0 = '#111219'
   let g:terminal_color_1 = '#e58585'

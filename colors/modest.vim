@@ -1,6 +1,6 @@
 " Vim color file
 " Maintainer:   matveyt
-" Last Change:  2024 Jun 21
+" Last Change:  2024 Sep 04
 " License:      VIM License
 " URL:          https://github.com/matveyt/vim-modest
 
@@ -59,14 +59,14 @@ if &background is# 'dark'
     call s:hilite('Statement', 'Mantis', 'NONE', 'NONE')
     call s:hilite('CursorLine', 'NONE', 'Grey19', 'NONE')
     call s:hilite('TabLine', 'NONE', 'GreyGreen', 'underline')
-    call s:hilite('Underlined', 'fg', 'DarkChestnut', 'underline')
+    call s:hilite('Underlined', 'NONE', 'Grey19', 'underline')
     call s:hilite('WildMenu', 'bg', 'Mantis', 'gui=bold')
 else
     call s:hilite('Normal', 'EgyptianBlue', 'Beige')
     call s:hilite('Statement', 'DarkChestnut', 'NONE', 'NONE')
     call s:hilite('CursorLine', 'NONE', 'Grey85', 'NONE')
     call s:hilite('TabLine', 'NONE', 'LightSeaGreen', 'NONE')
-    call s:hilite('Underlined', 'fg', 'LightSeaGreen', 'underline')
+    call s:hilite('Underlined', 'NONE', 'Grey85', 'underline')
     call s:hilite('WildMenu', 'bg', 'LightSeaGreen')
 endif
 
@@ -84,8 +84,8 @@ call s:hilink('Normal', 'Terminal')
 call s:hilink('Comment', 'Conceal', 'CursorLineFold', 'CursorLineSign', 'EndOfBuffer',
     \ 'FoldColumn', 'Folded', 'Ignore', 'LineNr', 'LineNrAbove', 'LineNrBelow',
     \ 'NonText', 'SignColumn', 'SpecialKey')
-call s:hilink('Statement', 'Constant', 'Directory', 'helpHyperTextJump', 'MoreMsg',
-    \ 'Question', 'Special', 'Title', 'Type')
+call s:hilink('Statement', 'Constant', 'Directory', 'MoreMsg', 'Question', 'Special',
+    \ 'String', 'Title', 'Type')
 call s:hilink('CursorLine', 'ColorColumn', 'CursorColumn', 'VertSplit')
 call s:hilink('Error', 'MatchParen', 'PmenuThumb')
 call s:hilink('ErrorMsg', 'DiffDelete', 'WarningMsg')
@@ -108,6 +108,8 @@ if has('nvim')
     call s:hilink('StatusLineNC', 'TermCursor', 'WinBarNC')
     call s:hilink('Underlined', 'Substitute')
     call s:hilink('Visual', 'NormalFloat')
+else
+    call s:hilink('Underlined', 'helpHyperTextJump')
 endif
 
 call s:setansicolors('Eigengrau', 'Firebrick', 'Mantis', 'DarkChestnut', 'EgyptianBlue',
