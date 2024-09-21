@@ -198,6 +198,7 @@ function! s:compare_binary_versions(a, b)
   return s:compare_versions(s:get_version(a:a), s:get_version(a:b))
 endfunction
 
+let s:min_version = '0.53.0'
 let s:checked = {}
 function! fzf#exec(...)
   if !exists('s:exec')
@@ -225,7 +226,11 @@ function! fzf#exec(...)
     let s:exec = binaries[-1]
   endif
 
-  if a:0 && !has_key(s:checked, a:1)
+  let min_version = s:min_version
+  if a:0 && s:compare_versions(a:1, min_version) > 0
+    let min_version = a:1
+  endif
+  if !has_key(s:checked, min_version)
     let fzf_version = s:get_version(s:exec)
     if empty(fzf_version)
       let message = printf('Failed to run "%s --version"', s:exec)
@@ -233,17 +238,17 @@ function! fzf#exec(...)
       throw message
     end
 
-    if s:compare_versions(fzf_version, a:1) >= 0
-      let s:checked[a:1] = 1
+    if s:compare_versions(fzf_version, min_version) >= 0
+      let s:checked[min_version] = 1
       return s:exec
-    elseif a:0 < 2 && input(printf('You need fzf %s or above. Found: %s. Download binary? (y/n) ', a:1, fzf_version)) =~? '^y'
+    elseif a:0 < 2 && input(printf('You need fzf %s or above. Found: %s. Download binary? (y/n) ', min_version, fzf_version)) =~? '^y'
       let s:versions = {}
       unlet s:exec
       redraw
       call fzf#install()
-      return fzf#exec(a:1, 1)
+      return fzf#exec(min_version, 1)
     else
-      throw printf('You need to upgrade fzf (required: %s or above)', a:1)
+      throw printf('You need to upgrade fzf (required: %s or above)', min_version)
     endif
   endif
 
@@ -665,21 +670,17 @@ else
   let s:launcher = function('s:xterm_launcher')
 endif
 
-function! s:exit_handler(code, command, ...)
-  if a:code == 130
-    return 0
-  elseif has('nvim') && a:code == 129
-    " When deleting the terminal buffer while fzf is still running,
-    " Nvim sends SIGHUP.
-    return 0
-  elseif a:code > 1
+function! s:exit_handler(dict, code, command, ...)
+  if has_key(a:dict, 'exit')
+    call a:dict.exit(a:code)
+  endif
+  if a:code == 2
     call s:error('Error running ' . a:command)
     if !empty(a:000)
       sleep
     endif
-    return 0
   endif
-  return 1
+  return a:code
 endfunction
 
 function! s:execute(dict, command, use_height, temps) abort
@@ -731,7 +732,7 @@ function! s:execute(dict, command, use_height, temps) abort
   let exit_status = v:shell_error
   redraw!
   let lines = s:collect(a:temps)
-  return s:exit_handler(exit_status, command) ? lines : []
+  return s:exit_handler(a:dict, exit_status, command) < 2 ? lines : []
 endfunction
 
 function! s:execute_tmux(dict, command, temps) abort
@@ -746,7 +747,7 @@ function! s:execute_tmux(dict, command, temps) abort
   let exit_status = v:shell_error
   redraw!
   let lines = s:collect(a:temps)
-  return s:exit_handler(exit_status, command) ? lines : []
+  return s:exit_handler(a:dict, exit_status, command) < 2 ? lines : []
 endfunction
 
 function! s:calc_size(max, val, dict)
@@ -912,7 +913,7 @@ function! s:execute_term(dict, command, temps) abort
     endif
 
     let lines = s:collect(self.temps)
-    if !s:exit_handler(a:code, self.command, 1)
+    if s:exit_handler(self.dict, a:code, self.command, 1) >= 2
       return
     endif
 
