@@ -221,3 +221,9 @@
 [submodule "pack/plugins/start/vim-fauna"]
 	path = pack/plugins/start/vim-fauna
 	url = git@github.com:shmup/vim-fauna.git
+[submodule "pack/plugins/start/fzf-tags"]
+	path = pack/plugins/start/fzf-tags
+	url = https://github.com/zackhsi/fzf-tags.git
+[submodule "pack/plugins/start/vim-orgmode"]
+	path = pack/plugins/start/vim-orgmode
+	url = git@github.com:shmup/vim-orgmode.git
