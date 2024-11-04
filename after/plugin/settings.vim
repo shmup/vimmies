@@ -81,7 +81,7 @@ let g:sexp_enable_insert_mode_mappings = 1
 let g:chad_seed = "To assist: Be terse. Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize. Ask questions when unsure."
 let g:chad_options = {
     \ 'api_key': $CHAD,
-    \ 'model': "gpt-4o",
+    \ 'model': "gpt-4o-mini",
     \ 'temperature': 0.3,
     \ 'top_p': 1,
     \ 'top_k': 5,
