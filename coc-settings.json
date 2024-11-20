@@ -56,7 +56,7 @@
       "ignoredRootPaths": ["~"]
     },
     "raku": {
-      "command": "node ~/src/RakuNavigator/server/out/server.js --stdio",
+      "command": "node /home/jtm/src/RakuNavigator/server/out/server.js --stdio",
       "filetypes": ["raku", "rakumod", "rakudoc", "rakutest", "t", "pl6", "pm6", "p6", "t6"]
     }
   },
