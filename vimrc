@@ -1,17 +1,17 @@
-let g:slime_no_mappings = 1 " needs to be before it loads.. hm
+let g:slime_no_mappings = 1
+let g:copilot_enabled = 1
+
+let mapleader = "\<Space>"
 
 filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
-let lightscheme = 'komau'
-let darkscheme = 'apprentice'
-
+let lightscheme = 'xcode'
+let darkscheme = 'dogrun'
 execute 'colorscheme ' . darkscheme
 
-let g:copilot_enabled = 1
-let mapleader = "\<Space>"
-
-inoremap <C-\> <Plug>(copilot-suggest)
+nnoremap gt :Tags<CR>
+nnoremap gT :BTags<CR>
 
 set autoindent            " dont need smartindent. syntax files do that
 set encoding=utf-8        " encoding
@@ -33,9 +33,7 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd,*.com,*.tdy,*.dll,*.exe
 set wildignore+=*.o,*.obj,*.so,*.a,*.lib;
 set wildignore+=bower_components/*,*/.vim/junk/*
-set wildignore+=**/node_modules/**
-
-inoremap <C-l> λ
+set wildignore+=**/node_modules/**,tags
 
 " use existing tab if possible when loading a file from quickfix
 set switchbuf+=usetab
@@ -135,6 +133,7 @@ nnoremap <silent> <space>el :edit ~/brain/journals/<cr>
 nnoremap <silent> <space>eu :edit ~/txt/unicode.txt<cr>
 nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
+nnoremap <silent> <space>ep :edit ~/.profile<cr>
 nnoremap <silent> <space>ex :edit ~/.Xdefaults<cr>
 nnoremap <silent> <space>ed :edit ~/projects/xom.world/txt/shmup.crawlrc<cr>
 nnoremap <silent> <space>et :edit ~/.tmux.conf<cr>
@@ -161,7 +160,7 @@ nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
 nnoremap <silent>yoz :syntax sync fromstart<CR>
-nnoremap yoo :ToggleChad<CR>
+nnoremap yoo :ToggleLlm<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
 
@@ -178,6 +177,8 @@ nnoremap c* *Ncgn
 nnoremap c# #NcgN
 nnoremap cg* g*Ncgn
 nnoremap cg# g#NcgN
+
+
 
 " change to file dir, repo dir, or Z result
 nnoremap <silent> ,cd :lcd %:p:h<cr>
@@ -215,14 +216,15 @@ nnoremap ,V :vert sfind ./**/*
 nnoremap ,t :tabfind *
 nnoremap ,T :tabfind ./**/*
 
+" code assistance
+inoremap <silent> <C-l> <Plug>(copilot-suggest)
+inoremap <silent> <C-j> <Plug>(copilot-next)
+inoremap <silent> <S-C-j> <Plug>(copilot-accept-line)
 nnoremap <silent> ,cl :CocCommand document.toggleCodeLens<CR>
-nnoremap <silent> ,cp :silent! let g:copilot_enabled = !get(g:, 'copilot_enabled', v:false) \| let b:copilot_enabled = g:copilot_enabled \| echo "Copilot " . (g:copilot_enabled ? "enabled" : "disabled")<CR>
 nnoremap <silent> ,cw :Workspaced<CR>
-
-" augroup CopilotSync
-"  autocmd!
-"  autocmd BufEnter * if !exists('b:copilot_enabled') | let b:copilot_enabled = get(g:, 'copilot_enabled', 0) | endif
-" augroup END
+nnoremap <silent> ,cp :let g:copilot_enabled = !g:copilot_enabled
+    \ <bar> echo "Copilot " . (g:copilot_enabled ? "enabled" : "disabled")
+    \ <CR>
 
 " let me save with sudo when needed
 cmap w!! %!sudo tee > /dev/null %
@@ -345,6 +347,13 @@ augroup CursorLine
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
+
+function! UpdatePluginDocs()
+    silent! helptags ALL
+
+    echo "Plugin documentation updated!"
+endfunction
+command! UpdatePluginDocs call UpdatePluginDocs()
 
 function! WrapWithAsciiWalls(style) range
   let l:start = a:firstline
