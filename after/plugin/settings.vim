@@ -132,9 +132,6 @@ let g:goyo_width = 90
 let g:goyo_height = '95%'
 let g:goyo_linenr = 0
 
-" fzf
-let g:fzf_preview_window = ''
-
 " EditorConfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
