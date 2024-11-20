@@ -227,3 +227,6 @@
 [submodule "pack/plugins/start/vim-orgmode"]
 	path = pack/plugins/start/vim-orgmode
 	url = git@github.com:shmup/vim-orgmode.git
+[submodule "pack/plugins/start/llm.vim"]
+	path = pack/plugins/start/llm.vim
+	url = https://github.com/shmup/llm.vim.git
