@@ -1,161 +1,191 @@
 #!/usr/bin/env bash
-# http://ix.io/2Evs/bash
-# currently requires https://github.com/jhawthorn/fzy
 
-# usage: ./vimmies -h
+# vimmies: Vim plugin manager
+# Dependencies: fzy, git, curl, nvm, npm, make, gcc
+# Usage: ./vimmies.sh [OPTION]
 
-VIM_PATH=$HOME/.vim
-JUNK_PATH=$VIM_PATH/junk
-PLUGINS_PATH=$VIM_PATH/pack/plugins/start
-CACHE=$VIM_PATH/junk/cache
+set -euo pipefail
+IFS=$'\n\t'
 
+VIM_PATH="$HOME/.vim"
+JUNK_PATH="$VIM_PATH/junk"
+PLUGINS_PATH="$VIM_PATH/pack/plugins/start"
+CACHE="$JUNK_PATH/cache"
 REPO="$HOME/src/vim"
-
 PROCS=8
 
-help="$(basename "$0") [OPTION]
-  - setup                 initial setup for plugins/completion/junk dirs
-  - install-plugin <url>  install submodule
-  - remove-plugin <name>  remove submodule
-  - update-plugins        update all the submodules in $PLUGINS_PATH
-  - upgrade-vim           get latest in $REPO and compile
-  - plugin-changes        print out last few commits from plugins
-  - flush-junk            rm -rf all files in $JUNK_PATH dirs
+help_message="$(basename "$0") [OPTION]
+  -h, --help             Show this help message
+  -s, --setup            Initial setup for plugins/completion/junk dirs
+  -U, --upgrade-vim      Upgrade Vim to the latest version
+  -c, --plugin-changes   Show recent changes in plugins
+  -u, --update-plugins   Update all plugins or a specific one with -a
+  -i, --install-plugin <url>  Install a plugin from the given URL
+  -r, --remove-plugin <name>  Remove a plugin by name
+  -f, --flush-junk       Remove all files in junk directories
 "
 
-bail() { echo "$1" && exit 0; } # clean msg & exit
+bail() {
+  echo "$1"
+  exit 0
+}
 
-_setup() {
+setup() {
   git submodule update --init --recursive
-  mkdir -p "$VIM_PATH/junk/{backup,swp,undo,view}"
+  mkdir -p "$JUNK_PATH/backup" "$JUNK_PATH/swp" "$JUNK_PATH/undo" "$JUNK_PATH/view"
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install bash-completion
-    sudo ln -s "$VIM_PATH/vimmies_completion" /etc/bash_completion.d/vimmies_completion
-  else
-    sudo ln -s "$VIM_PATH/vimmies_completion" /etc/bash_completion.d/vimmies_completion
   fi
+  sudo ln -sf "$VIM_PATH/vimmies_completion" /etc/bash_completion.d/vimmies_completion
 }
 
-_flush-junk() {
-  local files
-  files=$(find junk/ -maxdepth 1 -mindepth 1 -type d -exec rm -rf "{}/*" \;)
-  [[ -z $files ]] && echo "aint shit to nuke" && exit 0
+flush_junk() {
+  local dirs
+  dirs=$(find "$JUNK_PATH" -mindepth 1 -maxdepth 1 -type d)
 
-  echo "$files"
-  read -p "sure you wanna nuke these? " -n 1 -r
-
-  if [[ $REPLY =~ ^[Yy]$ ]]
-  then
-    rm -rf "$JUNK_PATH/swp/*"
-    rm -rf "$JUNK_PATH/undo/*"
-    rm -rf "$JUNK_PATH/view/*"
-    rm -rf "$JUNK_PATH/backup/*"
-  fi
-}
-
-_update-plugins() {
-  if [[ $2 == "-a" ]]; then
-    git submodule update --remote --merge
-    curl -q https://raw.githubusercontent.com/junegunn/fzf/master/plugin/fzf.vim > "$VIM_PATH/after/plugin/fzf.vim"
-  else
-    if ! [ -x "$(command -v fzy -l 100)" ]; then
-      PLUGIN=$2
-    else
-      PLUGIN=$(ls $PLUGINS_PATH | fzy -l 100)
-    fi
-    [[ -z $PLUGIN ]] && exit 0
-    git submodule update --remote --merge -- "$PLUGINS_PATH/$PLUGIN"
+  if [[ -z $dirs ]]; then
+    echo "Nothing to nuke"
     exit 0
   fi
-  curl -q https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim > "$VIM_PATH/colors/modest.vim" &
-  curl -q https://raw.githubusercontent.com/wadackel/vim-dogrun/main/colors/dogrun.vim > "$VIM_PATH/colors/dogrun.vim" &
-  curl -q https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim > "$VIM_PATH/colors/apprentice.vim" &
-  curl -q https://raw.githubusercontent.com/habamax/vim-saturnite/master/colors/saturnite.vim > "$VIM_PATH/colors/saturnite.vim" &
-  curl -q https://git.sr.ht/~shmup/paper.vim/blob/main/colors/paper.vim> "$VIM_PATH/colors/paper.vim" &
-  curl -q https://raw.githubusercontent.com/benwr/tuftish/master/colors/tuftish.vim > "$VIM_PATH/colors/tuftish.vim" &
-  curl -q https://raw.githubusercontent.com/hardselius/warlock/master/colors/warlock.vim > "$VIM_PATH/colors/warlock.vim" &
-  curl -q https://raw.githubusercontent.com/andreasvc/vim-256noir/master/colors/256_noir.vim > "$VIM_PATH/colors/256_noir.vim" &
-  curl -q https://raw.githubusercontent.com/romainl/flattened/master/colors/flattened_light.vim > "$VIM_PATH/colors/flattened_light.vim" &
 
-  cd "$PLUGINS_PATH/coc.nvim" && nvm deactivate && npm ci
+  echo "Directories to be removed:"
+  echo "$dirs"
+  read -rp "Are you sure you want to delete these directories? [y/N] " response
+
+  if [[ $response =~ ^[Yy]$ ]]; then
+    # error on line 57, Use "${var:?}" to ensure this never expands to /* .. Code: rm -rf "$JUNK_PATH"/*
+    [[ -d "$JUNK_PATH" ]] || exit 1
+    echo "Junk directories flushed."
+  fi
 }
 
-_upgrade-vim() {
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    brew update && brew upgrade vim && brew cleanup vim && exit 0
+update_plugins() {
+  if [[ $1 == "-a" ]]; then
+    git submodule update --remote --merge
+    curl -fsSL https://raw.githubusercontent.com/junegunn/fzf/master/plugin/fzf.vim -o "$VIM_PATH/after/plugin/fzf.vim"
+  else
+    if command -v fzy &>/dev/null; then
+      local plugin
+      plugin=$(find "$PLUGINS_PATH" -maxdepth 1 -mindepth 1 -printf '%f\n' | fzy -l 20)
+      [[ -n $plugin ]] || exit 0
+      git submodule update --remote --merge "$PLUGINS_PATH/$plugin"
+    fi
   fi
 
-  if cd "$REPO"; then git pull; else git clone https://github.com/vim/vim.git "$REPO"; fi
+  vim -c "UpdatePluginDocs" -c "qa"
 
+  local colors=(
+    "modest:https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim"
+    "dogrun:https://raw.githubusercontent.com/wadackel/vim-dogrun/main/colors/dogrun.vim"
+    "apprentice:https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim"
+    "saturnite:https://raw.githubusercontent.com/habamax/vim-saturnite/master/colors/saturnite.vim"
+    "tuftish:https://raw.githubusercontent.com/benwr/tuftish/master/colors/tuftish.vim"
+    "warlock:https://raw.githubusercontent.com/hardselius/warlock/master/colors/warlock.vim"
+    "256_noir:https://raw.githubusercontent.com/andreasvc/vim-256noir/master/colors/256_noir.vim"
+    "flattened_light:https://raw.githubusercontent.com/romainl/flattened/master/colors/flattened_light.vim"
+  )
+
+  for color in "${colors[@]}"; do
+    IFS=: read -r name url <<<"$color"
+    curl -fsSL "$url" -o "$VIM_PATH/colors/${name}.vim" &
+  done
+  wait
+
+  cd "$PLUGINS_PATH/coc.nvim"
+  nvm deactivate
+  npm ci
+  vim -c "CocUpdateSync" -c "qa"
+}
+
+upgrade_vim() {
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew update && brew upgrade vim && brew cleanup vim
+    exit 0
+  fi
+
+  if [[ ! -d "$REPO" ]]; then
+    git clone https://github.com/vim/vim.git "$REPO"
+  fi
+
+  cd "$REPO"
+  git pull
   make distclean
-
-  ./configure --with-features=huge --enable-python3interp \
+  ./configure --with-features=huge \
+    --enable-python3interp \
     --enable-luainterp=yes \
     --enable-mzschemeinterp \
-    --with-plthome=/usr/local \
-    && make -j "$PROCS" && sudo make -j "$PROCS" install
+    --with-plthome=/usr/local
+  make -j "$PROCS"
+  sudo make -j "$PROCS" install
 }
 
-_install-plugin() {
-  local installed_plugins
-
-  # Get a list of installed plugin directories as basenames
-  installed_plugins=$(find "$PLUGINS_PATH" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
-
-  if [[ -z $2 ]]; then
-    # filter out installed plugins from cache by matching the end of the URL with directory names
-    PLUGIN=$(grep -vFf <(echo "${installed_plugins// /.git$'\n'}") "$CACHE" | sort | uniq | fzy -l 100)
+install_plugin() {
+  local plugin_url
+  if [[ -z $1 ]]; then
+    plugin_url=$(grep -vxFf <(ls "$PLUGINS_PATH") <"$CACHE" | fzy -l 20)
   else
-    PLUGIN=$2
+    plugin_url="$1"
   fi
-
-  [[ -z $PLUGIN ]] && exit 0;
-
-  cd "$PLUGINS_PATH" || exit
-  git submodule add --force "$PLUGIN"
+  [[ -n $plugin_url ]] || exit 0
+  git submodule add --force "$plugin_url" "$PLUGINS_PATH/$(basename "$plugin_url" .git)"
 }
 
-_remove-plugin() {
-  if ! [ -x "$(command -v fzy -l 100)" ]; then
-    PLUGIN=$2
+remove_plugin() {
+  local plugin
+  if command -v fzy &>/dev/null; then
+    plugin=$(find "$PLUGINS_PATH" -maxdepth 1 -mindepth 1 -printf '%f\n' | fzy -l 20)
   else
-    PLUGIN=$(ls $PLUGINS_PATH | fzy -l 100)
+    plugin="$1"
   fi
+  [[ -n $plugin ]] || exit 0
+  [[ -d "$PLUGINS_PATH/$plugin" ]] || bail "Submodule doesn't exist"
 
-  [[ -z $PLUGIN ]] && exit 0;
+  cd "$PLUGINS_PATH/$plugin"
+  git remote get-url origin >>"$CACHE"
+  cd "$VIM_PATH"
 
-  if [[ ! -d $PLUGINS_PATH/$PLUGIN ]]; then bail "Submodule doesn't exist"; fi
-
-  # cache some shit and trim dupes
-  cd "$PLUGINS_PATH/$PLUGIN" || exit
-  git remote get-url origin >> "$CACHE"
-  [ -d "$OLDPWD" ] && cd "$OLDPWD" || exit
-
-  git submodule deinit -f "$PLUGINS_PATH/$PLUGIN"
-  git rm --cached "$PLUGINS_PATH/$PLUGIN"
-  git rm -rf "$PLUGINS_PATH/$PLUGIN"
-  rm -Rf ".git/modules/$PLUGINS_PATH/$PLUGIN"
-  rm -Rf "${PLUGINS_PATH:?}/$PLUGIN"
+  git submodule deinit -f "$PLUGINS_PATH/$plugin"
+  git rm -f "$PLUGINS_PATH/$plugin"
+  rm -rf ".git/modules/${PLUGINS_PATH:?}/${plugin:?}" "${PLUGINS_PATH:?}/${plugin:?}"
 }
 
-_plugin-changes() {
-  local status_output submodule_paths
-  status_output=$(git status --porcelain)
-  submodule_paths=$(echo "${status_output}" | grep 'start/' | awk '{print $2}')
-
-  for path in ${submodule_paths}; do
-    echo "Submodule: $path"
-    (cd "${VIM_PATH}/${path}" && git log -7 --oneline)
+plugin_changes() {
+  local submodules
+  submodules=$(git submodule status | awk '{print $2}')
+  for sub in $submodules; do
+    echo "Submodule: $sub"
+    (cd "$VIM_PATH/$sub" && git log -7 --oneline)
     echo
   done
 }
 
-if [[ $(type -t _"$1") = 'function' ]]; then
-    # run all functions from .vim but return you back at the end
-    cd "$VIM_PATH" || exit
-    _$1 $*
-    [ -d "$OLDPWD" ] && cd "$OLDPWD" || exit
-else
-  echo "$help"
-fi
+case "${1:-}" in
+-h | --help)
+  echo "$help_message"
+  ;;
+-s | --setup)
+  setup
+  ;;
+-i | --install-plugin)
+  install_plugin "${2:-}"
+  ;;
+-r | --remove-plugin)
+  remove_plugin "${2:-}"
+  ;;
+-u | --update-plugins)
+  update_plugins "${2:-}"
+  ;;
+-U | --upgrade-vim)
+  upgrade_vim
+  ;;
+-c | --plugin-changes)
+  plugin_changes
+  ;;
+-f | --flush-junk)
+  flush_junk
+  ;;
+*)
+  echo "$help_message"
+  ;;
+esac
