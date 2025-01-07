@@ -188,9 +188,6 @@
 	path = pack/plugins/start/vim-scriptease
 	url = https://github.com/tpope/vim-scriptease.git
 	ignore = dirty
-[submodule "pack/plugins/start/vim-svelte-plugin"]
-	path = pack/plugins/start/vim-svelte-plugin
-	url = https://github.com/leafOfTree/vim-svelte-plugin.git
 [submodule "pack/plugins/start/vim-css3-syntax"]
 	path = pack/plugins/start/vim-css3-syntax
 	url = https://github.com/hail2u/vim-css3-syntax.git
