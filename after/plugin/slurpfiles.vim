@@ -8,7 +8,19 @@ vim9script
 #   :Slurp -w or --working-dir to aggregate all files in the current working directory
 # you can use -r with -b or -w to recursively slurp files in the directory
 
-def SlurpBuffers(...args: list<string>)
+def SlurpBuffers(firstline: number, lastline: number, ...args: list<string>)
+  if firstline != lastline
+    var lines = getline(firstline, lastline)
+    var output = '# Sourced from ' .. expand('%:t') .. "\n\n"
+      .. lines->join("\n") .. "\n\n"
+    tabnew
+    setlocal buftype=nofile bufhidden=wipe noswapfile nowrap
+    setline(1, output->split("\n"))
+    @+ = output
+    echo "Selection slurped and copied to clipboard!"
+    return
+  endif
+
   var only_this_tab = false
   var mode = 'buffer'
   var target_dir = ''
@@ -95,4 +107,4 @@ def SlurpBuffers(...args: list<string>)
   echo "Content slurped and copied to clipboard!"
 enddef
 
-command! -nargs=* Slurp SlurpBuffers(<f-args>)
+command! -range -nargs=* Slurp call SlurpBuffers(<line1>, <line2>, <f-args>)
