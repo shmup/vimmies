@@ -71,7 +71,7 @@ def SlurpBuffers(...args: list<string>)
 
     for buf in buffers
       var fname = bufname(buf)
-      if empty(fname)
+      if empty(fname) || !filereadable(fname)
         continue
       endif
       var lines = getbufline(buf, 1, '$')
