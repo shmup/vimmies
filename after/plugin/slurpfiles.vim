@@ -9,17 +9,36 @@ vim9script
 # you can use -r with -b or -w to recursively slurp files in the directory
 
 def SlurpBuffers(...args: list<string>)
-  var only_this_tab = args->len() > 0 && (args[0] ==# '-t' || args[0] ==# '--tab-only')
-  var buffer_directory_mode = args->len() > 0 && (args[0] ==# '-b' || args[0] ==# '--buffer-dir')
-  var working_directory_mode = args->len() > 0 && (args[0] ==# '-w' || args[0] ==# '--working-dir')
-  var recursive_current_dir = args->len() > 0 && args[0] ==# '-rd'
-  var recursive = args->len() > 1 && args[1] ==# '-r' || recursive_current_dir
+  var only_this_tab = false
+  var buffer_directory_mode = false
+  var working_directory_mode = false
+  var recursive = false
+  var recursive_current_dir = false
+
+  # manual argument parsing
+  for arg in args
+    if arg ==# '-t' || arg ==# '--tab-only'
+      only_this_tab = true
+    elseif arg ==# '-b' || arg ==# '--buffer-dir'
+      buffer_directory_mode = true
+    elseif arg ==# '-w' || arg ==# '--working-dir'
+      working_directory_mode = true
+    elseif arg ==# '-r' || arg ==# '--recursive'
+      recursive = true
+    elseif arg ==# '-rd'
+      recursive_current_dir = true
+    else
+      echo "Unknown argument: " .. arg
+      return
+    endif
+  endfor
+
   var buffers: list<number> = []
   var output = ''
 
   if buffer_directory_mode || working_directory_mode || recursive_current_dir
     var target_dir = working_directory_mode ? getcwd() : (buffer_directory_mode ? expand('%:p:h') : getcwd())
-    var glob_pattern = recursive ? target_dir .. '/**/*' : target_dir .. '/*'
+    var glob_pattern = recursive || recursive_current_dir ? target_dir .. '/**/*' : target_dir .. '/*'
     var files = glob(glob_pattern, false, true)
     for file in files
       if !isdirectory(file)
@@ -69,4 +88,4 @@ def SlurpBuffers(...args: list<string>)
   echo "Content slurped and copied to clipboard!"
 enddef
 
-command! -nargs=? Slurp SlurpBuffers(<f-args>)
+command! -nargs=* Slurp SlurpBuffers(<f-args>)
