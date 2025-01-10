@@ -66,7 +66,7 @@ def SlurpBuffers(...args: list<string>)
       var current_tab = tabpagenr()
       buffers = tabpagebuflist(current_tab)->filter('buflisted(v:val)')
     else
-      buffers = filter(getbufinfo(), 'v:val.buflisted')->map('v:val.bufnr')
+      buffers = filter(getbufinfo(), 'v:val.listed')->map('v:val.bufnr')
     endif
 
     for buf in buffers
