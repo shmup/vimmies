@@ -10,69 +10,76 @@ vim9script
 
 def SlurpBuffers(...args: list<string>)
   var only_this_tab = false
-  var buffer_directory_mode = false
-  var working_directory_mode = false
+  var mode = 'buffer'
+  var target_dir = ''
   var recursive = false
-  var recursive_current_dir = false
 
-  # manual argument parsing
   for arg in args
     if arg ==# '-t' || arg ==# '--tab-only'
       only_this_tab = true
     elseif arg ==# '-b' || arg ==# '--buffer-dir'
-      buffer_directory_mode = true
+      if mode !=# 'buffer'
+        echo "Conflicting options specified."
+        return
+      endif
+      mode = 'file'
+      var buf_dir = expand('%:p:h')
+      if empty(buf_dir)
+        echo "Current buffer has no associated directory."
+        return
+      endif
+      target_dir = buf_dir
     elseif arg ==# '-w' || arg ==# '--working-dir'
-      working_directory_mode = true
+      if mode !=# 'buffer'
+        echo "Conflicting options specified."
+        return
+      endif
+      mode = 'file'
+      target_dir = getcwd()
     elseif arg ==# '-r' || arg ==# '--recursive'
       recursive = true
-    elseif arg ==# '-rd'
-      recursive_current_dir = true
     else
       echo "Unknown argument: " .. arg
       return
     endif
   endfor
 
-  var buffers: list<number> = []
   var output = ''
 
-  if buffer_directory_mode || working_directory_mode || recursive_current_dir
-    var target_dir = working_directory_mode ? getcwd() : (buffer_directory_mode ? expand('%:p:h') : getcwd())
-    var glob_pattern = recursive || recursive_current_dir ? target_dir .. '/**/*' : target_dir .. '/*'
+  if mode ==# 'file'
+    var glob_pattern = recursive ? target_dir .. '/**/*' : target_dir .. '/*'
     var files = glob(glob_pattern, false, true)
+
     for file in files
       if !isdirectory(file)
-        var content = readfile(file)->join("\n")
-        if !empty(content)
-          output ..= '# ' .. fnamemodify(file, ':t') .. "\n\n" .. content .. "\n\n"
+        var lines = readfile(file)
+        if empty(lines)
+          continue
         endif
+        var content = lines->join("\n")
+        output ..= '# ' .. fnamemodify(file, ':t') .. "\n\n" .. content .. "\n\n"
       endif
     endfor
   else
+    var buffers: list<number>
     if only_this_tab
       var current_tab = tabpagenr()
-      for win in getwininfo()
-        if win.tabnr == current_tab
-          var buf = win.bufnr
-          if buflisted(buf) && index(buffers, buf) == -1
-            call add(buffers, buf)
-          endif
-        endif
-      endfor
+      buffers = tabpagebuflist(current_tab)->filter('buflisted(v:val)')
     else
-      buffers = range(1, bufnr('$'))->filter('buflisted(v:val)')
+      buffers = filter(getbufinfo(), 'v:val.buflisted')->map('v:val.bufnr')
     endif
 
     for buf in buffers
-      bufload(buf)
       var fname = bufname(buf)
       if empty(fname)
         continue
       endif
-      var content = getbufline(buf, 1, '$')->join("\n")
-      if !empty(content)
-        output ..= '# ' .. fname .. "\n\n" .. content .. "\n\n"
+      var lines = getbufline(buf, 1, '$')
+      if empty(lines)
+        continue
       endif
+      var content = lines->join("\n")
+      output ..= '# ' .. fname .. "\n\n" .. content .. "\n\n"
     endfor
   endif
 
