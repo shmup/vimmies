@@ -1,8 +1,9 @@
 vim9script
 
 # slurpfiles.vim
-# aggregate buffers into a new buffer and copy to system clipboard
+# combines 1+ buffer into a single buffer w/ file path headers
 #   :Slurp to aggregate all buffers into a new buffer
+#   :Slurp <selection> to copy selected lines into a new buffer
 #   :Slurp -t or --tab-only to only aggregate current tab's buffers
 #   :Slurp -b or --buffer-dir to aggregate all files in the current buffer's directory
 #   :Slurp -w or --working-dir to aggregate all files in the current working directory
@@ -11,7 +12,7 @@ vim9script
 def SlurpBuffers(firstline: number, lastline: number, ...args: list<string>)
   if firstline != lastline
     var lines = getline(firstline, lastline)
-    var output = '# Sourced from ' .. expand('%:t') .. "\n\n"
+    var output = '# sourced from ' .. expand('%:t') .. "\n\n"
       .. lines->join("\n") .. "\n\n"
     tabnew
     setlocal buftype=nofile bufhidden=wipe noswapfile nowrap
