@@ -36,9 +36,6 @@
 [submodule "pack/plugins/start/vim-projectionist"]
 	path = pack/plugins/start/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
-[submodule "pack/plugins/start/vim-fireplace"]
-	path = pack/plugins/start/vim-fireplace
-	url = https://github.com/tpope/vim-fireplace.git
 [submodule "pack/plugins/start/Colorizer"]
 	path = pack/plugins/start/Colorizer
 	url = https://github.com/chrisbra/Colorizer.git
