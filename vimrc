@@ -7,11 +7,20 @@ filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
 let lightscheme = 'xcode'
-let darkscheme = 'dogrun'
+let darkscheme = 'apprentice'
+set background=dark
 execute 'colorscheme ' . darkscheme
 
 nnoremap gt :Tags<CR>
 nnoremap gT :BTags<CR>
+
+" i do this a lot: ggVG followed by <space>y
+" TODO -DOES NOT WORK
+nnoremap <C-S-c> ggVG<Space>y
+
+
+" I want gL to run :Lines
+nnoremap gl :Lines<CR>
 
 set autoindent            " dont need smartindent. syntax files do that
 set encoding=utf-8        " encoding
@@ -33,7 +42,7 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd,*.com,*.tdy,*.dll,*.exe
 set wildignore+=*.o,*.obj,*.so,*.a,*.lib;
 set wildignore+=bower_components/*,*/.vim/junk/*
-set wildignore+=**/node_modules/**,tags
+set wildignore+=**/node_modules/**,tags,**/dist/**
 
 " use existing tab if possible when loading a file from quickfix
 set switchbuf+=usetab
@@ -133,6 +142,8 @@ nnoremap <silent> <space>el :edit ~/brain/journals/<cr>
 nnoremap <silent> <space>eu :edit ~/txt/unicode.txt<cr>
 nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
 nnoremap <silent> <space>eb :edit ~/.bashrc<cr>
+nnoremap <silent> <space>ej :edit ~/matrix/brain/journals/<cr>:$<cr>
+nnoremap <silent> <space>em :edit ~/matrix<cr>
 nnoremap <silent> <space>ep :edit ~/.profile<cr>
 nnoremap <silent> <space>ex :edit ~/.Xdefaults<cr>
 nnoremap <silent> <space>ed :edit ~/projects/xom.world/txt/shmup.crawlrc<cr>
@@ -221,6 +232,7 @@ inoremap <silent> <C-l> <Plug>(copilot-suggest)
 inoremap <silent> <C-j> <Plug>(copilot-next)
 inoremap <silent> <S-C-j> <Plug>(copilot-accept-line)
 nnoremap <silent> ,cl :CocCommand document.toggleCodeLens<CR>
+nnoremap <silent> ,ch :CocCommand document.toggleCodeLens<CR>
 nnoremap <silent> ,cw :Workspaced<CR>
 nnoremap <silent> ,cp :let g:copilot_enabled = !g:copilot_enabled
     \ <bar> echo "Copilot " . (g:copilot_enabled ? "enabled" : "disabled")
@@ -266,14 +278,11 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <space>gb :Git blame<cr>
 nmap <space>gs :Git<cr>
 nmap <space>ge :Gedit<cr>
-nmap <space>gc :Gcommit -v<cr>
-nmap <space>gn :Gcommit -v --no-verify<cr>
-nmap <space>gm :Gcommit -v --amend<cr>
-nmap <space>gp :Gpush<cr>
 nmap <space>gl :BCommits<cr>
 nmap <space>gL :GcLog<cr>
 nmap <space>gd :Gdiffsplit<cr>
 nmap <space>gw :Gwrite<cr>
+nmap <space>gp :Git log -p -- %<cr>
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -296,15 +305,17 @@ set statusline+=%{printf('x%X',char2nr(getline('.')[getpos('.')[2]-1]))}
 set statusline+=\              " and two spaces
 set statusline+=%Y             " show the filetype
 set statusline+=\              " and two spaces
-set statusline+=%{ObsessionStatus('💾\ ','')}
-" set statusline+=%{get(b:,'copilot_enabled',0)?'👂\':'🙉'}
-set statusline+=\              " and two spaces
-set statusline+=%{g:coc_enabled?'😊':'😴'}
+set statusline+=%{www#status()}
+set statusline+=%{ObsessionStatus('💾','')}
+set statusline+=%{g:coc_enabled?'🌍':'🌕'}
+set statusline+=%{g:copilot_enabled?'🌚':'🌜'} " 🌚 🌛 🌜 🌝 🌞
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
 set statusline+=%<%F           " (truncated) full path to the file we are editing
 set statusline+=%m             " [+] if the file is modified but not saved
 set statusline+=%r             " show [RO] if a file is read-only
+
+nnoremap <silent> ,gg :Goyo<cr>
 
 command! -range GOpen execute 'silent ! git browse ' . expand('%') . ' ' . <line1> . ' ' . <line2> | checktime | redraw!
 
@@ -337,15 +348,15 @@ augroup Convenience
 
   " https://vi.stackexchange.com/a/69/287
   " prevents unmodified buffer + crash = bullshit swap file
-  autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
-        \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+  " autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
+  "       \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
 augroup END
 
-augroup CursorLine
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-augroup END
+" augroup CursorLine
+"   autocmd!
+"   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"   autocmd WinLeave * setlocal nocursorline
+" augroup END
 
 
 function! UpdatePluginDocs()
@@ -397,46 +408,5 @@ command! -range H4 <line1>,<line2>call WrapWithAsciiWalls('H4')
 
 " colors
 hi SpellBad term=reverse ctermbg=226 ctermfg=0
-
-highlight SEND_HELP ctermbg=131 ctermfg=white
-highlight SEND_WARNING ctermbg=129 ctermfg=white
-highlight CLEAN ctermbg=white ctermfg=black
-highlight PASS ctermbg=131 ctermfg=65
-highlight GENERIC cterm=reverse gui=reverse
-highlight ColorColumn ctermbg=238
-highlight YELLOW ctermbg=black ctermfg=yellow
-highlight GREEN ctermbg=black ctermfg=green
-highlight RED ctermbg=black ctermfg=red
-
-augroup SpecialHighlights
-  autocmd!
-  autocmd WinEnter,BufEnter *
-        \  call clearmatches()
-        \| call matchadd('ColorColumn', '\s\+$', 100)
-        \| call matchadd('SEND_HELP', '\<HACK\>')
-        \| call matchadd('SEND_HELP', '\<ERROR\>')
-        \| call matchadd('SEND_HELP', '\<CLOSED\>')
-        \| call matchadd('SEND_HELP', '\<BLOCKED\>')
-        \| call matchadd('SEND_HELP', '\<REMOVED\>')
-        \| call matchadd('SEND_HELP', '\<BREAKING CHANGE\>')
-        \| call matchadd('SEND_HELP', '\<ALERT\>', 101)
-        \| call matchadd('GENERIC', '^\<EMILY\>', 101)
-        \| call matchadd('GENERIC', '^\<KRISTIAN\>', 101)
-        \| call matchadd('GENERIC', '\<FIXED\>')
-        \| call matchadd('GENERIC', '\<TODO\>')
-        \| call matchadd('GENERIC', '\<NOTE\>')
-        \| call matchadd('YELLOW', '^\<ASK\>')
-        \| call matchadd('YELLOW', '#\d\+')
-        \| call matchadd('SEND_WARNING', '\*priority\*')
-        \| call matchadd('SEND_WARNING', '\*deprioritize\*')
-        \| call matchadd('RED', '^\zs>')
-        \| call matchadd('YELLOW', '^\zs<')
-        \| call matchadd('GREEN', '^\zs!')
-        \| call matchadd('YELLOW', '\/\/\s\+@.*')
-        \| call matchadd('YELLOW', '\d\{4}-\d\{2}-\d\{2}T\d\{2}:\d\{2}:\d\{2}-\d\{4}')
-        \| call matchadd('GENERIC', '\<NOTES\>')
-        \| call matchadd('GENERIC', '\<EXCEPTION\>')
-        \| call matchadd('CLEAN', '\<CLEANME\>')
-augroup END
 
 packadd! matchit

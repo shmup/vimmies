@@ -7,10 +7,12 @@
 
 let g:coc_global_extensions = [
       \'coc-clangd',
-      \'coc-deno',
+      \'coc-go',
+      \'coc-phpls',
       \'coc-pyright',
       \'coc-sh',
       \'coc-tsserver',
+      \'coc-zig'
       \]
 
 highlight CocErrorFloat ctermfg=206 ctermbg=233
@@ -79,16 +81,17 @@ let g:sexp_enable_insert_mode_mappings = 1
 "  AI CRAP
 
 let g:llm_seed = "To assist: Be terse. Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize. Ask questions when unsure."
+" controls randomness (0=deterministic, 1=creative)
+" maximum length of response in tokens
+" nucleus sampling - restricts to most likely tokens that sum to 70% probability
+" limits response to 5 most likely next tokens (0-200 words)
 let g:llm_options = {
       \ 'model': 'claude-3.5-sonnet',
-      \ 'temperature': 0.3,
-      \ 'max_tokens': 1000,
+      \ 'temperature': 0.1,
+      \ 'max_tokens': 2000,
       \ 'top_p': 0.7,
-      \ 'top_k': 5,
+      \ 'top_k': 40,
       \ }
-
-
-
 
 " ▄▄▌   ▄▄▄·  ▐ ▄  ▄▄ • ▄• ▄▌ ▄▄▄·  ▄▄ • ▄▄▄ ..▄▄ ·
 " ██•  ▐█ ▀█ •█▌▐█▐█ ▀ ▪█▪██▌▐█ ▀█ ▐█ ▀ ▪▀▄.▀·▐█ ▀.

@@ -14,6 +14,8 @@ CACHE="$JUNK_PATH/cache"
 REPO="$HOME/src/vim"
 PROCS=8
 
+export NVM_DIR="$HOME/.nvm"
+
 help_message="$(basename "$0") [OPTION]
   -h, --help             Show this help message
   -s, --setup            Initial setup for plugins/completion/junk dirs
@@ -62,8 +64,10 @@ flush_junk() {
 
 update_plugins() {
   if [[ $1 == "-a" ]]; then
+    cd "$VIM_PATH"
     git submodule update --remote --merge
     curl -fsSL https://raw.githubusercontent.com/junegunn/fzf/master/plugin/fzf.vim -o "$VIM_PATH/after/plugin/fzf.vim"
+    plugin_shortlog
   else
     if command -v fzy &>/dev/null; then
       local plugin
@@ -75,27 +79,44 @@ update_plugins() {
 
   vim -c "UpdatePluginDocs" -c "qa"
 
-  local colors=(
-    "modest:https://raw.githubusercontent.com/matveyt/vim-modest/master/colors/modest.vim"
-    "dogrun:https://raw.githubusercontent.com/wadackel/vim-dogrun/main/colors/dogrun.vim"
-    "apprentice:https://raw.githubusercontent.com/romainl/Apprentice/master/colors/apprentice.vim"
-    "saturnite:https://raw.githubusercontent.com/habamax/vim-saturnite/master/colors/saturnite.vim"
-    "tuftish:https://raw.githubusercontent.com/benwr/tuftish/master/colors/tuftish.vim"
-    "warlock:https://raw.githubusercontent.com/hardselius/warlock/master/colors/warlock.vim"
-    "256_noir:https://raw.githubusercontent.com/andreasvc/vim-256noir/master/colors/256_noir.vim"
-    "flattened_light:https://raw.githubusercontent.com/romainl/flattened/master/colors/flattened_light.vim"
+  # Define colors as associative array
+  declare -A colorschemes=(
+    [modest]="matveyt/vim-modest/master/colors/modest.vim"
+    [dogrun]="wadackel/vim-dogrun/main/colors/dogrun.vim"
+    [apprentice]="romainl/Apprentice/master/colors/apprentice.vim"
+    [saturnite]="habamax/vim-saturnite/master/colors/saturnite.vim"
+    [tuftish]="benwr/tuftish/master/colors/tuftish.vim"
+    [warlock]="hardselius/warlock/master/colors/warlock.vim"
+    [256_noir]="andreasvc/vim-256noir/master/colors/256_noir.vim"
+    [flattened_light]="romainl/flattened/master/colors/flattened_light.vim"
   )
 
-  for color in "${colors[@]}"; do
-    IFS=: read -r name url <<<"$color"
-    curl -fsSL "$url" -o "$VIM_PATH/colors/${name}.vim" &
+  # Download colorschemes in parallel
+  for name in "${!colorschemes[@]}"; do
+    curl -fsSL "https://raw.githubusercontent.com/${colorschemes[$name]}" \
+      -o "$VIM_PATH/colors/${name}.vim" 2>/dev/null &
   done
   wait
 
   cd "$PLUGINS_PATH/coc.nvim"
-  nvm deactivate
   npm ci
   vim -c "CocUpdateSync" -c "qa"
+}
+
+plugin_shortlog() {
+    local modified_modules
+    modified_modules=$(git status -s | grep -E '^\s*M.*pack/plugins/start/' | awk '{print $2}')
+
+    if [[ -z "$modified_modules" ]]; then
+        echo "No modified plugins"
+        return
+    fi
+
+    while IFS= read -r module; do
+        echo "=== ${module##*/} ==="
+        (cd "$module" && git log -5 --oneline)
+        echo
+    done <<< "$modified_modules"
 }
 
 upgrade_vim() {

@@ -5,4 +5,5 @@ shopt -s expand_aliases
 
 . $HOME/src/z/z.sh
 
-alias yapf='PYTHONPATH=$HOME/src/yapf python3 $HOME/src/yapf/yapf'
+export NODE_PATH=/home/jtm/.config/nvm/versions/node/v20.17.0/lib/node_modules
+# alias yapf='PYTHONPATH=$HOME/src/yapf python3 $HOME/src/yapf/yapf'

@@ -20,8 +20,16 @@ function! s:is_running() abort
   return type(s:job) == v:t_job && job_status(s:job) ==# 'run'
 endfunction
 
+function! s:browser_sync_installed() abort
+  return executable('browser-sync')
+endfunction
+
 function! s:start() abort
-  let cmd = ['browser-sync', 'start', '--server', '--files', '.', '--no-ui', '--port', '3000']
+  if !s:browser_sync_installed()
+    echohl ErrorMsg | echomsg 'please npm install -g browser-sync' | echohl None
+    return
+  endif
+  let cmd = ['browser-sync', 'start', '--server', '--files', '.', '--no-ui', '--port', '3001']
   let s:job = job_start(cmd, {
         \ 'out_cb': function('s:handle_output'),
         \ 'err_cb': function('s:handle_error'),
