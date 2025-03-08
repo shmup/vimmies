@@ -154,7 +154,9 @@ upgrade_vim() {
   ./configure --with-features=huge \
     --enable-python3interp \
     --enable-luainterp=yes \
-    --enable-mzschemeinterp \
+    --enable-perlinterp=yes \
+    --enable-rubyinterp=yes \
+    --enable-sodiuminterp=yes \
     --with-plthome=/usr/local
   make -j "$PROCS"
   sudo make -j "$PROCS" install
