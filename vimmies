@@ -119,6 +119,25 @@ plugin_shortlog() {
     done <<< "$modified_modules"
 }
 
+install_deps() {
+  sudo dnf install \
+    gcc \
+    make \
+    ncurses-devel \
+    gtk2-devel \
+    libX11-devel \
+    libXt-devel \
+    lua-devel \
+    python3-devel \
+    perl-devel \
+    perl-ExtUtils-Embed \
+    ruby-devel \
+    libacl-devel \
+    gpm-devel \
+    libXpm-devel \
+    libsodium-devel
+}
+
 upgrade_vim() {
   if [[ "$OSTYPE" == "darwin"* ]]; then
     brew update && brew upgrade vim && brew cleanup vim
@@ -187,6 +206,9 @@ case "${1:-}" in
   ;;
 -s | --setup)
   setup
+  ;;
+-d | --install-deps)
+  install_deps
   ;;
 -i | --install-plugin)
   install_plugin "${2:-}"
