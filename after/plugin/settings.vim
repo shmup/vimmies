@@ -10,9 +10,10 @@ let g:coc_global_extensions = [
       \'coc-go',
       \'coc-phpls',
       \'coc-pyright',
+      \'coc-rust-analyzer',
       \'coc-sh',
       \'coc-tsserver',
-      \'coc-zig'
+      \'coc-zig',
       \]
 
 highlight CocErrorFloat ctermfg=206 ctermbg=233
