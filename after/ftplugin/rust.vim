@@ -21,3 +21,6 @@ endif
 if executable('rustfmt')
   let &l:formatprg = 'rustfmt'
 endif
+
+nnoremap <silent> ,rr :CocCommand rust-analyzer.run<CR>
+nnoremap <silent> ,rd :CocCommand rust-analyzer.debug<CR>
