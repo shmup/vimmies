@@ -98,6 +98,11 @@
     "unix",
     "lsqlite3"
   ],
+  "rust-analyzer.workspace.ignoredFolders": [
+    "$HOME",
+    "$HOME/.cargo/**",
+    "$HOME/.rustup/**"
+  ],
   "typescript.referencesCodeLens.enabled": true,
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.referencesCodeLens.showOnAllFunctions": false,
