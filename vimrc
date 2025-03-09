@@ -232,7 +232,7 @@ inoremap <silent> <C-l> <Plug>(copilot-suggest)
 inoremap <silent> <C-j> <Plug>(copilot-next)
 inoremap <silent> <S-C-j> <Plug>(copilot-accept-line)
 nnoremap <silent> ,cl :CocCommand document.toggleCodeLens<CR>
-nnoremap <silent> ,ch :CocCommand document.toggleCodeLens<CR>
+nnoremap <silent> ,ch :CocCommand document.toggleInlayHint<CR>
 nnoremap <silent> ,cw :Workspaced<CR>
 nnoremap <silent> ,cp :let g:copilot_enabled = !g:copilot_enabled
     \ <bar> echo "Copilot " . (g:copilot_enabled ? "enabled" : "disabled")
