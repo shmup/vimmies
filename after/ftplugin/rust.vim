@@ -8,14 +8,6 @@ if executable('rustc')
   setlocal errorformat+=%Wwarning:\ %m
   setlocal errorformat+=%Inote:\ %m
   setlocal errorformat+=%C\ %#-->\ %f:%l:%c
-
-  if filereadable("Cargo.toml")
-    setlocal makeprg=cargo\ build
-    nnoremap <buffer><space>m :Dispatch<cr>
-  else
-    setlocal makeprg=rustc\ %
-    nnoremap <buffer><space>m :silent make! \| redraw!<cr>
-  endif
 endif
 
 if executable('rustfmt')
