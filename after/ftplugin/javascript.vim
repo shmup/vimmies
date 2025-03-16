@@ -12,7 +12,6 @@ setlocal define=class\\s
 
 
 if executable('prettier')
-  " setlocal formatprg=prettier\ --parser\ javascript
   let &l:formatprg = 'npx prettier --stdin-filepath %'
 endif
 
