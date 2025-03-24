@@ -92,7 +92,7 @@ def SlurpBuffers(firstline: number, lastline: number, ...args: list<string>)
         continue
       endif
       var content = lines->join("\n")
-      output ..= '# ' .. fname .. "\n\n" .. content .. "\n\n"
+      output ..= fname .. "\n" .. "```\n" .. content .. "\n```\n\n"
     endfor
   endif
 
