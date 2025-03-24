@@ -35,7 +35,7 @@ if has('nvim')
   let g:terminal_color_14 = '#5fafaf'
   let g:terminal_color_15 = '#eeeeee'
 endif
-hi Normal guifg=#bcbcbc guibg=#1c1c1c gui=NONE cterm=NONE
+hi Normal guifg=#bcbcbc guibg=#000000 gui=NONE cterm=NONE
 hi EndOfBuffer guifg=#444444 guibg=NONE gui=NONE cterm=NONE
 hi Statusline guifg=#1c1c1c guibg=#5f8787 gui=NONE cterm=NONE
 hi StatuslineNC guifg=#bcbcbc guibg=#444444 gui=NONE cterm=NONE
@@ -70,7 +70,7 @@ hi ModeMsg guifg=#1c1c1c guibg=#af8700 gui=NONE cterm=NONE
 hi WarningMsg guifg=#af8700 guibg=NONE gui=NONE cterm=NONE
 hi MoreMsg guifg=#87af87 guibg=NONE gui=NONE cterm=NONE
 hi Question guifg=#d7875f guibg=NONE gui=NONE cterm=NONE
-hi Todo guifg=#af8700 guibg=#1c1c1c gui=reverse cterm=reverse
+hi Todo guifg=#af8700 guibg=#000000 gui=reverse cterm=reverse
 hi MatchParen guifg=#121212 guibg=#af8700 gui=NONE cterm=NONE
 hi Search guifg=#121212 guibg=#5f875f gui=NONE cterm=NONE
 hi IncSearch guifg=#121212 guibg=#d7af5f gui=NONE cterm=NONE

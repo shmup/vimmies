@@ -86,7 +86,7 @@ update_plugins() {
     [modest]="matveyt/vim-modest/master/colors/modest.vim"
     [dogrun]="wadackel/vim-dogrun/main/colors/dogrun.vim"
     [apprentice]="romainl/Apprentice/master/colors/apprentice.vim"
-    [saturnite]="habamax/vim-saturnite/master/colors/saturnite.vim"
+    [saturnite]="shmup/vim-saturnite/main/colors/saturnite.vim"
     [tuftish]="benwr/tuftish/master/colors/tuftish.vim"
     [warlock]="hardselius/warlock/master/colors/warlock.vim"
     [256_noir]="andreasvc/vim-256noir/master/colors/256_noir.vim"
