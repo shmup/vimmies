@@ -14,6 +14,8 @@ CACHE="$JUNK_PATH/cache"
 REPO="$HOME/src/vim"
 PROCS=8
 
+cd "$VIM_PATH"
+
 export NVM_DIR="$HOME/.nvm"
 
 help_message="$(basename "$0") [OPTION]
