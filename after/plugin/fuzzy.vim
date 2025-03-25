@@ -6,3 +6,5 @@ nnoremap <space>v :History<cr>
 nnoremap <space>b :Buffers<cr>
 nnoremap <c-f> :Files<cr>
 nnoremap <c-p> :GFiles<cr>
+
+nnoremap <space>c :CocCommands<cr>
