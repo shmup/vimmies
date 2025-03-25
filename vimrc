@@ -7,7 +7,7 @@ filetype plugin indent on " important options
 syntax on                 " turn on syntax highlighting
 
 let lightscheme = 'xcode'
-let darkscheme = 'apprentice'
+let darkscheme = 'saturnite'
 set background=dark
 execute 'colorscheme ' . darkscheme
 
@@ -46,8 +46,6 @@ set wildignore+=**/node_modules/**,tags,**/dist/**
 
 " use existing tab if possible when loading a file from quickfix
 set switchbuf+=usetab
-
-nnoremap <Leader>ch <Cmd>Chistory<Cr>
 
 " whitespace
 set nowrap
@@ -275,8 +273,8 @@ nmap <silent> gr <Plug>(coc-references)
 " inoremap <silent><expr> <tab> coc#refresh()
 
 " fugitive/rhubarb/gv
-nmap <space>gb :Git blame<cr>
-nmap <space>gs :Git<cr>
+nmap <space>gb :G blame<cr>
+nmap <space>gs :G<cr>
 nmap <space>ge :Gedit<cr>
 nmap <space>gl :BCommits<cr>
 nmap <space>gL :GcLog<cr>
