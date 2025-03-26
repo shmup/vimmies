@@ -221,3 +221,6 @@
 [submodule "pack/plugins/start/vim-pipenv"]
 	path = pack/plugins/start/vim-pipenv
 	url = git@github.com:shmup/vim-pipenv.git
+[submodule "/home/jtm/.vim/pack/plugins/start/vim-colortemplate"]
+	path = /home/jtm/.vim/pack/plugins/start/vim-colortemplate
+	url = https://github.com/lifepillar/vim-colortemplate.git
