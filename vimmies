@@ -85,7 +85,7 @@ update_plugins() {
   declare -A colorschemes=(
     [modest]="matveyt/vim-modest/master/colors/modest.vim"
     [dogrun]="wadackel/vim-dogrun/main/colors/dogrun.vim"
-    [apprentice]="romainl/Apprentice/master/colors/apprentice.vim"
+    [apprentice]="shmup/Apprentice/master/colors/apprentice.vim"
     [saturnite]="shmup/vim-saturnite/main/colors/saturnite.vim"
     [tuftish]="benwr/tuftish/master/colors/tuftish.vim"
     [warlock]="hardselius/warlock/master/colors/warlock.vim"
