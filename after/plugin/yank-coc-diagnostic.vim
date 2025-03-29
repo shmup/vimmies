@@ -7,29 +7,58 @@
 
 nnoremap <silent><space>yd :call YankLineAndDiagnosticToClipboard()<CR>
 
-function! GetDiagnosticForLine(lineNumber)
-    let diagList = CocAction('diagnosticList')
-    for diagItem in diagList
-        if a:lineNumber == diagItem['lnum']
-            return trim(diagItem['message'])
-        endif
-    endfor
+function! GetDiagnosticForLine(lineNumber, columnNumber)
+  let diagList = CocAction('diagnosticList')
+  let bestMatch = ''
+  let minDistance = 999999  " Large initial value
 
-    return ''
+  for diagItem in diagList
+    if a:lineNumber == diagItem['lnum']
+      " Calculate distance from cursor to diagnostic
+      let distance = abs(a:columnNumber - diagItem['col'])
+
+      " If this is the closest diagnostic so far, save it
+      if distance < minDistance
+        let minDistance = distance
+        let bestMatch = trim(diagItem['message'])
+      endif
+    endif
+  endfor
+
+  return bestMatch
 endfunction
 
 function! YankLineAndDiagnosticToClipboard()
-    let currentLine = line('.')
-    let currentLineText = trim(getline(currentLine))
-    let diagnostic = GetDiagnosticForLine(currentLine)
+  let currentLine = line('.')
+  let currentCol = col('.')
+  let currentLineText = trim(getline(currentLine))
+  let diagnostic = GetDiagnosticForLine(currentLine, currentCol)
 
-    if len(diagnostic) > 0
-        let clipboardContent = printf("error on line %d, %s. Code: %s", currentLine, diagnostic, currentLineText)
-        call setreg('+', clipboardContent)
-    else
-        let clipboardContent = printf("%d: %s", currentLine, currentLineText)
-        call setreg('+', clipboardContent)
-    endif
+  if len(diagnostic) > 0
+    let clipboardContent = printf("error on line %d, %s. Code: %s", currentLine, diagnostic, currentLineText)
+    call setreg('+', clipboardContent)
+  else
+    let clipboardContent = printf("%d: %s", currentLine, currentLineText)
+    call setreg('+', clipboardContent)
+  endif
 endfunction
 
-" http://ix.io/3JJi
+function! YankAllDiagnostics() abort
+  let diagnostics = CocAction('diagnosticList')
+  let formatted = []
+
+  for diagnostic in diagnostics
+    let line = printf("%s:%d:%d - %s: %s",
+          \ diagnostic.file,
+          \ diagnostic.lnum,
+          \ diagnostic.col,
+          \ diagnostic.severity,
+          \ diagnostic.message)
+    call add(formatted, line)
+  endfor
+
+  let @+ = join(formatted, "\n")
+  echo "Copied " . len(formatted) . " diagnostics to clipboard"
+endfunction
+
+command! YankDiagnostics call YankAllDiagnostics()
