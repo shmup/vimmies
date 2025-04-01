@@ -404,6 +404,9 @@ command! -range H4 <line1>,<line2>call WrapWithAsciiWalls('H4')
 " nnoremap <silent> <S-Up> :resize +5<CR>
 " nnoremap <silent> <S-Down> :resize -5<CR>
 
+" uv fix
+au BufRead,BufNewFile * if getline(1) =~# '^#!/usr/bin/env -S uv run --script' | set filetype=python | endif
+
 " colors
 hi SpellBad term=reverse ctermbg=226 ctermfg=0
 
