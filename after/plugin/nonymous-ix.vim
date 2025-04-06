@@ -4,10 +4,10 @@
 " replace :RX <URL or ID> [optional visual selection]
 " delete  :DX <URL or ID>
 
-" example $HOME/.netrc
+" example ~/.netrc
 "   machine no.dungeon.red
-"   login foo
-"   password bar
+"   login piss
+"   password whistler
 
 if has('win64') || has('win32') || has('win16')
   let s:env = 'WINDOWS'
@@ -16,15 +16,13 @@ else
 endif
 
 if s:env =~ 'LINUX' && executable('xclip')
-  command! -range=% IX <line1>,<line2>w !curl -s -X POST --data-binary @- https://no.dungeon.red | tr -d '\n' | tee >(xclip -i -selection clipboard)
-  command! -nargs=1 -range=% RX <line1>,<line2>w !curl -s -X PUT --data-binary @- <args> | tee >(xclip -i -selection clipboard)
-  command! -nargs=1 DX execute '!curl -s -X DELETE ' . shellescape(<f-args>, 1)
+  command! -range=% IX <line1>,<line2>w !curl -n -s -F 'f:1=<-' https://no.dungeon.red | tr -d '\n' | tee >(xclip -i -selection clipboard)
+  command! -nargs=1 -range=% RX <line1>,<line2>w !curl -n -s -X PUT -F 'f:1=<-' <args> | tr -d '\n' | tee >(xclip -i -selection clipboard)
+  command! -nargs=1 DX execute '!curl -n -s -X DELETE ' . shellescape(<f-args>, 1)
 endif
 
-
-" macos requires curl
 if s:env =~ 'DARWIN'
   command! -range=% IX <line1>,<line2>w !curl -n -F 'f:1=<-' no.dungeon.red | tr -d '\n' | tee >(pbcopy)
   command! -nargs=1 -range=% RX <line1>,<line2>w !curl -n -X PUT -F 'f:1=<-' <args> | tr -d '\n' | tee >(pbcopy)
-  command! -nargs=1 -range=% DX w !curl -n -X DELETE <args>
+  command! -nargs=1 DX execute '!curl -n -s -X DELETE ' . shellescape(<f-args>, 1)
 endif
