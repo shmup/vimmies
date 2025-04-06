@@ -19,6 +19,10 @@
   "codeLens.enable": true,
   "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
   "languageserver": {
+    "commonlisp": {
+      "command": "cl-lsp",
+      "filetypes": ["lisp"]
+    },
     "vala": {
       "command": "vala-language-server",
       "filetypes": ["vala", "genie"]
