@@ -1,2 +1,2 @@
 setlocal sw=4
-setlocal commentstring=\#nop\ %s
+setlocal commentstring=/*\ %s\ */
