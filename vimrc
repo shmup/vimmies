@@ -307,6 +307,7 @@ set statusline+=%{www#status()}
 set statusline+=%{ObsessionStatus('💾','')}
 set statusline+=%{g:coc_enabled?'🌍':'🌕'}
 set statusline+=%{g:copilot_enabled?'🌚':'🌜'} " 🌚 🌛 🌜 🌝 🌞
+set statusline+=%{llm#ThinkingStatus()}
 set statusline+=\              " and two spaces
 set statusline+=%=             " move to the right side
 set statusline+=%<%F           " (truncated) full path to the file we are editing
