@@ -400,6 +400,8 @@ command! -range H2 <line1>,<line2>call WrapWithAsciiWalls('H2')
 command! -range H3 <line1>,<line2>call WrapWithAsciiWalls('H3')
 command! -range H4 <line1>,<line2>call WrapWithAsciiWalls('H4')
 
+command! -nargs=1 Figlet read !figlet -f $HOME/.vim/tools/elite.flf <args>
+
 " nnoremap <silent> <S-Right> :vertical resize +5<CR>
 " nnoremap <silent> <S-Left> :vertical resize -5<CR>
 " nnoremap <silent> <S-Up> :resize +5<CR>
