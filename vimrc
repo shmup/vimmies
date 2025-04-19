@@ -229,8 +229,6 @@ nnoremap ,T :tabfind ./**/*
 inoremap <silent> <C-l> <Plug>(copilot-suggest)
 inoremap <silent> <C-j> <Plug>(copilot-next)
 inoremap <silent> <S-C-j> <Plug>(copilot-accept-line)
-nnoremap <silent> ,cl :CocCommand document.toggleCodeLens<CR>
-nnoremap <silent> ,ch :CocCommand document.toggleInlayHint<CR>
 nnoremap <silent> ,cw :Workspaced<CR>
 nnoremap <silent> ,cp :let g:copilot_enabled = !g:copilot_enabled
     \ <bar> echo "Copilot " . (g:copilot_enabled ? "enabled" : "disabled")
@@ -264,13 +262,6 @@ vmap <enter> <plug>(EasyAlign)
 " nmap ga <plug>(EasyAlign)
 
 " GoTo code navigation.
-nmap <silent><space>m :CocList --height=10 diagnostics<cr>
-nmap <silent><space>M :CocDiagnostics 10<cr>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" inoremap <silent><expr> <tab> coc#refresh()
 
 " fugitive/rhubarb/gv
 nmap <space>gb :G blame<cr>
@@ -282,8 +273,6 @@ nmap <space>gd :Gdiffsplit<cr>
 nmap <space>gw :Gwrite<cr>
 nmap <space>gp :Git log -p -- %<cr>
 
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " gutter
 nmap [c <plug>(GitGutterPrevHunk)

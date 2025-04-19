@@ -5,8 +5,6 @@
 " yank line number, error, and line text to clipboard #gptfriendly
 " e.g. -> error on line 83, "Terminal" is not defined. Code: term = Terminal()
 
-nnoremap <silent><space>yd :call YankLineAndDiagnosticToClipboard()<CR>
-
 function! GetDiagnosticForLine(lineNumber, columnNumber)
   let diagList = CocAction('diagnosticList')
   let bestMatch = ''

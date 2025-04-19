@@ -31,24 +31,6 @@
       "command": "csharp-ls",
       "filetypes": ["cs"]
     },
-    "javascript": {
-      "implentationsCodeLens": {
-        "enabled": false
-      },
-      "referencesCodeLens": {
-        "enabled": false,
-        "showOnAllFunctions": false
-      }
-    },
-    "typescript": {
-      "implentationsCodeLens": {
-        "enabled": false
-      },
-      "referencesCodeLens": {
-        "enabled": false,
-        "showOnAllFunctions": false
-      }
-    },
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
