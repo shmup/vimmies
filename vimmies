@@ -101,7 +101,7 @@ update_plugins() {
   wait
 
   cd "$PLUGINS_PATH/coc.nvim"
-  npm ci
+  npm i
   vim -c "CocUpdateSync" -c "qa"
 }
 
