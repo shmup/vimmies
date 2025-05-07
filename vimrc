@@ -40,7 +40,7 @@ set mouse=a               " enable mouse
 " TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd,*.com,*.tdy,*.dll,*.exe
-set wildignore+=*.o,*.obj,*.so,*.a,*.lib;
+set wildignore+=*.o,*.obj,*.so,*.a,*.lib,*.i,*.s
 set wildignore+=bower_components/*,*/.vim/junk/*
 set wildignore+=**/node_modules/**,tags,**/dist/**
 
@@ -144,7 +144,7 @@ nnoremap <silent> <space>ej :edit ~/matrix/brain/journals/<cr>:$<cr>
 nnoremap <silent> <space>em :edit ~/matrix<cr>
 nnoremap <silent> <space>ep :edit ~/.profile<cr>
 nnoremap <silent> <space>ex :edit ~/.Xdefaults<cr>
-nnoremap <silent> <space>ed :edit ~/projects/xom.world/txt/shmup.crawlrc<cr>
+nnoremap <silent> <space>ed :edit ~/dungeon/xom.world/frontend/txt/shmup.crawlrc<cr>
 nnoremap <silent> <space>et :edit ~/.tmux.conf<cr>
 nnoremap <silent> <space>ef :edit ~/.mozilla/firefox/jtm/chrome/userChrome.css<cr>
 nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
@@ -336,8 +336,8 @@ augroup Convenience
 
   " https://vi.stackexchange.com/a/69/287
   " prevents unmodified buffer + crash = bullshit swap file
-  " autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
-  "       \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+  autocmd BufWritePost,CursorHold *
+        \ let &swapfile = &modified
 augroup END
 
 " augroup CursorLine
