@@ -229,3 +229,9 @@
 	path = pack/plugins/start/pack/plugins/start/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
 	branch = release
+[submodule "/home/jtm/.vim/pack/plugins/start/vim-elixir"]
+	path = /home/jtm/.vim/pack/plugins/start/vim-elixir
+	url = https://github.com/elixir-editors/vim-elixir.git
+[submodule "/home/jtm/.vim/pack/plugins/start/vim-markdown"]
+	path = /home/jtm/.vim/pack/plugins/start/vim-markdown
+	url = git@github.com:tpope/vim-markdown.git
