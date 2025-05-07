@@ -23,9 +23,6 @@
 [submodule "pack/plugins/start/vim-obsession"]
 	path = pack/plugins/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "pack/plugins/start/vim-markdown"]
-	path = pack/plugins/start/vim-markdown
-	url = https://github.com/tpope/vim-markdown.git
 [submodule "pack/plugins/start/vim-qf"]
 	path = pack/plugins/start/vim-qf
 	url = https://github.com/romainl/vim-qf.git
@@ -100,9 +97,6 @@
 [submodule "pack/plugins/start/vim-gist"]
 	path = pack/plugins/start/vim-gist
 	url = https://github.com/mattn/vim-gist.git
-[submodule "pack/plugins/start/markdown-preview.nvim"]
-	path = pack/plugins/start/markdown-preview.nvim
-	url = https://github.com/iamcco/markdown-preview.nvim.git
 [submodule "pack/plugins/start/xterm-color-table.vim"]
 	path = pack/plugins/start/xterm-color-table.vim
 	url = git@github.com:shmup/xterm-color-table.vim.git
