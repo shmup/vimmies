@@ -68,7 +68,8 @@ hi ModeMsg guifg=#73c1a9 ctermfg=79
 hi Debug guifg=#9ea3c0 ctermfg=146
 hi Todo guifg=#a8a384 ctermfg=144 guibg=NONE ctermbg=NONE gui=bold cterm=bold
 hi Pmenu guifg=#9ea3c0 ctermfg=146 guibg=#32364c ctermbg=237
-hi PmenuSel guifg=#9ea3c0 ctermfg=146 guibg=#424865 ctermbg=60
+hi PmenuSel guifg=#9ea3c0 ctermfg=146 guibg=#363e7f ctermbg=61 gui=NONE cterm=NONE
+hi PmenuMatch guifg=#929be5 ctermfg=104 gui=bold cterm=bold
 hi PmenuSbar guibg=#292c3f ctermbg=236
 hi PmenuThumb guibg=#464f7f ctermbg=60
 hi Visual guibg=#363e7f ctermbg=61 gui=NONE cterm=NONE
@@ -290,6 +291,30 @@ hi CmpItemKindKeyword guifg=#a8a384 ctermfg=144
 hi CmpItemKindProperty guifg=#a8a384 ctermfg=144
 hi CmpItemKindField guifg=#a8a384 ctermfg=144
 hi CmpItemKindUnit guifg=#a8a384 ctermfg=144
+hi BlinkCmpMenu guifg=#9ea3c0 ctermfg=146
+hi BlinkCmpMenuSelection guibg=#363e7f ctermbg=61
+hi BlinkCmpLabelMatch guifg=#929be5 ctermfg=104 gui=bold cterm=bold
+hi BlinkCmpLabelDeprecated guifg=#545c8c ctermfg=60 gui=strikethrough cterm=strikethrough
+hi BlinkCmpKind guifg=#8085a6 ctermfg=103
+hi BlinkCmpKindText guifg=#8085a6 ctermfg=103
+hi BlinkCmpKindVariable guifg=#73c1a9 ctermfg=79
+hi BlinkCmpKindConstant guifg=#73c1a9 ctermfg=79
+hi BlinkCmpKindEnum guifg=#73c1a9 ctermfg=79
+hi BlinkCmpKindInterface guifg=#73c1a9 ctermfg=79
+hi BlinkCmpKindClass guifg=#73c1a9 ctermfg=79
+hi BlinkCmpKindFunction guifg=#ac8b83 ctermfg=138
+hi BlinkCmpKindMethod guifg=#ac8b83 ctermfg=138
+hi BlinkCmpKindModule guifg=#ac8b83 ctermfg=138
+hi BlinkCmpKindConstructor guifg=#ac8b83 ctermfg=138
+hi BlinkCmpKindKeyword guifg=#a8a384 ctermfg=144
+hi BlinkCmpKindProperty guifg=#a8a384 ctermfg=144
+hi BlinkCmpKindField guifg=#a8a384 ctermfg=144
+hi BlinkCmpKindUnit guifg=#a8a384 ctermfg=144
+hi BlinkCmpSource guifg=#545c8c ctermfg=60 gui=italic cterm=italic
+hi BlinkCmpDocSeparator guifg=#545c8c ctermfg=60
+hi BlinkCmpMenuBorder guifg=#545c8c ctermfg=60 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi BlinkCmpDocBorder guifg=#545c8c ctermfg=60 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi BlinkCmpSignatureHelpBorder guifg=#545c8c ctermfg=60 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi FloatTitle guifg=#929be5 ctermfg=104 guibg=#222433 ctermbg=235 gui=NONE cterm=NONE
 hi TelescopeNormal guifg=#8085a6 ctermfg=103
 hi TelescopeTitle guifg=#929be5 ctermfg=104
@@ -343,15 +368,15 @@ hi NotifyINFOBody guifg=#9ea3c0 ctermfg=146
 hi NotifyDEBUGBody guifg=#9ea3c0 ctermfg=146
 hi NotifyTRACEBody guifg=#9ea3c0 ctermfg=146
 hi AvanteTitle guifg=#222433 ctermfg=235 guibg=#929be5 ctermbg=104
-hi AvanteReversedTitle guifg=#929be5 ctermfg=104
+hi AvanteReversedTitle guifg=#929be5 ctermfg=104 guibg=#222433 ctermbg=235
 hi AvanteSubtitle guifg=#222433 ctermfg=235 guibg=#73c1a9 ctermbg=79
-hi AvanteReversedSubtitle guifg=#73c1a9 ctermfg=79
+hi AvanteReversedSubtitle guifg=#73c1a9 ctermfg=79 guibg=#222433 ctermbg=235
 hi AvanteThirdTitle guifg=#9ea3c0 ctermfg=146 guibg=#32364c ctermbg=237
-hi AvanteReversedThirdTitle guifg=#32364c ctermfg=237
+hi AvanteReversedThirdTitle guifg=#32364c ctermfg=237 guibg=#222433 ctermbg=235
 hi AvantePopupHint guifg=#545c8c ctermfg=60
 hi AvanteInlineHint guifg=#545c8c ctermfg=60
 hi AvanteSidebarWinSeparator guifg=#363859 ctermfg=60 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi AvanteSidebarWinHorizontalSeparator guifg=#222433 ctermfg=235 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi AvanteSidebarWinHorizontalSeparator guifg=#222433 ctermfg=235 guibg=#222433 ctermbg=235 gui=NONE cterm=NONE
 if has("nvim")
   let g:terminal_color_0 = '#111219'
   let g:terminal_color_1 = '#e58585'
