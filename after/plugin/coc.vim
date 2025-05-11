@@ -21,10 +21,15 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+" to install phpactor:
+" 1. sudo dnf install composer
+" 2. composer global require phpactor/phpactor
+" 3. export PATH="$PATH:$HOME/.config/composer/vendor/bin"
+
 let g:coc_global_extensions = [
       \'coc-clangd',
       \'coc-go',
-      \'coc-phpls',
+      \'coc-phpactor',
       \'coc-pyright',
       \'coc-rust-analyzer',
       \'coc-sh',
