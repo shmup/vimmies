@@ -23,9 +23,6 @@
 [submodule "pack/plugins/start/vim-obsession"]
 	path = pack/plugins/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "pack/plugins/start/vim-qf"]
-	path = pack/plugins/start/vim-qf
-	url = https://github.com/romainl/vim-qf.git
 [submodule "pack/plugins/start/emmet-vim"]
 	path = pack/plugins/start/emmet-vim
 	url = git@github.com:shmup/emmet-vim.git
@@ -229,3 +226,6 @@
 [submodule "/home/jtm/.vim/pack/plugins/start/vim-markdown"]
 	path = /home/jtm/.vim/pack/plugins/start/vim-markdown
 	url = git@github.com:tpope/vim-markdown.git
+[submodule "/home/jtm/.vim/pack/plugins/start/vim-qf"]
+	path = /home/jtm/.vim/pack/plugins/start/vim-qf
+	url = git@github.com:romainl/vim-qf.git
