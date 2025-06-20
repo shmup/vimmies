@@ -229,3 +229,6 @@
 [submodule "/home/jtm/.vim/pack/plugins/start/vim-qf"]
 	path = /home/jtm/.vim/pack/plugins/start/vim-qf
 	url = git@github.com:romainl/vim-qf.git
+[submodule "/home/jtm/.vim/pack/plugins/start/vim-fennel"]
+	path = /home/jtm/.vim/pack/plugins/start/vim-fennel
+	url = https://github.com/atweiden/vim-fennel.git
