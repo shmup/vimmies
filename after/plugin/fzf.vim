@@ -1,4 +1,4 @@
-" Copyright (c) 2013-2024 Junegunn Choi
+" Copyright (c) 2013-2025 Junegunn Choi
 "
 " MIT License
 "
@@ -553,8 +553,15 @@ try
     let height = s:calc_size(&lines, dict.down, dict)
     let optstr .= ' --no-tmux --height='.height
   endif
-  " Respect --border option given in $FZF_DEFAULT_OPTS and 'options'
-  let optstr = join([s:border_opt(get(dict, 'window', 0)), s:extract_option($FZF_DEFAULT_OPTS, 'border'), optstr])
+
+  if exists('&winborder') && &winborder !=# '' && &winborder !=# 'none'
+    " Add 1-column horizontal margin
+    let optstr = join(['--margin 0,1', optstr])
+  else
+    " Respect --border option given in $FZF_DEFAULT_OPTS and 'options'
+    let optstr = join([s:border_opt(get(dict, 'window', 0)), s:extract_option($FZF_DEFAULT_OPTS, 'border'), optstr])
+  endif
+
   let command = prefix.(use_tmux ? s:fzf_tmux(dict) : fzf_exec).' '.optstr.' > '.temps.result
 
   if use_term
@@ -1020,8 +1027,23 @@ if has('nvim')
     let buf = nvim_create_buf(v:false, v:true)
     let opts = extend({'relative': 'editor', 'style': 'minimal'}, a:opts)
     let win = nvim_open_win(buf, v:true, opts)
-    silent! call setwinvar(win, '&winhighlight', 'Pmenu:,Normal:Normal')
     call setwinvar(win, '&colorcolumn', '')
+
+    " Colors
+    try
+      call setwinvar(win, '&winhighlight', 'Pmenu:,Normal:Normal')
+      let rules = get(g:, 'fzf_colors', {})
+      if has_key(rules, 'bg')
+        let color = call('s:get_color', rules.bg)
+        if len(color)
+          let ns = nvim_create_namespace('fzf_popup')
+          let hl = nvim_set_hl(ns, 'Normal',
+                \ &termguicolors ? { 'bg': color } : { 'ctermbg': str2nr(color) })
+          call nvim_win_set_hl_ns(win, ns)
+        endif
+      endif
+    catch
+    endtry
     return buf
   endfunction
 else
