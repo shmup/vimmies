@@ -1,1 +1,2 @@
 wincmd K
+setlocal spell
