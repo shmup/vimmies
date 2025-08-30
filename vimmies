@@ -1,87 +1,204 @@
 #!/usr/bin/env bash
 
-# vimmies: Vim plugin manager
-# Dependencies: fzy, git, curl, nvm, npm, make, gcc
-# Usage: ./vimmies.sh [OPTION]
-
 set -euo pipefail
 IFS=$'\n\t'
 
-VIM_PATH="$HOME/.vim"
-JUNK_PATH="$VIM_PATH/junk"
-PLUGINS_PATH="$VIM_PATH/pack/plugins/start"
-CACHE="$JUNK_PATH/cache"
-REPO="$HOME/src/vim"
-PROCS=8
+# configuration
+readonly VIM_PATH="$HOME/.vim"
+readonly JUNK_PATH="$VIM_PATH/junk"
+readonly PLUGINS_PATH="$VIM_PATH/pack/plugins/start"
+readonly CACHE="$JUNK_PATH/cache"
+readonly REPO="$HOME/src/vim"
+readonly PROCS=8
+readonly SCRIPT_NAME="$(basename "$0")"
 
+# color codes for output
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[1;33m'
+readonly NC='\033[0m' # no color
+
+# ensure we're in the vim directory
 cd "$VIM_PATH"
 
+# nvm setup if available
 export NVM_DIR="$HOME/.nvm"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
 
-help_message="$(basename "$0") [OPTION]
-  -h, --help             Show this help message
-  -s, --setup            Initial setup for plugins/completion/junk dirs
-  -U, --upgrade-vim      Upgrade Vim to the latest version
-  -c, --plugin-changes   Show recent changes in plugins
-  -u, --update-plugins   Update all plugins or a specific one with -a
-  -i, --install-plugin <url>  Install a plugin from the given URL
-  -r, --remove-plugin <name>  Remove a plugin by name
-  -f, --flush-junk       Remove all files in junk directories
-"
+# help message
+readonly HELP_MESSAGE="$SCRIPT_NAME [OPTION]
+  -h, --help                    Show this help message
+  -s, --setup                   Initial setup for plugins/completion/junk dirs
+  -U, --upgrade-vim             Upgrade Vim to the latest version
+  -c, --plugin-changes          Show recent changes in plugins
+  -u, --update-plugins          Update all plugins or a specific one with -a
+  -i, --install-plugin <url>    Install a plugin from the given URL
+  -r, --remove-plugin <name>    Remove a plugin by name
+  -f, --flush-junk              Remove all files in junk directories
+  -l, --list-plugins            List all installed plugins
+  -v, --verify                  Verify git submodule integrity"
 
-bail() {
-  echo "$1"
-  exit 0
+# utility functions
+log_info() {
+  echo -e "${GREEN}[INFO]${NC} $1"
 }
 
-setup() {
-  git submodule update --init --recursive
-  mkdir -p "$JUNK_PATH/backup" "$JUNK_PATH/swp" "$JUNK_PATH/undo" "$JUNK_PATH/view"
+log_warn() {
+  echo -e "${YELLOW}[WARN]${NC} $1" >&2
+}
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    brew install bash-completion
+log_error() {
+  echo -e "${RED}[ERROR]${NC} $1" >&2
+}
+
+bail() {
+  log_error "$1"
+  exit 1
+}
+
+confirm() {
+  local prompt="${1:-Are you sure?} [y/N] "
+  read -rp "$prompt" response
+  [[ $response =~ ^[Yy]$ ]]
+}
+
+check_dependencies() {
+  local missing_deps=()
+  local required_tools=("git" "curl")
+  local optional_tools=("fzy" "make" "gcc" "npm")
+
+  for tool in "${required_tools[@]}"; do
+    if ! command -v "$tool" &>/dev/null; then
+      missing_deps+=("$tool (required)")
+    fi
+  done
+
+  for tool in "${optional_tools[@]}"; do
+    if ! command -v "$tool" &>/dev/null; then
+      log_warn "Optional tool '$tool' not found - some features may be limited"
+    fi
+  done
+
+  if [[ ${#missing_deps[@]} -gt 0 ]]; then
+    bail "Missing required dependencies: ${missing_deps[*]}"
   fi
-  sudo ln -sf "$VIM_PATH/vimmies_completion" /etc/bash_completion.d/vimmies_completion
+}
+
+select_plugin() {
+  local prompt="${1:-Select a plugin}"
+
+  if ! command -v fzy &>/dev/null; then
+    log_warn "fzy not found, listing plugins instead"
+    find "$PLUGINS_PATH" -maxdepth 1 -mindepth 1 -type d -printf '%f\n' | sort
+    echo -n "Enter plugin name: "
+    read -r plugin
+    echo "$plugin"
+  else
+    find "$PLUGINS_PATH" -maxdepth 1 -mindepth 1 -type d -printf '%f\n' | fzy -l 20 -p "$prompt: "
+  fi
+}
+
+# main functions
+setup() {
+  log_info "Starting initial setup..."
+
+  # initialize submodules
+  git submodule update --init --recursive || bail "Failed to initialize submodules"
+
+  # create junk directories
+  local dirs=("backup" "swp" "undo" "view")
+  for dir in "${dirs[@]}"; do
+    mkdir -p "$JUNK_PATH/$dir"
+  done
+  log_info "Created junk directories"
+
+  # setup bash completion
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    if command -v brew &>/dev/null; then
+      brew install bash-completion 2>/dev/null || log_warn "bash-completion may already be installed"
+    fi
+  fi
+
+  if [[ -f "vimmies_completion" ]]; then
+    log_info "Installing bash completion (requires sudo)"
+    sudo ln -sf "$VIM_PATH/vimmies_completion" /etc/bash_completion.d/vimmies_completion
+  fi
+
+  log_info "Setup complete!"
 }
 
 flush_junk() {
   local dirs
-  dirs=$(find "$JUNK_PATH" -mindepth 1 -maxdepth 1 -type d)
+  dirs=$(find "$JUNK_PATH" -mindepth 1 -maxdepth 1 -type d 2>/dev/null)
 
   if [[ -z $dirs ]]; then
-    echo "Nothing to nuke"
-    exit 0
+    log_info "Nothing to flush in junk directory"
+    return 0
   fi
 
   echo "Directories to be removed:"
   echo "$dirs"
-  read -rp "Are you sure you want to delete these directories? [y/N] " response
 
-  if [[ $response =~ ^[Yy]$ ]]; then
-    # error on line 57, Use "${var:?}" to ensure this never expands to /* .. Code: rm -rf "$JUNK_PATH"/*
-    [[ -d "$JUNK_PATH" ]] || exit 1
-    echo "Junk directories flushed."
+  if confirm "Are you sure you want to delete these directories?"; then
+    # safety check: ensure JUNK_PATH is set and exists
+    [[ -n "${JUNK_PATH}" ]] || bail "JUNK_PATH is not set"
+    [[ -d "${JUNK_PATH}" ]] || bail "JUNK_PATH does not exist"
+
+    # additional safety: don't delete if path is too short
+    if [[ ${#JUNK_PATH} -lt 10 ]]; then
+      bail "JUNK_PATH seems too short, refusing to delete for safety"
+    fi
+
+    # remove with explicit path checking
+    find "$JUNK_PATH" -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
+    log_info "Junk directories flushed"
+  else
+    log_info "Operation cancelled"
   fi
 }
 
 update_plugins() {
-  if [[ $1 == "-a" ]]; then
+  local update_all=false
+  [[ "${1:-}" == "-a" ]] && update_all=true
+
+  if $update_all; then
+    log_info "Updating all plugins..."
     cd "$VIM_PATH"
-    git submodule update --remote --merge
-    curl -fsSL https://raw.githubusercontent.com/junegunn/fzf/master/plugin/fzf.vim -o "$VIM_PATH/after/plugin/fzf.vim"
+    git submodule update --remote --merge || log_warn "Some submodules may have failed to update"
+
+    # update fzf.vim
+    log_info "Updating fzf.vim..."
+    curl -fsSL https://raw.githubusercontent.com/junegunn/fzf/master/plugin/fzf.vim \
+      -o "$VIM_PATH/after/plugin/fzf.vim" || log_warn "Failed to update fzf.vim"
+
     plugin_shortlog
   else
-    if command -v fzy &>/dev/null; then
-      local plugin
-      plugin=$(find "$PLUGINS_PATH" -maxdepth 1 -mindepth 1 -printf '%f\n' | fzy -l 20)
-      [[ -n $plugin ]] || exit 0
+    local plugin
+    plugin=$(select_plugin "Select plugin to update")
+    [[ -n $plugin ]] || return 0
+
+    if [[ -d "$PLUGINS_PATH/$plugin" ]]; then
+      log_info "Updating $plugin..."
       git submodule update --remote --merge "$PLUGINS_PATH/$plugin"
+    else
+      bail "Plugin '$plugin' not found"
     fi
   fi
 
-  vim -c "UpdatePluginDocs" -c "qa"
+  # update vim help docs
+  if command -v vim &>/dev/null; then
+    log_info "Updating plugin documentation..."
+    vim -c "UpdatePluginDocs" -c "qa" 2>/dev/null || log_warn "Failed to update plugin docs"
+  fi
 
-  # Define colors as associative array
+  update_colorschemes
+  update_coc_if_exists
+}
+
+update_colorschemes() {
+  log_info "Updating colorschemes..."
+
+  # define colorschemes as associative array
   declare -A colorschemes=(
     [modest]="matveyt/vim-modest/master/colors/modest.vim"
     [dogrun]="wadackel/vim-dogrun/main/colors/dogrun.vim"
@@ -93,36 +210,75 @@ update_plugins() {
     [flattened_light]="romainl/flattened/master/colors/flattened_light.vim"
   )
 
-  # Download colorschemes in parallel
-  for name in "${!colorschemes[@]}"; do
-    curl -fsSL "https://raw.githubusercontent.com/${colorschemes[$name]}" \
-      -o "$VIM_PATH/colors/${name}.vim" 2>/dev/null &
-  done
-  wait
+  # ensure colors directory exists
+  mkdir -p "$VIM_PATH/colors"
 
-  cd "$PLUGINS_PATH/coc.nvim"
-  npm i
-  vim -c "CocUpdateSync" -c "qa"
+  # download colorschemes in parallel
+  local pids=()
+  for name in "${!colorschemes[@]}"; do
+    (
+      curl -fsSL "https://raw.githubusercontent.com/${colorschemes[$name]}" \
+        -o "$VIM_PATH/colors/${name}.vim" 2>/dev/null ||
+        log_warn "Failed to download $name colorscheme"
+    ) &
+    pids+=($!)
+  done
+
+  # wait for all downloads to complete
+  for pid in "${pids[@]}"; do
+    wait "$pid"
+  done
+}
+
+update_coc_if_exists() {
+  if [[ -d "$PLUGINS_PATH/coc.nvim" ]]; then
+    log_info "Updating coc.nvim..."
+    cd "$PLUGINS_PATH/coc.nvim"
+
+    if command -v npm &>/dev/null; then
+      npm i || log_warn "Failed to update coc.nvim dependencies"
+
+      if command -v vim &>/dev/null; then
+        vim -c "CocUpdateSync" -c "qa" 2>/dev/null || log_warn "Failed to update Coc extensions"
+      fi
+    else
+      log_warn "npm not found, skipping coc.nvim update"
+    fi
+
+    cd "$VIM_PATH"
+  fi
 }
 
 plugin_shortlog() {
-    local modified_modules
-    modified_modules=$(git status -s | grep -E '^\s*M.*pack/plugins/start/' | awk '{print $2}')
+  local modified_modules
+  modified_modules=$(git status -s | grep -E '^\s*M.*pack/plugins/start/' | awk '{print $2}')
 
-    if [[ -z "$modified_modules" ]]; then
-        echo "No modified plugins"
-        return
-    fi
+  if [[ -z "$modified_modules" ]]; then
+    log_info "No modified plugins"
+    return
+  fi
 
-    while IFS= read -r module; do
-        echo "=== ${module##*/} ==="
-        (cd "$module" && git log -5 --oneline)
-        echo
-    done <<< "$modified_modules"
+  echo "=== Recent plugin changes ==="
+  while IFS= read -r module; do
+    echo "--- ${module##*/} ---"
+    (cd "$module" && git log -5 --oneline 2>/dev/null) || log_warn "Could not get log for ${module##*/}"
+    echo
+  done <<<"$modified_modules"
 }
 
 install_deps() {
-  sudo dnf install \
+  if [[ "$OSTYPE" != "linux-gnu"* ]]; then
+    bail "install_deps is only supported on Linux"
+  fi
+
+  log_info "Installing Vim build dependencies..."
+
+  # check for dnf
+  if ! command -v dnf &>/dev/null; then
+    bail "dnf not found - this function is for Fedora/RHEL systems"
+  fi
+
+  sudo dnf install -y \
     gcc \
     make \
     ncurses-devel \
@@ -137,102 +293,282 @@ install_deps() {
     libacl-devel \
     gpm-devel \
     libXpm-devel \
-    libsodium-devel
+    libsodium-devel || bail "Failed to install dependencies"
+
+  log_info "Dependencies installed successfully"
 }
 
 upgrade_vim() {
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    brew update && brew upgrade vim && brew cleanup vim
-    exit 0
+    if command -v brew &>/dev/null; then
+      log_info "Upgrading Vim via Homebrew..."
+      brew update && brew upgrade vim && brew cleanup vim
+    else
+      bail "Homebrew not found"
+    fi
+    return 0
   fi
 
+  # linux build from source
+  log_info "Building Vim from source..."
+
   if [[ ! -d "$REPO" ]]; then
-    git clone https://github.com/vim/vim.git "$REPO"
+    log_info "Cloning Vim repository..."
+    git clone https://github.com/vim/vim.git "$REPO" || bail "Failed to clone Vim repository"
   fi
 
   cd "$REPO"
-  git pull
-  make distclean
+
+  log_info "Pulling latest changes..."
+  git pull || bail "Failed to pull latest changes"
+
+  log_info "Cleaning previous build..."
+  make distclean 2>/dev/null || true
+
+  log_info "Configuring Vim build..."
   ./configure --with-features=huge \
     --enable-python3interp \
     --enable-luainterp=yes \
     --enable-perlinterp=yes \
     --enable-rubyinterp=yes \
     --enable-sodiuminterp=yes \
-    --with-plthome=/usr/local
-  make -j "$PROCS"
-  sudo make -j "$PROCS" install
+    --with-plthome=/usr/local || bail "Configuration failed"
+
+  log_info "Building Vim (using $PROCS parallel jobs)..."
+  make -j "$PROCS" || bail "Build failed"
+
+  log_info "Installing Vim (requires sudo)..."
+  sudo make -j "$PROCS" install || bail "Installation failed"
+
+  log_info "Vim upgraded successfully!"
+  vim --version | head -n1
 }
 
 install_plugin() {
-  local plugin_url
-  if [[ -z $1 ]]; then
-    plugin_url=$(grep -vxFf <(ls "$PLUGINS_PATH") <"$CACHE" | fzy -l 20)
-  else
-    plugin_url="$1"
+  local plugin_url="${1:-}"
+
+  # ensure cache directory exists
+  mkdir -p "$(dirname "$CACHE")"
+  touch "$CACHE"
+
+  if [[ -z $plugin_url ]]; then
+    if [[ ! -s "$CACHE" ]]; then
+      log_warn "Cache is empty and no URL provided"
+      echo -n "Enter plugin URL: "
+      read -r plugin_url
+      [[ -n $plugin_url ]] || return 0
+    else
+      # select from cache
+      if command -v fzy &>/dev/null; then
+        plugin_url=$(grep -vxFf <(ls "$PLUGINS_PATH" 2>/dev/null) <"$CACHE" | fzy -l 20 -p "Select plugin from cache: ")
+      else
+        log_info "Previously removed plugins:"
+        grep -vxFf <(ls "$PLUGINS_PATH" 2>/dev/null) <"$CACHE" | nl
+        echo -n "Enter plugin URL: "
+        read -r plugin_url
+      fi
+    fi
   fi
-  [[ -n $plugin_url ]] || exit 0
-  git submodule add --force "$plugin_url" "$PLUGINS_PATH/$(basename "$plugin_url" .git)"
+
+  [[ -n $plugin_url ]] || return 0
+
+  # validate url format
+  if [[ ! "$plugin_url" =~ ^(https?://|git@) ]]; then
+    bail "Invalid URL format: $plugin_url"
+  fi
+
+  local plugin_name
+  plugin_name=$(basename "$plugin_url" .git)
+
+  if [[ -d "$PLUGINS_PATH/$plugin_name" ]]; then
+    bail "Plugin '$plugin_name' already exists"
+  fi
+
+  log_info "Installing plugin: $plugin_name"
+  git submodule add --force "$plugin_url" "$PLUGINS_PATH/$plugin_name" || bail "Failed to add submodule"
+
+  log_info "Plugin '$plugin_name' installed successfully"
 }
 
 remove_plugin() {
-  local plugin
-  if command -v fzy &>/dev/null; then
-    plugin=$(find "$PLUGINS_PATH" -maxdepth 1 -mindepth 1 -printf '%f\n' | fzy -l 20)
-  else
-    plugin="$1"
-  fi
-  [[ -n $plugin ]] || exit 0
-  [[ -d "$PLUGINS_PATH/$plugin" ]] || bail "Submodule doesn't exist"
+  local plugin="${1:-}"
 
+  if [[ -z $plugin ]]; then
+    plugin=$(select_plugin "Select plugin to remove")
+    [[ -n $plugin ]] || return 0
+  fi
+
+  [[ -d "$PLUGINS_PATH/$plugin" ]] || bail "Plugin '$plugin' doesn't exist"
+
+  if ! confirm "Remove plugin '$plugin'?"; then
+    log_info "Operation cancelled"
+    return 0
+  fi
+
+  log_info "Removing plugin: $plugin"
+
+  # save the url to cache for potential reinstallation
+  mkdir -p "$(dirname "$CACHE")"
   cd "$PLUGINS_PATH/$plugin"
-  git remote get-url origin >>"$CACHE"
+  git remote get-url origin >>"$CACHE" 2>/dev/null || log_warn "Could not save plugin URL to cache"
   cd "$VIM_PATH"
 
-  git submodule deinit -f "$PLUGINS_PATH/$plugin"
-  git rm -f "$PLUGINS_PATH/$plugin"
-  rm -rf ".git/modules/${PLUGINS_PATH:?}/${plugin:?}" "${PLUGINS_PATH:?}/${plugin:?}"
+  # proper submodule removal process
+  log_info "Deinitializing submodule..."
+  git submodule deinit -f "$PLUGINS_PATH/$plugin" || bail "Failed to deinit submodule"
+
+  log_info "Removing from git..."
+  git rm -f "$PLUGINS_PATH/$plugin" || bail "Failed to remove from git"
+
+  # clean up git modules directory
+  local module_path=".git/modules/pack/plugins/start/$plugin"
+  if [[ -d "$module_path" ]]; then
+    log_info "Cleaning git modules..."
+    rm -rf "$module_path"
+  fi
+
+  # ensure the plugin directory is removed
+  if [[ -d "$PLUGINS_PATH/$plugin" ]]; then
+    log_info "Removing plugin directory..."
+    rm -rf "$PLUGINS_PATH/$plugin"
+  fi
+
+  log_info "Plugin '$plugin' removed successfully"
+  log_info "Note: Remember to commit these changes to git"
+}
+
+list_plugins() {
+  log_info "Installed plugins:"
+
+  if [[ ! -d "$PLUGINS_PATH" ]]; then
+    log_warn "Plugins directory doesn't exist"
+    return 1
+  fi
+
+  local count=0
+  while IFS= read -r plugin; do
+    if [[ -d "$plugin/.git" ]]; then
+      local name="${plugin##*/}"
+      local url
+      url=$(cd "$plugin" && git remote get-url origin 2>/dev/null || echo "unknown")
+      printf "  %-30s %s\n" "$name" "$url"
+      ((count++))
+    fi
+  done < <(find "$PLUGINS_PATH" -maxdepth 1 -mindepth 1 -type d | sort)
+
+  echo
+  log_info "Total: $count plugins"
+}
+
+verify_submodules() {
+  log_info "Verifying git submodule integrity..."
+
+  local issues=0
+
+  # check for uncommitted changes in submodules
+  if git submodule status | grep -q '^+'; then
+    log_warn "Found uncommitted changes in submodules:"
+    git submodule status | grep '^+' | awk '{print "  " $2}'
+    ((issues++))
+  fi
+
+  # check for uninitialized submodules
+  if git submodule status | grep -q '^-'; then
+    log_warn "Found uninitialized submodules:"
+    git submodule status | grep '^-' | awk '{print "  " $2}'
+    ((issues++))
+  fi
+
+  # check for merge conflicts
+  if git submodule status | grep -q '^U'; then
+    log_error "Found merge conflicts in submodules:"
+    git submodule status | grep '^U' | awk '{print "  " $2}'
+    ((issues++))
+  fi
+
+  if [[ $issues -eq 0 ]]; then
+    log_info "All submodules are healthy"
+  else
+    log_warn "Found $issues issue(s) with submodules"
+
+    if confirm "Would you like to attempt to fix these issues?"; then
+      log_info "Attempting to fix submodule issues..."
+      git submodule update --init --recursive
+      git submodule foreach git checkout .
+    fi
+  fi
 }
 
 plugin_changes() {
   local submodules
   submodules=$(git submodule status | awk '{print $2}')
+
+  if [[ -z $submodules ]]; then
+    log_info "No submodules found"
+    return 0
+  fi
+
+  echo "=== Plugin change history ==="
   for sub in $submodules; do
-    echo "Submodule: $sub"
-    (cd "$VIM_PATH/$sub" && git log -7 --oneline)
-    echo
+    if [[ -d "$VIM_PATH/$sub/.git" ]]; then
+      echo "--- ${sub##*/} ---"
+      (cd "$VIM_PATH/$sub" && git log -7 --oneline 2>/dev/null) || log_warn "Could not get log for ${sub##*/}"
+      echo
+    fi
   done
 }
 
-case "${1:-}" in
--h | --help)
-  echo "$help_message"
-  ;;
--s | --setup)
-  setup
-  ;;
--d | --install-deps)
-  install_deps
-  ;;
--i | --install-plugin)
-  install_plugin "${2:-}"
-  ;;
--r | --remove-plugin)
-  remove_plugin "${2:-}"
-  ;;
--u | --update-plugins)
-  update_plugins "${2:-}"
-  ;;
--U | --upgrade-vim)
-  upgrade_vim
-  ;;
--c | --plugin-changes)
-  plugin_changes
-  ;;
--f | --flush-junk)
-  flush_junk
-  ;;
-*)
-  echo "$help_message"
-  ;;
-esac
+# main execution
+main() {
+  # check dependencies on first run
+  if [[ "${1:-}" != "-h" ]] && [[ "${1:-}" != "--help" ]]; then
+    check_dependencies
+  fi
+
+  case "${1:-}" in
+  -h | --help)
+    echo "$HELP_MESSAGE"
+    ;;
+  -s | --setup)
+    setup
+    ;;
+  -d | --install-deps)
+    install_deps
+    ;;
+  -i | --install-plugin)
+    install_plugin "${2:-}"
+    ;;
+  -r | --remove-plugin)
+    remove_plugin "${2:-}"
+    ;;
+  -u | --update-plugins)
+    update_plugins "${2:-}"
+    ;;
+  -U | --upgrade-vim)
+    upgrade_vim
+    ;;
+  -c | --plugin-changes)
+    plugin_changes
+    ;;
+  -f | --flush-junk)
+    flush_junk
+    ;;
+  -l | --list-plugins)
+    list_plugins
+    ;;
+  -v | --verify)
+    verify_submodules
+    ;;
+  "")
+    echo "$HELP_MESSAGE"
+    ;;
+  *)
+    log_error "Unknown option: $1"
+    echo "$HELP_MESSAGE"
+    exit 1
+    ;;
+  esac
+}
+
+# run main function
+main "$@"

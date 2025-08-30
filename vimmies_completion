@@ -1,2 +1,39 @@
-_vimmies_options='setup update-plugins install-plugin remove-plugin upgrade-vim plugin-changes flush-junk'
-complete -W "${_vimmies_options}" 'vimmies'
+_vimmies() {
+    local cur prev
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    # check if we're completing after the main command
+    if [[ ${COMP_CWORD} -eq 1 ]]; then
+        # first argument - show main commands grouped by frequency of use
+        local common="update-plugins install-plugin remove-plugin"
+        local vim_ops="upgrade-vim plugin-changes"
+        local maintenance="setup flush-junk verify list-plugins install-deps"
+        local opts="${common} ${vim_ops} ${maintenance}"
+
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
+
+    # handle specific command completions
+    case "${COMP_WORDS[1]}" in
+        update-plugins)
+            if [[ ${cur} == -* ]] || [[ -z ${cur} ]]; then
+                COMPREPLY=( $(compgen -W "-a" -- ${cur}) )
+            fi
+            ;;
+        remove-plugin)
+            # complete with existing plugin names
+            if [[ -d "$HOME/.vim/pack/plugins/start" ]]; then
+                local plugins=$(ls -1 "$HOME/.vim/pack/plugins/start" 2>/dev/null)
+                COMPREPLY=( $(compgen -W "${plugins}" -- ${cur}) )
+            fi
+            ;;
+        *)
+            # no further completion for other commands
+            ;;
+    esac
+}
+
+complete -F _vimmies vimmies
