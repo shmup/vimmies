@@ -38,19 +38,4 @@ git commit
 
 ### coc things
 
-npm i -g bash-language-server
-
-
-
-
-
-### fix my submodules
-
-# Synchronize submodule URLs (useful if they have changed)
-git submodule sync --recursive
-
-# Initialize submodules (in case they weren't initialized)
-git submodule update --init --recursive
-
-# Forcefully update each submodule to match the remote tracking branch
-git submodule foreach --recursive 'git fetch origin && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)'
+`npm i -g bash-language-server`
