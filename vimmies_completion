@@ -6,32 +6,47 @@ _vimmies() {
 
     # check if we're completing after the main command
     if [[ ${COMP_CWORD} -eq 1 ]]; then
-        # first argument - show main commands grouped by frequency of use
-        local common="update-plugins install-plugin remove-plugin"
-        local vim_ops="upgrade-vim plugin-changes"
-        local maintenance="setup flush-junk verify list-plugins install-deps"
-        local opts="${common} ${vim_ops} ${maintenance}"
-
-        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        # first argument - show completions based on what they're typing
+        if [[ ${cur} == --* ]]; then
+            local long_opts="--help --setup --upgrade-vim --plugin-changes --update-plugins --install-plugin --remove-plugin --flush-junk --list-plugins --verify --install-deps"
+            COMPREPLY=( $(compgen -W "${long_opts}" -- ${cur}) )
+        elif [[ ${cur} == -* ]]; then
+            # if they start typing a short option, show short options
+            local short_opts="-h -s -U -c -u -i -r -f -l -v -d"
+            COMPREPLY=( $(compgen -W "${short_opts}" -- ${cur}) )
+        else
+            # when empty, show long options for tab cycling
+            local long_opts="--help --setup --upgrade-vim --plugin-changes --update-plugins --install-plugin --remove-plugin --flush-junk --list-plugins --verify --install-deps"
+            COMPREPLY=( $(compgen -W "${long_opts}" -- ${cur}) )
+        fi
         return 0
     fi
 
     # handle specific command completions
     case "${COMP_WORDS[1]}" in
-        update-plugins)
-            if [[ ${cur} == -* ]] || [[ -z ${cur} ]]; then
+        -u|--update-plugins)
+            if [[ ${COMP_CWORD} -eq 2 ]] && ([[ ${cur} == -* ]] || [[ -z ${cur} ]]); then
                 COMPREPLY=( $(compgen -W "-a" -- ${cur}) )
             fi
             ;;
-        remove-plugin)
-            # complete with existing plugin names
-            if [[ -d "$HOME/.vim/pack/plugins/start" ]]; then
-                local plugins=$(ls -1 "$HOME/.vim/pack/plugins/start" 2>/dev/null)
-                COMPREPLY=( $(compgen -W "${plugins}" -- ${cur}) )
+        -r|--remove-plugin)
+            if [[ ${COMP_CWORD} -eq 2 ]]; then
+                # complete with existing plugin names
+                if [[ -d "$HOME/.vim/pack/plugins/start" ]]; then
+                    local plugins=$(find "$HOME/.vim/pack/plugins/start" -maxdepth 1 -mindepth 1 -type d -printf '%f\n' 2>/dev/null | sort)
+                    COMPREPLY=( $(compgen -W "${plugins}" -- ${cur}) )
+                fi
+            fi
+            ;;
+        -i|--install-plugin)
+            if [[ ${COMP_CWORD} -eq 2 ]]; then
+                # no completion for URLs - let user type
+                COMPREPLY=()
             fi
             ;;
         *)
-            # no further completion for other commands
+            # commands that take no arguments - no completion
+            COMPREPLY=()
             ;;
     esac
 }
