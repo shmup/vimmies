@@ -440,21 +440,24 @@ remove_plugin() {
 list_plugins() {
   log_info "Installed plugins:"
 
-  if [[ ! -d "$PLUGINS_PATH" ]]; then
-    log_warn "Plugins directory doesn't exist"
-    return 1
-  fi
-
   local count=0
-  while IFS= read -r plugin; do
-    if [[ -d "$plugin/.git" ]]; then
-      local name="${plugin##*/}"
+  local old_ifs="$IFS"
+  IFS=$' \t\n' # restore default IFS for command substitution
+
+  # use a simpler approach - direct command substitution
+  for plugin_name in $(ls "$PLUGINS_PATH"); do
+    local plugin_dir="$PLUGINS_PATH/$plugin_name"
+    [[ -d "$plugin_dir" ]] || continue
+
+    if [[ -e "$plugin_dir/.git" ]]; then
       local url
-      url=$(cd "$plugin" && git remote get-url origin 2>/dev/null || echo "unknown")
-      printf "  %-30s %s\n" "$name" "$url"
-      ((count++))
+      url=$(git -C "$plugin_dir" remote get-url origin 2>/dev/null || echo "unknown")
+      printf "  %-30s %s\n" "$plugin_name" "$url"
+      count=$((count + 1))
     fi
-  done < <(find "$PLUGINS_PATH" -maxdepth 1 -mindepth 1 -type d | sort)
+  done
+
+  IFS="$old_ifs" # restore original IFS
 
   echo
   log_info "Total: $count plugins"
