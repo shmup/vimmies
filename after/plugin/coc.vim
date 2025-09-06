@@ -12,8 +12,8 @@ nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
 nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
 nnoremap <silent> ,cl :CocCommand document.toggleCodeLens<CR>
 nnoremap <silent> ,ch :CocCommand document.toggleInlayHint<CR>
-nmap <silent><space>m :CocList --height=10 diagnostics<cr>
-nmap <silent><space>M :CocDiagnostics 10<cr>
+nmap <silent><space>M :CocList --height=10 diagnostics<cr>
+nmap <silent><space>m :CocDiagnostics 10<cr>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
