@@ -241,6 +241,11 @@ cmap w!! %!sudo tee > /dev/null %
 vnoremap <space>y "+y
 vnoremap <space>d "+d
 
+" OSC52 clipboard copy
+autocmd! TextYankPost * call system("printf $'\\e]52;c;%s\\a' \"$(base64 <<< " . shellescape(join(v:event.regcontents, "\n")) . ")\" > /dev/tty", "")
+nnoremap <space>ty :%y+<CR>:echo "Yanked entire file!"<CR>
+
+
 " it's a mood thing
 command! BufOnly silent! execute "%bd|e#|bd#"
 nnoremap <space>o :only<cr>
