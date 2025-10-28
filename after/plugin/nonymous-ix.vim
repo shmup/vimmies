@@ -1,12 +1,12 @@
-" nonymous-ix.vim uses .netrc for auth, and fucks with no.dungeon.red
+" nonymous-ix.vim uses .netrc for auth
 
 " insert  :IX [optional visual selection] - copies url to system clipboard
 " replace :RX <URL or ID> [optional visual selection]
 " delete  :DX <URL or ID>
 
 " example ~/.netrc
-"   machine no.dungeon.red
-"   login piss
+"   machine whatever.com
+"   login heck
 "   password whistler
 
 if has('win64') || has('win32') || has('win16')
