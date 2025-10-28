@@ -4,6 +4,7 @@
 setlocal foldmethod=indent
 setlocal commentstring=\/\/\ %s
 setlocal include=from
+setlocal tabstop=2
 setlocal suffixesadd=.jsx,.js
 setlocal define=class\\s
 
