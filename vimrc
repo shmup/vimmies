@@ -169,6 +169,7 @@ nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoS :SCREAM<CR>
 nnoremap <silent>yoW :WHISPER<CR>
 nnoremap <silent>yoz :syntax sync fromstart<CR>
+nnoremap <silent><buffer> yoe :let &l:conceallevel = 2 - &l:conceallevel<CR>
 nnoremap yoo :ToggleLlm<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
