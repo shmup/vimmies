@@ -5,7 +5,7 @@ if executable('php')
 endif
 
 if executable('prettier')
-  let &l:formatprg = 'NODE_PATH=/home/jtm/.config/nvm/versions/node/v20.17.0/lib/node_modules prettier --stdin-filepath % --parser=php'
+  let &l:formatprg='npx -y prettier --stdin-filepath % --parser=php --plugin=@prettier/plugin-php'
 endif
 
 let g:PHP_outdentphpescape = 0
