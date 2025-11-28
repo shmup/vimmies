@@ -354,6 +354,7 @@ augroup END
 " augroup END
 
 
+" generate help tags for all plugins
 function! UpdatePluginDocs()
     silent! helptags ALL
 
