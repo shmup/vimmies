@@ -14,9 +14,8 @@ endif
 
 " gq{motion}
 " friend wants us to set the widto to 120
-if executable('yapf')
-  " let &l:formatprg = 'yapf'
-  let &l:formatprg = 'yapf --style="{based_on_style: pep8, column_limit: 120}"'
+if executable('black')
+  let &l:formatprg = 'black --line-length 120 -q -'
 endif
 
 " add the virtualenv's site-packages to vim path
