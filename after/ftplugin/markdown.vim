@@ -3,7 +3,7 @@ let g:markdown_fenced_languages=[
       \ 'html', 'python', 'bash=sh',
       \'javascript', 'json', 'yaml',
       \'sql', 'typescript', 'lua',
-      \'vim', 'elixir']
+      \'vim', 'elixir', 'toml']
 
 setlocal conceallevel=2
 setlocal concealcursor=nc
