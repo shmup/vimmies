@@ -242,9 +242,16 @@ cmap w!! %!sudo tee > /dev/null %
 vnoremap <space>y "+y
 vnoremap <space>d "+d
 
-" TODO - create a toggle for this using yo mappings
-" OSC52 clipboard copy
-" autocmd! TextYankPost * call system("printf $'\\e]52;c;%s\\a' \"$(base64 <<< " . shellescape(join(v:event.regcontents, "\n")) . ")\" > /dev/tty", "")
+" OSC52 clipboard copy (toggle with yoy)
+let g:osc52_enabled = 1
+function! OSC52Yank()
+  if g:osc52_enabled
+    call system("printf $'\\e]52;c;%s\\a' \"$(base64 <<< " . shellescape(join(v:event.regcontents, "\n")) . ")\" > /dev/tty", "")
+  endif
+endfunction
+autocmd! TextYankPost * call OSC52Yank()
+nnoremap <silent> yoy :let g:osc52_enabled = !g:osc52_enabled
+    \ <bar> echo "OSC52 clipboard " . (g:osc52_enabled ? "enabled" : "disabled")<CR>
 nnoremap <space>ty :%y+<CR>:echo "Yanked entire file!"<CR>
 
 
