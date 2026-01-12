@@ -135,7 +135,7 @@ nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
 nnoremap <silent> <space>es :edit ~/.vim/after/plugin/settings.vim<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 nnoremap <silent> <space>er :edit ~/lisp/notes/learnxiny.rkt<cr>
-nnoremap <silent> <space>eg :edit ~/.vim/tools/gpt/<cr>
+nnoremap <silent> <space>eg :edit ~/.gitrc<cr>
 nnoremap <silent> <space>el :edit ~/brain/journals/<cr>
 nnoremap <silent> <space>eu :edit ~/txt/unicode.txt<cr>
 nnoremap <silent> <space>ei :edit ~/.config/i3/config<cr>
@@ -146,9 +146,11 @@ nnoremap <silent> <space>ep :edit ~/.profile<cr>
 nnoremap <silent> <space>ex :edit ~/.Xdefaults<cr>
 nnoremap <silent> <space>ed :edit ~/dungeon/xom.world/frontend/txt/shmup.crawlrc<cr>
 nnoremap <silent> <space>et :edit ~/.tmux.conf<cr>
-nnoremap <silent> <space>ef :edit ~/.mozilla/firefox/jtm/chrome/userChrome.css<cr>
+nnoremap <silent> <space>ef :edit ~/.librewolf/jtm/chrome/userChrome.css<cr>
 nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
 nnoremap <silent> <space>ea :edit ~/.config/alacritty/alacritty.toml<cr>
+nnoremap <silent> <space>ew :edit ~/.config/wezterm/wezterm.lua<cr>
+nnoremap <silent> <space>ek :edit ~/.config/kitty/kitty.conf<cr>
 
 " alt-tab between two buffers
 nnoremap <space><space> :b#<cr>
