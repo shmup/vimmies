@@ -146,7 +146,7 @@ nnoremap <silent> <space>ep :edit ~/.profile<cr>
 nnoremap <silent> <space>ex :edit ~/.Xdefaults<cr>
 nnoremap <silent> <space>ed :edit ~/dungeon/xom.world/frontend/txt/shmup.crawlrc<cr>
 nnoremap <silent> <space>et :edit ~/.tmux.conf<cr>
-nnoremap <silent> <space>ef :edit ~/.librewolf/jtm/chrome/userChrome.css<cr>
+nnoremap <silent> <space>ef :edit ~/.mozilla/firefox/jtm/chrome/userChrome.css<cr>
 nnoremap <silent> <space>ec :edit ~/.vim/coc-settings.json<cr>
 nnoremap <silent> <space>ea :edit ~/.config/alacritty/alacritty.toml<cr>
 nnoremap <silent> <space>ew :edit ~/.config/wezterm/wezterm.lua<cr>
