@@ -1,5 +1,5 @@
 let g:slime_no_mappings = 1
-let g:copilot_enabled = 1
+let g:copilot_enabled = 0
 
 let mapleader = "\<Space>"
 
