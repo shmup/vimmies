@@ -245,7 +245,7 @@ vnoremap <space>y "+y
 vnoremap <space>d "+d
 
 " OSC52 clipboard copy (toggle with yoy)
-let g:osc52_enabled = 1
+let g:osc52_enabled = 0
 function! OSC52Yank()
   if g:osc52_enabled
     call system("printf $'\\e]52;c;%s\\a' \"$(base64 <<< " . shellescape(join(v:event.regcontents, "\n")) . ")\" > /dev/tty", "")
