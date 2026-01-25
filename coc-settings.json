@@ -16,7 +16,8 @@
   "colors.enable": true,
   "highlight.trace": "verbose",
   "zig.debugLog": false,
-  "codeLens.enable": true,
+  "codeLens.enable": false,
+  "inlayHint.enable": false,
   "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
   "languageserver": {
     "commonlisp": {
