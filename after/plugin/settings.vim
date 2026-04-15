@@ -68,7 +68,7 @@ let g:gitgutter_terminal_reports_focus=0
 let g:gitgutter_enabled = 0
 
 " goyo
-let g:goyo_width = 90
+let g:goyo_width = 70
 let g:goyo_height = '95%'
 let g:goyo_linenr = 0
 
