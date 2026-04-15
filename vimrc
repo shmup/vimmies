@@ -36,6 +36,8 @@ set t_vb=                 " dont beep
 set termguicolors
 set visualbell            " dont blink
 set mouse=a               " enable mouse
+set cursorlineopt=screenline " highlights single line when line is wrapped
+set display+=lastline     " show as much of last line as possible, useful when statusline is disabled
 
 " TODO don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
@@ -108,8 +110,8 @@ set backupcopy=yes
 " change cursor from block to i-beam in insert mode
 " https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
 " may need but idk:  autocmd VimEnter * silent !echo -ne "\e[1 q"
-let &t_SI = "\e[5 q"
-let &t_EI = "\e[1 q"
+let &t_SI = "\e[6 q" " steady i-beam in insert mode
+let &t_EI = "\e[2 q" " steady block in normal mode
 
 " window management
 set splitright
@@ -132,6 +134,7 @@ nnoremap <silent> <space>W :%s/\s\+$//<cr>:let @/=''<cr>
 
 " vimrc
 nnoremap <silent> <space>ev :edit ~/.vim/vimrc<cr>
+nnoremap <silent> <space>eq :edit ~/.config/qutebrowser<cr>
 nnoremap <silent> <space>es :edit ~/.vim/after/plugin/settings.vim<cr>
 nnoremap <silent> <space>rv :source ~/.vim/vimrc<cr>
 nnoremap <silent> <space>er :edit ~/lisp/notes/learnxiny.rkt<cr>
@@ -168,10 +171,11 @@ nnoremap Y y$
 " https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt#L77-L95
 nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? lightscheme : darkscheme)
 nnoremap <silent>yog :GitGutterToggle<cr>
-nnoremap <silent>yoW :set wrap!<CR>
 nnoremap <silent>yoG :Goyo<CR>
-nnoremap <silent>yoz :syntax sync fromstart<CR>
 nmap <silent>yoN <Plug>(TextNrToggle)
+nmap <silent>yoW <Plug>(WiktListToggle)
+" nnoremap <silent>yoW :set wrap!<CR>
+nnoremap <silent>yoz :syntax sync fromstart<CR>
 
 nnoremap <silent><buffer> yoe :let &l:conceallevel = 2 - &l:conceallevel<CR>
 nnoremap yoo :ToggleLlm<CR>
@@ -420,5 +424,9 @@ au BufRead,BufNewFile * if getline(1) =~# '^#!/usr/bin/env -S uv run --script' |
 
 " colors
 hi SpellBad term=reverse ctermbg=226 ctermfg=0
+
+let g:wikt_dictionaries = [
+            \ {'path': expand('~/projects/lotr/tools/silmarillion-index.txt'), 'name': 'The Silmarillion'},
+            \ ]
 
 packadd! matchit
