@@ -172,13 +172,12 @@ nnoremap Y y$
 nnoremap <silent><expr>yot printf(":set bg=%s \| colo %s\r", &bg ==# 'dark' ? 'light' : 'dark', &bg ==# 'dark' ? lightscheme : darkscheme)
 nnoremap <silent>yog :GitGutterToggle<cr>
 nnoremap <silent>yoG :Goyo<CR>
+nmap <silent>yoo <Plug>(ReadingToggle)
 nmap <silent>yoN <Plug>(TextNrToggle)
 nmap <silent>yoW <Plug>(WiktListToggle)
-" nnoremap <silent>yoW :set wrap!<CR>
 nnoremap <silent>yoz :syntax sync fromstart<CR>
 
 nnoremap <silent><buffer> yoe :let &l:conceallevel = 2 - &l:conceallevel<CR>
-nnoremap yoo :ToggleLlm<CR>
 nmap ,q <Plug>(qf_qf_switch)
 nmap ,Q <Plug>(qf_qf_toggle_stay)
 
